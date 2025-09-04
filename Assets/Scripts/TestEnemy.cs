@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class TestEnemy : MonoBehaviour, I_TestDamageable
 {
     private Rigidbody rb;
     [SerializeField] private float hp = 100f;
+    [SerializeField] private Transform ringPosition;
+
+    public event System.Action<I_TestDamageable> OnDeath;
 
     private void Start()
     {
@@ -24,7 +28,16 @@ public class TestEnemy : MonoBehaviour, I_TestDamageable
         hp -= damageAmount;
         if (hp <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
     }
+
+    private void Die()
+    {
+        OnDeath?.Invoke(this);
+
+        Destroy(gameObject);
+    }
+
+
 }
