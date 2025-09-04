@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1952966794937004296}
+  - component: {fileID: 6491122522772515096}
   m_Layer: 0
   m_Name: TurretParent
   m_TagString: Untagged
@@ -32,6 +33,18 @@ Transform:
   - {fileID: 7672585166755718956}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6491122522772515096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2722975604164686984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff57e783650b90542971180240ac19b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5856788826771945461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,8 +187,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.59, y: 7.0132046, z: 6.17}
-  m_Center: {x: 0, y: 3.3849626, z: 0}
+  m_Size: {x: 6.5899997, y: 6.0008183, z: 6.1699996}
+  m_Center: {x: 0, y: 3.8911552, z: 0}
 --- !u!4 &7672585166755718956 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4268570111676256473, guid: 4063295e4c703164a899864faf273f02,
