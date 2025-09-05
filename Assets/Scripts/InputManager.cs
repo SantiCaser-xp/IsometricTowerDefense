@@ -13,6 +13,8 @@ public class InputManager : MonoBehaviour
 
     public event Action OnClicked, OnExit;
 
+    [SerializeField] private float rayDistance = 100f;
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -37,7 +39,7 @@ public class InputManager : MonoBehaviour
         mousePos.z = sceneCamera.nearClipPlane;
         Ray ray = sceneCamera.ScreenPointToRay(mousePos);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100, placementLayerMask))
+        if (Physics.Raycast(ray, out hit, rayDistance, placementLayerMask))
         {
             return hit.point;
         }
