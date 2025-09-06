@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class IncrementVelocityPerk : Perk, IPerkEffect<float>
+public class VelocityBoostPerk : Perk, IPerkEffect<float>
 {
     [SerializeField] private float _speedBoostPerUpgrade = 0.1f;
     private float _currentBoost = 1.0f;

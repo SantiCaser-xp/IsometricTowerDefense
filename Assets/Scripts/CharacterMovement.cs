@@ -5,7 +5,7 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed = 3.5f;
     [SerializeField] private float _movementSpeedMultiplier = 1f;
-    [SerializeField] private IncrementVelocityPerk _incrementVelocityPerk;
+    [SerializeField] private VelocityBoostPerk _incrementVelocityPerk;
     private Rigidbody _rb;
     private Vector3 _moveDirection;
 
