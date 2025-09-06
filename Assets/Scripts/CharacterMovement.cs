@@ -17,6 +17,6 @@ public class CharacterMovement : MonoBehaviour
     public void Movement(Vector3 dir)
     {
         _moveDirection = (transform.right * dir.x + transform.forward * dir.z);
-        _rb.MovePosition(_rb.position + _moveDirection.normalized * Time.fixedDeltaTime * _movementSpeed * _incrementVelocityPerk.CurrentBoost);
+        _rb.MovePosition(_rb.position + _moveDirection * Time.fixedDeltaTime * _movementSpeed * _incrementVelocityPerk.CurrentBoost);
     }
 }

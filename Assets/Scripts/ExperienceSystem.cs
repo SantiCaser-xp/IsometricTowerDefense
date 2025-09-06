@@ -44,4 +44,10 @@ public class ExperienceSystem : MonoBehaviour, IResettable<float>
         _currentExperienceThreshold = _startExperienceThreshold;
         _currentExperience = 0f;
     }
+
+    [ContextMenu("Add Experience")]
+    public void AddExperienceForce()
+    {
+        AddExperience(3);
+    }
 }

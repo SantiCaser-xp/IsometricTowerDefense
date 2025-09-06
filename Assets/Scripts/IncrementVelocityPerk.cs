@@ -6,10 +6,15 @@ public class IncrementVelocityPerk : Perk, IPerkEffect<float>
     private float _currentBoost = 1.0f;
     public float CurrentBoost => _currentBoost;
 
-    [ContextMenu("BuyPerk")]
+    protected override void OnPerkApplied()
+    {
+        _currentBoost += _speedBoostPerUpgrade;
+        Debug.Log(_currentBoost);
+    }
+
     public float ApplyEffect()
     {
-        return _currentBoost += _speedBoostPerUpgrade;
+        return _currentBoost;
     }
 
     public float RemoveEffect()

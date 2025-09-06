@@ -7,6 +7,11 @@ public class CharacterInputController
 
     public void InputArtificialUpdate()
     {
+        InputPC();
+    }
+
+    public void InputPC()
+    {
         _inputDirection.x = Input.GetAxisRaw("Horizontal");
         _inputDirection.z = Input.GetAxisRaw("Vertical");
     }

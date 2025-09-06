@@ -20,7 +20,7 @@ public class TestEnemy : MonoBehaviour, I_TestDamageable
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + Vector3.left * Time.fixedDeltaTime * 2);
+        //rb.MovePosition(rb.position + Vector3.left * Time.fixedDeltaTime * 2);
     }
 
     public void TakeDamage(int damageAmount)

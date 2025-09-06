@@ -5,31 +5,35 @@ using UnityEngine;
 public class Character : MonoBehaviour, IRestoreable, IDamageable
 {
     public static Action<bool> OnDead;
-    [SerializeField] private float _delayInSeconds = 900f; 
     [SerializeField] private float _maxHealth = 100f;
     private float _currentHealth = 0f;
     private bool _isAlive = true;
     
-
-    private CharacterInputController _controller;
+    [SerializeField] private ControlBase _control;
+   // private CharacterInputController _controller;
     private CharacterMovement _movement;
 
     private void Awake()
     {
-        _controller = new CharacterInputController();
+        //_controller = new CharacterInputController();
         _movement = GetComponent<CharacterMovement>();
     }
 
     private void Update()
     {
-        _controller.InputArtificialUpdate();
+        //_controller.InputArtificialUpdate();
     }
 
     private void FixedUpdate()
     {
-        if(_controller.InputDirection.sqrMagnitude > 0.001f)
+        /*if(_controller.InputDirection.sqrMagnitude > 0.001f)
         {
             _movement.Movement(_controller.InputDirection);
+        }*/
+
+        if(_control.GetDirection().sqrMagnitude > 0.001f)
+        {
+            _movement.Movement(_control.GetDirection());
         }
     }
 
