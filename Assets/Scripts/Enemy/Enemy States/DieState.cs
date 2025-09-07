@@ -1,21 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DieState : EnemyState<EnemyFSMStates, BaseEnemy>
 {
     public override void OnEnter()
     {
-        Debug.Log($"Enter a DieState");
+        avatar.agent.isStopped = true;
     }
 
     public override void OnExecute()
     {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            enemyFSM.ChangeState(EnemyFSMStates.Idle);
-        }
+       
+
     }
+
+   
+
+    
+
     public override void OnExit()
     {
         Debug.Log($"Exit from DieState");

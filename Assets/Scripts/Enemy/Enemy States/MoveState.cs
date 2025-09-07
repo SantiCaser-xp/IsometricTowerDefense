@@ -9,51 +9,65 @@ public class MoveState : EnemyState<EnemyFSMStates, BaseEnemy>
     private float _attackCoolDown;
     public override void OnEnter()
     {
-        Debug.Log($"Debug Enter a MoveState");
+       
+        avatar.agent.isStopped = false;
     }
 
     public override void OnExecute()
     {
-        
-        _attackCoolDown -= Time.deltaTime;
-        if (avatar.ReduceEnergy(Time.deltaTime * 5))
+        if (avatar.currentTarget == null || !avatar.currentTarget.IsAlive)
         {
             enemyFSM.ChangeState(EnemyFSMStates.Idle);
-        }
-
-        //From Patrol to Chase
-        var closeTarget = Physics.OverlapSphere(avatar.transform.position, avatar.detectionRadius, avatar.targetMask);
-        if (closeTarget.Length > 0)
-        {
-            avatar.SetTarget(closeTarget[0].gameObject);
-            //enemyFSM.ChangeState(EnemyFSMStates.Move);
             return;
         }
-
-        var chaseVector = avatar._target.transform.position - avatar.transform.position;
-        if (chaseVector.magnitude > 0.3f)
+        float distanceToTarget = Vector3.Distance(avatar.transform.position, avatar.currentTarget.Position);
+        if (distanceToTarget <= avatar.attackRange)
         {
-            avatar.transform.position += chaseVector.normalized * Time.deltaTime * 5;
-        }
-        else if (_attackCoolDown <= 0) 
-        {
+            avatar.agent.isStopped = true;
             enemyFSM.ChangeState(EnemyFSMStates.Attack);
-            _attackCoolDown = 2f;
         }
-
-        if (avatar.MoveTo(_actualWaypoint))
+        else
         {
-
-            _actualWaypoint++;
-            if (_actualWaypoint >= avatar.maxWaypoints)
-            {
-                _actualWaypoint = 0;
-            }
+            avatar.agent.isStopped = false;
+            avatar.agent.SetDestination(avatar.currentTarget.Position);
         }
+
+
+
+        // Energy logic - skip for now
+        //_attackCoolDown -= Time.deltaTime;
+        //if (avatar.ReduceEnergy(Time.deltaTime * 5))
+        //{
+        //    enemyFSM.ChangeState(EnemyFSMStates.Idle);
+        //}
+
+        //From Patrol to Chase
+
+
+        //var chaseVector = avatar._target.transform.position - avatar.transform.position;
+        //if (chaseVector.magnitude > 0.3f)
+        //{
+        //    avatar.transform.position += chaseVector.normalized * Time.deltaTime * 5;
+        //}
+        //else if (_attackCoolDown <= 0) 
+        //{
+        //    enemyFSM.ChangeState(EnemyFSMStates.Attack);
+        //    _attackCoolDown = 2f;
+        //}
+
+        //if (avatar.MoveTo(_actualWaypoint))
+        //{
+
+        //    _actualWaypoint++;
+        //    if (_actualWaypoint >= avatar.maxWaypoints)
+        //    {
+        //        _actualWaypoint = 0;
+        //    }
+        //}
 
     }
     public override void OnExit()
     {
-        avatar.SetTarget(null);
+        //avatar.SetTarget(null);
     }
 }
