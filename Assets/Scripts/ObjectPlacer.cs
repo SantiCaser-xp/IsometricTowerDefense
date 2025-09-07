@@ -13,6 +13,8 @@ public class ObjectPlacer : MonoBehaviour
         GameObject newObject = Instantiate(prefab);
         newObject.transform.position = position;
         placedGameObjects.Add(newObject);
+        newObject.GetComponent<SphereCollider>().enabled = true;
+        newObject.GetComponentInChildren<BoxCollider>().enabled = true;
         return placedGameObjects.Count - 1;
     }
 
