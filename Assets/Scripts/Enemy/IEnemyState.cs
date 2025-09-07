@@ -1,18 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class IEnemyState : MonoBehaviour
+public interface IEnemyState<T>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void OnEnter();
+    void OnExecute();
+    void OnFixedExecute();
+    void OnExit();
+    void AddTransition(T input, IEnemyState<T> enemyState);
+    bool GetTransition(T input, out IEnemyState<T> enemyState);
 }
