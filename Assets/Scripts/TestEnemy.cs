@@ -23,7 +23,7 @@ public class TestEnemy : MonoBehaviour, I_TestDamageable
         rb.MovePosition(rb.position + Vector3.left * Time.fixedDeltaTime * 2);
     }
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(float damageAmount)
     {
         hp -= damageAmount;
         if (hp <= 0)
