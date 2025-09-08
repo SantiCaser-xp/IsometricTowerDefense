@@ -11,6 +11,7 @@ public class BaseEnemy : MonoBehaviour, I_TestDamageable
     {
         TakeDamage(damageAmount);
     }
+    //You can comment this if you want to check the error, sorry for the inconvenience
 
 
     [Header("Enemy Stats")]
