@@ -3,16 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class SimpleTower : MonoBehaviour
+public class SimpleTower : AbstractTower
 {
     [SerializeField] private float fireRate = 1f;
-    [SerializeField] private int damage = 10;
+    [SerializeField] public int damage = 10;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private TargetRing targetRing;
 
+
     private float fireCountdown = 0f;
     private List<I_TestDamageable> enemiesInRange = new List<I_TestDamageable>();
+
+    private void Awake()
+    {
+        
+    }
 
     private void Update()
     {
@@ -47,10 +53,11 @@ public class SimpleTower : MonoBehaviour
         }
     }
 
-    private void Shoot(I_TestDamageable target, Transform targetTransform)
+    public override void Shoot(I_TestDamageable target, Transform targetTransform)
     {
-        GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        SimpleTowerBullet bullet = bulletGO.GetComponent<SimpleTowerBullet>();
+        SimpleTowerBullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation).GetComponent<SimpleTowerBullet>();
+        bullet.transform.position = firePoint.position;
+        bullet.transform.rotation = firePoint.rotation;
         bullet.damage = damage;
         bullet.SetTarget(target, targetTransform);
     }
@@ -120,5 +127,7 @@ public class SimpleTower : MonoBehaviour
             }
         }
     }
+
+
 }
 

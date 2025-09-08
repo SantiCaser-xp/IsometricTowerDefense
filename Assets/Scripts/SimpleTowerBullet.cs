@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimpleTowerBullet : MonoBehaviour
+public class SimpleTowerBullet : AbstractBullet
 {
     I_TestDamageable target;
     private Transform targetTransform;
@@ -19,12 +19,6 @@ public class SimpleTowerBullet : MonoBehaviour
 
         Vector3 dir = (targetTransform.position - transform.position).normalized;
         transform.position += dir * speed * Time.deltaTime;
-        //float distanceThisFrame = speed * Time.deltaTime;
-
-
-        //transform.Translate(direction.normalized * distanceThisFrame, Space.World);
-
-        //transform.rotation = Quaternion.LookRotation(direction);
     }
 
     public void SetTarget(I_TestDamageable newTarget, Transform targetTf)
