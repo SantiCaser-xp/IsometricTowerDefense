@@ -27,7 +27,7 @@ public class SimpleTowerBullet : AbstractBullet
         targetTransform = targetTf;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.transform == targetTransform)
         {
@@ -38,6 +38,12 @@ public class SimpleTowerBullet : AbstractBullet
     public void HitTarget()
     {
         target.TakeDamage(damage);
-        Destroy(gameObject);
+        _myPool.Release(this);
+    }
+
+    public override void Refresh()
+    {
+        target = null;
+        targetTransform = null;
     }
 }

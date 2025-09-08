@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface I_TestDamageable
 {
-    public void TakeDamage(int damageAmount);
+    public void TakeDamage(float damageAmount);
     event System.Action<I_TestDamageable> OnDeath;
 }

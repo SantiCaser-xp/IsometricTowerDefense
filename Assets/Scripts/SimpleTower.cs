@@ -55,7 +55,7 @@ public class SimpleTower : AbstractTower
 
     public override void Shoot(I_TestDamageable target, Transform targetTransform)
     {
-        SimpleTowerBullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation).GetComponent<SimpleTowerBullet>();
+        SimpleTowerBullet bullet = _factory.Create() as SimpleTowerBullet;
         bullet.transform.position = firePoint.position;
         bullet.transform.rotation = firePoint.rotation;
         bullet.damage = damage;

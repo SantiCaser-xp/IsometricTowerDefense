@@ -6,6 +6,13 @@ using UnityEngine.AI;
 
 public class BaseEnemy : MonoBehaviour, I_TestDamageable
 {
+    //Santino: Just for testing purposes, sorry if forgot to delete
+    public void TakeDamage(float damageAmount)
+    {
+        TakeDamage(damageAmount);
+    }
+
+
     [Header("Enemy Stats")]
     [SerializeField] protected float health = 100f;
     [SerializeField] protected float damage = 10f;
