@@ -11,9 +11,9 @@ public class SimpleTowerBullet : AbstractBullet
 
     private void Update()
     {
-        if (targetTransform == null || target == null)
+        if (_isShooted && (targetTransform == null || target == null))
         {
-            Destroy(gameObject);
+            _myPool.Release(this);
             return;
         }
 
@@ -21,7 +21,7 @@ public class SimpleTowerBullet : AbstractBullet
         transform.position += dir * speed * Time.deltaTime;
     }
 
-    public void SetTarget(I_TestDamageable newTarget, Transform targetTf)
+    public override void SetTarget(I_TestDamageable newTarget, Transform targetTf)
     {
         target = newTarget;
         targetTransform = targetTf;
@@ -45,5 +45,6 @@ public class SimpleTowerBullet : AbstractBullet
     {
         target = null;
         targetTransform = null;
+        _isShooted = false;
     }
 }

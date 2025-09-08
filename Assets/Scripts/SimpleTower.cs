@@ -15,9 +15,9 @@ public class SimpleTower : AbstractTower
     private float fireCountdown = 0f;
     private List<I_TestDamageable> enemiesInRange = new List<I_TestDamageable>();
 
-    private void Awake()
+    private void Start()
     {
-        
+        _factory = FactorySimpleBullet.Instance;
     }
 
     private void Update()
@@ -55,11 +55,12 @@ public class SimpleTower : AbstractTower
 
     public override void Shoot(I_TestDamageable target, Transform targetTransform)
     {
-        SimpleTowerBullet bullet = _factory.Create() as SimpleTowerBullet;
+        var bullet = _factory.Create();
         bullet.transform.position = firePoint.position;
         bullet.transform.rotation = firePoint.rotation;
-        bullet.damage = damage;
+        bullet._damage = damage;
         bullet.SetTarget(target, targetTransform);
+        bullet._isShooted = true;
     }
 
     private void HandleEnemyDeath(I_TestDamageable deadEnemy)
