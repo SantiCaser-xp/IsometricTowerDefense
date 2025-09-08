@@ -6,13 +6,23 @@ using static UnityEngine.GraphicsBuffer;
 public class SimpleTower : MonoBehaviour
 {
     [SerializeField] private float fireRate = 1f;
-    [SerializeField] private int damage = 10;
+    [SerializeField] public int damage = 10;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private TargetRing targetRing;
+    [SerializeField] public BulletFactory bulletFactory;
+
 
     private float fireCountdown = 0f;
     private List<I_TestDamageable> enemiesInRange = new List<I_TestDamageable>();
+
+    private void Awake()
+    {
+        if (bulletFactory == null)
+        {
+            Debug.LogError("BulletFactory no está asignado en " + gameObject.name);
+        }
+    }
 
     private void Update()
     {
@@ -49,10 +59,12 @@ public class SimpleTower : MonoBehaviour
 
     private void Shoot(I_TestDamageable target, Transform targetTransform)
     {
-        GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        SimpleTowerBullet bullet = bulletGO.GetComponent<SimpleTowerBullet>();
+        SimpleTowerBullet bullet = bulletFactory.GetBullet();
+        bullet.transform.position = firePoint.position;
+        bullet.transform.rotation = firePoint.rotation;
         bullet.damage = damage;
         bullet.SetTarget(target, targetTransform);
+        bullet.OnBulletExpired = () => bulletFactory.ReturnBullet(bullet); // Asegúrate de tener este callback en SimpleTowerBullet
     }
 
     private void HandleEnemyDeath(I_TestDamageable deadEnemy)
@@ -120,5 +132,7 @@ public class SimpleTower : MonoBehaviour
             }
         }
     }
+
+
 }
 

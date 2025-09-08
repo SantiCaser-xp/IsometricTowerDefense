@@ -8,6 +8,7 @@ public class SimpleTowerBullet : MonoBehaviour
     private Transform targetTransform;
     public float speed = 40f;
     public int damage = 10;
+    public System.Action OnBulletExpired;
 
     private void Update()
     {
@@ -45,5 +46,10 @@ public class SimpleTowerBullet : MonoBehaviour
     {
         target.TakeDamage(damage);
         Destroy(gameObject);
+    }
+
+    private void Expire()
+    {
+        OnBulletExpired?.Invoke();
     }
 }

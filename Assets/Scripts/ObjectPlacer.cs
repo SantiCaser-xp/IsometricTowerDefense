@@ -12,6 +12,9 @@ public class ObjectPlacer : MonoBehaviour
     {
         GameObject newObject = Instantiate(prefab);
         newObject.transform.position = position;
+        SimpleTower simpleTower = newObject.GetComponent<SimpleTower>();
+        BulletFactory bulletFactory = FindObjectOfType<BulletFactory>(); // O referencia directa si la tienes
+        simpleTower.bulletFactory = bulletFactory;
         placedGameObjects.Add(newObject);
         newObject.GetComponent<SphereCollider>().enabled = true;
         newObject.GetComponentInChildren<BoxCollider>().enabled = true;
