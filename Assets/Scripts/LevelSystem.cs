@@ -1,0 +1,41 @@
+using System;
+using UnityEngine;
+
+public class LevelSystem : MonoBehaviour, IResettable<int>
+{
+    public static Action<int> OnLevelChanged;
+
+    [Header("Level")]
+    [SerializeField] private int _maxLevel = 100;
+    private int _startLevel = 1;
+    private int _currentLevel = 0;
+
+    private void Awake()
+    {
+        _currentLevel = _startLevel;
+    }
+
+    private void OnEnable()
+    {
+        ExperienceSystem.OnLevelUp += AddLevel;
+    }
+
+    private void OnDisable()
+    {
+        ExperienceSystem.OnLevelUp -= AddLevel;
+    }
+
+    private void AddLevel()
+    {
+        if(_currentLevel < _maxLevel)
+        {
+            _currentLevel++;
+            OnLevelChanged?.Invoke(_currentLevel);
+        }
+    }
+
+    public void Reset()
+    {
+        _currentLevel = 1;
+    }
+}
