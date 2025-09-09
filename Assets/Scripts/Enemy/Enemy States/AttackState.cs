@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackState : EnemyState<EnemyFSMStates, BaseEnemy>
@@ -12,20 +10,20 @@ public class AttackState : EnemyState<EnemyFSMStates, BaseEnemy>
 
     public override void OnExecute()
     {
-        if (avatar.currentTarget == null || !avatar.currentTarget.IsAlive)
+        if (avatar.currentTarget == null)
         {
             enemyFSM.ChangeState(EnemyFSMStates.Idle);
             return;
         }
 
-        float distanceToTarget = Vector3.Distance(avatar.transform.position, avatar.currentTarget.Position);
+        float distanceToTarget = Vector3.Distance(avatar.transform.position, avatar.currentTarget.GetPos());
         if (distanceToTarget > avatar.attackRange)
         {
             enemyFSM.ChangeState(EnemyFSMStates.Move);
             return;
         }
         // Turning towards the target
-        Vector3 lookDirection = (avatar.currentTarget.Position - avatar.transform.position).normalized;
+        Vector3 lookDirection = (avatar.currentTarget.GetPos() - avatar.transform.position).normalized;
         lookDirection.y = 0;
         avatar.transform.rotation = Quaternion.LookRotation(lookDirection);
 

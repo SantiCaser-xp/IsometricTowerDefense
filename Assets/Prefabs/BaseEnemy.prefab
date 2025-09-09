@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3688540347587148828}
   - component: {fileID: 4248611031493397340}
   - component: {fileID: 2983226625633981859}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,11 +115,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7369767477773740042}
   - component: {fileID: 6485476042077920468}
-  - component: {fileID: 4096698052080971778}
   - component: {fileID: 7261267803571081864}
   - component: {fileID: 5653857692630007765}
   - component: {fileID: 3361632149069800241}
-  m_Layer: 0
+  - component: {fileID: 7477271549730268283}
+  - component: {fileID: 397299231706808115}
+  m_Layer: 6
   m_Name: BaseEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,40 +166,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &4096698052080971778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2329179003821567121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de8c5e1d0fedba544b4710b90746d98a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  damage: 10
-  attackRange: 3
-  attackCooldown: 1
-  searchInterval: 1
-  walkSpeed: 3
-  idleTime: 10
-  detectionRadius: 3
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  _energy: 50
-  targetingStrategy: 1
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  currentWaypoint: 0
-  lastAttackTime: 0
-  lastSearchTime: 0
-  agent: {fileID: 0}
 --- !u!54 &7261267803571081864
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -269,6 +236,54 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &7477271549730268283
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329179003821567121}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &397299231706808115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2329179003821567121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fd6c94574afe24bb2777659cb3f634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  damage: 10
+  attackRange: 2
+  attackCooldown: 1
+  searchInterval: 0.5
+  walkSpeed: 0
+  idleTime: 0
+  targetingStrategy: 0
+  waypoints: []
+  currentWaypoint: 0
+  lastAttackTime: 0
+  lastSearchTime: 0
+  agent: {fileID: 0}
 --- !u!1 &7303477762665445853
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +296,7 @@ GameObject:
   - component: {fileID: 2583532328144364737}
   - component: {fileID: 2252715442607877707}
   - component: {fileID: 1109962024358962133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +401,7 @@ GameObject:
   - component: {fileID: 3759059743898079232}
   - component: {fileID: 4383313234014317816}
   - component: {fileID: 9123859645693062594}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

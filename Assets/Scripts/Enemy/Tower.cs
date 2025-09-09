@@ -59,5 +59,8 @@ public class Tower : MonoBehaviour, ITargetable
         }
     }
 
-     
+    public Vector3 GetPos()
+    {
+        return transform.position;
+    }
 }

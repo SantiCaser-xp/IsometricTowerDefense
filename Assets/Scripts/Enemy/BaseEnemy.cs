@@ -1,30 +1,22 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BaseEnemy : MonoBehaviour, I_TestDamageable
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CapsuleCollider))]
+public abstract class BaseEnemy : Destructible, IDamageable<float>
 {
-    //Santino: Just for testing purposes, sorry if forgot to delete
-    public void TakeDamage(float damageAmount)
-    {
-        TakeDamage(damageAmount);
-    }
-    //You can comment this if you want to check the error, sorry for the inconvenience
-
-
     [Header("Enemy Stats")]
-    [SerializeField] protected float health = 100f;
     [SerializeField] protected float damage = 10f;
     [SerializeField] public float attackRange = 2f;
     [SerializeField] public float attackCooldown = 1f;
     [SerializeField] public float searchInterval = 0.5f;
     [SerializeField] float walkSpeed;
     [SerializeField] float idleTime;
-    [SerializeField] public float detectionRadius;
-    [SerializeField] public LayerMask targetMask;
-    [SerializeField] public float _energy;
+    //[SerializeField] public float detectionRadius;
+    //[SerializeField] public LayerMask targetMask;
+    //[SerializeField] public float _energy;
 
     [Header("Targeting")]
     [SerializeField] protected TargetingStrategy targetingStrategy = TargetingStrategy.Nearest;
@@ -39,8 +31,6 @@ public class BaseEnemy : MonoBehaviour, I_TestDamageable
     [Header("Components")]
     public NavMeshAgent agent;
     protected Animator animator;
-
-    public event Action<I_TestDamageable> OnDeath;
 
 
     public GameObject _target
@@ -110,32 +100,22 @@ public class BaseEnemy : MonoBehaviour, I_TestDamageable
     #region Combat
     public virtual void PerformAttack()
     {
-        
-        if (currentTarget != null && currentTarget.IsAlive)
+        if (currentTarget != null )//&& currentTarget.IsAlive)
         {
-            currentTarget.TakeDamage(damage);
+            //projectile will shoot 
             Debug.Log($"PerformAttack with {damage}");
         }
     }
-    public void TakeDamage(int damageAmount)
+    public override void TakeDamage(float damage)
     {
-        health -= damageAmount;
-        if (health <= 0)
-        {
-            Die();
-        }
+        base.TakeDamage(damage);
     }
 
 
-
-
-    public virtual void Die()
+    public override void Die()
     {
         _enemyFSM.ChangeState(EnemyFSMStates.Die);
-
-        OnDeath?.Invoke(this);
         Destroy(gameObject, 2f);
-
     }
 
     protected virtual void OnDestroy()
@@ -173,14 +153,9 @@ public class BaseEnemy : MonoBehaviour, I_TestDamageable
     //{
     //    _target = target;
     //}
+
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-        
+        Gizmos.DrawWireSphere(transform.position, attackRange); 
     }
-
-    //void I_TestDamageable.TakeDamage(int damageAmount)
-    //{
-    //    TakeDamage(damageAmount);
-    //}
 }

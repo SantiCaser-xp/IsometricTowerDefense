@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SimpleTowerBullet : AbstractBullet
 {
-    I_TestDamageable target;
+    IDamageable<float> target;
     private Transform targetTransform;
     public float speed = 40f;
     public int damage = 10;
@@ -21,7 +21,7 @@ public class SimpleTowerBullet : AbstractBullet
         transform.position += dir * speed * Time.deltaTime;
     }
 
-    public override void SetTarget(I_TestDamageable newTarget, Transform targetTf)
+    public override void SetTarget(IDamageable<float> newTarget, Transform targetTf)
     {
         target = newTarget;
         targetTransform = targetTf;
