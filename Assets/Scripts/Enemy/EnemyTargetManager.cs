@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class EnemyTargetManager : MonoBehaviour
 {
@@ -83,9 +82,9 @@ public class EnemyTargetManager : MonoBehaviour
         List<ITargetable> nearbyTargets = GetNearbyTargets(gridPos, 2); // Check neighboring cells
         foreach (var target in nearbyTargets)
         {
-            if (target == null || !target.IsAlive) continue;
+            if (target == null) continue;
 
-            float distance = Vector3.Distance(fromPosition, target.Position);
+            float distance = Vector3.Distance(fromPosition, target.GetPos());
             if (distance < minDistance) { minDistance = distance; nearest = target; }
         }
         // If not found in the nearest cells, search globally
@@ -93,8 +92,8 @@ public class EnemyTargetManager : MonoBehaviour
         {
             foreach (var target in allTargets)
             {
-                if (target == null || !target.IsAlive) continue;
-                float distance = Vector3.Distance(fromPosition, target.Position);
+                if (target == null) continue;
+                float distance = Vector3.Distance(fromPosition, target.GetPos());
                 if (distance < minDistance) { minDistance = distance; nearest = target; }
             }
         }
@@ -103,9 +102,9 @@ public class EnemyTargetManager : MonoBehaviour
     private ITargetable GetWeakestTarget(Vector3 fromPosition)
     {
         return allTargets
-             .Where(t => t != null && t.IsAlive)
-             .OrderBy(t => t.CurrentHealth)
-             .ThenBy(t => Vector3.Distance(fromPosition, t.Position))
+             .Where(t => t != null)
+             //.OrderBy(t => t.CurrentHealth)
+             //.ThenBy(t => Vector3.Distance(fromPosition, t.Position))
              .FirstOrDefault();
     }
 
@@ -113,9 +112,9 @@ public class EnemyTargetManager : MonoBehaviour
     private ITargetable GetStrongestTarget(Vector3 fromPosition)
     {
         return allTargets
-           .Where(t => t != null && t.IsAlive)
-           .OrderByDescending(t => t.CurrentHealth)
-           .ThenBy(t => Vector3.Distance(fromPosition, t.Position))
+           .Where(t => t != null)
+           //.OrderByDescending(t => t.CurrentHealth)
+           //.ThenBy(t => Vector3.Distance(fromPosition, t.Position))
            .FirstOrDefault();
     }
     #region Spatial Grid Optimization
@@ -127,14 +126,14 @@ public class EnemyTargetManager : MonoBehaviour
     }
     private void UpdateSpatialGrid(ITargetable target)
     {
-        Vector2Int gridPos = GetGridPosition(target.Position);
+        Vector2Int gridPos = GetGridPosition(target.GetPos());
         if (!spatialGrid.ContainsKey(gridPos))
             spatialGrid[gridPos] = new List<ITargetable>();
         spatialGrid[gridPos].Add(target);
     }
     private void RemoveFromSpatialGrid(ITargetable target)
     {
-        Vector2Int gridPos = GetGridPosition(target.Position);
+        Vector2Int gridPos = GetGridPosition(target.GetPos());
         if (spatialGrid.ContainsKey(gridPos))
             spatialGrid[gridPos].Remove(target);
     }

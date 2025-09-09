@@ -26,7 +26,7 @@ public class IdleState : EnemyState<EnemyFSMStates, BaseEnemy>
         }
         
       
-        if (avatar.currentTarget!=null && avatar.currentTarget.IsAlive)
+        if (avatar.currentTarget!=null)
         {
                       enemyFSM.ChangeState(EnemyFSMStates.Move);
         }

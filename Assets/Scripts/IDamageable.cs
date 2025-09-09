@@ -1,5 +1,4 @@
-public interface IDamageable
+public interface IDamageable<T>
 {
-   public void TakeDamage(float damage);
-   public void Die(); 
+   public void TakeDamage(T damage);
 }

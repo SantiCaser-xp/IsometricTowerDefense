@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class MoveState : EnemyState<EnemyFSMStates, BaseEnemy>
@@ -15,12 +12,12 @@ public class MoveState : EnemyState<EnemyFSMStates, BaseEnemy>
 
     public override void OnExecute()
     {
-        if (avatar.currentTarget == null || !avatar.currentTarget.IsAlive)
+        if (avatar.currentTarget == null)
         {
             enemyFSM.ChangeState(EnemyFSMStates.Idle);
             return;
         }
-        float distanceToTarget = Vector3.Distance(avatar.transform.position, avatar.currentTarget.Position);
+        float distanceToTarget = Vector3.Distance(avatar.transform.position, avatar.currentTarget.GetPos());
         if (distanceToTarget <= avatar.attackRange)
         {
             avatar.agent.isStopped = true;
@@ -29,7 +26,7 @@ public class MoveState : EnemyState<EnemyFSMStates, BaseEnemy>
         else
         {
             avatar.agent.isStopped = false;
-            avatar.agent.SetDestination(avatar.currentTarget.Position);
+            avatar.agent.SetDestination(avatar.currentTarget.GetPos());
         }
 
 

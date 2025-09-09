@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class SimpleTower : AbstractTower
 {
@@ -13,11 +11,16 @@ public class SimpleTower : AbstractTower
 
 
     private float fireCountdown = 0f;
-    private List<I_TestDamageable> enemiesInRange = new List<I_TestDamageable>();
+    private List<IDamageable<float>> enemiesInRange = new List<IDamageable<float>>();
 
+    private void OnEnable()
+    {
+        
+    }
     private void Start()
     {
         _factory = FactorySimpleBullet.Instance;
+        EnemyTargetManager.Instance?.RegisterTarget(this);
     }
 
     private void Update()
@@ -29,7 +32,7 @@ public class SimpleTower : AbstractTower
 
         if (fireCountdown <= 0f)
         {
-            I_TestDamageable target = enemiesInRange[0];
+            IDamageable<float> target = enemiesInRange[0];
 
             if (target != null)
             {
@@ -53,7 +56,7 @@ public class SimpleTower : AbstractTower
         }
     }
 
-    public override void Shoot(I_TestDamageable target, Transform targetTransform)
+    public override void Shoot(IDamageable<float> target, Transform targetTransform)
     {
         var bullet = _factory.Create();
         bullet.transform.position = firePoint.position;
@@ -63,7 +66,7 @@ public class SimpleTower : AbstractTower
         bullet._isShooted = true;
     }
 
-    private void HandleEnemyDeath(I_TestDamageable deadEnemy)
+    private void HandleEnemyDeath(IDamageable<float> deadEnemy)
     {
         if (enemiesInRange.Contains(deadEnemy))
         {
@@ -75,7 +78,7 @@ public class SimpleTower : AbstractTower
             }
             else
             {
-                I_TestDamageable nextTarget = enemiesInRange[0];
+                IDamageable<float> nextTarget = enemiesInRange[0];
                 MonoBehaviour mb = nextTarget as MonoBehaviour;
                 if (mb != null)
                 {
@@ -87,11 +90,11 @@ public class SimpleTower : AbstractTower
 
     private void OnTriggerEnter(Collider other)
     {
-        I_TestDamageable damageable = other.GetComponent<I_TestDamageable>();
+        IDamageable<float> damageable = other.GetComponent<IDamageable<float>>();
         if (damageable != null && !enemiesInRange.Contains(damageable))
         {
             enemiesInRange.Add(damageable);
-            damageable.OnDeath += HandleEnemyDeath;
+            //damageable.OnDead += HandleEnemyDeath;
 
             if (enemiesInRange.Count == 1)
             {
@@ -106,11 +109,11 @@ public class SimpleTower : AbstractTower
 
     private void OnTriggerExit(Collider other)
     {
-        I_TestDamageable damageable = other.GetComponent<I_TestDamageable>();
+        IDamageable<float> damageable = other.GetComponent< IDamageable<float>>();
         if (damageable != null && enemiesInRange.Contains(damageable))
         {
             enemiesInRange.Remove(damageable);
-            damageable.OnDeath -= HandleEnemyDeath;
+            //damageable.OnDeath -= HandleEnemyDeath;
         }
 
         if (enemiesInRange.Count == 0)
@@ -120,7 +123,7 @@ public class SimpleTower : AbstractTower
         else
         {
             // Mover el anillo al siguiente enemigo
-            I_TestDamageable nextTarget = enemiesInRange[0];
+            IDamageable<float> nextTarget = enemiesInRange[0];
             MonoBehaviour mb = nextTarget as MonoBehaviour;
             if (mb != null)
             {
