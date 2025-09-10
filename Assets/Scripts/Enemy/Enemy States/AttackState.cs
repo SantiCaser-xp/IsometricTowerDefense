@@ -30,13 +30,13 @@ public class AttackState : EnemyState<EnemyFSMStates, BaseEnemy>
         // Attack with cooldown
         if (Time.time - avatar.lastAttackTime >= avatar.attackCooldown)
         {
-            Debug.Log($"Attack with cooldown");
+            
             avatar.lastAttackTime = Time.time;
             avatar.PerformAttack();
         }
     }
     public override void OnExit()
     {
-        Debug.Log($"Exit from AttackState");
+        
     }
 }
