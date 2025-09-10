@@ -47,4 +47,8 @@ public class SimpleTowerBullet : AbstractBullet
         targetTransform = null;
         _isShooted = false;
     }
+
+    public override void SetTarget(ITargetable newTarget, Vector3 targetTf)
+    {
+    }
 }

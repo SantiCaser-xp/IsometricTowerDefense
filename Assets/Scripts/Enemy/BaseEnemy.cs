@@ -26,7 +26,9 @@ public abstract class BaseEnemy : Destructible, IDamageable<float>
     public float lastAttackTime;
     public float lastSearchTime;
 
-
+    [Header("Combat")]
+    [SerializeField] protected AbstractFactory<AbstractBullet> _factory;
+    [SerializeField] private GameObject bulletPrefab;
 
     [Header("Components")]
     public NavMeshAgent agent;
@@ -67,7 +69,7 @@ public abstract class BaseEnemy : Destructible, IDamageable<float>
 
         _enemyFSM.ChangeState(EnemyFSMStates.Idle);
     }
-    private void Start()
+    public virtual void Start()
     {
         EnemyManager.Instance?.RegisterEnemy(this);
     }

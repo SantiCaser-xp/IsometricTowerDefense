@@ -15,6 +15,7 @@ public abstract class AbstractBullet : MonoBehaviour
     public virtual void Refresh() { }
 
     public abstract void SetTarget(IDamageable<float> newTarget, Transform targetTf);
+    public abstract void SetTarget(ITargetable newTarget, Vector3 targetTf);
 
     //protected virtual void OnTriggerEnter(Collider other)
     //{
