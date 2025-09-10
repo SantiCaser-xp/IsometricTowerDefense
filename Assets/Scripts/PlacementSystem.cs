@@ -18,7 +18,7 @@ public class PlacementSystem : MonoBehaviour
     private GridData floorData, structureData;
 
     [SerializeField]
-    private PreviewSystem preview;
+    private NewPreviewSystem preview;
 
     private Vector3Int lastDetectedPosition = Vector3Int.zero;
 

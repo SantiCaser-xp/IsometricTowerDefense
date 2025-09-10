@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class PlacementState : IBuildingState
+public class NewPlacementState : IBuildingState
 {
     private int selectedObjectIndex = -1;
     int ID;
@@ -14,7 +14,7 @@ public class PlacementState : IBuildingState
     GridData structureData;
     ObjectPlacer objectPlacer;
 
-    public PlacementState(int iD,
+    public NewPlacementState(int iD,
                           Grid grid,
                           NewPreviewSystem previewSystem,
                           ObjectsDatabaseSO dataBase,

@@ -7,12 +7,12 @@ public class RemovingState : IBuildingState
 {
     private int gameObjectIndex = -1;
     Grid grid;
-    PreviewSystem previewSystem;
+    NewPreviewSystem previewSystem;
     GridData floorData;
     GridData structureData;
     ObjectPlacer objectPlacer;
 
-    public RemovingState(Grid grid, PreviewSystem previewSystem, GridData floorData, GridData structureData, ObjectPlacer objectPlacer)
+    public RemovingState(Grid grid, NewPreviewSystem previewSystem, GridData floorData, GridData structureData, ObjectPlacer objectPlacer)
     {
         this.grid = grid;
         this.previewSystem = previewSystem;
