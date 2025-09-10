@@ -61,9 +61,9 @@ public class SimpleTower : AbstractTower
         var bullet = _factory.Create();
         bullet.transform.position = firePoint.position;
         bullet.transform.rotation = firePoint.rotation;
-        bullet._damage = damage;
-        bullet.SetTarget(target, targetTransform);
-        bullet._isShooted = true;
+        //bullet._damage = damage;
+        //bullet.SetTarget(target, targetTransform);
+        //bullet._isShooted = true;
     }
 
     private void HandleEnemyDeath(IDamageable<float> deadEnemy)

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public abstract class AbstractBullet : MonoBehaviour
 {
-    protected ObjectPool<AbstractBullet> _myPool;
-    [SerializeField] public float _damage;
-    [SerializeField] public bool _isShooted = false;
+    [SerializeField] protected ObjectPool<AbstractBullet> _myPool;
+    [SerializeField] protected float _damage;
+    [SerializeField] protected bool _isShooted = false;
+
     public void Initialize(ObjectPool<AbstractBullet> pool)
     {
         _myPool = pool;
@@ -14,7 +15,7 @@ public abstract class AbstractBullet : MonoBehaviour
 
     public virtual void Refresh() { }
 
-    public abstract void SetTarget(IDamageable<float> newTarget, Transform targetTf);
+    //public abstract void SetTarget(IDamageable<float> newTarget, Transform targetTf);
 
     //protected virtual void OnTriggerEnter(Collider other)
     //{

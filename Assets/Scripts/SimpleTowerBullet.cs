@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleTowerBullet : AbstractBullet
@@ -8,43 +6,58 @@ public class SimpleTowerBullet : AbstractBullet
     private Transform targetTransform;
     public float speed = 40f;
     public int damage = 10;
+    private float _timer = 1f;
+
+    private void OnEnable()
+    {
+        Invoke(nameof(OnRelease), _timer);
+    }
 
     private void Update()
     {
-        if (_isShooted && (targetTransform == null || target == null))
-        {
-            _myPool.Release(this);
-            return;
-        }
-
-        Vector3 dir = (targetTransform.position - transform.position).normalized;
+        Vector3 dir = transform.forward;
         transform.position += dir * speed * Time.deltaTime;
     }
 
-    public override void SetTarget(IDamageable<float> newTarget, Transform targetTf)
-    {
-        target = newTarget;
-        targetTransform = targetTf;
-    }
+    //private void Update()
+    //{
+    //    if (_isShooted && (targetTransform == null || target == null))
+    //    {
+    //        _myPool.Release(this);
+    //        return;
+    //    }
+        //Vector3 dir = (targetTransform.position - transform.position).normalized;
+        //transform.position += dir* speed * Time.deltaTime;
+    //    
+    //}
+
+    //public override void SetTarget(IDamageable<float> newTarget, Transform targetTf)
+    //{
+    //    target = newTarget;
+    //    targetTransform = targetTf;
+    //}
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.transform == targetTransform)
+        Destructible dest = other.GetComponent<Destructible>();
+
+        if (dest != null)
         {
-            HitTarget();
+            target.TakeDamage(damage);
+            OnRelease();
+            
         }
     }
 
-    public void HitTarget()
+    private void OnRelease()
     {
-        target.TakeDamage(damage);
         _myPool.Release(this);
     }
 
-    public override void Refresh()
-    {
-        target = null;
-        targetTransform = null;
-        _isShooted = false;
-    }
+    //public override void Refresh()
+    //{
+    //    target = null;
+    //    targetTransform = null;
+    //    _isShooted = false;
+    //}
 }
