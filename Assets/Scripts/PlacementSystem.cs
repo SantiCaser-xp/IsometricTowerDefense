@@ -35,6 +35,7 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
         floorData = new();
         structureData = new();
+
     }
 
     public void StartPlacement(int ID)
@@ -103,4 +104,5 @@ public class PlacementSystem : MonoBehaviour
         lastDetectedPosition = gridPosition;
 
     }
+
 }
