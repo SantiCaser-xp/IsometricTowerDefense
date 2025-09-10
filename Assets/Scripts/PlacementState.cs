@@ -20,7 +20,8 @@ public class PlacementState : IBuildingState
                           ObjectsDatabaseSO dataBase,
                           GridData floorData,
                           GridData structureData,
-                          ObjectPlacer objectPlacer)
+                          ObjectPlacer objectPlacer,
+                          LayerMask layerMask)
     {
         ID = iD;
         this.grid = grid;
@@ -70,7 +71,21 @@ public class PlacementState : IBuildingState
             floorData :
             structureData;
 
-        return selectedData.CanPlaceObject(gridPosition, dataBase.objectsData[selectedObjectIndex].Size);
+        bool gridValid = selectedData.CanPlaceObject(gridPosition, dataBase.objectsData[selectedObjectIndex].Size);
+
+        bool enemyCollision = CheckEnemyCollision(grid.CellToWorld(gridPosition), dataBase.objectsData[selectedObjectIndex].Size);
+
+        return gridValid && !enemyCollision;
+    }
+
+    private bool CheckEnemyCollision(Vector3 worldPosition, Vector2Int size)
+    {
+        Vector3 center = worldPosition + new Vector3(size.x / 2f, 0.5f, size.y / 2f);
+        Vector3 halfExtents = new Vector3(size.x / 2f, 1f, size.y / 2f);
+
+        Collider[] colliders = Physics.OverlapBox(center, halfExtents, Quaternion.identity, LayerMask.GetMask("Enemy"));
+
+        return colliders.Length > 0;
     }
 
     public void UpdateState(Vector3Int gridPosition)

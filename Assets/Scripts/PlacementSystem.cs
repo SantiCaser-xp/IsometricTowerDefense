@@ -25,6 +25,9 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private ObjectPlacer objectPlacer;
 
+    [SerializeField]
+    private LayerMask layerMask;
+
     IBuildingState buildingState;
 
     private void Start()
@@ -38,7 +41,7 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         gridVisualization.SetActive(true);
-        buildingState = new PlacementState(ID, grid, preview, database, floorData, structureData, objectPlacer);
+        buildingState = new PlacementState(ID, grid, preview, database, floorData, structureData, objectPlacer, layerMask);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
@@ -96,11 +99,8 @@ public class PlacementSystem : MonoBehaviour
         }
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+        buildingState.UpdateState(gridPosition);
+        lastDetectedPosition = gridPosition;
 
-        if (lastDetectedPosition != gridPosition)
-        {
-            buildingState.UpdateState(gridPosition);
-            lastDetectedPosition = gridPosition;
-        }
     }
 }
