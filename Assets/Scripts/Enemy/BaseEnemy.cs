@@ -52,9 +52,11 @@ public abstract class BaseEnemy : Destructible, IDamageable<float>
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.speed = walkSpeed;
+
         animator = GetComponent<Animator>();
 
-        EnemyManager.Instance?.RegisterEnemy(this);
+      
 
         _enemyFSM = new EnemyFSM<EnemyFSMStates, BaseEnemy>();
 
@@ -65,7 +67,10 @@ public abstract class BaseEnemy : Destructible, IDamageable<float>
 
         _enemyFSM.ChangeState(EnemyFSMStates.Idle);
     }
-
+    private void Start()
+    {
+        EnemyManager.Instance?.RegisterEnemy(this);
+    }
 
 
     // Update is called once per frame
