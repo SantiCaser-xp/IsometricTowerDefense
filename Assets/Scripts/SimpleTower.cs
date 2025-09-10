@@ -20,7 +20,7 @@ public class SimpleTower : AbstractTower
     private void Start()
     {
         _factory = FactorySimpleBullet.Instance;
-        EnemyTargetManager.Instance?.RegisterTarget(this);
+        
     }
 
     private void Update()
