@@ -28,6 +28,11 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private LayerMask layerMask;
 
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private float placementDistance = 2f; // Distancia frente al jugador
+    [SerializeField] private float raycastHeight = 2f;     // Altura desde la que lanzar el raycast
+
+
     IBuildingState buildingState;
 
     private void Start()
@@ -63,9 +68,7 @@ public class PlacementSystem : MonoBehaviour
         {
             return;
         }
-        Vector3 mousePosition = inputManager.GetSelectedMapPosition();
-        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-
+        Vector3Int gridPosition = GetGridPositionInFrontOfPlayer();
         buildingState.OnAction(gridPosition);
     }
 
@@ -98,10 +101,25 @@ public class PlacementSystem : MonoBehaviour
         {
             return;
         }
-        Vector3 mousePosition = inputManager.GetSelectedMapPosition();
-        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+        Vector3Int gridPosition = GetGridPositionInFrontOfPlayer();
         buildingState.UpdateState(gridPosition);
         lastDetectedPosition = gridPosition;
+    }
+
+    private Vector3Int GetGridPositionInFrontOfPlayer()
+    {
+        Vector3 origin = playerTransform.position + playerTransform.forward * placementDistance + Vector3.up * raycastHeight;
+        Vector3 direction = Vector3.down;
+        RaycastHit hit;
+
+        if (Physics.Raycast(origin, direction, out hit, raycastHeight * 2f, layerMask))
+        {
+            return grid.WorldToCell(hit.point);
+        }
+        // Si no golpea nada, devuelve la celda frente al jugador a nivel del suelo
+        Vector3 fallback = playerTransform.position + playerTransform.forward * placementDistance;
+        fallback.y = 0; // Ajusta según tu sistema de grilla
+        return grid.WorldToCell(fallback);
     }
 
 }
