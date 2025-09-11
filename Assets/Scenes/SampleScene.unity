@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -131,6 +131,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 293016725}
     m_Modifications:
+    - target: {fileID: 1936654477445518959, guid: 1a41e869998b4774da595f2d1abbe962,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1973234550011058718, guid: 1a41e869998b4774da595f2d1abbe962,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1992,6 +1997,9 @@ MonoBehaviour:
   gridVisualization: {fileID: 1378222774}
   preview: {fileID: 468606809}
   objectPlacer: {fileID: 332785602}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &994086934
 GameObject:
   m_ObjectHideFlags: 0

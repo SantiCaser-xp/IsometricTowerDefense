@@ -27,6 +27,8 @@ public class SimpleTower : AbstractTower
     {
         fireCountdown -= Time.deltaTime;
 
+        UpdateRingPosition();
+
         if (enemiesInRange.Count == 0) return;
 
 
@@ -66,24 +68,29 @@ public class SimpleTower : AbstractTower
         bullet._isShooted = true;
     }
 
-    private void HandleEnemyDeath(IDamageable<float> deadEnemy)
+    private void UpdateRingPosition()
     {
-        if (enemiesInRange.Contains(deadEnemy))
+        while (enemiesInRange.Count > 0)
         {
-            enemiesInRange.Remove(deadEnemy);
-
-            if (enemiesInRange.Count == 0)
+            var target = enemiesInRange[0] as MonoBehaviour;
+            if (target == null || !target.gameObject.activeInHierarchy)
             {
-                targetRing.Hide();
+                enemiesInRange.RemoveAt(0);
+
+                if (enemiesInRange.Count > 0)
+                {
+                    var nextMb = enemiesInRange[0] as MonoBehaviour;
+                    if (nextMb != null)
+                        targetRing.RingActive(nextMb.transform);
+                }
+                else
+                {
+                    targetRing.Hide();
+                }
             }
             else
             {
-                IDamageable<float> nextTarget = enemiesInRange[0];
-                MonoBehaviour mb = nextTarget as MonoBehaviour;
-                if (mb != null)
-                {
-                    targetRing.RingActive(mb.transform);
-                }
+                break;
             }
         }
     }
