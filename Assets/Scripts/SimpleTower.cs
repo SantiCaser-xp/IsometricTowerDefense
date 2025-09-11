@@ -8,6 +8,8 @@ public class SimpleTower : AbstractTower
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private TargetRing targetRing;
+    [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] private SphereCollider enemyDetectorCollider;
 
 
     private float fireCountdown = 0f;
@@ -17,10 +19,19 @@ public class SimpleTower : AbstractTower
     {
         
     }
+
+    private void Awake()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+        if (boxCollider == null)
+        {
+            Debug.LogError("BoxCollider not found on SimpleTower.");
+        }
+        enemyDetectorCollider = GetComponent<SphereCollider>();
+    }
     private void Start()
     {
         _factory = FactorySimpleBullet.Instance;
-        
     }
 
     private void Update()
@@ -97,18 +108,26 @@ public class SimpleTower : AbstractTower
 
     private void OnTriggerEnter(Collider other)
     {
-        IDamageable<float> damageable = other.GetComponent<IDamageable<float>>();
-        if (damageable != null && !enemiesInRange.Contains(damageable))
+        // Solo procesar si el collider que detecta es el SphereCollider
+        if (enemyDetectorCollider != null && other != null)
         {
-            enemiesInRange.Add(damageable);
-            //damageable.OnDead += HandleEnemyDeath;
+            // Solo continuar si el collider que está activo es el SphereCollider
+            // (Unity llama a este método en el objeto que tiene el trigger, así que esto es suficiente)
+            if (!enemyDetectorCollider.enabled || !enemyDetectorCollider.isTrigger)
+                return;
 
-            if (enemiesInRange.Count == 1)
+            IDamageable<float> damageable = other.GetComponent<IDamageable<float>>();
+            if (damageable != null && !enemiesInRange.Contains(damageable))
             {
-                MonoBehaviour mb = damageable as MonoBehaviour;
-                if (mb != null)
+                enemiesInRange.Add(damageable);
+
+                if (enemiesInRange.Count == 1)
                 {
-                    targetRing.RingActive(mb.transform);
+                    MonoBehaviour mb = damageable as MonoBehaviour;
+                    if (mb != null)
+                    {
+                        targetRing.RingActive(mb.transform);
+                    }
                 }
             }
         }

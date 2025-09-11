@@ -73,31 +73,12 @@ public class PlacementState : IBuildingState
 
         bool gridValid = selectedData.CanPlaceObject(gridPosition, dataBase.objectsData[selectedObjectIndex].Size);
 
-        bool enemyCollision = CheckEnemyCollision(grid.CellToWorld(gridPosition), dataBase.objectsData[selectedObjectIndex].Size);
+        // Obtén el detector del preview
+        var detector = previewSystem.GetPreviewCollisionDetector();
+        bool enemyCollision = detector != null && detector.IsColliding;
 
         return gridValid && !enemyCollision;
     }
-
-    private bool CheckEnemyCollision(Vector3 worldPosition, Vector2Int size)
-    {
-        // Ajusta la altura según el tamaño real de los enemigos
-        float yCenter = 0.5f; // O la altura media de los enemigos
-        float yExtent = 0.5f; // O la mitad de la altura de los enemigos
-
-        Vector3 center = worldPosition + new Vector3(size.x / 2f, yCenter, size.y / 2f);
-        Vector3 halfExtents = new Vector3(size.x / 2f, yExtent, size.y / 2f);
-
-        // Dibuja el OverlapBox en la escena para depuración
-#if UNITY_EDITOR
-        Debug.DrawLine(center - halfExtents, center + halfExtents, Color.red, 0.5f);
-#endif
-
-        Collider[] colliders = Physics.OverlapBox(center, halfExtents, Quaternion.identity, LayerMask.GetMask("Enemy"));
-
-        return colliders.Length > 0;
-    }
-
-
 
     public void UpdateState(Vector3Int gridPosition)
     {
