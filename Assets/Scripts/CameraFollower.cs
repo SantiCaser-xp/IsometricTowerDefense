@@ -17,5 +17,6 @@ public class CameraFollower : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, targetPos, _speedRate * Time.fixedDeltaTime);
         transform.LookAt(_character.transform);
+
     }
 }
