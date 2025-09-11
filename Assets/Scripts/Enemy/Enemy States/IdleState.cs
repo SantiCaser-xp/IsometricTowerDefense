@@ -53,6 +53,6 @@ public class IdleState : EnemyState<EnemyFSMStates, BaseEnemy>
     }
     public override void OnExit()
     {
-        Debug.Log($"Exit from IdleState");
+        
     }
 }

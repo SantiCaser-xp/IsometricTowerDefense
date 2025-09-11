@@ -68,7 +68,7 @@ public class GridData
         }
     }
 
-    public class PlacementData
+    public struct PlacementData
     {
         public List<Vector3Int> occupiedPositions;
 
@@ -82,4 +82,8 @@ public class GridData
             PlacedObjectIndex = placedObjectIndex;
         }
     }
+
+
 }
+
+
