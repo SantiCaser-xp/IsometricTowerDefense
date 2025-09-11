@@ -5,7 +5,6 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed = 3.5f;
     [SerializeField] private float _movementSpeedMultiplier = 1f;
-    [SerializeField] private VelocityBoostPerk _incrementVelocityPerk;
     private Rigidbody _rb;
     private Vector3 _moveDirection;
 
@@ -17,6 +16,11 @@ public class CharacterMovement : MonoBehaviour
     public void Movement(Vector3 dir)
     {
         _moveDirection = (transform.right * dir.x + transform.forward * dir.z);
-        _rb.MovePosition(_rb.position + _moveDirection * Time.fixedDeltaTime * _movementSpeed * _incrementVelocityPerk.CurrentBoost);
+        _rb.MovePosition(_rb.position + _moveDirection * Time.fixedDeltaTime * _movementSpeed * _movementSpeedMultiplier);
+    }
+
+    public void ChangeSpeedMultiplier(float speedMultiplier)
+    {
+        _movementSpeedMultiplier += speedMultiplier;
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectPlacer : MonoBehaviour
@@ -15,6 +16,15 @@ public class ObjectPlacer : MonoBehaviour
         placedGameObjects.Add(newObject);
         newObject.GetComponent<SphereCollider>().enabled = true;
         newObject.GetComponentInChildren<BoxCollider>().enabled = true;
+
+        ITargetable targetable = newObject.GetComponent<ITargetable>();
+        if (targetable != null)
+        {
+            EnemyTargetManager.Instance?.RegisterTarget(targetable);
+        }
+        
+
+
         return placedGameObjects.Count - 1;
     }
 

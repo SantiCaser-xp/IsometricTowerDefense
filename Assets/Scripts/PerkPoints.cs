@@ -7,7 +7,8 @@ public class PerkPoints : MonoBehaviour, IResettable<int>
 
     [Header("Perk points")]
     [SerializeField] private int _perkPerLevel = 1;
-    private int _currentPerks = 0;
+    private int _availablePerks = 0;
+    public int AvailablePerks => _availablePerks;
 
     private void OnEnable()
     {
@@ -26,16 +27,16 @@ public class PerkPoints : MonoBehaviour, IResettable<int>
 
     private void AddPerk()
     {
-        _currentPerks += _perkPerLevel;
-        OnPerksChanged?.Invoke(_currentPerks);
+        _availablePerks += _perkPerLevel;
+        OnPerksChanged?.Invoke(_availablePerks);
     }
 
     public bool TryUsePerk(int price)
     {
-        if (_currentPerks >= price)
+        if (_availablePerks >= price)
         {
-            _currentPerks -= price;
-            OnPerksChanged?.Invoke(_currentPerks);
+            _availablePerks -= price;
+            OnPerksChanged?.Invoke(_availablePerks);
             return true;
         }
 
@@ -44,6 +45,6 @@ public class PerkPoints : MonoBehaviour, IResettable<int>
 
     public void Reset()
     {
-        _currentPerks = 0;
+        _availablePerks = 0;
     }
 }

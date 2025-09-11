@@ -20,7 +20,8 @@ public class PlacementState : IBuildingState
                           ObjectsDatabaseSO dataBase,
                           GridData floorData,
                           GridData structureData,
-                          ObjectPlacer objectPlacer)
+                          ObjectPlacer objectPlacer,
+                          LayerMask layerMask)
     {
         ID = iD;
         this.grid = grid;
@@ -70,7 +71,13 @@ public class PlacementState : IBuildingState
             floorData :
             structureData;
 
-        return selectedData.CanPlaceObject(gridPosition, dataBase.objectsData[selectedObjectIndex].Size);
+        bool gridValid = selectedData.CanPlaceObject(gridPosition, dataBase.objectsData[selectedObjectIndex].Size);
+
+        // Obtén el detector del preview
+        var detector = previewSystem.GetPreviewCollisionDetector();
+        bool enemyCollision = detector != null && detector.IsColliding;
+
+        return gridValid && !enemyCollision;
     }
 
     public void UpdateState(Vector3Int gridPosition)
