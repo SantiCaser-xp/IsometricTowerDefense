@@ -16,7 +16,7 @@ public class CharacterMovement : MonoBehaviour
     public void Movement(Vector3 dir)
     {
         _moveDirection = (transform.right * dir.x + transform.forward * dir.z);
-        _rb.MovePosition(_rb.position + _moveDirection * Time.fixedDeltaTime * _movementSpeed * _movementSpeedMultiplier);
+        _rb.MovePosition(_rb.position + _moveDirection.ToIso() * Time.fixedDeltaTime * _movementSpeed * _movementSpeedMultiplier);
     }
 
     public void ChangeSpeedMultiplier(float speedMultiplier)
