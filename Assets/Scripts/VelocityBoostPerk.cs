@@ -1,24 +1,25 @@
 using UnityEngine;
 
-public class VelocityBoostPerk : Perk, IPerkEffect<float>
+[CreateAssetMenu(menuName = "Perk/VelocityBoostPerk")]
+public class VelocityBoostPerk : PerkData
 {
-    [SerializeField] private float _speedBoostPerUpgrade = 0.1f;
-    private float _currentBoost = 1.0f;
-    public float CurrentBoost => _currentBoost;
+    [SerializeField] private float _speedBoostPerUpgrade = 0.2f;
 
-    protected override void OnPerkApplied()
+    public override void ApplyEffect(PerkInstance instance, GameObject player)
     {
-        _currentBoost += _speedBoostPerUpgrade;
-        Debug.Log(_currentBoost);
+        var movement = player.GetComponent<CharacterMovement>();
+        if (movement != null)
+        {
+            movement.ChangeSpeedMultiplier(_speedBoostPerUpgrade);
+        }
     }
 
-    public float ApplyEffect()
+    public override void RemoveEffect(PerkInstance instance, GameObject player)
     {
-        return _currentBoost;
-    }
-
-    public float RemoveEffect()
-    {
-        return _currentBoost -= _speedBoostPerUpgrade;
+        var movement = player.GetComponent<CharacterMovement>();
+        if (movement != null)
+        {
+            movement.ChangeSpeedMultiplier(_speedBoostPerUpgrade);
+        }
     }
 }

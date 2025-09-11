@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BuildingPanel : MonoBehaviour
+public class SwitcheablePanel : MonoBehaviour
 {
     private void Awake()
     {

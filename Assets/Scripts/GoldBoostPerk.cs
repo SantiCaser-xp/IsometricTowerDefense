@@ -1,25 +1,25 @@
 using UnityEngine;
 
-public class GoldBoostPerk : Perk, IPerkEffect<int>
+[CreateAssetMenu(menuName = "Perk/GoldBoostPerk")]
+public class GoldBoostPerk : PerkData
 {
     [SerializeField] private int _goldBoostPerUpgrade = 5;
-    private int _currentBoost = 0;
-    public int CurrentBoost => _currentBoost;
 
-    public int RemoveEffect()
+    public override void ApplyEffect(PerkInstance instance, GameObject player)
     {
-        _currentBoost -= _goldBoostPerUpgrade;
-        return _currentBoost;
+        var deposit = player.GetComponent<CharacterInventory>();
+        if (deposit != null)
+        {
+            deposit.ChangeDeposit(_goldBoostPerUpgrade);
+        }
     }
 
-    public int ApplyEffect()
+    public override void RemoveEffect(PerkInstance instance, GameObject player)
     {
-        _currentBoost += _goldBoostPerUpgrade;
-        return _currentBoost;
-    }
-
-    protected override void OnPerkApplied()
-    {
-        Debug.Log("5 gold in Start Deposit");
+        var deposit = player.GetComponent<CharacterInventory>();
+        if (deposit != null)
+        {
+            deposit.ChangeDeposit(_goldBoostPerUpgrade);
+        }
     }
 }
