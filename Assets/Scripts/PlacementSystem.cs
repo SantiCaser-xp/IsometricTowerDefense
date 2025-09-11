@@ -35,6 +35,7 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
         floorData = new();
         structureData = new();
+
     }
 
     public void StartPlacement(int ID)
@@ -101,6 +102,6 @@ public class PlacementSystem : MonoBehaviour
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         buildingState.UpdateState(gridPosition);
         lastDetectedPosition = gridPosition;
-
     }
+
 }

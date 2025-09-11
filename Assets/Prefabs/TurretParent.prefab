@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 1952966794937004296}
   - component: {fileID: 6491122522772515096}
   - component: {fileID: 1501017535540876367}
+  - component: {fileID: 8271244552662317280}
   m_Layer: 0
   m_Name: TurretParent
   m_TagString: Untagged
@@ -125,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff57e783650b90542971180240ac19b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 100
   _factory: {fileID: 0}
   fireRate: 10
   damage: 1
@@ -152,6 +154,27 @@ SphereCollider:
   m_Enabled: 0
   serializedVersion: 3
   m_Radius: 6
+  m_Center: {x: 0.5, y: 0.5, z: 0.5}
+--- !u!65 &8271244552662317280
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2722975604164686984}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!1001 &5856788826771945461
 PrefabInstance:
@@ -291,7 +314,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3

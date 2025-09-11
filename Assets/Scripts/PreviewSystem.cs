@@ -25,6 +25,11 @@ public class PreviewSystem : MonoBehaviour
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
         previewObject = Instantiate(prefab);
+
+        // Asegura que el preview tenga el detector
+        if (previewObject.GetComponent<PreviewCollisionDetector>() == null)
+            previewObject.AddComponent<PreviewCollisionDetector>();
+
         PreparePreview(previewObject);
         PrepareCursor(size);
         cellIndicator.SetActive(true);
@@ -100,5 +105,11 @@ public class PreviewSystem : MonoBehaviour
         cellIndicator.SetActive(true);
         PrepareCursor(Vector2Int.one);
         ApplyFeedbackToCursor(false);
+    }
+
+    public PreviewCollisionDetector GetPreviewCollisionDetector()
+    {
+        if (previewObject == null) return null;
+        return previewObject.GetComponent<PreviewCollisionDetector>();
     }
 }
