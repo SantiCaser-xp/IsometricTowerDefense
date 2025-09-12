@@ -2,6 +2,6 @@ using System;
 
 public interface IKillable
 {
-    public event Action OnDead;
+    public static event Action OnDead;
     public void Die();
 }
