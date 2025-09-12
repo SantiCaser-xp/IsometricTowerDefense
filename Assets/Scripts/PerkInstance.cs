@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PerkInstance : MonoBehaviour
+public class PerkInstance
 {
     public event Action<PerkInstance> OnChanged;
 
