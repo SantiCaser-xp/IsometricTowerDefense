@@ -80,7 +80,8 @@ public class PreviewSystem : MonoBehaviour
     {
         Color c = validity ? Color.white : Color.red;
         c.a = 0.5f;
-        previewMaterialInstance.color = c;
+        // Cambia "_HologramColor" por el nombre real de tu propiedad
+        previewMaterialInstance.SetColor("Color", c);
     }
 
     private void ApplyFeedbackToCursor(bool validity)

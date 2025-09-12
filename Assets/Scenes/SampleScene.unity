@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previewYOffset: 0.06
   cellIndicator: {fileID: 1611897970}
-  previewMaterialPrefab: {fileID: 2100000, guid: 4a538c340b1945141abcd77e142829f5,
+  previewMaterialPrefab: {fileID: 2100000, guid: 6082b57f55198c84cb941bb4e80ce1fa,
     type: 2}
 --- !u!4 &468606810
 Transform:
@@ -3730,6 +3730,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 8284666752383117198, guid: ff6ed243fc2a95549829a073a0a4a307,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6082b57f55198c84cb941bb4e80ce1fa, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

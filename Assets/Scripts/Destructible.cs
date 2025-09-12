@@ -6,11 +6,11 @@ public abstract class Destructible : MonoBehaviour, IDamageable<float>, IKillabl
     [SerializeField] protected float _maxHealth = 100f;
     protected float _currentHealth = 0f;
 
-    public event Action OnDead;
+    public static event Action OnDead;
 
     public virtual void Die()
     {
-        //logic
+        OnDead?.Invoke();
     }
 
     public virtual void TakeDamage(float damage)
