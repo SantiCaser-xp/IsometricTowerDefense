@@ -4,25 +4,24 @@ using UnityEngine;
 public class PerkPoints : MonoBehaviour, IResettable<int>
 {
     public static Action<int> OnPerksChanged;
+    public static PerkPoints Instance;
 
     [Header("Perk points")]
     [SerializeField] private int _perkPerLevel = 1;
     private int _availablePerks = 0;
     public int AvailablePerks => _availablePerks;
 
-    private void OnEnable()
+    private void Awake()
     {
-        LevelSystem.OnLevelChanged += OnLevelUp;
-    }
-
-    private void OnDisable()
-    {
-        LevelSystem.OnLevelChanged -= OnLevelUp;
-    }
-
-    private void OnLevelUp(int newLevel)
-    {
-        AddPerk();
+        if(!Instance)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void AddPerk()

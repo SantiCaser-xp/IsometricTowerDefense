@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider))]
-public class Character : MonoBehaviour, IRestoreable, IDamageable
+public class Character : MonoBehaviour, IRestoreable, IDamageable, IObservable
 {
     public static Action<bool> OnDead;
     [SerializeField] private float _maxHealth = 100f;
@@ -12,11 +13,22 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable
     [SerializeField] private ControlBase _joystick;
     private CharacterInputController _controller;
     private CharacterMovement _movement;
+    private List<IObserver> _observers = new List<IObserver>();
 
     private void Awake()
     {
         _controller = new CharacterInputController(_joystick);
         _movement = GetComponent<CharacterMovement>();
+
+        _currentHealth = _maxHealth;
+    }
+
+    private void Start()
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentHealth, _maxHealth);
+        }
     }
 
     private void Update()
@@ -39,7 +51,12 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable
 
         _currentHealth += value;
 
-        if(_currentHealth >= _maxHealth)
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentHealth, _maxHealth);
+        }
+
+        if (_currentHealth >= _maxHealth)
         {
             _currentHealth = _maxHealth;
         }
@@ -51,9 +68,14 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable
 
         _currentHealth -= damage;
 
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentHealth, _maxHealth);
+        }
+
         if (_currentHealth <= 0)
         {
-            _currentHealth = _maxHealth;
+            _currentHealth = 0;
             Die();
         }
     }
@@ -63,4 +85,28 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable
         _isAlive = false;
         OnDead?.Invoke(_isAlive);
     }
+
+    public void Subscribe(IObserver observer)
+    {
+        if (!_observers.Contains(observer))
+        {
+            _observers.Add(observer);
+        }
+    }
+
+    public void Unsubscribe(IObserver observer)
+    {
+        if (_observers.Contains(observer))
+        {
+            _observers.Remove(observer);
+        }
+    }
+
+    #region ForTest
+    [ContextMenu("TakeDamage")]
+    private void GetDamage()
+    {
+        TakeDamage(10);
+    }
+    #endregion
 }
