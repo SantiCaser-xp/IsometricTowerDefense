@@ -1,9 +1,9 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ExperienceSystem : MonoBehaviour, IResettable<float>
+public class ExperienceSystem : MonoBehaviour, IResettable<float>, IObservable
 {
-    public static Action OnLevelUp;
+    public static ExperienceSystem Instance;
 
     [Header("Experience")]
     [SerializeField] private float _maxExperienceLimit = 9999f;
@@ -12,10 +12,36 @@ public class ExperienceSystem : MonoBehaviour, IResettable<float>
     private float _currentExperience = 0f;
     private float _currentExperienceThreshold = 0f;
 
+    [Header("Level")]
+    [SerializeField] private int _maxLevel = 100;
+    private int _startLevel = 1;
+    private int _currentLevel = 0;
+
+    private List<IObserver> _observers = new List<IObserver>();
+
     private void Awake()
     {
+        if(!Instance)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         _currentExperienceThreshold = _startExperienceThreshold;
-        //initialize the variables for UI
+        _currentLevel = _startLevel;
+    }
+
+    private void Start()
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentExperience, _currentExperienceThreshold);
+            obs.UpdateData(_currentLevel);
+        }
     }
 
     public void AddExperience(float value)
@@ -29,8 +55,22 @@ public class ExperienceSystem : MonoBehaviour, IResettable<float>
         while (_currentExperience >= _currentExperienceThreshold)
         {
             _currentExperience -= _currentExperienceThreshold;
+            AddLevel();
             RecalculateExperienceThreshold();
-            OnLevelUp?.Invoke();
+        }
+
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentExperience, _currentExperienceThreshold);
+            obs.UpdateData(_currentLevel);
+        }
+    }
+
+    private void AddLevel()
+    {
+        if (_currentLevel < _maxLevel)
+        {
+            _currentLevel++;
         }
     }
 
@@ -43,11 +83,30 @@ public class ExperienceSystem : MonoBehaviour, IResettable<float>
     {
         _currentExperienceThreshold = _startExperienceThreshold;
         _currentExperience = 0f;
+        _currentLevel = 1;
     }
 
+    public void Subscribe(IObserver observer)
+    {
+        if (!_observers.Contains(observer))
+        {
+            _observers.Add(observer);
+        }
+    }
+
+    public void Unsubscribe(IObserver observer)
+    {
+        if (_observers.Contains(observer))
+        {
+            _observers.Remove(observer);
+        }
+    }
+
+    #region TEST
     [ContextMenu("Add Experience")]
     public void AddExperienceForce()
     {
         AddExperience(100);
     }
+    #endregion
 }

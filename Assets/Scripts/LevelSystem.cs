@@ -15,16 +15,6 @@ public class LevelSystem : MonoBehaviour, IResettable<int>
         _currentLevel = _startLevel;
     }
 
-    private void OnEnable()
-    {
-        ExperienceSystem.OnLevelUp += AddLevel;
-    }
-
-    private void OnDisable()
-    {
-        ExperienceSystem.OnLevelUp -= AddLevel;
-    }
-
     private void AddLevel()
     {
         if(_currentLevel < _maxLevel)
