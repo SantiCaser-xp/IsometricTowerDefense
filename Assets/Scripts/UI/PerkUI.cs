@@ -49,7 +49,6 @@ public class PerkUI : MonoBehaviour
 
         _buyButton.interactable = canUpgrade;
 
-        // Подсветка текста цены
         _priceText.color = canUpgrade ? Color.white : Color.red;
     }
 
