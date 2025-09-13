@@ -26,7 +26,7 @@ public class ExperienceSystem : MonoBehaviour, IResettable<float>
 
         _currentExperience = Mathf.Clamp(_currentExperience, 0f, _maxExperienceLimit);
 
-        if(_currentExperience >= _currentExperienceThreshold)
+        while (_currentExperience >= _currentExperienceThreshold)
         {
             _currentExperience -= _currentExperienceThreshold;
             RecalculateExperienceThreshold();
@@ -48,6 +48,6 @@ public class ExperienceSystem : MonoBehaviour, IResettable<float>
     [ContextMenu("Add Experience")]
     public void AddExperienceForce()
     {
-        AddExperience(3);
+        AddExperience(100);
     }
 }
