@@ -1,4 +1,4 @@
-
+using System.Collections;
 using UnityEngine;
 
 public class PreviewSystem : MonoBehaviour
@@ -14,6 +14,8 @@ public class PreviewSystem : MonoBehaviour
     private Material previewMaterialInstance;
 
     private Renderer cellIndicatorRenderer;
+
+    private Coroutine lerpCoroutine;
 
     private void Start()
     {
@@ -33,6 +35,11 @@ public class PreviewSystem : MonoBehaviour
         PreparePreview(previewObject);
         PrepareCursor(size);
         cellIndicator.SetActive(true);
+
+        // Inicia la animación de los sliders
+        if (lerpCoroutine != null)
+            StopCoroutine(lerpCoroutine);
+        lerpCoroutine = StartCoroutine(LerpMaterialSliders());
     }
 
 
@@ -112,5 +119,37 @@ public class PreviewSystem : MonoBehaviour
     {
         if (previewObject == null) return null;
         return previewObject.GetComponent<PreviewCollisionDetector>();
+    }
+
+    private IEnumerator LerpMaterialSliders()
+    {
+        Debug.Log("Starting LerpMaterialSliders Coroutine");
+        float duration = 0.3f;
+        float timer = 0f;
+        float DisplacementInitial = 0.800f;
+        float DistortionInitial = 49.5f;
+        float DisplacementFinal = 0.13f;
+        float DistortionFinal = 3.4f;
+
+        previewMaterialInstance.SetFloat("_DisplacementAmount", DisplacementInitial);
+        previewMaterialInstance.SetFloat("_DistortionFrequency", DistortionInitial);
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / duration);
+            float valueA = Mathf.Lerp(DisplacementInitial, DisplacementFinal, t);
+            float valueB = Mathf.Lerp(DistortionInitial, DistortionFinal, t);
+
+            previewMaterialInstance.SetFloat("_DisplacementAmount", valueA);
+            previewMaterialInstance.SetFloat("_DistortionFrequency", valueB);
+
+            Debug.Log($"Lerping values: DisplacementAmount={valueA}, DistortionFrequency={valueB}");
+
+            yield return null;
+        }
+
+        previewMaterialInstance.SetFloat("_DisplacementAmount", DisplacementFinal);
+        previewMaterialInstance.SetFloat("_DistortionFrequency", DistortionFinal);
     }
 }
