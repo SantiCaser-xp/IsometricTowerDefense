@@ -6,7 +6,7 @@ public class CharacterMeshRotator : MonoBehaviour
 
     public void RotateMesh(Vector3 input)
     {
-        Quaternion targetRotation = Quaternion.LookRotation(input);
+        Quaternion targetRotation = Quaternion.LookRotation(input.ToIso());
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, _speedRotation * Time.fixedDeltaTime);
     }
 }
