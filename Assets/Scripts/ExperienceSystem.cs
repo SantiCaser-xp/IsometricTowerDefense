@@ -56,6 +56,7 @@ public class ExperienceSystem : MonoBehaviour, IResettable<float>, IObservable
         {
             _currentExperience -= _currentExperienceThreshold;
             AddLevel();
+            //_observers[0].UpdateData(_currentLevel);
             RecalculateExperienceThreshold();
         }
 

@@ -27,7 +27,7 @@ public class PerkPoints : MonoBehaviour, IResettable<int>
     private void AddPerk()
     {
         _availablePerks += _perkPerLevel;
-        OnPerksChanged?.Invoke(_availablePerks);
+        //OnPerksChanged?.Invoke(_availablePerks);
     }
 
     public bool TryUsePerk(int price)
