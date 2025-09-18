@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,11 +19,6 @@ public class GlobalStamineUI : MonoBehaviour, IObserver
         }
 
         obs.Subscribe(this);
-    }
-
-    private void Start()
-    {
-        
     }
 
     public void UpdateData(float currentValue, float maxValue)
