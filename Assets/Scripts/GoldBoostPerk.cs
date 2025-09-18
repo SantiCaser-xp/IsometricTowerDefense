@@ -7,7 +7,7 @@ public class GoldBoostPerk : PerkData
 
     public override void ApplyEffect(PerkInstance instance, GameObject player)
     {
-        var deposit = player.GetComponent<CharacterInventory>();
+        var deposit = player.GetComponent<CharacterDeposit>();
         if (deposit != null)
         {
             deposit.ChangeDeposit(_goldBoostPerUpgrade);
@@ -16,7 +16,7 @@ public class GoldBoostPerk : PerkData
 
     public override void RemoveEffect(PerkInstance instance, GameObject player)
     {
-        var deposit = player.GetComponent<CharacterInventory>();
+        var deposit = player.GetComponent<CharacterDeposit>();
         if (deposit != null)
         {
             deposit.ChangeDeposit(_goldBoostPerUpgrade);
