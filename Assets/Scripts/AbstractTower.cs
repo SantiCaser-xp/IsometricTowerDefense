@@ -14,6 +14,7 @@ public abstract class AbstractTower : Destructible, ITargetable, IDamageable<flo
         return transform.position;
     }
 
+
     public override void Die()
     {
         Destroy(gameObject);
