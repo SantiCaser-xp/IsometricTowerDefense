@@ -10,18 +10,19 @@ public class SimpleTower : AbstractTower
     [SerializeField] private TargetRing targetRing;
     [SerializeField] private BoxCollider boxCollider;
     [SerializeField] private SphereCollider enemyDetectorCollider;
+    [SerializeField] private TowerHealthBar _healthBar;
+    [SerializeField] private GameObject normalVersion;
+    [SerializeField] private GameObject damagedVersion;
+    [SerializeField] private bool isDead = false;
 
 
     private float fireCountdown = 0f;
     private List<IDamageable<float>> enemiesInRange = new List<IDamageable<float>>();
 
-    private void OnEnable()
-    {
-        
-    }
-
     private void Awake()
     {
+        _currentHealth = _maxHealth;
+        _healthBar.SetHealth(_currentHealth, _maxHealth);
         boxCollider = GetComponent<BoxCollider>();
         if (boxCollider == null)
         {
@@ -36,6 +37,13 @@ public class SimpleTower : AbstractTower
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            TakeDamage(10);
+        }
+
+        if (isDead) return;
+
         fireCountdown -= Time.deltaTime;
 
         UpdateRingPosition();
@@ -67,6 +75,23 @@ public class SimpleTower : AbstractTower
                 enemiesInRange.RemoveAt(0);
             }
         }
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        _healthBar.SetHealth(_currentHealth, _maxHealth);
+    }
+
+    public override void Die()
+    {
+        if (normalVersion != null) normalVersion.SetActive(false);
+        if (damagedVersion != null) damagedVersion.SetActive(true);
+
+        if (boxCollider != null) boxCollider.enabled = false;
+        if (_healthBar != null) _healthBar.gameObject.SetActive(false);
+
+        isDead = true;
     }
 
     public override void Shoot(IDamageable<float> target, Transform targetTransform)
@@ -108,11 +133,8 @@ public class SimpleTower : AbstractTower
 
     private void OnTriggerEnter(Collider other)
     {
-        // Solo procesar si el collider que detecta es el SphereCollider
         if (enemyDetectorCollider != null && other != null)
         {
-            // Solo continuar si el collider que está activo es el SphereCollider
-            // (Unity llama a este método en el objeto que tiene el trigger, así que esto es suficiente)
             if (!enemyDetectorCollider.enabled || !enemyDetectorCollider.isTrigger)
                 return;
 
@@ -139,7 +161,6 @@ public class SimpleTower : AbstractTower
         if (damageable != null && enemiesInRange.Contains(damageable))
         {
             enemiesInRange.Remove(damageable);
-            //damageable.OnDeath -= HandleEnemyDeath;
         }
 
         if (enemiesInRange.Count == 0)
@@ -148,7 +169,6 @@ public class SimpleTower : AbstractTower
         }
         else
         {
-            // Mover el anillo al siguiente enemigo
             IDamageable<float> nextTarget = enemiesInRange[0];
             MonoBehaviour mb = nextTarget as MonoBehaviour;
             if (mb != null)

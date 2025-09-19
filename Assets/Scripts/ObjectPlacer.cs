@@ -16,6 +16,11 @@ public class ObjectPlacer : MonoBehaviour
         placedGameObjects.Add(newObject);
         newObject.GetComponent<SphereCollider>().enabled = true;
         newObject.GetComponentInChildren<BoxCollider>().enabled = true;
+        TowerHealthBar healthBar = newObject.GetComponentInChildren<TowerHealthBar>(true);
+        if (healthBar != null)
+        {
+            healthBar.gameObject.SetActive(true);
+        }
 
         ITargetable targetable = newObject.GetComponent<ITargetable>();
         if (targetable != null)
