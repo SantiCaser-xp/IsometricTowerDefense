@@ -5,11 +5,13 @@ public class SimpleTower : AbstractTower
 {
     [SerializeField] private float fireRate = 1f;
     [SerializeField] public int damage = 10;
+    [SerializeField] public float radius = 10f;
     [SerializeField] private Transform firePoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private TargetRing targetRing;
     [SerializeField] private BoxCollider boxCollider;
-    [SerializeField] private SphereCollider enemyDetectorCollider;
+    [SerializeField] private LayerMask _enemyMask;
+    //[SerializeField] private SphereCollider enemyDetectorCollider;
     [SerializeField] private TowerHealthBar _healthBar;
     [SerializeField] private GameObject normalVersion;
     [SerializeField] private GameObject damagedVersion;
@@ -28,7 +30,7 @@ public class SimpleTower : AbstractTower
         {
             Debug.LogError("BoxCollider not found on SimpleTower.");
         }
-        enemyDetectorCollider = GetComponent<SphereCollider>();
+        //enemyDetectorCollider = GetComponent<SphereCollider>();
     }
     private void Start()
     {
@@ -46,6 +48,7 @@ public class SimpleTower : AbstractTower
 
         fireCountdown -= Time.deltaTime;
 
+        SphereCasting();
         UpdateRingPosition();
 
         if (enemiesInRange.Count == 0) return;
@@ -131,14 +134,15 @@ public class SimpleTower : AbstractTower
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (enemyDetectorCollider != null && other != null)
         {
             if (!enemyDetectorCollider.enabled || !enemyDetectorCollider.isTrigger)
                 return;
 
-            IDamageable<float> damageable = other.GetComponent<IDamageable<float>>();
+            {
+                IDamageable<float> damageable = other.GetComponent<IDamageable<float>>();
             if (damageable != null && !enemiesInRange.Contains(damageable))
             {
                 enemiesInRange.Add(damageable);
@@ -153,9 +157,33 @@ public class SimpleTower : AbstractTower
                 }
             }
         }
+    }*/
+
+    private void SphereCasting()
+    {
+        //if (enemiesInRange.Count < 1) return;
+
+        Collider[] destruct = Physics.OverlapSphere(transform.position, radius, _enemyMask);
+        Debug.Log("Detected");
+
+        foreach (var item in destruct)
+        {
+            enemiesInRange.Add(item.GetComponent<IDamageable<float>>());
+        }
+
+
+        if (enemiesInRange.Count > 0)
+        {
+            MonoBehaviour mb = enemiesInRange[0] as MonoBehaviour;
+
+            if (mb != null)
+            {
+                targetRing.RingActive(mb.transform);
+            }
+        }
     }
 
-    private void OnTriggerExit(Collider other)
+    /*private void OnTriggerExit(Collider other)
     {
         IDamageable<float> damageable = other.GetComponent< IDamageable<float>>();
         if (damageable != null && enemiesInRange.Contains(damageable))
@@ -176,8 +204,13 @@ public class SimpleTower : AbstractTower
                 targetRing.RingActive(mb.transform);
             }
         }
+    }*/
+
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
-
-
 }
-

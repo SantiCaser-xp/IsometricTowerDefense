@@ -84,7 +84,36 @@ public abstract class BaseEnemy : Destructible, IDamageable<float>
         }
         
     }
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        IDamageable<float> damageable = other.GetComponent<IDamageable<float>>();
+
+        if (damageable != null)
+        {
+            damageable.TakeDamage(damage);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        IDamageable<float> damageable = other.GetComponent<IDamageable<float>>();
+
+        if (damageable != null)
+        {
+            float timer = 5;
+
+            timer -= Time.deltaTime;
+            //Debug.Log(timer);
+            if (timer <= 0)
+            {
+                timer = 5;
+                damageable.TakeDamage(damage);
+                Debug.Log("StartDamage");
+            }
+        }
+    }
+
 
     #region Targeting
     public virtual void SearchForTarget()
@@ -108,7 +137,7 @@ public abstract class BaseEnemy : Destructible, IDamageable<float>
         if (currentTarget != null )//&& currentTarget.IsAlive)
         {
             //projectile will shoot 
-            Debug.Log($"PerformAttack with {damage}");
+            //Debug.Log($"PerformAttack with {damage}");
         }
     }
     public override void TakeDamage(float damage)

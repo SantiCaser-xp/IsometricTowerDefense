@@ -4,7 +4,7 @@ public class AttackState : EnemyState<EnemyFSMStates, BaseEnemy>
 {
     public override void OnEnter()
     {
-        Debug.Log($"Debug Enter a AttackState");
+        //Debug.Log($"Debug Enter a AttackState");
         avatar.agent.isStopped = true;
     }
 
