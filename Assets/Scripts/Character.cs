@@ -6,9 +6,14 @@ using UnityEngine;
 public class Character : MonoBehaviour, IRestoreable, IDamageable, IObservable
 {
     public static Action<bool> OnDead;
+    public static Action<float, float> OnHealthChanged;
+    
     [SerializeField] private float _maxHealth = 100f;
     private float _currentHealth = 0f;
     private bool _isAlive = true;
+    
+    public float CurrentHealth => _currentHealth;
+    public float MaxHealth => _maxHealth;
     [SerializeField] private CharacterMeshRotator _meshRotator;
     [SerializeField] private ControlBase _joystick;
     private CharacterInputController _controller;
@@ -29,6 +34,8 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable, IObservable
         {
             obs.UpdateData(_currentHealth, _maxHealth);
         }
+        
+        OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
 
     private void Update()
@@ -60,6 +67,8 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable, IObservable
         {
             _currentHealth = _maxHealth;
         }
+        
+        OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
 
     public void TakeDamage(float damage)
@@ -78,12 +87,15 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable, IObservable
             _currentHealth = 0;
             Die();
         }
+        
+        OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
 
     public void Die()
     {
         _isAlive = false;
         OnDead?.Invoke(_isAlive);
+        FindObjectOfType<GameOverSystem>(true)?.ShowLose();
     }
 
     public void Subscribe(IObserver observer)
