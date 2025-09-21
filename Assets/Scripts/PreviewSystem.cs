@@ -123,7 +123,7 @@ public class PreviewSystem : MonoBehaviour
 
     private IEnumerator LerpMaterialSliders()
     {
-        Debug.Log("Starting LerpMaterialSliders Coroutine");
+        //Debug.Log("Starting LerpMaterialSliders Coroutine");
         float duration = 0.3f;
         float timer = 0f;
         float DisplacementInitial = 0.800f;
@@ -144,7 +144,7 @@ public class PreviewSystem : MonoBehaviour
             previewMaterialInstance.SetFloat("_DisplacementAmount", valueA);
             previewMaterialInstance.SetFloat("_DistortionFrequency", valueB);
 
-            Debug.Log($"Lerping values: DisplacementAmount={valueA}, DistortionFrequency={valueB}");
+            //Debug.Log($"Lerping values: DisplacementAmount={valueA}, DistortionFrequency={valueB}");
 
             yield return null;
         }
