@@ -13,8 +13,6 @@ public abstract class AbstractBullet : MonoBehaviour
 
     protected void Update()
     {
-
-
         timer += Time.deltaTime;
         
 
