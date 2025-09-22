@@ -150,7 +150,8 @@ public abstract class BaseEnemy : Destructible
         GetComponent<NavMeshAgent>().enabled = false;
         //_enemyFSM.ChangeState(EnemyFSMStates.Die);
         var gold = _goldFactory.Create();
-        gold.transform.position = transform.position + Vector3.up;
+        // gold.transform.position = transform.position + Vector3.up * 10;
+        gold.transform.position = new Vector3 (transform.position.x, transform.position.y + 1, transform.position.z);
     }
 
     protected virtual void OnDestroy()

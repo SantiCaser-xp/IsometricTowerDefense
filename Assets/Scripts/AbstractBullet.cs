@@ -8,9 +8,24 @@ public abstract class AbstractBullet : MonoBehaviour
     [SerializeField] protected float speed = 40f;
     protected IDamageable<float> _target;
     protected Transform _targetTransform;
+    float timer = 0;
+
 
     protected void Update()
     {
+
+
+        timer += Time.deltaTime;
+        
+
+        if (timer > 3)
+        {
+
+            Debug.Log("Release");
+            _myPool.Release(this);
+            return;
+        }
+
         if (_isShooted && (_targetTransform == null || _target == null))
         {
             _myPool.Release(this);
@@ -30,6 +45,7 @@ public abstract class AbstractBullet : MonoBehaviour
         _target = null;
         _targetTransform = null;
         _isShooted = false;
+        timer = 0;
     }
 
     public virtual void SetTarget(IDamageable<float> newTarget, Transform targetTf)

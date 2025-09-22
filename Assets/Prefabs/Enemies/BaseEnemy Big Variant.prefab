@@ -101,7 +101,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -208,7 +208,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -315,7 +315,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -422,7 +422,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -529,7 +529,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -553,10 +553,20 @@ PrefabInstance:
       propertyPath: _maxHealth
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 1109962024358962133, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2329179003821567121, guid: c223a96076b233849969187b887c421d,
         type: 3}
       propertyPath: m_Name
       value: BaseEnemy Big Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2983226625633981859, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3911706220345846082, guid: c223a96076b233849969187b887c421d,
         type: 3}
@@ -630,13 +640,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7477271549730268283, guid: c223a96076b233849969187b887c421d,
         type: 3}
+      propertyPath: m_Height
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477271549730268283, guid: c223a96076b233849969187b887c421d,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477271549730268283, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.97667176
       objectReference: {fileID: 0}
     - target: {fileID: 8695904212882894349, guid: c223a96076b233849969187b887c421d,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.482
+      objectReference: {fileID: 0}
+    - target: {fileID: 9123859645693062594, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
