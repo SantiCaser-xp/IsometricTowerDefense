@@ -17,7 +17,6 @@ public class SimpleTower : AbstractTower
     [SerializeField] private GameObject damagedVersion;
     [SerializeField] private bool isDead = false;
 
-
     private float fireCountdown = 0f;
     private List<IDamageable<float>> enemiesInRange = new List<IDamageable<float>>();
 
@@ -88,12 +87,13 @@ public class SimpleTower : AbstractTower
 
     public override void Die()
     {
+        EnemyTargetManager.Instance?.UnregisterTarget(this);
+
         if (normalVersion != null) normalVersion.SetActive(false);
         if (damagedVersion != null) damagedVersion.SetActive(true);
 
         if (boxCollider != null) boxCollider.enabled = false;
         if (_healthBar != null) _healthBar.gameObject.SetActive(false);
-
         isDead = true;
     }
 
@@ -102,9 +102,7 @@ public class SimpleTower : AbstractTower
         var bullet = _factory.Create();
         bullet.transform.position = firePoint.position;
         bullet.transform.rotation = firePoint.rotation;
-        bullet._damage = damage;
         bullet.SetTarget(target, targetTransform);
-        bullet._isShooted = true;
     }
 
     private void UpdateRingPosition()
@@ -161,25 +159,48 @@ public class SimpleTower : AbstractTower
 
     private void SphereCasting()
     {
-        //if (enemiesInRange.Count < 1) return;
+        Collider[] hits = Physics.OverlapSphere(transform.position, radius, _enemyMask);
+      
+        HashSet<IDamageable<float>> detectedEnemies = new HashSet<IDamageable<float>>();
 
-        Collider[] destruct = Physics.OverlapSphere(transform.position, radius, _enemyMask);
-        Debug.Log("Detected");
-
-        foreach (var item in destruct)
+        foreach (var hit in hits)
         {
-            enemiesInRange.Add(item.GetComponent<IDamageable<float>>());
+            var enemy = hit.GetComponent<IDamageable<float>>();
+            if (enemy != null)
+            {
+                detectedEnemies.Add(enemy);
+
+                // Добавляем только если врага ещё нет в списке
+                if (!enemiesInRange.Contains(enemy))
+                {
+                    enemiesInRange.Add(enemy);
+                }
+            }
         }
 
+        // Теперь чистим список от тех, кто вышел из радиуса или умер
+        for (int i = enemiesInRange.Count - 1; i >= 0; i--)
+        {
+            var enemy = enemiesInRange[i] as MonoBehaviour;
 
+            if (enemy == null || !enemy.gameObject.activeInHierarchy || !detectedEnemies.Contains(enemiesInRange[i]))
+            {
+                enemiesInRange.RemoveAt(i);
+            }
+        }
+
+        // Включаем кольцо на первом враге, если есть
         if (enemiesInRange.Count > 0)
         {
             MonoBehaviour mb = enemiesInRange[0] as MonoBehaviour;
-
             if (mb != null)
             {
                 targetRing.RingActive(mb.transform);
             }
+        }
+        else
+        {
+            targetRing.Hide();
         }
     }
 
@@ -205,8 +226,6 @@ public class SimpleTower : AbstractTower
             }
         }
     }*/
-
-
 
     private void OnDrawGizmos()
     {
