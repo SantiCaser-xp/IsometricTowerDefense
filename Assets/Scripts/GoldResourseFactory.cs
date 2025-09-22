@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class GoldResourseFactory : AbstractFactory<GoldResource>
 {
+    [SerializeField] private CharacterDeposit _deposit;
     public override GoldResource Create()
     {
         var x = _pool.Get();
-        x.Initialize(_pool);
+        x.Initialize(_pool, _deposit);
         Debug.Log("Creating bullet from pool: " + x.ToString());
 
         return x;

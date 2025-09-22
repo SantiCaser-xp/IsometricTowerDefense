@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TowerHealthBar : MonoBehaviour
+public class TowerHealthBar : MonoBehaviour, IObserver
 {
     [SerializeField] private Image _fillImage;
 
@@ -9,6 +9,16 @@ public class TowerHealthBar : MonoBehaviour
 
     private void Awake()
     {
+        IObservable obs = GetComponentInParent<IObservable>();
+
+        if (obs == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        obs.Subscribe(this);
+
         _mainCamera = Camera.main;
     }
 
@@ -16,12 +26,14 @@ public class TowerHealthBar : MonoBehaviour
     {
         if (_mainCamera != null)
         {
-            transform.LookAt(transform.position + _mainCamera.transform.forward);
+            transform.LookAt(transform.position + -_mainCamera.transform.forward);
         }
     }
 
-    public void SetHealth(float current, float max)
+    public void UpdateData(float currentValue, float maxValue)
     {
-        _fillImage.fillAmount = current / max;
+        _fillImage.fillAmount = currentValue / maxValue;
     }
+
+    public void UpdateData(int value) { }
 }

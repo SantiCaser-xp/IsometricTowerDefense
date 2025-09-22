@@ -78,6 +78,7 @@ public abstract class BaseEnemy : Destructible
     {
 
         _enemyFSM.OnExecute();
+
         if (Input.GetKeyDown(KeyCode.C))
         {
             _enemyFSM.ChangeState(EnemyFSMStates.Move);
@@ -145,13 +146,14 @@ public abstract class BaseEnemy : Destructible
 
     public override void Die()
     {
-        Debug.Log($"Die {_currentHealth}");
         GetComponent<Collider>().enabled = false;
         GetComponent<NavMeshAgent>().enabled = false;
         //_enemyFSM.ChangeState(EnemyFSMStates.Die);
+        Destroy(gameObject);
         var gold = _goldFactory.Create();
-        // gold.transform.position = transform.position + Vector3.up * 10;
-        gold.transform.position = new Vector3 (transform.position.x, transform.position.y + 1, transform.position.z);
+        Vector3 pos = transform.position;
+        pos.y = 1f; 
+        gold.transform.position = pos;
     }
 
     protected virtual void OnDestroy()
