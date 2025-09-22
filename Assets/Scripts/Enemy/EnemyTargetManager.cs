@@ -44,6 +44,7 @@ public class EnemyTargetManager : MonoBehaviour
 
         UpdateSpatialGrid(target);
     }
+
     public void UnregisterTarget(ITargetable target)
     {
         if (target == null) return;
@@ -56,6 +57,7 @@ public class EnemyTargetManager : MonoBehaviour
         // Notify all enemies about the loss of the target
          EnemyManager.Instance?.NotifyTargetLost(target);
     }
+
     public ITargetable GetOptimalTarget(Vector3 fromPosition, TargetingStrategy strategy)
     {
         switch (strategy)

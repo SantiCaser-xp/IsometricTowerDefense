@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider))]
-public class Character : MonoBehaviour, IRestoreable, IDamageable, IObservable
+public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObservable, ITargetable
 {
     public static Action<bool> OnDead;
     public static Action<float, float> OnHealthChanged;
@@ -14,6 +14,9 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable, IObservable
     
     public float CurrentHealth => _currentHealth;
     public float MaxHealth => _maxHealth;
+
+    public TargetType TargetType => TargetType.PlayerBase;
+
     [SerializeField] private CharacterMeshRotator _meshRotator;
     [SerializeField] private ControlBase _joystick;
     private CharacterInputController _controller;
@@ -119,6 +122,11 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable, IObservable
     private void GetDamage()
     {
         TakeDamage(10);
+    }
+
+    public Vector3 GetPos()
+    {
+        return transform.position;
     }
     #endregion
 }

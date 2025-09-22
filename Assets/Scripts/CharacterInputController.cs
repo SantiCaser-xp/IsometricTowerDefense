@@ -6,29 +6,21 @@ public class CharacterInputController
     public Vector3 InputDirection => _inputDirection;
 
     private ControlBase _joystick;
-    private bool _useJoystick;
 
     public CharacterInputController(ControlBase joystick)
     {
         _joystick = joystick;
-
-#if UNITY_ANDROID
-        _useJoystick = true;
-#else
-        _useJoystick = false;
-#endif
     }
 
     public void InputArtificialUpdate()
     {
-        if (_useJoystick && _joystick != null)
-        {
-            InputAndroid();
-        }
-        else
-        {
-            InputPC();
-        }
+
+#if UNITY_ANDROID
+        InputAndroid();
+#else
+        InputPC();
+        _joystick.transform.parent.gameObject.SetActive(false);
+#endif
     }
 
     public void InputPC()
