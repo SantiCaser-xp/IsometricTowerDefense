@@ -15,6 +15,7 @@ public class SimpleTower : AbstractTower
     [SerializeField] private TowerHealthBar _healthBar;
     [SerializeField] private GameObject normalVersion;
     [SerializeField] private GameObject damagedVersion;
+    [SerializeField] private IsPlaced isPlaced;
     [SerializeField] private bool isDead = false;
 
     private float fireCountdown = 0f;
@@ -22,6 +23,8 @@ public class SimpleTower : AbstractTower
 
     private void Awake()
     {
+        isPlaced = GetComponent<IsPlaced>();
+
         _currentHealth = _maxHealth;
         _healthBar.SetHealth(_currentHealth, _maxHealth);
         boxCollider = GetComponent<BoxCollider>();
@@ -43,7 +46,10 @@ public class SimpleTower : AbstractTower
             TakeDamage(10);
         }
 
-        if (isDead) return;
+        if (isPlaced.isPlaced == false || isDead)
+        {
+            return;
+        }
 
         fireCountdown -= Time.deltaTime;
 

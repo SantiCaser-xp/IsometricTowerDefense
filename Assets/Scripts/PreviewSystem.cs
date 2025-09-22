@@ -87,7 +87,6 @@ public class PreviewSystem : MonoBehaviour
     {
         Color c = validity ? Color.white : Color.red;
         c.a = 0.5f;
-        // Cambia "_HologramColor" por el nombre real de tu propiedad
         previewMaterialInstance.SetColor("Color", c);
     }
 
@@ -143,8 +142,6 @@ public class PreviewSystem : MonoBehaviour
 
             previewMaterialInstance.SetFloat("_DisplacementAmount", valueA);
             previewMaterialInstance.SetFloat("_DistortionFrequency", valueB);
-
-            //Debug.Log($"Lerping values: DisplacementAmount={valueA}, DistortionFrequency={valueB}");
 
             yield return null;
         }
