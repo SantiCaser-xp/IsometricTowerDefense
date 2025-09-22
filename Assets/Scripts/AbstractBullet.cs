@@ -1,20 +1,58 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class AbstractBullet : MonoBehaviour
 {
     protected ObjectPool<AbstractBullet> _myPool;
-    [SerializeField] public float _damage;
-    [SerializeField] public bool _isShooted = false;
+    [SerializeField] protected float _damage= 10f;
+    [SerializeField] protected bool _isShooted = false;
+    [SerializeField] protected float speed = 40f;
+    protected IDamageable<float> _target;
+    protected Transform _targetTransform;
+
+    protected void Update()
+    {
+        if (_isShooted && (_targetTransform == null || _target == null))
+        {
+            _myPool.Release(this);
+            return;
+        }
+
+        MoveProjectile();
+    }
+
     public void Initialize(ObjectPool<AbstractBullet> pool)
     {
         _myPool = pool;
     }
 
-    public virtual void Refresh() { }
+    public virtual void Refresh()
+    {
+        _target = null;
+        _targetTransform = null;
+        _isShooted = false;
+    }
 
-    public abstract void SetTarget(IDamageable<float> newTarget, Transform targetTf);
+    public virtual void SetTarget(IDamageable<float> newTarget, Transform targetTf)
+    {
+        _target = newTarget;
+        _targetTransform = targetTf;
+        _isShooted = true;
+    }
+
+    protected virtual void MoveProjectile()
+    {
+        Vector3 dir = (_targetTransform.position - transform.position).normalized;
+        transform.position += dir * speed * Time.deltaTime;
+    }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        if (other.transform == _targetTransform)
+        {
+            _target.TakeDamage(_damage);
+            _myPool.Release(this);
+        }
+    }
 
     //protected virtual void OnTriggerEnter(Collider other)
     //{

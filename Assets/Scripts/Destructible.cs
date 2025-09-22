@@ -1,16 +1,20 @@
-using System;
 using UnityEngine;
 
-public abstract class Destructible : MonoBehaviour, IDamageable<float>, IKillable
+public abstract class Destructible : MonoBehaviour, IDamageable<float>, IKillable, ITargetable
 {
     [SerializeField] protected float _maxHealth = 100f;
     protected float _currentHealth = 0f;
 
-    public static event Action OnDead;
+    public TargetType TargetType => TargetType.Tower;
 
     public virtual void Die()
     {
-        OnDead?.Invoke();
+
+    }
+
+    public Vector3 GetPos()
+    {
+        return transform.position;
     }
 
     public virtual void TakeDamage(float damage)

@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
-public abstract class BaseEnemy : Destructible, IDamageable<float>
+public abstract class BaseEnemy : Destructible
 {
     [Header("Enemy Stats")]
     [SerializeField] protected float damage = 10f;
@@ -29,6 +28,7 @@ public abstract class BaseEnemy : Destructible, IDamageable<float>
 
 
     [Header("Components")]
+    [SerializeField] private GoldResourseFactory _goldFactory;
     public NavMeshAgent agent;
     protected Animator animator;
 
@@ -136,20 +136,21 @@ public abstract class BaseEnemy : Destructible, IDamageable<float>
     {
         if (currentTarget != null )//&& currentTarget.IsAlive)
         {
-            //projectile will shoot 
+            IDamageable<float> damagable = currentTarget as IDamageable<float>;
+
             //Debug.Log($"PerformAttack with {damage}");
         }
-    }
-    public override void TakeDamage(float damage)
-    {
-        base.TakeDamage(damage);
     }
 
 
     public override void Die()
     {
-        _enemyFSM.ChangeState(EnemyFSMStates.Die);
-        Destroy(gameObject, 2f);
+        Debug.Log($"Die {_currentHealth}");
+        GetComponent<Collider>().enabled = false;
+        GetComponent<NavMeshAgent>().enabled = false;
+        //_enemyFSM.ChangeState(EnemyFSMStates.Die);
+        var gold = _goldFactory.Create();
+        gold.transform.position = transform.position + Vector3.up;
     }
 
     protected virtual void OnDestroy()

@@ -10,7 +10,7 @@ public class GoldBoostPerk : PerkData
         var deposit = player.GetComponent<CharacterDeposit>();
         if (deposit != null)
         {
-            deposit.ChangeDeposit(_goldBoostPerUpgrade);
+            deposit.ChangeStartedDeposit(_goldBoostPerUpgrade);
         }
     }
 
@@ -19,7 +19,7 @@ public class GoldBoostPerk : PerkData
         var deposit = player.GetComponent<CharacterDeposit>();
         if (deposit != null)
         {
-            deposit.ChangeDeposit(_goldBoostPerUpgrade);
+            deposit.ChangeStartedDeposit(-_goldBoostPerUpgrade);
         }
     }
 }
