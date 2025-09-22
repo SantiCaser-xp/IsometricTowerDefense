@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -18,15 +17,9 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button settingsCloseX;
     [SerializeField] private Button settingsBack;
 
-    [Header("Load Target")]
-    [SerializeField] private string gameSceneName = "";
-    [SerializeField] private int gameSceneBuildIndex = -1;
-
     void Awake()
     {
-        if (playButton) playButton.onClick.AddListener(PlayGame);
         if (settingsButton) settingsButton.onClick.AddListener(OpenSettings);
-        if (exitButton) exitButton.onClick.AddListener(ExitGame);
 
         if (settingsCloseX) settingsCloseX.onClick.AddListener(CloseSettings);
         if (settingsBack) settingsBack.onClick.AddListener(CloseSettings);
@@ -45,7 +38,6 @@ public class MainMenu : MonoBehaviour
             settingsPanel.SetActive(true);
             settingsPanel.transform.SetAsLastSibling();
         }
-
     }
 
     public void CloseSettings()
@@ -53,24 +45,5 @@ public class MainMenu : MonoBehaviour
         if (settingsPanel) settingsPanel.SetActive(false);
         if (menuBlock) menuBlock.SetActive(true);
 
-    }
-
-    public void PlayGame()
-    {
-        if (!string.IsNullOrEmpty(gameSceneName))
-            SceneManager.LoadScene(gameSceneName);
-        else if (gameSceneBuildIndex >= 0)
-            SceneManager.LoadScene(gameSceneBuildIndex);
-        else
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    public void ExitGame()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
     }
 }

@@ -4,43 +4,17 @@ using UnityEngine;
 public class TowerMeshRotator : MonoBehaviour
 {
     [SerializeField] private float _speedRotation = 5f;
-    [SerializeField] private float _radius = 10f;
-    [SerializeField] private BaseEnemy _enemy;
-    private bool _isIdle = true;
-    private float _distance;
+    [SerializeField] private float _angleThreshold = 5f;
     private Quaternion _randomRot;
 
     private void Start()
     {
-        InvokeRepeating(nameof(SetRandomRotation), 0, 5f);
+        InvokeRepeating(nameof(SetRandomRotation), 0, 5);
     }
 
-    void Update()
+    public void RotateTowerToEnemy(Transform target)
     {
-        _distance = (_enemy.transform.position - transform.position).sqrMagnitude;
-
-        if(_distance < _radius * _radius)
-        {
-            _isIdle = false;
-        }
-        else
-        {
-            _isIdle = true;
-        }
-
-        if (!_isIdle)
-        {
-            RotateTowerToEnemy();
-        }
-        else
-        {
-            RotateTowerIdle();
-        }
-    }
-
-    private void RotateTowerToEnemy()
-    {
-        Vector3 dir = (_enemy.transform.position - transform.position).normalized;
+        Vector3 dir = (target.transform.position - transform.position).normalized;
         dir.y = 0f;
 
         if(dir.sqrMagnitude > 0.01f)
@@ -56,14 +30,19 @@ public class TowerMeshRotator : MonoBehaviour
         _randomRot = Quaternion.Euler(0, randomY, 0);
     }
 
-    private void RotateTowerIdle()
+    public void RotateTowerIdle()
     {
         transform.rotation = Quaternion.Lerp(transform.rotation, _randomRot, _speedRotation * Time.deltaTime);
     }
 
-    private void OnDrawGizmos()
+    public bool IsFacingTarget(Transform target)
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _radius);
+        Vector3 dir = (target.position - transform.position).normalized;
+        dir.y = 0f;
+        if (dir.sqrMagnitude < 0.01f) return false;
+
+        Quaternion targetRot = Quaternion.LookRotation(dir);
+        float angle = Quaternion.Angle(transform.rotation, targetRot);
+        return angle < _angleThreshold;
     }
 }
