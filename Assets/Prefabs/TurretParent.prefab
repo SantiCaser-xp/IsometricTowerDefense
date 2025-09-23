@@ -234,23 +234,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _factory: {fileID: 0}
-  fireRate: 10
+  fireRate: 5
   damage: 1
   radius: 10
-  firePoint: {fileID: 6951884325127588617}
-  bulletPrefab: {fileID: 8712580021114328150, guid: 073cd4cf4b1967b43bb35ca0e527d9f8,
-    type: 3}
-  targetRing: {fileID: 149113877419946354}
-  boxCollider: {fileID: 0}
+  isDead: 0
   _enemyMask:
     serializedVersion: 2
     m_Bits: 64
+  firePoint: {fileID: 6951884325127588617}
+  _factory: {fileID: 0}
+  targetRing: {fileID: 149113877419946354}
+  boxCollider: {fileID: 0}
   _healthBar: {fileID: 6150634127095587317}
   normalVersion: {fileID: 6205687315054515762}
   damagedVersion: {fileID: 1575080181560601847}
   isPlaced: {fileID: 0}
-  isDead: 0
   _meshTopRotatior: {fileID: 946863439601856717}
 --- !u!65 &8271244552662317280
 BoxCollider:

@@ -5,6 +5,7 @@ public class CharacterDeposit : MonoBehaviour, IObservable
 {
     [SerializeField] private int _maxGold = 9999;
     private int _currentGold = 0;
+    public int CurrentGold => _currentGold;
     private int _startedDeposit = 5;
     List<IObserver> _observers = new List<IObserver>();
 
@@ -38,7 +39,7 @@ public class CharacterDeposit : MonoBehaviour, IObservable
 
         _currentGold -= amount;
 
-        _currentGold = Mathf.Clamp(_currentGold, _maxGold, 0);
+        _currentGold = Mathf.Clamp(_currentGold, 0, _maxGold);
 
         foreach (var obs in _observers)
         {
