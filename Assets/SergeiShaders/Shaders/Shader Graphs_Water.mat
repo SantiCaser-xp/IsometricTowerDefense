@@ -46,18 +46,18 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 1
+    - _Alpha: 0.487
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 1
     - _CellSize: 10
-    - _CellWaveSize: 1
-    - _CellWaveSpeed: 3.47
+    - _CellWaveSize: 2.52
+    - _CellWaveSpeed: 1.66
     - _Cull: 2
     - _Distance: 0.001
-    - _DistortionIntensity: 0.342
+    - _DistortionIntensity: 0.5
     - _Distortion_Strenght: 0.13
     - _DstBlend: 10
     - _Falloff: 0.001
@@ -66,21 +66,22 @@ Material:
     - _ReceiveShadows: 1
     - _SrcBlend: 1
     - _Surface: 1
-    - _WaveAmplitude: 1.85
+    - _WaveAmplitude: 4.5
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _ColorEspuma: {r: 1, g: 1, b: 1, a: 0}
-    - _DEPTH: {r: 0, g: 0.44705883, b: 0.38431373, a: 0}
-    - _DistortionTiling: {r: 1, g: 0.16, b: 0, a: 0}
-    - _DistortionTiling2: {r: 3, g: 1.22, b: 0, a: 0}
+    - _ColorEspuma: {r: 0.2216981, g: 1, b: 0.861129, a: 1}
+    - _DEPTH: {r: 0, g: 0.18664181, b: 0.5, a: 0}
+    - _DistortionTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _DistortionTiling2: {r: 3, g: 3, b: 0, a: 0}
     - _OFFSET: {r: 0, g: 0, b: 0, a: 0}
     - _SpeedOffset: {r: 0.1, g: 0, b: 0, a: 0}
-    - _TILING: {r: 8, g: 2.27, b: 0, a: 0}
-    - _WAVE: {r: 1, g: 1, b: 1, a: 0}
-    - _WaveSpeed: {r: 0.1, g: 0, b: 0, a: 0}
+    - _TILING: {r: 14.95, g: 12.71, b: 0, a: 0}
+    - _VoronoiTiling: {r: 8.46, g: 0.9, b: 0, a: 0}
+    - _WAVE: {r: 0.36320752, g: 1, b: 0.94514585, a: 0}
+    - _WaveSpeed: {r: 0.7, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5149155509780205186
 MonoBehaviour:
