@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
@@ -31,8 +28,8 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float placementDistance = 2f; // Distancia frente al jugador
     [SerializeField] private float raycastHeight = 2f;     // Altura desde la que lanzar el raycast
-
-
+    [SerializeField] private CharacterDeposit _deposit;
+    private int _currentSelectedID;
     IBuildingState buildingState;
 
     private void Start()
@@ -40,13 +37,13 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
         floorData = new();
         structureData = new();
-
     }
 
     public void StartPlacement(int ID)
     {
         StopPlacement();
         gridVisualization.SetActive(true);
+        _currentSelectedID = ID;
         buildingState = new PlacementState(ID, grid, preview, database, floorData, structureData, objectPlacer, layerMask);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
@@ -64,12 +61,24 @@ public class PlacementSystem : MonoBehaviour
 
     private void PlaceStructure()
     {
-        if (inputManager.IsPointerOverUI())
-        {
-            return;
-        }
+        if (inputManager.IsPointerOverUI()) return;
+
         Vector3Int gridPosition = GetGridPositionInFrontOfPlayer();
-        buildingState.OnAction(gridPosition);
+
+        int price = database.objectsData[_currentSelectedID].Price;
+         
+        if (_deposit.CurrentGold >= price)
+        {
+            Debug.Log("Comprado!");
+            _deposit.SubstructDeposit(price); // списываем монеты
+            buildingState.OnAction(gridPosition);  // размещаем объект
+        }
+        else
+        {
+            StopPlacement();
+            Debug.Log("Недостаточно монет!");
+        }
+        //buildingState.OnAction(gridPosition);
     }
 
     //private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
@@ -83,10 +92,8 @@ public class PlacementSystem : MonoBehaviour
 
     private void StopPlacement()
     {
-        if (buildingState == null)
-        {
-            return;
-        }
+        if (buildingState == null) return;
+
         gridVisualization.SetActive(false);
         buildingState.EndState();
         inputManager.OnClicked -= PlaceStructure;

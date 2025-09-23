@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _character: {fileID: 0}
   _speedRate: 4
-  _offset: {x: -20, y: 15, z: -13}
+  _offset: {x: -13, y: 15, z: -13}
 --- !u!20 &6318307996302939921
 Camera:
   m_ObjectHideFlags: 0
@@ -83,7 +83,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 22.5
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
