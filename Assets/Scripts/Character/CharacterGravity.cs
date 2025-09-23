@@ -29,7 +29,7 @@ public class CharacterGravity : MonoBehaviour
             {
                 float distance = (_rb.position - _detectedObj[i].attachedRigidbody.position).magnitude;
                 Vector3 dir = (_rb.position - _detectedObj[i].attachedRigidbody.position).normalized;
-                _detectedObj[i].attachedRigidbody.AddForce(dir * _force / distance, ForceMode.Impulse);
+                _detectedObj[i].attachedRigidbody.AddForce(dir * _force / (distance * distance), ForceMode.Impulse);
             }
         }
     }
