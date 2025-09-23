@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider))]
@@ -39,6 +40,12 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
         }
         
         OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
+
+        ITargetable targetable = this.GetComponent<ITargetable>();
+        if (targetable != null)
+        {
+            EnemyTargetManager.Instance?.RegisterTarget(targetable);
+        }
     }
 
     private void Update()

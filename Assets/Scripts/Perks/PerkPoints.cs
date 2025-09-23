@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PerkPoints : MonoBehaviour, IResettable<int>
+public class PerkPoints : MonoBehaviour
 {
     public static Action<int> OnPerksChanged;
     public static PerkPoints Instance;
@@ -13,7 +13,7 @@ public class PerkPoints : MonoBehaviour, IResettable<int>
 
     private void Awake()
     {
-        if(!Instance)
+        if (!Instance)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -42,8 +42,4 @@ public class PerkPoints : MonoBehaviour, IResettable<int>
         return false;
     }
 
-    public void Reset()
-    {
-        _availablePerks = 0;
-    }
 }
