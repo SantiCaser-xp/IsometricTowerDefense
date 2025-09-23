@@ -31,6 +31,8 @@ public abstract class BaseEnemy : Destructible
     [SerializeField] private GoldResourseFactory _goldFactory;
     public NavMeshAgent agent;
     protected Animator animator;
+    protected ObjectPool<BaseEnemy> _myPool;
+    protected CharacterDeposit _deposit;
 
 
     public GameObject _target
@@ -71,6 +73,7 @@ public abstract class BaseEnemy : Destructible
     {
         EnemyManager.Instance?.RegisterEnemy(this);
     }
+
 
 
     // Update is called once per frame
@@ -114,7 +117,16 @@ public abstract class BaseEnemy : Destructible
             }
         }
     }
-
+    public void Initialize(ObjectPool<BaseEnemy> pool, GoldResourseFactory goldFactory)
+    {
+        _myPool = pool;
+        _goldFactory = goldFactory;
+    }
+    public virtual void Refresh()
+    {
+        _target = null;
+        
+    }
 
     #region Targeting
     public virtual void SearchForTarget()
@@ -146,14 +158,17 @@ public abstract class BaseEnemy : Destructible
 
     public override void Die()
     {
-        GetComponent<Collider>().enabled = false;
-        GetComponent<NavMeshAgent>().enabled = false;
+        //GetComponent<Collider>().enabled = false;
+        //GetComponent<NavMeshAgent>().enabled = false;
         //_enemyFSM.ChangeState(EnemyFSMStates.Die);
-        Destroy(gameObject);
+       // Destroy(gameObject);
         var gold = _goldFactory.Create();
         Vector3 pos = transform.position;
         pos.y = 1f; 
         gold.transform.position = pos;
+
+        EnemyManager.Instance?.UnregisterEnemy(this);
+        _myPool.Release(this);
     }
 
     protected virtual void OnDestroy()

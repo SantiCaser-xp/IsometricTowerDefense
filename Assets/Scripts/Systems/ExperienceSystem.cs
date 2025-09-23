@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExperienceSystem : MonoBehaviour, IResettable<float>, IObservable
+public class ExperienceSystem : MonoBehaviour, IObservable
 {
     public static ExperienceSystem Instance;
 
@@ -19,17 +19,17 @@ public class ExperienceSystem : MonoBehaviour, IResettable<float>, IObservable
     private int _currentLevel = 0;
 
     private List<IObserver> _observers = new List<IObserver>();
-    
+
     // Events for UI
     public event Action<int, int> OnXpChanged;
-    
+
     // Properties for UI
     public int CurrentXP => Mathf.RoundToInt(_currentExperience);
     public int XpToNext => Mathf.RoundToInt(_currentExperienceThreshold);
 
     private void Awake()
     {
-        if(!Instance)
+        if (!Instance)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -50,7 +50,7 @@ public class ExperienceSystem : MonoBehaviour, IResettable<float>, IObservable
             obs.UpdateData(_currentExperience, _currentExperienceThreshold);
             obs.UpdateData(_currentLevel);
         }
-        
+
         // Trigger UI event
         OnXpChanged?.Invoke(CurrentXP, XpToNext);
     }
@@ -76,7 +76,7 @@ public class ExperienceSystem : MonoBehaviour, IResettable<float>, IObservable
             obs.UpdateData(_currentExperience, _currentExperienceThreshold);
             obs.UpdateData(_currentLevel);
         }
-        
+
         // Trigger UI event
         OnXpChanged?.Invoke(CurrentXP, XpToNext);
     }
@@ -92,13 +92,6 @@ public class ExperienceSystem : MonoBehaviour, IResettable<float>, IObservable
     private void RecalculateExperienceThreshold()
     {
         _currentExperienceThreshold *= _experienceGainMultiplier;
-    }
-
-    public void Reset()
-    {
-        _currentExperienceThreshold = _startExperienceThreshold;
-        _currentExperience = 0f;
-        _currentLevel = 1;
     }
 
     public void Subscribe(IObserver observer)
