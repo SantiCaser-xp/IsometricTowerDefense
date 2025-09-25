@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SimpleTower : AbstractTower
+public class HeavyTurret : AbstractTower
 {
     [SerializeField] protected Transform firePoint;
     [SerializeField] protected AbstractFactory<AbstractBullet> _factory;
