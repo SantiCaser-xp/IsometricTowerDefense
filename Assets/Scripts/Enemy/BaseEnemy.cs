@@ -158,10 +158,11 @@ public abstract class BaseEnemy : Destructible
 
     public override void Die()
     {
+        _enemyFSM.ChangeState(EnemyFSMStates.Die);
         //GetComponent<Collider>().enabled = false;
         //GetComponent<NavMeshAgent>().enabled = false;
         //_enemyFSM.ChangeState(EnemyFSMStates.Die);
-       // Destroy(gameObject);
+        // Destroy(gameObject);
         var gold = _goldFactory.Create();
         Vector3 pos = transform.position;
         pos.y = 1f; 

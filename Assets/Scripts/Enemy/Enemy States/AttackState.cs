@@ -4,7 +4,8 @@ public class AttackState : EnemyState<EnemyFSMStates, BaseEnemy>
 {
     public override void OnEnter()
     {
-        //Debug.Log($"Debug Enter a AttackState");
+        if (avatar.agent == null || !avatar.agent.enabled || !avatar.agent.isOnNavMesh)
+            return;
         avatar.agent.isStopped = true;
     }
 
