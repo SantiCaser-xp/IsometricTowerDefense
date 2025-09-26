@@ -11,6 +11,7 @@ public abstract class BaseEnemy : Destructible
     [SerializeField] public float attackRange = 2f;
     [SerializeField] public float attackCooldown = 1f;
     [SerializeField] public float searchInterval = 0.5f;
+    [SerializeField] public float _experienceModidier = 3f;
     [SerializeField] float walkSpeed;
     [SerializeField] float idleTime;
     //[SerializeField] public float detectionRadius;
@@ -166,6 +167,7 @@ public abstract class BaseEnemy : Destructible
         Vector3 pos = transform.position;
         pos.y = 1f; 
         gold.transform.position = pos;
+        ExperienceSystem.Instance.AddExperience(_experienceModidier);
 
         EnemyManager.Instance?.UnregisterEnemy(this);
         _myPool.Release(this);

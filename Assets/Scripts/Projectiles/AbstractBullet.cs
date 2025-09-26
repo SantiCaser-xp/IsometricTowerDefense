@@ -67,6 +67,10 @@ public abstract class AbstractBullet : MonoBehaviour
             _target.TakeDamage(_damage);
             _myPool.Release(this);
         }
+        else
+        {
+            _myPool.Release(this);
+        }
     }
 
     //protected virtual void OnTriggerEnter(Collider other)

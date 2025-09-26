@@ -18,14 +18,19 @@ public class ExperienceSystem : MonoBehaviour, IObservable
     private int _startLevel = 1;
     private int _currentLevel = 0;
 
+    [Header("Perks")]
+    [SerializeField] private int _maxPerksCount = 9999; 
+    [SerializeField] private int _currentPerksCount;
+    public int CurrentPerksCount => _currentPerksCount;
+
     private List<IObserver> _observers = new List<IObserver>();
 
-    // Events for UI
-    public event Action<int, int> OnXpChanged;
+    //// Events for UI
+    //public event Action<int, int> OnXpChanged;
 
-    // Properties for UI
-    public int CurrentXP => Mathf.RoundToInt(_currentExperience);
-    public int XpToNext => Mathf.RoundToInt(_currentExperienceThreshold);
+    //// Properties for UI
+    //public int CurrentXP => Mathf.RoundToInt(_currentExperience);
+    //public int XpToNext => Mathf.RoundToInt(_currentExperienceThreshold);
 
     private void Awake()
     {
@@ -51,8 +56,8 @@ public class ExperienceSystem : MonoBehaviour, IObservable
             obs.UpdateData(_currentLevel);
         }
 
-        // Trigger UI event
-        OnXpChanged?.Invoke(CurrentXP, XpToNext);
+        //// Trigger UI event
+        //OnXpChanged?.Invoke(CurrentXP, XpToNext);
     }
 
     public void AddExperience(float value)
@@ -77,8 +82,8 @@ public class ExperienceSystem : MonoBehaviour, IObservable
             obs.UpdateData(_currentLevel);
         }
 
-        // Trigger UI event
-        OnXpChanged?.Invoke(CurrentXP, XpToNext);
+        //// Trigger UI event
+        //OnXpChanged?.Invoke(CurrentXP, XpToNext);
     }
 
     private void AddLevel()
@@ -87,6 +92,20 @@ public class ExperienceSystem : MonoBehaviour, IObservable
         {
             _currentLevel++;
         }
+    }
+
+    public void AddPerks()
+    {
+        _currentPerksCount++;
+    }
+
+    public void SubstractPerk(int value)
+    {
+        if (value <= 0f) return;
+
+        _currentPerksCount -= value;
+
+        _currentPerksCount = Mathf.Clamp(_currentPerksCount, 0, _maxPerksCount);
     }
 
     private void RecalculateExperienceThreshold()
