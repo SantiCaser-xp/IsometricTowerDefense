@@ -18,7 +18,7 @@ public class MoveState : EnemyState<EnemyFSMStates, BaseEnemy>
             return;
         }
         float distanceToTarget = Vector3.Distance(avatar.transform.position, avatar.currentTarget.GetPos());
-        if (distanceToTarget <= avatar.attackRange)
+        if (distanceToTarget <= avatar.data.attackRange)
         {
             avatar.agent.isStopped = true;
             enemyFSM.ChangeState(EnemyFSMStates.Attack);
@@ -33,6 +33,6 @@ public class MoveState : EnemyState<EnemyFSMStates, BaseEnemy>
     }
     public override void OnExit()
     {
-        
+
     }
 }

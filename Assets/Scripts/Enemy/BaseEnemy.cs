@@ -7,12 +7,8 @@ using UnityEngine.AI;
 public abstract class BaseEnemy : Destructible
 {
     [Header("Enemy Stats")]
-    [SerializeField] protected float damage = 10f;
-    [SerializeField] public float attackRange = 2f;
-    [SerializeField] public float attackCooldown = 1f;
     [SerializeField] public float searchInterval = 0.5f;
     [SerializeField] public float _experienceModidier = 3f;
-    [SerializeField] float walkSpeed;
     [SerializeField] float idleTime;
     //[SerializeField] public float detectionRadius;
     //[SerializeField] public LayerMask targetMask;
@@ -20,7 +16,7 @@ public abstract class BaseEnemy : Destructible
 
     [Header("Targeting")]
     [SerializeField] protected TargetingStrategy targetingStrategy = TargetingStrategy.Nearest;
-    public  ITargetable currentTarget;
+    public ITargetable currentTarget;
     [SerializeField] Transform[] waypoints;
     [SerializeField] int currentWaypoint;
     public float lastAttackTime;
@@ -34,7 +30,7 @@ public abstract class BaseEnemy : Destructible
     protected Animator animator;
     protected ObjectPool<BaseEnemy> _myPool;
     protected CharacterDeposit _deposit;
-
+    [SerializeField] public EnemyData data;
 
     public GameObject _target
     {
@@ -55,11 +51,11 @@ public abstract class BaseEnemy : Destructible
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = walkSpeed;
+        agent.speed = data.walkSpeed;
 
         animator = GetComponent<Animator>();
 
-      
+
 
         _enemyFSM = new EnemyFSM<EnemyFSMStates, BaseEnemy>();
 
@@ -87,7 +83,7 @@ public abstract class BaseEnemy : Destructible
         {
             _enemyFSM.ChangeState(EnemyFSMStates.Move);
         }
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -96,7 +92,7 @@ public abstract class BaseEnemy : Destructible
 
         if (damageable != null)
         {
-            damageable.TakeDamage(damage);
+            damageable.TakeDamage(data.damage);
         }
     }
 
@@ -113,7 +109,7 @@ public abstract class BaseEnemy : Destructible
             if (timer <= 0)
             {
                 timer = 5;
-                damageable.TakeDamage(damage);
+                damageable.TakeDamage(data.damage);
                 Debug.Log("StartDamage");
             }
         }
@@ -126,7 +122,7 @@ public abstract class BaseEnemy : Destructible
     public virtual void Refresh()
     {
         _target = null;
-        
+
     }
 
     #region Targeting
@@ -148,11 +144,10 @@ public abstract class BaseEnemy : Destructible
     #region Combat
     public virtual void PerformAttack()
     {
-        if (currentTarget != null )//&& currentTarget.IsAlive)
+        if (currentTarget != null)//&& currentTarget.IsAlive)
         {
             IDamageable<float> damagable = currentTarget as IDamageable<float>;
 
-            //Debug.Log($"PerformAttack with {damage}");
         }
     }
 
@@ -160,13 +155,9 @@ public abstract class BaseEnemy : Destructible
     public override void Die()
     {
         _enemyFSM.ChangeState(EnemyFSMStates.Die);
-        //GetComponent<Collider>().enabled = false;
-        //GetComponent<NavMeshAgent>().enabled = false;
-        //_enemyFSM.ChangeState(EnemyFSMStates.Die);
-        // Destroy(gameObject);
         var gold = _goldFactory.Create();
         Vector3 pos = transform.position;
-        pos.y = 1f; 
+        pos.y = 1f;
         gold.transform.position = pos;
         ExperienceSystem.Instance.AddExperience(_experienceModidier);
 
@@ -180,38 +171,9 @@ public abstract class BaseEnemy : Destructible
     }
     #endregion
 
-    // Energy logic - skip for now
-    //public bool ReduceEnergy(float fatigue)
-    //{
-    //    _energy -= fatigue;
-    //    if (_energy <= 0)
-    //    {
-    //        _energy = 0;
-    //        return true;
-    //    }
-    //    return false;
-    //}
-    //public void RecoverEnergy()
-    //{
-    //    _energy = 100;
-    //}
-    //public bool MoveTo(int index)
-    //{
-    //    var dirVector = waypoints[index].position - transform.position;
-    //    transform.position += dirVector.normalized * Time.deltaTime * walkSpeed;
-    //    if (dirVector.magnitude < 0.2f)
-    //    {
-    //        return true;
-    //    }
-    //    return false;
-    //}
-    //public void SetTarget(GameObject target)
-    //{
-    //    _target = target;
-    //}
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, attackRange); 
+        Gizmos.DrawWireSphere(transform.position, data.attackRange);
     }
 }

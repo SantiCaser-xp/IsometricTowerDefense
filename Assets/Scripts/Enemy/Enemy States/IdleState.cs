@@ -6,6 +6,7 @@ public class IdleState : EnemyState<EnemyFSMStates, BaseEnemy>
 {
     // Energy logic - skip for now
     //private float _actualCounter;
+
     public override void OnEnter()
     {
         avatar.agent.isStopped = true;
@@ -31,24 +32,7 @@ public class IdleState : EnemyState<EnemyFSMStates, BaseEnemy>
                       enemyFSM.ChangeState(EnemyFSMStates.Move);
         }
 
-        //var closeTarget = Physics.OverlapSphere(avatar.transform.position, avatar.detectionRadius, avatar.targetMask);
-        //if (closeTarget.Length > 0)
-        //{
-        //    avatar.SetTarget(closeTarget[0].gameObject);
-        //    enemyFSM.ChangeState(EnemyFSMStates.Move);
-        //    return;
-        //}
-
-
-
-        // Energy logic - skip for now
-        //_actualCounter -= Time.deltaTime;
-        //if (_actualCounter <= 0)
-        //{
-        //    avatar.RecoverEnergy();
-        //    enemyFSM.ChangeState(EnemyFSMStates.Move);
-
-        //}
+        
 
     }
     public override void OnExit()
