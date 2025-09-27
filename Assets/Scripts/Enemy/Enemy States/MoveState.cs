@@ -5,7 +5,8 @@ public class MoveState : EnemyState<EnemyFSMStates, BaseEnemy>
 
     public override void OnEnter()
     {
-       
+        if (avatar.agent == null || !avatar.agent.enabled || !avatar.agent.isOnNavMesh)
+            return;
         avatar.agent.isStopped = false;
     }
 
