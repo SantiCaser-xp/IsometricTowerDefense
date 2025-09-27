@@ -10,6 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 397299231706808115, guid: c223a96076b233849969187b887c421d,
         type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: c65dc11a03f238841b0c39a8923bc16e,
+        type: 2}
+    - target: {fileID: 397299231706808115, guid: c223a96076b233849969187b887c421d,
+        type: 3}
       propertyPath: walkSpeed
       value: 7
       objectReference: {fileID: 0}
@@ -22,6 +28,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BaseEnemy Small Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261267803571081864, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261267803571081864, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7369767477773740042, guid: c223a96076b233849969187b887c421d,
         type: 3}
