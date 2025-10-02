@@ -3,6 +3,9 @@ using UnityEngine;
 public class PlayerBase : Destructible
 {
     [SerializeField] TargetType _targetType;
+    [SerializeField] Animator _animator;
+
+    public event System.Action OnPlayerBaseDestroyed;
 
     private void Start()
     {
@@ -18,5 +21,17 @@ public class PlayerBase : Destructible
         {
             obs.UpdateData(_currentHealth, _maxHealth);
         }
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        _animator.SetTrigger("Hit");
+    }
+
+    public override void Die()
+    {
+        OnPlayerBaseDestroyed?.Invoke();
+        _animator.SetTrigger("Die");
     }
 }
