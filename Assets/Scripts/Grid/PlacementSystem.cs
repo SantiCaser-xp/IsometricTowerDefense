@@ -1,4 +1,4 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
 {
@@ -70,13 +70,13 @@ public class PlacementSystem : MonoBehaviour
         if (_deposit.CurrentGold >= price)
         {
             Debug.Log("Comprado!");
-            _deposit.SubstructDeposit(price); // списываем монеты
-            buildingState.OnAction(gridPosition);  // размещаем объект
+            _deposit.SubstructDeposit(price); // substruct money
+            buildingState.OnAction(gridPosition);  // place object
         }
         else
         {
             StopPlacement();
-            Debug.Log("Недостаточно монет!");
+            Debug.Log("Yo donВґt have money!");
         }
         //buildingState.OnAction(gridPosition);
     }
@@ -125,7 +125,7 @@ public class PlacementSystem : MonoBehaviour
         }
         // Si no golpea nada, devuelve la celda frente al jugador a nivel del suelo
         Vector3 fallback = playerTransform.position + playerTransform.forward * placementDistance;
-        fallback.y = 0; // Ajusta segъn tu sistema de grilla
+        fallback.y = 0; // Ajusta segun tu sistema de grilla
         return grid.WorldToCell(fallback);
     }
 

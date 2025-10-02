@@ -73,7 +73,6 @@ public class PauseSystem : MonoBehaviour
         SetGroupActive(gameplayUI, false);
 
         Time.timeScale = 0f;
-        AudioManager.Instance?.MuteNonMusicDuringPause(true);
     }
 
     public void Resume()
@@ -88,13 +87,11 @@ public class PauseSystem : MonoBehaviour
         SetGroupActive(gameplayUI, true);
 
         Time.timeScale = 1f;
-        AudioManager.Instance?.MuteNonMusicDuringPause(false);
     }
 
     public void RestartLevel()
     {
         Time.timeScale = 1f;
-        AudioManager.Instance?.MuteNonMusicDuringPause(false);
         IsPaused = false;
 
         SetGroupActive(gameplayUI, true);

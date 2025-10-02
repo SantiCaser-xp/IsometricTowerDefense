@@ -27,7 +27,6 @@ public class MainMenu : MonoBehaviour
         if (settingsPanel) settingsPanel.SetActive(false);
 
         Time.timeScale = 1f;
-        AudioManager.Instance?.MuteNonMusicDuringPause(false);
     }
 
     public void OpenSettings()

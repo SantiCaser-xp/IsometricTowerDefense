@@ -44,7 +44,6 @@ public class GameOverSystem : MonoBehaviour
 
         SetGroupActive(gameplayUI, false);
         Time.timeScale = 0f;
-        AudioManager.Instance?.MuteNonMusicDuringPause(true);
 
         if (losePanel)
         {
@@ -60,7 +59,6 @@ public class GameOverSystem : MonoBehaviour
 
         SetGroupActive(gameplayUI, false);
         Time.timeScale = 0f;
-        AudioManager.Instance?.MuteNonMusicDuringPause(true);
 
         if (winPanel)
         {
@@ -72,7 +70,6 @@ public class GameOverSystem : MonoBehaviour
     public void RestartLevel()
     {
         Time.timeScale = 1f;
-        AudioManager.Instance?.MuteNonMusicDuringPause(false);
         IsGameOver = false;
         SetGroupActive(gameplayUI, true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -81,7 +78,6 @@ public class GameOverSystem : MonoBehaviour
     public void LoadMainMenu()
     {
         Time.timeScale = 1f;
-        AudioManager.Instance?.MuteNonMusicDuringPause(false);
         IsGameOver = false;
         SetGroupActive(gameplayUI, true);
 
@@ -94,7 +90,6 @@ public class GameOverSystem : MonoBehaviour
     public void LoadNextLevel()
     {
         Time.timeScale = 1f;
-        AudioManager.Instance?.MuteNonMusicDuringPause(false);
         IsGameOver = false;
         SetGroupActive(gameplayUI, true);
 
