@@ -19,7 +19,7 @@ public class CharacterGravity : MonoBehaviour
         _detectedObj = new Collider[maxColliders];    
     }
 
-    void Update()
+    void FixedUpdate()
     {
         int numbersCollider = Physics.OverlapSphereNonAlloc(transform.position, _radius, _detectedObj, _layerMask);
 

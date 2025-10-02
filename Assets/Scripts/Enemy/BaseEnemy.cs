@@ -106,6 +106,7 @@ public abstract class BaseEnemy : Destructible
             }
         }
     }
+
     public void Initialize(ObjectPool<BaseEnemy> pool, GoldResourseFactory goldFactory)
     {
         _myPool = pool;

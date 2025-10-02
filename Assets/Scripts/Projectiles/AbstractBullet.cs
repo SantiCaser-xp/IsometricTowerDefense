@@ -72,15 +72,4 @@ public abstract class AbstractBullet : MonoBehaviour
             _myPool.Release(this);
         }
     }
-
-    //protected virtual void OnTriggerEnter(Collider other)
-    //{
-    //    var damageable = other.GetComponent<I_TestDamageable>();
-
-    //    if (damageable != null)
-    //    {
-    //        damageable.TakeDamage(_damage);
-    //        _myPool.Release(this);
-    //    }
-    //}
 }

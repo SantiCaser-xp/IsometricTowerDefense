@@ -77,6 +77,7 @@ public class ExperienceSystem : MonoBehaviour, IObservable
         if (_currentLevel < _maxLevel)
         {
             _currentLevel++;
+            AddPerks();
         }
     }
 
