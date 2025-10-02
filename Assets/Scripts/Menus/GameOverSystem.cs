@@ -23,7 +23,17 @@ public class GameOverSystem : MonoBehaviour
 
     [SerializeField] private string mainMenuSceneName = "MainMenu";
 
+    [SerializeField] private LvManager lvManager;
+
     public static bool IsGameOver { get; private set; }
+
+    private void Update()
+    {
+        if (lvManager != null)
+        {
+            lvManager.OnGameOver += ShowLose;
+        }
+    }
 
     void Awake()
     {
