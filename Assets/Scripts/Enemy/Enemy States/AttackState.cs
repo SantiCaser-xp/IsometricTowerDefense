@@ -4,7 +4,8 @@ public class AttackState : EnemyState<EnemyFSMStates, BaseEnemy>
 {
     public override void OnEnter()
     {
-        //Debug.Log($"Debug Enter a AttackState");
+        if (avatar.agent == null || !avatar.agent.enabled || !avatar.agent.isOnNavMesh)
+            return;
         avatar.agent.isStopped = true;
     }
 
@@ -17,7 +18,7 @@ public class AttackState : EnemyState<EnemyFSMStates, BaseEnemy>
         }
 
         float distanceToTarget = Vector3.Distance(avatar.transform.position, avatar.currentTarget.GetPos());
-        if (distanceToTarget > avatar.attackRange)
+        if (distanceToTarget > avatar.data.attackRange)
         {
             enemyFSM.ChangeState(EnemyFSMStates.Move);
             return;
@@ -28,7 +29,7 @@ public class AttackState : EnemyState<EnemyFSMStates, BaseEnemy>
         avatar.transform.rotation = Quaternion.LookRotation(lookDirection);
 
         // Attack with cooldown
-        if (Time.time - avatar.lastAttackTime >= avatar.attackCooldown)
+        if (Time.time - avatar.lastAttackTime >= avatar.data.attackCooldown)
         {
             
             avatar.lastAttackTime = Time.time;
