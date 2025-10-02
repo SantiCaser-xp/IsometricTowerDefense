@@ -7,7 +7,7 @@ public class GoldResourseFactory : AbstractFactory<GoldResource>
     {
         var x = _pool.Get();
         x.Initialize(_pool, _deposit);
-        Debug.Log("Creating bullet from pool: " + x.ToString());
+        //     Debug.Log("Creating bullet from pool: " + x.ToString());
 
         return x;
     }
