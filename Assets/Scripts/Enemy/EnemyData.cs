@@ -7,5 +7,6 @@ public class EnemyData : ScriptableObject
     public float damage;
     public float attackRange;
     public float attackCooldown;
-    public float walkSpeed;
+    public float searchInterval;
+
 }

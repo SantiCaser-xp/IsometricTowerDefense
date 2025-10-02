@@ -20,7 +20,7 @@ public class FactorySimpleBullet : AbstractFactory<AbstractBullet>
     {
         var x = _pool.Get();
         x.Initialize(_pool);
-        Debug.Log("Creating bullet from pool: " + x.ToString());
+        //  Debug.Log("Creating bullet from pool: " + x.ToString());
 
         return x;
     }

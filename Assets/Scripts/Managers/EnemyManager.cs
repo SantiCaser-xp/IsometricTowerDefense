@@ -9,7 +9,7 @@ public class EnemyManager : MonoBehaviour
     private List<BaseEnemy> activeEnemies = new List<BaseEnemy>();
 
     [Header("Debug")]
-    [SerializeField] private bool showDebugInfo=false;
+    [SerializeField] private bool showDebugInfo = false;
 
     private void Awake()
     {
@@ -22,8 +22,8 @@ public class EnemyManager : MonoBehaviour
     }
     public void RegisterEnemy(BaseEnemy enemy)
     {
-        if(!activeEnemies.Contains(enemy))
-        activeEnemies.Add(enemy);
+        if (!activeEnemies.Contains(enemy))
+            activeEnemies.Add(enemy);
     }
     public void UnregisterEnemy(BaseEnemy enemy)
     {
@@ -35,14 +35,14 @@ public class EnemyManager : MonoBehaviour
         {
             enemy.NotifyTargetLost(lostTarget);
         }
-            }
+    }
 
     public List<BaseEnemy> GetEnemiesInRange(Vector3 position, float range)
     {
         List<BaseEnemy> enemiesInRange = new List<BaseEnemy>();
         foreach (var enemy in activeEnemies)
         {
-            if(enemy!=null && Vector3.Distance(position, enemy.transform.position)<= range)
+            if (enemy != null && Vector3.Distance(position, enemy.transform.position) <= range)
             {
                 enemiesInRange.Add(enemy);
             }
