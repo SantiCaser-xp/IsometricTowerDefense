@@ -24,6 +24,7 @@ public class SimpleTower : AbstractTower
     protected virtual void Start()
     {
         _factory = FactorySimpleBullet.Instance;
+
     }
 
     protected override void Update()
@@ -75,7 +76,7 @@ public class SimpleTower : AbstractTower
         if (damagedVersion != null) damagedVersion.SetActive(true);
 
         if (boxCollider != null) boxCollider.enabled = false;
-        if (_healthBar != null) _healthBar.gameObject.SetActive(false);
+        //if (_healthBar != null) _healthBar.gameObject.SetActive(false);
         isDead = true;
     }
 
