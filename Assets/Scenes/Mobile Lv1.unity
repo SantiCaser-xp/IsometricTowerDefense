@@ -899,6 +899,25 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
+--- !u!1 &290001888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1577069754942856095, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1540687049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &290001892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290001888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4860ecddb9b59304b805a70a713d5bba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newScale: 1
 --- !u!1 &293016724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1939,6 +1958,7 @@ MonoBehaviour:
   - {fileID: 1186853212}
   _secondToSpawn: 3
   _factory: {fileID: 914232989}
+  spawnEnemy: 0
 --- !u!1001 &548553576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3421,6 +3441,7 @@ MonoBehaviour:
   - {fileID: 2069079459}
   _secondToSpawn: 10
   _factory: {fileID: 1604556786}
+  spawnEnemy: 0
 --- !u!1 &1180468139
 GameObject:
   m_ObjectHideFlags: 0
@@ -4326,7 +4347,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1577069754942856095, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
+        type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 290001892}
   m_SourcePrefab: {fileID: 100100000, guid: 71dd55c12279ecf4eb33e8aa2983e63c, type: 3}
 --- !u!1001 &1550668928
 PrefabInstance:
@@ -5686,6 +5711,7 @@ MonoBehaviour:
   - {fileID: 1737289632}
   _secondToSpawn: 1
   _factory: {fileID: 1377383785}
+  spawnEnemy: 0
 --- !u!1001 &1940425739
 PrefabInstance:
   m_ObjectHideFlags: 0

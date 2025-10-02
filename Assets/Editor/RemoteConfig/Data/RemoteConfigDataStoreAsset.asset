@@ -12,6 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: '[]'
-  _rsLastCachedKeyList: '[]'
-  _environments: '[]'
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b6b711b7-2f43-4cfe-973c-0913ed0df64d\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"SpawnEnemy\",\r\n      \"type\": \"bool\",\r\n     
+    \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"798dd3d0-79ad-4e8f-ba51-7f7cb3be1bf6\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"EnemySpawnerTimer\",\r\n      \"type\": \"int\",\r\n      \"value\":
+    0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"570642cc-2ed3-4201-afe8-b81c64e8c50a\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"4d47be1b-4dc9-4771-a299-0860f179cfaa\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"TurretsPannelXPosition\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    -150.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"2aea5714-d511-4480-9b6c-2709ab88dd68\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n      \"value\": false\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"644672d5-8bd3-4f16-9948-c3563bcaec1d\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"SetTentHp\",\r\n      \"type\": \"int\",\r\n     
+    \"value\": 100\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"43eb8172-d46f-4495-a0ea-692deb7b4d9a\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"SetXp\",\r\n      \"type\": \"int\",\r\n      \"value\": 60\r\n   
+    }\r\n  }\r\n]"
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b6b711b7-2f43-4cfe-973c-0913ed0df64d\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"SpawnEnemy\",\r\n      \"type\": \"bool\",\r\n     
+    \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"798dd3d0-79ad-4e8f-ba51-7f7cb3be1bf6\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"EnemySpawnerTimer\",\r\n      \"type\": \"int\",\r\n      \"value\":
+    0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"570642cc-2ed3-4201-afe8-b81c64e8c50a\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"4d47be1b-4dc9-4771-a299-0860f179cfaa\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"TurretsPannelXPosition\",\r\n      \"type\": \"float\",\r\n      \"value\":
+    -150.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"2aea5714-d511-4480-9b6c-2709ab88dd68\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n      \"value\": false\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"644672d5-8bd3-4f16-9948-c3563bcaec1d\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"SetTentHp\",\r\n      \"type\": \"int\",\r\n     
+    \"value\": 100\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"43eb8172-d46f-4495-a0ea-692deb7b4d9a\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"SetXp\",\r\n      \"type\": \"int\",\r\n      \"value\": 60\r\n   
+    }\r\n  }\r\n]"
+  _environments: "[\r\n  {\r\n    \"projectId\": \"fa065e47-3520-464d-8198-426e6b6f91c3\",\r\n   
+    \"name\": \"production\",\r\n    \"id\": \"b6059e01-fa90-4889-8310-638f80dd598d\",\r\n   
+    \"isDefault\": true,\r\n    \"createdAt\": \"2025-10-02T17:16:14Z\",\r\n    \"updatedAt\":
+    \"2025-10-02T17:16:14Z\"\r\n  },\r\n  {\r\n    \"projectId\": \"fa065e47-3520-464d-8198-426e6b6f91c3\",\r\n   
+    \"name\": \"developers\",\r\n    \"id\": \"af07a3e9-6e87-4fe7-81d0-54d327a1ee04\",\r\n   
+    \"isDefault\": false,\r\n    \"createdAt\": \"2025-10-02T17:24:06Z\",\r\n   
+    \"updatedAt\": \"2025-10-02T17:24:06Z\"\r\n  }\r\n]"
