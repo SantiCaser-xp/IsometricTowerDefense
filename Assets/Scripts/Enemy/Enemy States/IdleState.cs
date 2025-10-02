@@ -1,42 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class IdleState : EnemyState<EnemyFSMStates, BaseEnemy>
 {
-    // Energy logic - skip for now
-    //private float _actualCounter;
+    float _timer;
 
     public override void OnEnter()
     {
-        avatar.agent.isStopped = true;
-       
-        // Energy logic - skip for now
-        //_actualCounter = 5;
+
+        if (avatar.Agent == null || !avatar.Agent.enabled || !avatar.Agent.isOnNavMesh)
+            return;
+        avatar.NavMeshAgentState(true);
     }
 
     public override void OnExecute()
     {
         // Set target logic
-
-        if(Time.time - avatar.lastSearchTime >= avatar.searchInterval)
+        _timer += Time.deltaTime;
+        if (_timer >= avatar.Data.searchInterval)
         {
-            avatar.lastSearchTime = Time.time;
             avatar.SearchForTarget();
-         
-        }
-        
-      
-        if (avatar.currentTarget!=null)
-        {
-                      enemyFSM.ChangeState(EnemyFSMStates.Move);
+            _timer = 0;
         }
 
-        
+        if (avatar.CurrentTarget != null)
+        {
+            enemyFSM.ChangeState(EnemyFSMStates.Move);
+        }
+
+
 
     }
     public override void OnExit()
     {
-        
+
     }
 }

@@ -9,7 +9,7 @@ public class EnemyFactory : AbstractFactory<BaseEnemy>
         var x = _pool.Get();
         x.Initialize(_pool, _goldFactory);
 
-        Debug.Log("Creating enemy from pool: " + x.ToString());
+        //  Debug.Log("Creating enemy from pool: " + x.ToString());
 
         return x;
     }

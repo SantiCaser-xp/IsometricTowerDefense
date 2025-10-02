@@ -1,56 +1,42 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
+
 public abstract class BaseEnemy : Destructible
 {
     [Header("Enemy Stats")]
-    [SerializeField] public float searchInterval = 0.5f;
-    [SerializeField] public float _experienceModidier = 3f;
-    [SerializeField] float idleTime;
-    //[SerializeField] public float detectionRadius;
-    //[SerializeField] public LayerMask targetMask;
-    //[SerializeField] public float _energy;
+    [SerializeField] protected float _experienceModidier = 3f;
 
     [Header("Targeting")]
-    [SerializeField] protected TargetingStrategy targetingStrategy = TargetingStrategy.Nearest;
-    public ITargetable currentTarget;
-    [SerializeField] Transform[] waypoints;
-    [SerializeField] int currentWaypoint;
-    public float lastAttackTime;
-    public float lastSearchTime;
+    [SerializeField] protected TargetingStrategy _targetingStrategy = TargetingStrategy.Nearest;
+    [SerializeField] protected string _cState;
+    [SerializeField] protected Transform[] _waypoints;
+    protected int _currentWaypoint;
+    protected ITargetable _currentTarget;
+    public ITargetable CurrentTarget => _currentTarget;
 
     [Header("Components")]
-    [SerializeField] private GoldResourseFactory _goldFactory;
-    public NavMeshAgent agent;
-    protected Animator animator;
+    [SerializeField] protected GoldResourseFactory _goldFactory;
+    protected NavMeshAgent _agent;
+    public NavMeshAgent Agent => _agent;
+    protected Animator _animator;
     protected ObjectPool<BaseEnemy> _myPool;
-    protected CharacterDeposit _deposit;
-    [SerializeField] public EnemyData data;
+    [SerializeField] protected EnemyData _data;
+    public EnemyData Data => _data;
 
-    public GameObject _target
-    {
-        get; private set;
-    }
+    protected EnemyFSM<EnemyFSMStates, BaseEnemy> _enemyFSM;
 
-    private EnemyFSM<EnemyFSMStates, BaseEnemy> _enemyFSM;
+    public int MaxWaypoints => _waypoints.Length;
 
-    public int maxWaypoints
-    {
-        get
-        {
-            return waypoints.Length;
-        }
-    }
 
     private void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.speed = data.walkSpeed;
-
-        animator = GetComponent<Animator>();
+        _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
 
         _enemyFSM = new EnemyFSM<EnemyFSMStates, BaseEnemy>();
 
@@ -68,43 +54,9 @@ public abstract class BaseEnemy : Destructible
 
     void Update()
     {
-
         _enemyFSM.OnExecute();
+        _cState = $"{_enemyFSM._actualState}";// for debug
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            _enemyFSM.ChangeState(EnemyFSMStates.Move);
-        }
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        IDamageable<float> damageable = other.GetComponent<IDamageable<float>>();
-
-        if (damageable != null)
-        {
-            damageable.TakeDamage(data.damage);
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        IDamageable<float> damageable = other.GetComponent<IDamageable<float>>();
-
-        if (damageable != null)
-        {
-            float timer = 5;
-
-            timer -= Time.deltaTime;
-
-            if (timer <= 0)
-            {
-                timer = 5;
-                damageable.TakeDamage(data.damage);
-                Debug.Log("StartDamage");
-            }
-        }
     }
 
     public void Initialize(ObjectPool<BaseEnemy> pool, GoldResourseFactory goldFactory)
@@ -114,20 +66,21 @@ public abstract class BaseEnemy : Destructible
     }
     public virtual void Refresh()
     {
-        _target = null;
-
+        _currentTarget = null;
+        EnemyManager.Instance?.RegisterEnemy(this);
+        _enemyFSM.ChangeState(EnemyFSMStates.Idle);
     }
 
     #region Targeting
     public virtual void SearchForTarget()
     {
-        currentTarget = EnemyTargetManager.Instance?.GetOptimalTarget(transform.position, targetingStrategy);
+        _currentTarget = EnemyTargetManager.Instance?.GetOptimalTarget(transform.position, _targetingStrategy);
     }
     public void NotifyTargetLost(ITargetable lostTarget)
     {
-        if (currentTarget == lostTarget)
+        if (_currentTarget == lostTarget)
         {
-            currentTarget = null; 
+            _currentTarget = null;
 
             _enemyFSM.ChangeState(EnemyFSMStates.Idle);
         }
@@ -136,9 +89,14 @@ public abstract class BaseEnemy : Destructible
     #region Combat
     public virtual void PerformAttack()
     {
-        if (currentTarget != null)
+        if (_currentTarget != null)
         {
-            IDamageable<float> damagable = currentTarget as IDamageable<float>;
+            IDamageable<float> damageable = _currentTarget as IDamageable<float>;
+            if (damageable != null)
+            {
+                // Debug.Log("Perform Attack");
+                damageable.TakeDamage(_data.damage);
+            }
         }
     }
 
@@ -161,9 +119,15 @@ public abstract class BaseEnemy : Destructible
     }
     #endregion
 
+    public void NavMeshAgentState(bool value)
+    {
+        Agent.isStopped = value;
+
+
+    }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, data.attackRange);
+        Gizmos.DrawWireSphere(transform.position, _data.attackRange);
     }
 }

@@ -42,7 +42,7 @@ public class ObjectPool<T>
 
     public void Release(T obj)
     {
-        Debug.Log("Releasing object back to pool: " + obj.ToString());
+        // Debug.Log("Releasing object back to pool: " + obj.ToString());
         _TurnOff(obj);
         _stockAvailables.Add(obj);
     }

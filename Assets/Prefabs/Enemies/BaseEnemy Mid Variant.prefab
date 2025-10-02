@@ -16,6 +16,12 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 397299231706808115, guid: c223a96076b233849969187b887c421d,
         type: 3}
+      propertyPath: _data
+      value: 
+      objectReference: {fileID: 11400000, guid: fa6957f785639eb4db75610558809417,
+        type: 2}
+    - target: {fileID: 397299231706808115, guid: c223a96076b233849969187b887c421d,
+        type: 3}
       propertyPath: walkSpeed
       value: 5
       objectReference: {fileID: 0}
@@ -33,6 +39,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BaseEnemy Mid Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5653857692630007765, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_Speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7369767477773740042, guid: c223a96076b233849969187b887c421d,
         type: 3}

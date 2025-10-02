@@ -55,7 +55,7 @@ public class EnemyTargetManager : MonoBehaviour
         RemoveFromSpatialGrid(target);
 
         // Notify all enemies about the loss of the target
-         EnemyManager.Instance?.NotifyTargetLost(target);
+        EnemyManager.Instance?.NotifyTargetLost(target);
     }
 
     public ITargetable GetOptimalTarget(Vector3 fromPosition, TargetingStrategy strategy)
@@ -86,8 +86,9 @@ public class EnemyTargetManager : MonoBehaviour
         {
             if (target == null) continue;
 
-            float distance = Vector3.Distance(fromPosition, target.GetPos());
-            if (distance < minDistance) { minDistance = distance; nearest = target; }
+            //  float distance = Vector3.Distance(fromPosition, target.GetPos());
+            float distance = (fromPosition - target.GetPos()).sqrMagnitude;
+            if (distance < minDistance * minDistance) { minDistance = distance; nearest = target; }
         }
         // If not found in the nearest cells, search globally
         if (nearest == null)
@@ -95,8 +96,8 @@ public class EnemyTargetManager : MonoBehaviour
             foreach (var target in allTargets)
             {
                 if (target == null) continue;
-                float distance = Vector3.Distance(fromPosition, target.GetPos());
-                if (distance < minDistance) { minDistance = distance; nearest = target; }
+                float distance = (fromPosition - target.GetPos()).sqrMagnitude;
+                if (distance < minDistance * minDistance) { minDistance = distance; nearest = target; }
             }
         }
         return nearest;
