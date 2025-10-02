@@ -11,7 +11,7 @@ public abstract class AbstractTower : Destructible
     [SerializeField] protected LayerMask _enemyMask;
     protected float fireCountdown = 0f;
     protected List<IDamageable<float>> enemiesInRange = new List<IDamageable<float>>();
-    
+
     protected virtual void Awake()
     {
         _currentHealth = _maxHealth;
@@ -21,8 +21,6 @@ public abstract class AbstractTower : Destructible
             obs.UpdateData(_currentHealth, _maxHealth);
         }
     }
-
-    
 
     protected virtual void Update()
     {
@@ -39,6 +37,7 @@ public abstract class AbstractTower : Destructible
         foreach (var hit in hits)
         {
             var enemy = hit.GetComponent<IDamageable<float>>();
+
             if (enemy != null)
             {
                 detectedEnemies.Add(enemy);

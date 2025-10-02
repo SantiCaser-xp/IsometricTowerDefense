@@ -34,12 +34,12 @@ public class HeavyTurret : AbstractTower
 
         if (enemiesInRange.Count == 0)
         {
-            // idle режим
+            // idle mode
             _meshTopRotatior.RotateTowerIdle();
         }
         else
         {
-            // боевой режим
+            // battle mode
             IDamageable<float> target = enemiesInRange[0];
 
             MonoBehaviour mb = target as MonoBehaviour;
@@ -50,7 +50,7 @@ public class HeavyTurret : AbstractTower
 
             _meshTopRotatior.RotateTowerToEnemy(targetTransform);
 
-            // стреляем только если башня уже почти смотрит на врага
+            // // do fire if tower done look at target
             if (fireCountdown <= 0f && _meshTopRotatior.IsFacingTarget(targetTransform))
             {
                 Shoot(target, targetTransform);

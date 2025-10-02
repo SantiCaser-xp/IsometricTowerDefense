@@ -20,7 +20,7 @@ public class ResourceUI : MonoBehaviour, IObserver
 
     public void UpdateData(float currentValue, float maxValue)
     {
-        throw new System.NotImplementedException();
+        //
     }
 
     public void UpdateData(int value)

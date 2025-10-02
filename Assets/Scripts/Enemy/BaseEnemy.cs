@@ -22,8 +22,6 @@ public abstract class BaseEnemy : Destructible
     public float lastAttackTime;
     public float lastSearchTime;
 
-
-
     [Header("Components")]
     [SerializeField] private GoldResourseFactory _goldFactory;
     public NavMeshAgent agent;
@@ -36,7 +34,6 @@ public abstract class BaseEnemy : Destructible
     {
         get; private set;
     }
-
 
     private EnemyFSM<EnemyFSMStates, BaseEnemy> _enemyFSM;
 
@@ -55,8 +52,6 @@ public abstract class BaseEnemy : Destructible
 
         animator = GetComponent<Animator>();
 
-
-
         _enemyFSM = new EnemyFSM<EnemyFSMStates, BaseEnemy>();
 
         _enemyFSM._possibleStates.Add(EnemyFSMStates.Idle, new IdleState().SetUp(_enemyFSM).SetAvatar(this));
@@ -71,9 +66,6 @@ public abstract class BaseEnemy : Destructible
         EnemyManager.Instance?.RegisterEnemy(this);
     }
 
-
-
-    // Update is called once per frame
     void Update()
     {
 
@@ -105,7 +97,7 @@ public abstract class BaseEnemy : Destructible
             float timer = 5;
 
             timer -= Time.deltaTime;
-            //Debug.Log(timer);
+
             if (timer <= 0)
             {
                 timer = 5;
@@ -134,8 +126,7 @@ public abstract class BaseEnemy : Destructible
     {
         if (currentTarget == lostTarget)
         {
-            currentTarget = null;
-            // if (_enemyFSM._actualState() == EnemyFSMStates.Die) { }   
+            currentTarget = null; 
 
             _enemyFSM.ChangeState(EnemyFSMStates.Idle);
         }
@@ -144,13 +135,11 @@ public abstract class BaseEnemy : Destructible
     #region Combat
     public virtual void PerformAttack()
     {
-        if (currentTarget != null)//&& currentTarget.IsAlive)
+        if (currentTarget != null)
         {
             IDamageable<float> damagable = currentTarget as IDamageable<float>;
-
         }
     }
-
 
     public override void Die()
     {

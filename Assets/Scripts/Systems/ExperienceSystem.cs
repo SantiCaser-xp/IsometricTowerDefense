@@ -25,13 +25,6 @@ public class ExperienceSystem : MonoBehaviour, IObservable
 
     private List<IObserver> _observers = new List<IObserver>();
 
-    //// Events for UI
-    //public event Action<int, int> OnXpChanged;
-
-    //// Properties for UI
-    //public int CurrentXP => Mathf.RoundToInt(_currentExperience);
-    //public int XpToNext => Mathf.RoundToInt(_currentExperienceThreshold);
-
     private void Awake()
     {
         if (!Instance)
@@ -55,9 +48,6 @@ public class ExperienceSystem : MonoBehaviour, IObservable
             obs.UpdateData(_currentExperience, _currentExperienceThreshold);
             obs.UpdateData(_currentLevel);
         }
-
-        //// Trigger UI event
-        //OnXpChanged?.Invoke(CurrentXP, XpToNext);
     }
 
     public void AddExperience(float value)
@@ -72,7 +62,6 @@ public class ExperienceSystem : MonoBehaviour, IObservable
         {
             _currentExperience -= _currentExperienceThreshold;
             AddLevel();
-            //_observers[0].UpdateData(_currentLevel);
             RecalculateExperienceThreshold();
         }
 
@@ -81,9 +70,6 @@ public class ExperienceSystem : MonoBehaviour, IObservable
             obs.UpdateData(_currentExperience, _currentExperienceThreshold);
             obs.UpdateData(_currentLevel);
         }
-
-        //// Trigger UI event
-        //OnXpChanged?.Invoke(CurrentXP, XpToNext);
     }
 
     private void AddLevel()
