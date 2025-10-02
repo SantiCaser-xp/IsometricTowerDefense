@@ -20,6 +20,7 @@ public class GoldResourseFactory : AbstractFactory<GoldResource>
 
     protected override void TurnOff(GoldResource obj)
     {
+        obj.Refresh();
         obj.gameObject.SetActive(false);
     }
 

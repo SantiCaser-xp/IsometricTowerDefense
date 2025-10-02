@@ -66,6 +66,11 @@ public class SimpleTower : AbstractTower
         bullet.transform.position = firePoint.position;
         bullet.transform.rotation = firePoint.rotation;
         bullet.SetTarget(target, targetTransform);
+
+        foreach(var obs in _observers)
+        {
+            obs.UpdateData(1);
+        }
     }
 
     public override void Die()
