@@ -105,7 +105,7 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
     {
         _isAlive = false;
         OnDead?.Invoke(_isAlive);
-        FindObjectOfType<GameOverSystem>(true)?.ShowLose();
+        FindObjectOfType<GameOverSystem>(true).UpdateGameStatus(GameStatus.Lose);
     }
 
     public void Subscribe(IObserver observer)

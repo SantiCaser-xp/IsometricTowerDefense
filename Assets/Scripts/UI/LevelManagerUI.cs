@@ -1,14 +1,11 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class GlobalStamineUI : MonoBehaviour, IObserver
+public class LevelManagerUI : MonoBehaviour, IObserver
 {
-    [SerializeField] private Slider _stamineSlider;
-    [SerializeField] private TextMeshProUGUI _countText;
-    
+    [SerializeField] private TextMeshProUGUI enemiesToKillText;
 
-    private void Awake()
+    void Awake()
     {
         IObservable obs = GetComponentInParent<IObservable>();
 
@@ -23,8 +20,7 @@ public class GlobalStamineUI : MonoBehaviour, IObserver
 
     public void UpdateData(float currentValue, float maxValue)
     {
-        _stamineSlider.value = currentValue / maxValue;
-        _countText.SetText($"{currentValue:F0}/{maxValue:F0}");
+        enemiesToKillText.text = $"Enemies Killed: {currentValue} / {maxValue}";
     }
 
     public void UpdateData(int value) { }

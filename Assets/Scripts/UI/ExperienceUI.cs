@@ -32,4 +32,6 @@ public class ExperienceUI : MonoBehaviour, IObserver
     {
         _levelText.SetText($"{value}");
     }
+
+    public void UpdateGameStatus(GameStatus status) { }
 }

@@ -1,42 +1,33 @@
-using System.Collections;
+//using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class LvManager : MonoBehaviour
+public class LvManager : MonoBehaviour, IObservable
 {
-    public PlayerBase playerBase;
+    /*public event Action OnGameOver;
+    public event Action OnWin;*/
 
-    public static LvManager Instance;
+    [SerializeField] private PlayerBase playerBase;
+    [SerializeField] private int _enemiesToKill;
+    private int _enemiesKilled;
+    private List<IObserver> _observers = new List<IObserver>();
 
-    public int enemiesKilled;
-    [SerializeField] private int enemiesToKill;
-
-    [SerializeField] private TextMeshProUGUI enemiesToKillText;
-
-    public event System.Action OnGameOver;
-    public event System.Action OnWin;
-    void Start()
+    void Awake()
     {
-        //Instance = this;
-        enemiesToKillText.text = $"Enemies Killed: {enemiesKilled} / {enemiesToKill}";
-
-        if (LvManager.Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
         if (playerBase != null)
         {
             playerBase.OnPlayerBaseDestroyed += OnPlayerBaseDiedHandler;
         }
 
         BaseEnemy.OnEnemyKilled += EnemyKilled;
+    }
+
+    void Start()
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_enemiesKilled, _enemiesToKill);
+        }
     }
 
     private void OnDestroy()
@@ -46,19 +37,32 @@ public class LvManager : MonoBehaviour
 
     public void EnemyKilled()
     {
-        enemiesKilled++;
-        enemiesToKillText.text = $"Enemies Killed: {enemiesKilled} / {enemiesToKill}";
-        if (enemiesKilled >= enemiesToKill)
+        _enemiesKilled++;
+
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_enemiesKilled, _enemiesToKill);
+        }
+
+        if (_enemiesKilled >= _enemiesToKill)
         {
             Debug.Log("All Enemies Killed! You Win!");
-            OnWin?.Invoke();
+            NotifyGameStatus(GameStatus.Win);
+        }
+    }
+
+    private void NotifyGameStatus(GameStatus status)
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateGameStatus(status);
         }
     }
 
     private void OnPlayerBaseDiedHandler()
     {
         Debug.Log("Player Base Destroyed! Game Over!");
-        OnGameOver?.Invoke();
+        NotifyGameStatus(GameStatus.Lose);
     }
 
     private void OnDisable()
@@ -66,6 +70,22 @@ public class LvManager : MonoBehaviour
         if (playerBase != null)
         {
             playerBase.OnPlayerBaseDestroyed -= OnPlayerBaseDiedHandler;
+        }
+    }
+
+    public void Subscribe(IObserver observer)
+    {
+        if (!_observers.Contains(observer))
+        {
+            _observers.Add(observer);
+        }
+    }
+
+    public void Unsubscribe(IObserver observer)
+    {
+        if (_observers.Contains(observer))
+        {
+            _observers.Remove(observer);
         }
     }
 }
