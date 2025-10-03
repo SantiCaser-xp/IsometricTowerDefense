@@ -1,3 +1,4 @@
+using Unity.Services.RemoteConfig;
 using UnityEngine;
 
 public class PlayerBase : Destructible
@@ -9,6 +10,7 @@ public class PlayerBase : Destructible
 
     private void Start()
     {
+        RemoteConfigService.Instance.FetchCompleted += UpdateData;
         ITargetable targetable = this.GetComponent<ITargetable>();
         if (targetable != null)
         {
@@ -33,5 +35,15 @@ public class PlayerBase : Destructible
     {
         OnPlayerBaseDestroyed?.Invoke();
         _animator.SetTrigger("Die");
+    }
+
+    public void UpdateData(ConfigResponse configResponse)
+    {
+        _currentHealth = RemoteConfigService.Instance.appConfig.GetInt("SetTentHp");
+
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentHealth, _maxHealth);
+        }
     }
 }
