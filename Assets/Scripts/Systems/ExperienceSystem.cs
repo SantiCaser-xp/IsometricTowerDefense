@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Unity.Services.RemoteConfig;
 using UnityEngine;
@@ -79,22 +78,23 @@ public class ExperienceSystem : MonoBehaviour, IObservable
         if (_currentLevel < _maxLevel)
         {
             _currentLevel++;
-            AddPerks();
+            AddPerk();
         }
     }
 
-    public void AddPerks()
+    public void AddPerk(int value = 1)
     {
-        _currentPerksCount++;
+        _currentPerksCount = Mathf.Clamp(_currentPerksCount + value, 0, _maxPerksCount);
     }
 
-    public void SubstractPerk(int value)
+    public bool TryUsePerk(int cost)
     {
-        if (value <= 0f) return;
-
-        _currentPerksCount -= value;
-
-        _currentPerksCount = Mathf.Clamp(_currentPerksCount, 0, _maxPerksCount);
+        if (_currentPerksCount >= cost)
+        {
+            _currentPerksCount = Mathf.Clamp(_currentPerksCount - cost, 0, _maxPerksCount);
+            return true;
+        }
+        return false;
     }
 
     private void RecalculateExperienceThreshold()

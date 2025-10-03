@@ -17,6 +17,6 @@ public class PerkPanelUI : MonoBehaviour
             perkUI.Setup(perk, _manager);
         }
 
-        _pertCount.SetText($"Available perks: {PerkPoints.Instance.AvailablePerks}");
+        _pertCount.SetText($"Available perks: {ExperienceSystem.Instance.CurrentPerksCount}");
     }
 }

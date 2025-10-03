@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class EnemyFactory : AbstractFactory<BaseEnemy>
@@ -8,9 +7,6 @@ public class EnemyFactory : AbstractFactory<BaseEnemy>
     {
         var x = _pool.Get();
         x.Initialize(_pool, _goldFactory);
-
-        //  Debug.Log("Creating enemy from pool: " + x.ToString());
-
         return x;
     }
 
@@ -30,6 +26,4 @@ public class EnemyFactory : AbstractFactory<BaseEnemy>
     {
         obj.gameObject.SetActive(true);
     }
-
-
 }

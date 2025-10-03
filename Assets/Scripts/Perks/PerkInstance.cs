@@ -18,10 +18,10 @@ public class PerkInstance
         Reset();
     }
 
-    public bool TryUpgrade(PerkPoints points)
+    public bool TryUpgrade()
     {
         if (_currentLevel >= _data.MaxUpgradeLevel) return false;
-        if (!points.TryUsePerk(_currentPrice)) return false;
+        if (!ExperienceSystem.Instance.TryUsePerk(_currentPrice)) return false;
 
         _currentLevel++;
         _currentPrice = Mathf.Min(_currentPrice + 1, _data.MaxPrice);
