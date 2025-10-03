@@ -20,13 +20,12 @@ public class GoldSFX : MonoBehaviour, IObserver
         obs.Subscribe(this);
     }
 
-    public void UpdateData(float currentValue, float maxValue)
-    {
-        
-    }
+    public void UpdateData(float currentValue, float maxValue) { }
 
     public void UpdateData(int value)
     {
         _audiosource.PlayOneShot(_clip);
     }
+
+    public void UpdateGameStatus(GameStatus status) { }
 }

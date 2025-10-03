@@ -18,13 +18,12 @@ public class ResourceUI : MonoBehaviour, IObserver
         obs.Subscribe(this);
     }
 
-    public void UpdateData(float currentValue, float maxValue)
-    {
-        //
-    }
+    public void UpdateData(float currentValue, float maxValue) { }
 
     public void UpdateData(int value)
     {
         _countText.SetText($"{value}");
     }
+
+    public void UpdateGameStatus(GameStatus status) { }
 }

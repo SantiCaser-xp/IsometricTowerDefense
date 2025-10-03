@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GoldParticle : MonoBehaviour, IObserver 
+public class GoldParticle : MonoBehaviour, IObserver
 {
     [SerializeField] ParticleSystem _particleSystem;
 
@@ -19,13 +19,12 @@ public class GoldParticle : MonoBehaviour, IObserver
         obs.Subscribe(this);
     }
 
-    public void UpdateData(float currentValue, float maxValue)
-    {
-
-    }
+    public void UpdateData(float currentValue, float maxValue) { }
 
     public void UpdateData(int value)
     {
         _particleSystem.Play();
     }
+
+    public void UpdateGameStatus(GameStatus status) { }
 }
