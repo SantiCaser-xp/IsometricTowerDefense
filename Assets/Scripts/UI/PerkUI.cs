@@ -31,7 +31,7 @@ public class PerkUI : MonoBehaviour
         _descriptionText.text = data.Description;
 
         _instance.OnChanged += UpdateUI;
-        PerkPoints.OnPerksChanged += OnPointsChanged;
+
         _buyButton.onClick.AddListener(OnBuyClicked);
 
         UpdateUI(_instance);
@@ -45,7 +45,7 @@ public class PerkUI : MonoBehaviour
         _buyButton.interactable = instance.CurrentLevel < instance.Data.MaxUpgradeLevel;
 
         bool canUpgrade = instance.CurrentLevel < instance.Data.MaxUpgradeLevel
-                      && _manager.Points.AvailablePerks >= instance.CurrentPrice;
+                      && ExperienceSystem.Instance.CurrentPerksCount >= instance.CurrentPrice;
 
         _buyButton.interactable = canUpgrade;
 
@@ -66,7 +66,5 @@ public class PerkUI : MonoBehaviour
     {
         if (_instance != null)
             _instance.OnChanged -= UpdateUI;
-
-        PerkPoints.OnPerksChanged -= OnPointsChanged;
     }
 }

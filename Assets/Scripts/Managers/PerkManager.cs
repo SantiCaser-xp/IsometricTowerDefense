@@ -3,11 +3,9 @@ using UnityEngine;
 
 public class PerkManager : MonoBehaviour
 {
-    [SerializeField] private PerkPoints _points;
     [SerializeField] private List<PerkData> _perkDataList;
 
     private Dictionary<PerkData, PerkInstance> _instances = new();
-    public PerkPoints Points => _points;
 
     private void Awake()
     {
@@ -23,7 +21,7 @@ public class PerkManager : MonoBehaviour
     public bool BuyPerk(PerkData data)
     {
         if (_instances.TryGetValue(data, out var instance))
-            return instance.TryUpgrade(_points);
+            return instance.TryUpgrade();
 
         return false;
     }

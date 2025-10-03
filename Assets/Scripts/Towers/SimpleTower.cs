@@ -24,7 +24,6 @@ public class SimpleTower : AbstractTower
     protected virtual void Start()
     {
         _factory = FactorySimpleBullet.Instance;
-
     }
 
     protected override void Update()

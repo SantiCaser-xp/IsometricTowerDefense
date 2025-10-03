@@ -3,6 +3,7 @@ using UnityEngine;
 public class FactorySimpleBullet : AbstractFactory<AbstractBullet>
 {
     public static FactorySimpleBullet Instance;
+
     private void Start()
     {
         if (Instance != null && Instance != this)
@@ -20,8 +21,6 @@ public class FactorySimpleBullet : AbstractFactory<AbstractBullet>
     {
         var x = _pool.Get();
         x.Initialize(_pool);
-        //  Debug.Log("Creating bullet from pool: " + x.ToString());
-
         return x;
     }
 
