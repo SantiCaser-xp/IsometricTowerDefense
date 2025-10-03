@@ -12,42 +12,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f6f5796b-dbd7-42c1-9a17-eeea48795e74\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"802505a0-c755-4ba0-b932-b60c6392297e\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SpawnEnemy\",\r\n      \"type\": \"bool\",\r\n     
-    \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"7c9823d6-3958-4da5-8d23-fd435fa7bbf6\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"value\": true\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"89c830cb-ee59-4fa9-a2be-7190730057f2\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerTimer\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    4.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e51915ae-d825-48df-85a9-00bad146858e\"\r\n   
+    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"0757ace3-4d64-4e7c-892a-1e9fd78b5907\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0c01925c-1a1e-4a3f-8471-32f90fd529ee\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"bd8defe9-dba4-423a-9239-d00909fe3ff0\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerPosition\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c2932310-15be-4b64-b882-621449315af9\"\r\n   
+    1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"a5439267-9dab-438f-a0bc-19768c7818ab\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"d050ed39-d3de-4b12-8342-33d4974812b5\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"SetTentHp\",\r\n      \"type\": \"int\",\r\n      \"value\": 100\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d2d2f2e2-a4a1-4bbe-9bf9-876e27a373c9\"\r\n   
+    \"1c674a45-0a63-4fc7-add7-0452cb542294\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"TentHpAdd\",\r\n      \"type\": \"int\",\r\n      \"value\": 0\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b2eaa8a9-19a3-4559-805e-553197b2f005\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"XpToAdd\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 5\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"f6f5796b-dbd7-42c1-9a17-eeea48795e74\"\r\n   
+    \"value\": 0\r\n    }\r\n  }\r\n]"
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"802505a0-c755-4ba0-b932-b60c6392297e\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SpawnEnemy\",\r\n      \"type\": \"bool\",\r\n     
-    \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"7c9823d6-3958-4da5-8d23-fd435fa7bbf6\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"value\": true\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"89c830cb-ee59-4fa9-a2be-7190730057f2\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerTimer\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    4.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e51915ae-d825-48df-85a9-00bad146858e\"\r\n   
+    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"0757ace3-4d64-4e7c-892a-1e9fd78b5907\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0c01925c-1a1e-4a3f-8471-32f90fd529ee\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"bd8defe9-dba4-423a-9239-d00909fe3ff0\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerPosition\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c2932310-15be-4b64-b882-621449315af9\"\r\n   
+    1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"a5439267-9dab-438f-a0bc-19768c7818ab\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"d050ed39-d3de-4b12-8342-33d4974812b5\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"SetTentHp\",\r\n      \"type\": \"int\",\r\n      \"value\": 100\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d2d2f2e2-a4a1-4bbe-9bf9-876e27a373c9\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"SetXp\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 5\r\n    }\r\n  }\r\n]"
+    \"1c674a45-0a63-4fc7-add7-0452cb542294\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"TentHpAdd\",\r\n      \"type\": \"int\",\r\n      \"value\": 0\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b2eaa8a9-19a3-4559-805e-553197b2f005\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"XpToAdd\",\r\n      \"type\": \"int\",\r\n     
+    \"value\": 0\r\n    }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"fa065e47-3520-464d-8198-426e6b6f91c3\",\r\n   
     \"name\": \"production\",\r\n    \"id\": \"b6059e01-fa90-4889-8310-638f80dd598d\",\r\n   
     \"isDefault\": true,\r\n    \"createdAt\": \"2025-10-02T17:16:14Z\",\r\n    \"updatedAt\":

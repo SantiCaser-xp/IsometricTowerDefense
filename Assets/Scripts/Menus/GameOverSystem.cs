@@ -32,6 +32,7 @@ public class GameOverSystem : MonoBehaviour
         if (lvManager != null)
         {
             lvManager.OnGameOver += ShowLose;
+            lvManager.OnWin += ShowWin;
         }
     }
 

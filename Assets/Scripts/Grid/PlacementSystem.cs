@@ -2,6 +2,7 @@
 
 public class PlacementSystem : MonoBehaviour
 {
+    [SerializeField] private GameObject _helpText;
 
     [SerializeField] InputManager inputManager;
 
@@ -43,6 +44,7 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         gridVisualization.SetActive(true);
+        _helpText.SetActive(true);
         _currentSelectedID = ID;
         buildingState = new PlacementState(ID, grid, preview, database, floorData, structureData, objectPlacer, layerMask);
         inputManager.OnClicked += PlaceStructure;
@@ -95,6 +97,7 @@ public class PlacementSystem : MonoBehaviour
         if (buildingState == null) return;
 
         gridVisualization.SetActive(false);
+        _helpText.SetActive(false);
         buildingState.EndState();
         inputManager.OnClicked -= PlaceStructure;
         inputManager.OnExit -= StopPlacement;

@@ -32,6 +32,8 @@ public abstract class BaseEnemy : Destructible
 
     public int MaxWaypoints => _waypoints.Length;
 
+    public static event System.Action OnEnemyKilled;
+
 
     private void Awake()
     {
@@ -108,6 +110,8 @@ public abstract class BaseEnemy : Destructible
         pos.y = 1f;
         gold.transform.position = pos;
         ExperienceSystem.Instance.AddExperience(_experienceModidier);
+
+        OnEnemyKilled?.Invoke();
 
         EnemyManager.Instance?.UnregisterEnemy(this);
         _myPool.Release(this);
