@@ -28,4 +28,6 @@ public class HealthUI : MonoBehaviour, IObserver
     }
 
     public void UpdateData(int value) { }
+
+    public void UpdateGameStatus(GameStatus status) { }
 }

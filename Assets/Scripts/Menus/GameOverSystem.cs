@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameOverSystem : MonoBehaviour
+public class GameOverSystem : MonoBehaviour, IObserver
 {
     [Header("Panels")]
     [SerializeField] private GameObject winPanel;
@@ -27,15 +27,6 @@ public class GameOverSystem : MonoBehaviour
 
     public static bool IsGameOver { get; private set; }
 
-    private void Update()
-    {
-        if (lvManager != null)
-        {
-            lvManager.OnGameOver += ShowLose;
-            lvManager.OnWin += ShowWin;
-        }
-    }
-
     void Awake()
     {
         HideAll();
@@ -46,36 +37,16 @@ public class GameOverSystem : MonoBehaviour
         if (winNextBtn) winNextBtn.onClick.AddListener(LoadNextLevel);
         if (winRestartBtn) winRestartBtn.onClick.AddListener(RestartLevel);
         if (winMenuBtn) winMenuBtn.onClick.AddListener(LoadMainMenu);
-    }
 
-    public void ShowLose()
-    {
-        if (IsGameOver) return;
-        IsGameOver = true;
+        IObservable obs = GetComponentInParent<IObservable>();
 
-        SetGroupActive(gameplayUI, false);
-        Time.timeScale = 0f;
-
-        if (losePanel)
+        if (obs == null)
         {
-            losePanel.SetActive(true);
-            losePanel.transform.SetAsLastSibling();
+            gameObject.SetActive(false);
+            return;
         }
-    }
 
-    public void ShowWin()
-    {
-        if (IsGameOver) return;
-        IsGameOver = true;
-
-        SetGroupActive(gameplayUI, false);
-        Time.timeScale = 0f;
-
-        if (winPanel)
-        {
-            winPanel.SetActive(true);
-            winPanel.transform.SetAsLastSibling();
-        }
+        obs.Subscribe(this);
     }
 
     public void RestartLevel()
@@ -122,5 +93,43 @@ public class GameOverSystem : MonoBehaviour
     {
         if (list == null) return;
         foreach (var go in list) if (go) go.SetActive(state);
+    }
+
+    public void UpdateData(float currentValue, float maxValue) { }
+
+    public void UpdateData(int value) { }
+
+    public void UpdateGameStatus(GameStatus status)
+    {
+        switch (status)
+        {
+            case GameStatus.Win:
+                if (IsGameOver) return;
+                IsGameOver = true;
+
+                SetGroupActive(gameplayUI, false);
+                Time.timeScale = 0f;
+
+                if (winPanel)
+                {
+                    winPanel.SetActive(true);
+                    winPanel.transform.SetAsLastSibling();
+                }
+                break;
+
+            case GameStatus.Lose:
+                if (IsGameOver) return;
+                IsGameOver = true;
+
+                SetGroupActive(gameplayUI, false);
+                Time.timeScale = 0f;
+
+                if (losePanel)
+                {
+                    losePanel.SetActive(true);
+                    losePanel.transform.SetAsLastSibling();
+                }
+                break;
+        }
     }
 }

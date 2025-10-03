@@ -34,11 +34,13 @@ public class TowerHealthBar : MonoBehaviour, IObserver
     {
         _fillImage.fillAmount = currentValue / maxValue;
 
-        if (currentValue <= 0f)
+        /*if (currentValue <= 0f)
         {
-            gameObject.SetActive(false);
-        }
+            gameObject.SetActive(false); //preguntar sobre esta mierda, que no quiere trabajar ^_^
+        }*/
     }
 
     public void UpdateData(int value) { }
+
+    public void UpdateGameStatus(GameStatus status) { }
 }
