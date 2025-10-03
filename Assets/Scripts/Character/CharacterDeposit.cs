@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Services.RemoteConfig;
 using UnityEngine;
 
 public class CharacterDeposit : MonoBehaviour, IObservable
@@ -6,6 +7,7 @@ public class CharacterDeposit : MonoBehaviour, IObservable
     [SerializeField] private int _maxGold = 9999;
     private int _currentGold = 0;
     public int CurrentGold => _currentGold;
+    private int _savedGold = 0;
     private int _startedDeposit = 5;
     List<IObserver> _observers = new List<IObserver>();
 
@@ -17,6 +19,8 @@ public class CharacterDeposit : MonoBehaviour, IObservable
         {
             obs.UpdateData(_currentGold);
         }
+
+        RemoteConfigService.Instance.FetchCompleted += UpdateData;
     }
 
     public void AddDeposit(int amount)
@@ -65,6 +69,27 @@ public class CharacterDeposit : MonoBehaviour, IObservable
         if (_observers.Contains(observer))
         {
             _observers.Remove(observer);
+        }
+    }
+
+    public void UpdateData(ConfigResponse configResponse)
+    {
+        var hasCero = RemoteConfigService.Instance.appConfig.GetBool("SetMoneyTo0");
+
+        if (hasCero)
+        {
+            _savedGold = _currentGold;
+            _currentGold = 0;
+        }
+        else
+        {
+            _currentGold += _savedGold;
+            _savedGold = 0;
+        }
+
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentGold);
         }
     }
 

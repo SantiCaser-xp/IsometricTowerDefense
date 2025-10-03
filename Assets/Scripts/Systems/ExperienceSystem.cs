@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Services.RemoteConfig;
 using UnityEngine;
 
 public class ExperienceSystem : MonoBehaviour, IObservable
@@ -43,6 +44,7 @@ public class ExperienceSystem : MonoBehaviour, IObservable
 
     private void Start()
     {
+        RemoteConfigService.Instance.FetchCompleted += UpdateData;
         foreach (var obs in _observers)
         {
             obs.UpdateData(_currentExperience, _currentExperienceThreshold);
@@ -114,6 +116,13 @@ public class ExperienceSystem : MonoBehaviour, IObservable
         {
             _observers.Remove(observer);
         }
+    }
+
+    public void UpdateData(ConfigResponse configResponse)
+    {
+        var experienceToAdd = RemoteConfigService.Instance.appConfig.GetFloat("XpToAdd");
+        AddExperience(experienceToAdd);
+
     }
 
     #region TEST

@@ -38,17 +38,14 @@ public class RemoteConfigManager : MonoBehaviour
         }
     }
 
-    async Task Start()
+    async void Start()
     {
-        // initialize Unity's authentication and core services, however check for internet connection
-        // in order to fail gracefully without throwing exception if connection does not exist
         if (Utilities.CheckForInternetConnection())
         {
             await InitializeRemoteConfigAsync();
+            RemoteConfigService.Instance.FetchCompleted += ApplyRemoteSettings;
+            StartCoroutine(ApplyNewData());
         }
-
-        RemoteConfigService.Instance.FetchCompleted += ApplyRemoteSettings;
-        StartCoroutine(ApplyNewData());
     }
 
     IEnumerator ApplyNewData()
