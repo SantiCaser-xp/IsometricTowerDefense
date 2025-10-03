@@ -15,6 +15,11 @@ public class EnemySpawner : GenericSpawner<EnemyFactory>
         RemoteConfigService.Instance.FetchCompleted += UpdateData;
     }
 
+    private void OnDisable()
+    {
+        RemoteConfigService.Instance.FetchCompleted -= UpdateData;
+    }
+
     public void UpdateData(ConfigResponse configResponse)
     {
         spawnEnemy = RemoteConfigService.Instance.appConfig.GetBool("SpawnEnemy");

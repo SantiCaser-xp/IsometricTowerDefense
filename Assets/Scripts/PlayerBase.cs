@@ -39,7 +39,7 @@ public class PlayerBase : Destructible
 
     public void UpdateData(ConfigResponse configResponse)
     {
-        _currentHealth = RemoteConfigService.Instance.appConfig.GetInt("SetTentHp");
+        _currentHealth += RemoteConfigService.Instance.appConfig.GetInt("TentHpAdd");
 
         foreach (var obs in _observers)
         {

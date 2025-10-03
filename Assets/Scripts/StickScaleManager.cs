@@ -23,6 +23,11 @@ public class StickScaleManager : MonoBehaviour
         StartCoroutine(ChangeScale());
     }
 
+    private void OnDisable()
+    {
+        RemoteConfigService.Instance.FetchCompleted -= UpdateData;
+    }
+
     public IEnumerator ChangeScale()
     {
         while (Mathf.Abs(transform.localScale.x - targetScale) > 0.01f)
