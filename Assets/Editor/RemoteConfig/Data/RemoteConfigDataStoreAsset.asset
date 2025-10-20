@@ -12,46 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"437d709d-6eb6-4a7f-8a44-6c718928b966\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"0cfeac26-de88-49a1-b8b8-f6fe017144a4\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SpawnEnemy\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": true\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0caf75ab-5fc6-4e0d-9883-0a65b49ce70a\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"f7cb324f-a9d7-49ab-84c3-dc66125d3411\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerTimer\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"76eb0a6b-926e-429f-ba03-23c9bafa84a6\"\r\n   
+    1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"92c53503-9a34-43ed-b586-a94f04b02830\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"7daf36e3-07e7-47ff-8abf-654243768d0c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"f8e855aa-2069-4b99-90a6-c33d5cc48a24\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerPosition\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7e78f7bd-46e0-4377-bb27-0cd91db325d6\"\r\n   
+    2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"9c5ba8df-e2d2-42c8-9b35-453ed2ac8786\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"3f68cd54-afa0-423d-b118-21837180bcd6\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"42ca6fca-4fbc-43a1-9b06-aad1ff3289fd\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"TentHpAdd\",\r\n      \"type\": \"int\",\r\n      \"value\": 0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2d5cd9fb-cc90-4f94-9e6d-66509317a58c\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"4ae5f760-b3b0-4648-9023-a435674c3f62\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"XpToAdd\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 0\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"437d709d-6eb6-4a7f-8a44-6c718928b966\"\r\n   
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"0cfeac26-de88-49a1-b8b8-f6fe017144a4\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SpawnEnemy\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": true\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0caf75ab-5fc6-4e0d-9883-0a65b49ce70a\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"f7cb324f-a9d7-49ab-84c3-dc66125d3411\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerTimer\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"76eb0a6b-926e-429f-ba03-23c9bafa84a6\"\r\n   
+    1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"92c53503-9a34-43ed-b586-a94f04b02830\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"7daf36e3-07e7-47ff-8abf-654243768d0c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"f8e855aa-2069-4b99-90a6-c33d5cc48a24\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerPosition\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7e78f7bd-46e0-4377-bb27-0cd91db325d6\"\r\n   
+    2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"9c5ba8df-e2d2-42c8-9b35-453ed2ac8786\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"3f68cd54-afa0-423d-b118-21837180bcd6\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"42ca6fca-4fbc-43a1-9b06-aad1ff3289fd\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"TentHpAdd\",\r\n      \"type\": \"int\",\r\n      \"value\": 0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2d5cd9fb-cc90-4f94-9e6d-66509317a58c\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"4ae5f760-b3b0-4648-9023-a435674c3f62\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"XpToAdd\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 0\r\n    }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"fa065e47-3520-464d-8198-426e6b6f91c3\",\r\n   
-    \"name\": \"production\",\r\n    \"id\": \"b6059e01-fa90-4889-8310-638f80dd598d\",\r\n   
-    \"isDefault\": true,\r\n    \"createdAt\": \"2025-10-02T17:16:14Z\",\r\n    \"updatedAt\":
-    \"2025-10-02T17:16:14Z\"\r\n  },\r\n  {\r\n    \"projectId\": \"fa065e47-3520-464d-8198-426e6b6f91c3\",\r\n   
     \"name\": \"developers\",\r\n    \"id\": \"af07a3e9-6e87-4fe7-81d0-54d327a1ee04\",\r\n   
     \"isDefault\": false,\r\n    \"createdAt\": \"2025-10-02T17:24:06Z\",\r\n   
-    \"updatedAt\": \"2025-10-02T17:24:06Z\"\r\n  }\r\n]"
+    \"updatedAt\": \"2025-10-02T17:24:06Z\"\r\n  },\r\n  {\r\n    \"projectId\":
+    \"fa065e47-3520-464d-8198-426e6b6f91c3\",\r\n    \"name\": \"production\",\r\n   
+    \"id\": \"b6059e01-fa90-4889-8310-638f80dd598d\",\r\n    \"isDefault\": true,\r\n   
+    \"createdAt\": \"2025-10-02T17:16:14Z\",\r\n    \"updatedAt\": \"2025-10-02T17:16:14Z\"\r\n 
+    }\r\n]"
