@@ -47,4 +47,9 @@ public class ObjectPlacer : MonoBehaviour
             placedGameObjects[gameObjectIndex] = null;
         }
     }
+
+    public int GetIndexOfPlacedObject(GameObject go)
+    {
+        return placedGameObjects.IndexOf(go);
+    }
 }
