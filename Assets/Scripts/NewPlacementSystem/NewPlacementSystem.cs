@@ -12,8 +12,11 @@ public class NewPlacementSystem : MonoBehaviour
     [SerializeField] private ObjectsDatabaseSO database;
     [SerializeField] private bool isPlacing = false;
     [SerializeField] private GameObject helpText;
+    [SerializeField] private GameObject cantPlaceText;
+    [SerializeField] private bool isGhostColliding;
     private GameObject currentGhost;
     private int currentID;
+
 
 
     void Update()
@@ -22,10 +25,19 @@ public class NewPlacementSystem : MonoBehaviour
         if (isPlacing)
         {
             UpdateGhostPosition();
+            isGhostColliding = currentGhost.GetComponent<GhostCollDetector>().isColliding;
             if (Input.GetMouseButtonDown(0))
             {
-                PlaceObject();
-                StopPlacement();
+                if (!isGhostColliding)
+                {
+                    PlaceObject();
+                    StopPlacement();
+                }
+                else
+                {
+                    cantPlaceText.SetActive(true);
+                    StartCoroutine(FadeOutText());
+                }
             }
         }
     }
@@ -38,10 +50,10 @@ public class NewPlacementSystem : MonoBehaviour
         currentID = ID;
         if (data != null && data.GhostPrefab != null)
         {
-            // Instancia el ghostPrefab en la escena
             Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
             currentGhost = Instantiate(data.GhostPrefab, placementPosition, Quaternion.identity);
-            // Puedes guardar la referencia si necesitas moverlo después
+            //isGhostColliding= currentGhost.GetComponent<GhostCollDetector>().isColliding;
+
         }
     }
 
@@ -60,11 +72,8 @@ public class NewPlacementSystem : MonoBehaviour
         ObjectData data = database.objectsData.Find(obj => obj.ID == currentID);
         if (data != null && data.Prefab != null)
         {
-            // Instancia el ghostPrefab en la escena
             Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
             Instantiate(data.Prefab, placementPosition, Quaternion.identity);
-
-            // Puedes guardar la referencia si necesitas moverlo después
         }
     }
 
@@ -93,5 +102,11 @@ public class NewPlacementSystem : MonoBehaviour
         Vector3 fallback = playerTransform.position + playerTransform.forward * placementDistance;
         fallback.y = 0;
         return fallback;
+    }
+
+    public IEnumerator FadeOutText()
+    {
+        yield return new WaitForSeconds(2);
+        cantPlaceText.SetActive(false);
     }
 }
