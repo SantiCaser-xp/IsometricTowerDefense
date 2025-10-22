@@ -11,13 +11,9 @@ public class NewPlacementSystem : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private ObjectsDatabaseSO database;
     [SerializeField] private bool isPlacing = false;
+    [SerializeField] private GameObject helpText;
     private GameObject currentGhost;
     private int currentID;
-
-    void Start()
-    {
-        
-    }
 
 
     void Update()
@@ -37,12 +33,14 @@ public class NewPlacementSystem : MonoBehaviour
     public void StartPlacement(int ID)
     {
         isPlacing = true;
+        helpText.SetActive(true);
         ObjectData data = database.objectsData.Find(obj => obj.ID == ID);
         currentID = ID;
         if (data != null && data.GhostPrefab != null)
         {
             // Instancia el ghostPrefab en la escena
-            currentGhost = Instantiate(data.GhostPrefab);
+            Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
+            currentGhost = Instantiate(data.GhostPrefab, placementPosition, Quaternion.identity);
             // Puedes guardar la referencia si necesitas moverlo después
         }
     }
@@ -50,6 +48,7 @@ public class NewPlacementSystem : MonoBehaviour
     public void StopPlacement()
     {
         isPlacing = false;
+        helpText.SetActive(false);
         if (currentGhost != null)
         {
             Destroy(currentGhost);
@@ -75,6 +74,10 @@ public class NewPlacementSystem : MonoBehaviour
         {
             Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
             currentGhost.transform.position = placementPosition;
+        }
+        else
+        {
+            Debug.Log("Theres not currentGhost");
         }
     }
     private Vector3 GetPlacementPositionInFrontOfPlayer()

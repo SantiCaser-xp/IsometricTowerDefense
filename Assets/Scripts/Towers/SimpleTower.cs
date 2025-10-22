@@ -9,7 +9,6 @@ public class SimpleTower : AbstractTower
     [SerializeField] protected TowerHealthBar _healthBar;
     [SerializeField] protected GameObject normalVersion;
     [SerializeField] protected GameObject damagedVersion;
-    [SerializeField] protected IsPlaced isPlaced;
 
     [Header("Rotation Settings")]
     [SerializeField] protected TowerMeshRotator _meshTopRotatior;
@@ -17,7 +16,6 @@ public class SimpleTower : AbstractTower
     protected override void Awake()
     {
         base.Awake();
-        isPlaced = GetComponent<IsPlaced>();
         boxCollider = GetComponent<BoxCollider>();
     }
 
@@ -30,7 +28,7 @@ public class SimpleTower : AbstractTower
     {
         base.Update();
         UpdateRingPosition();
-        if (isPlaced.isPlaced == false || isDead) return;
+        if (isDead) return;
 
         if (enemiesInRange.Count == 0)
         {
@@ -66,7 +64,7 @@ public class SimpleTower : AbstractTower
         bullet.transform.rotation = firePoint.rotation;
         bullet.SetTarget(target, targetTransform);
 
-        foreach(var obs in _observers)
+        foreach (var obs in _observers)
         {
             obs.UpdateData(1);
         }

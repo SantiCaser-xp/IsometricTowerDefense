@@ -680,6 +680,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 76589510}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &79259974 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1863771343052444586, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1540687049}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &90345662
 GameObject:
   m_ObjectHideFlags: 0
@@ -5327,6 +5333,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3484990541560161121, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484990541560161121, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484990541560161121, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 3807476289176555785, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
         type: 3}
       propertyPath: lvManager
@@ -7359,6 +7380,7 @@ MonoBehaviour:
     m_Bits: 8
   database: {fileID: 11400000, guid: 81ae321d9c2e255448676016167c3800, type: 2}
   isPlacing: 0
+  helpText: {fileID: 79259974}
 --- !u!1001 &2106457105
 PrefabInstance:
   m_ObjectHideFlags: 0

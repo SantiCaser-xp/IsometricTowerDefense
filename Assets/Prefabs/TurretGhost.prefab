@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1952966794937004296}
-  - component: {fileID: 6491122522772515096}
   - component: {fileID: 8271244552662317280}
-  - component: {fileID: 130093141572488443}
+  - component: {fileID: 4475651724970863758}
   m_Layer: 0
   m_Name: TurretGhost
   m_TagString: Untagged
@@ -35,35 +34,6 @@ Transform:
   - {fileID: 7672585166755718956}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6491122522772515096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2722975604164686984}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff57e783650b90542971180240ac19b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 100
-  fireRate: 5
-  damage: 1
-  radius: 10
-  isDead: 0
-  _enemyMask:
-    serializedVersion: 2
-    m_Bits: 64
-  firePoint: {fileID: 0}
-  _factory: {fileID: 0}
-  targetRing: {fileID: 0}
-  boxCollider: {fileID: 0}
-  _healthBar: {fileID: 0}
-  normalVersion: {fileID: 6205687315054515762}
-  damagedVersion: {fileID: 0}
-  isPlaced: {fileID: 0}
-  _meshTopRotatior: {fileID: 946863439601856717}
 --- !u!65 &8271244552662317280
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -83,9 +53,9 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.35, y: 1, z: 1.35}
   m_Center: {x: 0.5, y: 0.5, z: 0.5}
---- !u!114 &130093141572488443
+--- !u!114 &4475651724970863758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,10 +64,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2722975604164686984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 812f0358347385443a82549458431430, type: 3}
+  m_Script: {fileID: 11500000, guid: 9dd31274429234c47a9609c9473b3bd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlaced: 0
 --- !u!1001 &5856788826771945461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -254,10 +223,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1763394222838728714}
-    - targetCorrespondingSourceObject: {fileID: 529306906193240519, guid: 4063295e4c703164a899864faf273f02,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6129660881404925314}
     - targetCorrespondingSourceObject: {fileID: 5722733375902582763, guid: 4063295e4c703164a899864faf273f02,
         type: 3}
       insertIndex: -1
@@ -310,27 +275,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!65 &6129660881404925314
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6205687315054515762}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 6.5899997, y: 6.0008183, z: 6.1699996}
-  m_Center: {x: 0, y: 3.8911552, z: 0}
 --- !u!4 &7672585166755718956 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4268570111676256473, guid: 4063295e4c703164a899864faf273f02,
