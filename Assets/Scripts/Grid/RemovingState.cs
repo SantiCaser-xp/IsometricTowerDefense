@@ -5,21 +5,13 @@ using UnityEngine;
 
 public class RemovingState : IBuildingState
 {
-    private int gameObjectIndex = -1;
-    Grid grid;
-    PreviewSystem previewSystem;
-    GridData floorData;
-    GridData structureData;
-    ObjectPlacer objectPlacer;
+    private PreviewSystem previewSystem;
+    private ObjectPlacer objectPlacer;
 
-    public RemovingState(Grid grid, PreviewSystem previewSystem, GridData floorData, GridData structureData, ObjectPlacer objectPlacer)
+    public RemovingState(PreviewSystem previewSystem, ObjectPlacer objectPlacer)
     {
-        this.grid = grid;
         this.previewSystem = previewSystem;
-        this.floorData = floorData;
-        this.structureData = structureData;
         this.objectPlacer = objectPlacer;
-
         previewSystem.StartShowingRemovePreview();
     }
 
@@ -28,50 +20,24 @@ public class RemovingState : IBuildingState
         previewSystem.StopShowingPreview();
     }
 
-    public void OnAction(Vector3Int gridPosition)
+    public void OnAction(Vector3 position)
     {
-        GridData selectedData = null;
-        if (structureData.CanPlaceObject(gridPosition, Vector2Int.one) == false)
+        // Detecta el objeto bajo el cursor usando raycast
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            selectedData = structureData;
-        }
-        else if (floorData.CanPlaceObject(gridPosition, Vector2Int.one) == false)
-        {
-            selectedData = floorData;
-        }
-
-        if (selectedData == null)
-        {
-            //sound
-            return;
-        }
-        else
-        {
-            gameObjectIndex = selectedData.GetRepresentationIndex(gridPosition);
-            if (gameObjectIndex == -1)
+            var obj = hit.collider.GetComponent<IsPlaced>();
+            if (obj != null)
             {
-                return;
+                GameObject go = obj.gameObject;
+                objectPlacer.RemoveObjectAt(objectPlacer.GetIndexOfPlacedObject(go));
             }
-            else
-            {
-                selectedData.RemoveObjectAt(gridPosition);
-                objectPlacer.RemoveObjectAt(gameObjectIndex);
-            }
-            Vector3 cellPosition = grid.CellToWorld(gridPosition);
-            previewSystem.UpdatePosition(cellPosition, CheckIfSelectionIsValid(gridPosition));
-
         }
+        previewSystem.UpdatePosition(position, false);
     }
 
-    private bool CheckIfSelectionIsValid(Vector3Int gridPosition)
+    public void UpdateState(Vector3 position)
     {
-        return !(structureData.CanPlaceObject(gridPosition, Vector2Int.one) == false &&
-            floorData.CanPlaceObject(gridPosition, Vector2Int.one) == false);
-    }
-
-    public void UpdateState(Vector3Int gridPosition)
-    {
-        bool validity = CheckIfSelectionIsValid(gridPosition);
-        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), validity);
+        previewSystem.UpdatePosition(position, true);
     }
 }

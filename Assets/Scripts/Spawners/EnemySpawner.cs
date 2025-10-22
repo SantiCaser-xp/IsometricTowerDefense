@@ -38,7 +38,6 @@ public class EnemySpawner : GenericSpawner<EnemyFactory>
         }
         else if (newPosition == 2)
         {
-            Debug.Log("Enemy Spawner moved to position 2");
             transform.localPosition = new Vector3(37f, 0, -69f);
         }
         else if (newPosition == 3)

@@ -12,46 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"437d709d-6eb6-4a7f-8a44-6c718928b966\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"9c53b78d-5126-4106-bca3-cc1c77c06523\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SpawnEnemy\",\r\n      \"type\": \"bool\",\r\n     
-    \"value\": true\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0caf75ab-5fc6-4e0d-9883-0a65b49ce70a\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"f93e02af-8acd-4153-a51a-12c4e4354877\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerTimer\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"76eb0a6b-926e-429f-ba03-23c9bafa84a6\"\r\n   
+    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"50669835-2607-462e-8f33-4f3ad23cbb95\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"7daf36e3-07e7-47ff-8abf-654243768d0c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"77c0c9d5-055a-4e9d-8d59-6eb5c5f8c2fb\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerPosition\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7e78f7bd-46e0-4377-bb27-0cd91db325d6\"\r\n   
+    2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e1a1582a-19c0-4342-a0d2-eea939616eb2\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"3f68cd54-afa0-423d-b118-21837180bcd6\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"cd09f73c-3da5-4521-acbc-1fabfc624279\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"TentHpAdd\",\r\n      \"type\": \"int\",\r\n      \"value\": 0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2d5cd9fb-cc90-4f94-9e6d-66509317a58c\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"64bc8c17-e243-40c2-8f27-8b8940a2ff7c\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"XpToAdd\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 0\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"437d709d-6eb6-4a7f-8a44-6c718928b966\"\r\n   
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"9c53b78d-5126-4106-bca3-cc1c77c06523\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SpawnEnemy\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": true\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0caf75ab-5fc6-4e0d-9883-0a65b49ce70a\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"f93e02af-8acd-4153-a51a-12c4e4354877\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerTimer\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"76eb0a6b-926e-429f-ba03-23c9bafa84a6\"\r\n   
+    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"50669835-2607-462e-8f33-4f3ad23cbb95\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"7daf36e3-07e7-47ff-8abf-654243768d0c\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"value\": 10.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"77c0c9d5-055a-4e9d-8d59-6eb5c5f8c2fb\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"EnemySpawnerPosition\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    1\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7e78f7bd-46e0-4377-bb27-0cd91db325d6\"\r\n   
+    2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e1a1582a-19c0-4342-a0d2-eea939616eb2\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"3f68cd54-afa0-423d-b118-21837180bcd6\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"cd09f73c-3da5-4521-acbc-1fabfc624279\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"TentHpAdd\",\r\n      \"type\": \"int\",\r\n      \"value\": 0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2d5cd9fb-cc90-4f94-9e6d-66509317a58c\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"64bc8c17-e243-40c2-8f27-8b8940a2ff7c\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"XpToAdd\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 0\r\n    }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"fa065e47-3520-464d-8198-426e6b6f91c3\",\r\n   
-    \"name\": \"production\",\r\n    \"id\": \"b6059e01-fa90-4889-8310-638f80dd598d\",\r\n   
-    \"isDefault\": true,\r\n    \"createdAt\": \"2025-10-02T17:16:14Z\",\r\n    \"updatedAt\":
-    \"2025-10-02T17:16:14Z\"\r\n  },\r\n  {\r\n    \"projectId\": \"fa065e47-3520-464d-8198-426e6b6f91c3\",\r\n   
     \"name\": \"developers\",\r\n    \"id\": \"af07a3e9-6e87-4fe7-81d0-54d327a1ee04\",\r\n   
     \"isDefault\": false,\r\n    \"createdAt\": \"2025-10-02T17:24:06Z\",\r\n   
-    \"updatedAt\": \"2025-10-02T17:24:06Z\"\r\n  }\r\n]"
+    \"updatedAt\": \"2025-10-02T17:24:06Z\"\r\n  },\r\n  {\r\n    \"projectId\":
+    \"fa065e47-3520-464d-8198-426e6b6f91c3\",\r\n    \"name\": \"production\",\r\n   
+    \"id\": \"b6059e01-fa90-4889-8310-638f80dd598d\",\r\n    \"isDefault\": true,\r\n   
+    \"createdAt\": \"2025-10-02T17:16:14Z\",\r\n    \"updatedAt\": \"2025-10-02T17:16:14Z\"\r\n 
+    }\r\n]"

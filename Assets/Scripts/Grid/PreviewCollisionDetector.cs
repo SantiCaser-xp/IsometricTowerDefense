@@ -6,13 +6,16 @@ public class PreviewCollisionDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")|| other.gameObject.layer == LayerMask.NameToLayer("Object"))
+        {
             IsColliding = true;
+            Debug.Log("Collision Detected with " + other.gameObject.layer);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")|| other.gameObject.layer == LayerMask.NameToLayer("Object"))
             IsColliding = false;
     }
 }

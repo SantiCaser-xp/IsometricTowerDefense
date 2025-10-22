@@ -3,32 +3,15 @@
 public class PlacementSystem : MonoBehaviour
 {
     [SerializeField] private GameObject _helpText;
-
     [SerializeField] InputManager inputManager;
-
-    [SerializeField] Grid grid;
-
-    [SerializeField]
-    private ObjectsDatabaseSO database;
-
+    [SerializeField] private ObjectsDatabaseSO database;
     [SerializeField] private GameObject gridVisualization;
-
-    private GridData floorData, structureData;
-
-    [SerializeField]
-    private PreviewSystem preview;
-
-    private Vector3Int lastDetectedPosition = Vector3Int.zero;
-
-    [SerializeField]
-    private ObjectPlacer objectPlacer;
-
-    [SerializeField]
-    private LayerMask layerMask;
-
+    [SerializeField] private PreviewSystem preview;
+    [SerializeField] private ObjectPlacer objectPlacer;
+    [SerializeField] private LayerMask layerMask;
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private float placementDistance = 2f; // Distancia frente al jugador
-    [SerializeField] private float raycastHeight = 2f;     // Altura desde la que lanzar el raycast
+    [SerializeField] private float placementDistance = 2f;
+    [SerializeField] private float raycastHeight = 2f;
     [SerializeField] private CharacterDeposit _deposit;
     private int _currentSelectedID;
     IBuildingState buildingState;
@@ -36,17 +19,14 @@ public class PlacementSystem : MonoBehaviour
     private void Start()
     {
         StopPlacement();
-        floorData = new();
-        structureData = new();
     }
 
     public void StartPlacement(int ID)
     {
         StopPlacement();
-        gridVisualization.SetActive(true);
         _helpText.SetActive(true);
         _currentSelectedID = ID;
-        buildingState = new PlacementState(ID, grid, preview, database, floorData, structureData, objectPlacer, layerMask);
+        buildingState = new PlacementState(ID, preview, database, objectPlacer, layerMask);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
@@ -54,54 +34,40 @@ public class PlacementSystem : MonoBehaviour
     public void StartRemoving()
     {
         StopPlacement();
-        gridVisualization.SetActive(true);
-        buildingState = new RemovingState(grid, preview, floorData, structureData, objectPlacer);
+        buildingState = new RemovingState(preview, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
         inputManager.OnExit += StopPlacement;
     }
-
 
     private void PlaceStructure()
     {
         if (inputManager.IsPointerOverUI()) return;
 
-        Vector3Int gridPosition = GetGridPositionInFrontOfPlayer();
+        Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
 
         int price = database.objectsData[_currentSelectedID].Price;
-         
+
         if (_deposit.CurrentGold >= price)
         {
             Debug.Log("Comprado!");
-            _deposit.SubstructDeposit(price); // substruct money
-            buildingState.OnAction(gridPosition);  // place object
+            _deposit.SubstructDeposit(price);
+            buildingState.OnAction(placementPosition);
         }
         else
         {
             StopPlacement();
             Debug.Log("Yo don´t have money!");
         }
-        //buildingState.OnAction(gridPosition);
     }
-
-    //private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
-    //{
-    //    GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ?
-    //        floorData :
-    //        structureData;
-
-    //    return selectedData.CanPlaceObject(gridPosition, database.objectsData[selectedObjectIndex].Size);
-    //}
 
     private void StopPlacement()
     {
         if (buildingState == null) return;
 
-        gridVisualization.SetActive(false);
         _helpText.SetActive(false);
         buildingState.EndState();
         inputManager.OnClicked -= PlaceStructure;
         inputManager.OnExit -= StopPlacement;
-        lastDetectedPosition = Vector3Int.zero;
         buildingState = null;
     }
 
@@ -111,12 +77,11 @@ public class PlacementSystem : MonoBehaviour
         {
             return;
         }
-        Vector3Int gridPosition = GetGridPositionInFrontOfPlayer();
-        buildingState.UpdateState(gridPosition);
-        lastDetectedPosition = gridPosition;
+        Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
+        buildingState.UpdateState(placementPosition);
     }
 
-    private Vector3Int GetGridPositionInFrontOfPlayer()
+    private Vector3 GetPlacementPositionInFrontOfPlayer()
     {
         Vector3 origin = playerTransform.position + playerTransform.forward * placementDistance + Vector3.up * raycastHeight;
         Vector3 direction = Vector3.down;
@@ -124,13 +89,10 @@ public class PlacementSystem : MonoBehaviour
 
         if (Physics.Raycast(origin, direction, out hit, raycastHeight * 2f, layerMask))
         {
-            return grid.WorldToCell(hit.point);
+            return hit.point;
         }
-        // Si no golpea nada, devuelve la celda frente al jugador a nivel del suelo
         Vector3 fallback = playerTransform.position + playerTransform.forward * placementDistance;
-        fallback.y = 0; // Ajusta segun tu sistema de grilla
-        return grid.WorldToCell(fallback);
+        fallback.y = 0;
+        return fallback;
     }
-
-
 }
