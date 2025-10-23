@@ -7,6 +7,15 @@ public class GhostCollDetector : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private Material material;
     public bool isColliding;
+
+    private void Update()
+    {
+        if (!isColliding)
+        {
+            Color currentColor = material.color;
+            material.color = new Color(1f, 1f, 1f, currentColor.a);
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Colliding with: " + other);
@@ -14,7 +23,8 @@ public class GhostCollDetector : MonoBehaviour
         {
             Debug.Log("Colliding with object");
             isColliding = true;
-            material.color = Color.red;
+            Color currentColor = material.color;
+            material.color = new Color(1f, 0f, 0f, currentColor.a); // Rojo, alpha original
         }
     }
 
@@ -23,7 +33,6 @@ public class GhostCollDetector : MonoBehaviour
         if (((1 << other.gameObject.layer) & layerMask.value) != 0)
         {
             isColliding= false;
-            material.color = Color.white;
         }
     }
 }
