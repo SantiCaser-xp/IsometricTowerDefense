@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 public class NewPlacementSystem : MonoBehaviour
@@ -13,7 +14,10 @@ public class NewPlacementSystem : MonoBehaviour
     [SerializeField] private bool isPlacing = false;
     [SerializeField] private GameObject helpText;
     [SerializeField] private GameObject cantPlaceText;
+    [SerializeField] private GameObject outOfCashText;
+    [SerializeField] private CharacterDeposit _deposit;
     [SerializeField] private bool isGhostColliding;
+    [SerializeField] private int currentPrice;
     private GameObject currentGhost;
     private int currentID;
 
@@ -28,15 +32,32 @@ public class NewPlacementSystem : MonoBehaviour
             isGhostColliding = currentGhost.GetComponent<GhostCollDetector>().isColliding;
             if (Input.GetMouseButtonDown(0))
             {
-                if (!isGhostColliding)
+                // Verifica si el clic está sobre la UI
+                if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                {
+                    // Si está sobre la UI, no hagas nada
+                    return;
+                }
+
+                if (_deposit.CurrentGold >= currentPrice && !isGhostColliding)
                 {
                     PlaceObject();
-                    StopPlacement();
+                    _deposit.SubstructDeposit(currentPrice);
                 }
                 else
                 {
-                    cantPlaceText.SetActive(true);
-                    StartCoroutine(FadeOutText());
+                    if (isGhostColliding)
+                    {
+                        cantPlaceText.SetActive(true);
+                        StartCoroutine(FadeOutText(cantPlaceText));
+                    }
+
+                    if (_deposit.CurrentGold < currentPrice)
+                    {
+                        outOfCashText.SetActive(true);
+                        StartCoroutine(FadeOutText(outOfCashText));
+                        StopPlacement();
+                    }
                 }
             }
         }
@@ -44,16 +65,16 @@ public class NewPlacementSystem : MonoBehaviour
 
     public void StartPlacement(int ID)
     {
+        StopPlacement();
         isPlacing = true;
         helpText.SetActive(true);
         ObjectData data = database.objectsData.Find(obj => obj.ID == ID);
         currentID = ID;
+        currentPrice = data.Price;
         if (data != null && data.GhostPrefab != null)
         {
             Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
             currentGhost = Instantiate(data.GhostPrefab, placementPosition, Quaternion.identity);
-            //isGhostColliding= currentGhost.GetComponent<GhostCollDetector>().isColliding;
-
         }
     }
 
@@ -104,9 +125,9 @@ public class NewPlacementSystem : MonoBehaviour
         return fallback;
     }
 
-    public IEnumerator FadeOutText()
+    public IEnumerator FadeOutText(GameObject Advise)
     {
         yield return new WaitForSeconds(2);
-        cantPlaceText.SetActive(false);
+        Advise.SetActive(false);
     }
 }
