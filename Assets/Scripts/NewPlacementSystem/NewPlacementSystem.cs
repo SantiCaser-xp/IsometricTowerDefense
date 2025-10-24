@@ -32,10 +32,8 @@ public class NewPlacementSystem : MonoBehaviour
             isGhostColliding = currentGhost.GetComponent<GhostCollDetector>().isColliding;
             if (Input.GetMouseButtonDown(0))
             {
-                // Verifica si el clic está sobre la UI
                 if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
                 {
-                    // Si está sobre la UI, no hagas nada
                     return;
                 }
 
