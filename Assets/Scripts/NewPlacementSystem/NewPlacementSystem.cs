@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 public class NewPlacementSystem : MonoBehaviour
@@ -31,6 +32,13 @@ public class NewPlacementSystem : MonoBehaviour
             isGhostColliding = currentGhost.GetComponent<GhostCollDetector>().isColliding;
             if (Input.GetMouseButtonDown(0))
             {
+                // Verifica si el clic está sobre la UI
+                if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                {
+                    // Si está sobre la UI, no hagas nada
+                    return;
+                }
+
                 if (_deposit.CurrentGold >= currentPrice && !isGhostColliding)
                 {
                     PlaceObject();
@@ -57,6 +65,7 @@ public class NewPlacementSystem : MonoBehaviour
 
     public void StartPlacement(int ID)
     {
+        StopPlacement();
         isPlacing = true;
         helpText.SetActive(true);
         ObjectData data = database.objectsData.Find(obj => obj.ID == ID);

@@ -5911,7 +5911,7 @@ PrefabInstance:
     - target: {fileID: 1975165295134443995, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1975165295134443995, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
         type: 3}
@@ -6122,6 +6122,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 2095965698}
+    - target: {fileID: 6943960095001762067, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartPlacement
+      objectReference: {fileID: 0}
+    - target: {fileID: 6943960095001762067, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NewPlacementSystem, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7202461346977711768, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
         type: 3}
