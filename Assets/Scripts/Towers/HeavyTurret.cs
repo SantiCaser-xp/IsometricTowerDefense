@@ -9,7 +9,7 @@ public class HeavyTurret : AbstractTower
     [SerializeField] protected TowerHealthBar _healthBar;
     [SerializeField] protected GameObject normalVersion;
     [SerializeField] protected GameObject damagedVersion;
-    [SerializeField] protected IsPlaced isPlaced;
+    [SerializeField] protected GameObject projectilePrefab;
 
     [Header("Rotation Settings")]
     [SerializeField] protected TowerMeshRotator _meshTopRotatior;
@@ -17,7 +17,6 @@ public class HeavyTurret : AbstractTower
     protected override void Awake()
     {
         base.Awake();
-        isPlaced = GetComponent<IsPlaced>();
         boxCollider = GetComponent<BoxCollider>();
     }
 
@@ -29,8 +28,7 @@ public class HeavyTurret : AbstractTower
     protected override void Update()
     {
         base.Update();
-        UpdateRingPosition();
-        if (isPlaced.isPlaced == false || isDead) return;
+        if (isDead) return;
 
         if (enemiesInRange.Count == 0)
         {
@@ -51,7 +49,7 @@ public class HeavyTurret : AbstractTower
             _meshTopRotatior.RotateTowerToEnemy(targetTransform);
 
             // // do fire if tower done look at target
-            if (fireCountdown <= 0f && _meshTopRotatior.IsFacingTarget(targetTransform))
+            if (fireCountdown <= 0f)
             {
                 Shoot(target, targetTransform);
                 fireCountdown = 1f / fireRate;
@@ -61,10 +59,14 @@ public class HeavyTurret : AbstractTower
 
     protected override void Shoot(IDamageable<float> target, Transform targetTransform)
     {
-        var bullet = _factory.Create();
-        bullet.transform.position = firePoint.position;
-        bullet.transform.rotation = firePoint.rotation;
-        bullet.SetTarget(target, targetTransform);
+        //var bullet = _factory.Create();
+        //bullet.transform.position = firePoint.position;
+        //bullet.transform.rotation = firePoint.rotation;
+        //bullet.SetTarget(target, targetTransform);
+        GameObject p = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+        Greanade mp = p.GetComponent<Greanade>();
+        mp.Init(firePoint.position, targetTransform.position, 5f, 1.5f);
+        // 5f = altura máxima, 1.5f = duración del vuelo
     }
 
     public override void Die()
@@ -77,19 +79,5 @@ public class HeavyTurret : AbstractTower
         if (boxCollider != null) boxCollider.enabled = false;
         if (_healthBar != null) _healthBar.gameObject.SetActive(false);
         isDead = true;
-    }
-
-    protected virtual void UpdateRingPosition()
-    {
-        if (enemiesInRange.Count > 0)
-        {
-            MonoBehaviour mb = enemiesInRange[0] as MonoBehaviour;
-            if (mb != null)
-                targetRing.RingActive(mb.transform);
-        }
-        else
-        {
-            targetRing.Hide();
-        }
     }
 }
