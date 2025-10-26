@@ -11,6 +11,11 @@ public class HeavyTurret : AbstractTower
     [SerializeField] protected GameObject damagedVersion;
     [SerializeField] protected GameObject projectilePrefab;
 
+    //    public float projectileSpeed = 10f; // velocidad “horizontal” del proyectil
+    //public float projectileHeight = 5f;
+    //public float range = 20f;
+    //public float shootInterval = 2f;
+
     [Header("Rotation Settings")]
     [SerializeField] protected TowerMeshRotator _meshTopRotatior;
 
@@ -52,6 +57,7 @@ public class HeavyTurret : AbstractTower
             if (fireCountdown <= 0f)
             {
                 Shoot(target, targetTransform);
+                //ShootPredicted(targetTransform);
                 fireCountdown = 1f / fireRate;
             }
         }
@@ -80,4 +86,31 @@ public class HeavyTurret : AbstractTower
         if (_healthBar != null) _healthBar.gameObject.SetActive(false);
         isDead = true;
     }
+
+    //void ShootPredicted(Transform enemy)
+    //{
+    //    // Si el enemigo tiene Rigidbody o un script con velocidad
+    //    Vector3 enemyVelocity = Vector3.zero;
+    //    Rigidbody rb = enemy.GetComponent<Rigidbody>();
+    //    if (rb != null)
+    //        enemyVelocity = rb.velocity;
+
+    //    // Calcular distancia horizontal
+    //    Vector3 flatStart = new Vector3(firePoint.position.x, 0, firePoint.position.z);
+    //    Vector3 flatTarget = new Vector3(enemy.position.x, 0, enemy.position.z);
+    //    float distance = Vector3.Distance(flatStart, flatTarget);
+
+    //    // Tiempo estimado de vuelo (distancia / velocidad proyectil)
+    //    float timeToTarget = distance / projectileSpeed;
+
+    //    // Predicción de posición futura
+    //    Vector3 predictedPos = enemy.position + enemyVelocity * timeToTarget;
+
+    //    // Crear y disparar proyectil
+    //    GameObject p = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+    //    Greanade mp = p.GetComponent<Greanade>();
+
+    //    // duración del vuelo = el mismo tiempo estimado
+    //    mp.Init(firePoint.position, predictedPos, projectileHeight, timeToTarget);
+    //}
 }
