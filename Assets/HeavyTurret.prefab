@@ -340,7 +340,10 @@ MonoBehaviour:
   damagedVersion: {fileID: 7061266585411822418}
   projectilePrefab: {fileID: 4510579888871767208, guid: 8bdaecdd542dc0d468fa21fac3681a36,
     type: 3}
-  launchSpeed: 12
+  projectileSpeed: 10
+  projectileHeight: 7
+  range: 20
+  shootInterval: 2
   _meshTopRotatior: {fileID: 7644442367258956480}
 --- !u!65 &5225272746363494231
 BoxCollider:
