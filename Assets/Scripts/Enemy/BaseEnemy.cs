@@ -22,8 +22,9 @@ public abstract class BaseEnemy : Destructible
     [Header("Components")]
     [SerializeField] protected GoldResourseFactory _goldFactory;
     protected NavMeshAgent _agent;
+    
     public NavMeshAgent Agent => _agent;
-    protected Animator _animator;
+    public Animator animator;
     protected ObjectPool<BaseEnemy> _myPool;
     [SerializeField] protected EnemyData _data;
     public EnemyData Data => _data;
@@ -37,8 +38,9 @@ public abstract class BaseEnemy : Destructible
 
     private void Awake()
     {
+        _currentHealth = _maxHealth;
         _agent = GetComponent<NavMeshAgent>();
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         _enemyFSM = new EnemyFSM<EnemyFSMStates, BaseEnemy>();
 
@@ -96,14 +98,21 @@ public abstract class BaseEnemy : Destructible
             IDamageable<float> damageable = _currentTarget as IDamageable<float>;
             if (damageable != null)
             {
-                // Debug.Log("Perform Attack");
+                animator.SetTrigger("OnAttack");
                 damageable.TakeDamage(_data.damage);
             }
         }
-    }
 
+    }
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        animator.SetTrigger("OnHit");
+        Debug.Log("Take override hit");
+    }
     public override void Die()
     {
+        animator.SetTrigger("OnDeath");
         _enemyFSM.ChangeState(EnemyFSMStates.Die);
         var gold = _goldFactory.Create();
         Vector3 pos = transform.position;
@@ -126,9 +135,8 @@ public abstract class BaseEnemy : Destructible
     public void NavMeshAgentState(bool value)
     {
         Agent.isStopped = value;
-
-
     }
+    
 
     private void OnDrawGizmos()
     {

@@ -8,6 +8,7 @@ public class AttackState : EnemyState<EnemyFSMStates, BaseEnemy>
         if (avatar.Agent == null || !avatar.Agent.enabled || !avatar.Agent.isOnNavMesh)
             return;
         avatar.NavMeshAgentState(true);
+        avatar.animator.SetBool("isMoving", false);
     }
 
     public override void OnExecute()
