@@ -1,23 +1,8 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : SingltonBase<LevelManager>
 {
-    public static LevelManager Instance;
-
-    private void Awake()
-    {
-        if(!Instance)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     public void LoadLevel(string levelName)
     {
         SceneManager.LoadScene(levelName);

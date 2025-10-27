@@ -1,18 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterAnimationController : MonoBehaviour
+public class CharacterAnimationController
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] string _currentHealthName = "currentHealth";
+    [SerializeField] string _currentVelocityName = "currentVelocity";
+    [SerializeField] string _isFunnyBoolName = "isFunny";
+    [SerializeField] string _isHallooweenBoolName = "isHalloween";
+    [SerializeField] string _isBuildedTriggerName = "isBuilded";
+    private Animator _animator;
+
+    public CharacterAnimationController(Animator animator)
     {
-        
+        _animator = animator;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeVelocity(float dir)
     {
-        
+        _animator.SetFloat(_currentVelocityName, dir);
+    }
+
+    public void ChangeHealth(float health)
+    {
+        _animator.SetFloat(_currentHealthName, health);
+    }
+
+    public void ChangeFunnyMode(bool value)
+    {
+        _animator.SetBool(_isFunnyBoolName, value);
+    }
+
+    public void ChangeHalloweenMode(bool value)
+    {
+        _animator.SetBool(_isHallooweenBoolName, value);
+    }
+
+    public void ActivateTrigger()
+    {
+        _animator.SetTrigger(_isBuildedTriggerName);
     }
 }

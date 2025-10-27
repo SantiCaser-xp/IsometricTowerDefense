@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider))]
@@ -22,10 +21,14 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
     [SerializeField] private ControlBase _joystick;
     private CharacterInputController _controller;
     private CharacterMovement _movement;
+    private CharacterAnimationController _animationController;
     private List<IObserver> _observers = new List<IObserver>();
+    private Animator _animator;
 
     private void Awake()
     {
+        _animator = GetComponentInChildren<Animator>();
+        _animationController = new CharacterAnimationController(_animator);
         _controller = new CharacterInputController(_joystick);
         _movement = GetComponent<CharacterMovement>();
 
@@ -51,6 +54,8 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
     private void Update()
     {
         _controller.InputArtificialUpdate();
+        
+        _animationController.ChangeVelocity(_controller.InputDirection.magnitude);
     }
 
     private void FixedUpdate()
@@ -73,6 +78,8 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
             obs.UpdateData(_currentHealth, _maxHealth);
         }
 
+        _animationController.ChangeHealth(_currentHealth);
+
         if (_currentHealth >= _maxHealth)
         {
             _currentHealth = _maxHealth;
@@ -91,6 +98,8 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
         {
             obs.UpdateData(_currentHealth, _maxHealth);
         }
+
+        _animationController.ChangeHealth(_currentHealth);
 
         if (_currentHealth <= 0)
         {
