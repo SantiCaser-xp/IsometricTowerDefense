@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class LanguageU : MonoBehaviour
+public static class LanguageU
 {
     public static Dictionary<Language, Dictionary<string, string>> LoadTranslate(DataLocalization[] data)
     {
