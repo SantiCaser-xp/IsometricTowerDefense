@@ -134,6 +134,16 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7261267803571081864, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_Drag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261267803571081864, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_Mass
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 7303477762665445853, guid: c223a96076b233849969187b887c421d,
         type: 3}
       propertyPath: m_IsActive
@@ -208,6 +218,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477271549730268283, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 7776266306899059738, guid: c223a96076b233849969187b887c421d,
         type: 3}

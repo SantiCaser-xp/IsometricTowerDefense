@@ -28,8 +28,8 @@ public class MVC_EnemyView
     {
         _animator.SetTrigger("OnHit");  // TODO string -> variable
 
-        _particleDmg?.Play();
-        _soundDmg?.Play();
+       // _particleDmg?.Play();
+       // _soundDmg?.Play();
     }
     private void HandleAttack()
     {
