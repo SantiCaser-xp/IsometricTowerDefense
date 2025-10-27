@@ -34,6 +34,8 @@ public class MVC_Enemy : Destructible
     public TargetType TargetType => TargetType.Tower;
     protected ITargetable _currentTarget;
     [SerializeField] protected TargetingStrategy _targetingStrategy = TargetingStrategy.Nearest;
+    [SerializeField] protected string _cState;
+
 
     private void Awake()
     {
@@ -64,7 +66,7 @@ public class MVC_Enemy : Destructible
     void Update()
     {
         _fsm?.OnExecute();
-        // _cState = $"{_fsm._actualState}";// for debug
+        _cState = $"{_fsm._actualState}";// for debug
 
     }
     private void HandleDeathLogic()
@@ -97,9 +99,9 @@ public class MVC_Enemy : Destructible
     {
         return Model.GetPos();
     }
-    public  void Subscribe(IObserver observer)
+    public void Subscribe(IObserver observer)
     {
-       Model.Subscribe(observer);
+        Model.Subscribe(observer);
     }
 
     public virtual void Unsubscribe(IObserver observer)
