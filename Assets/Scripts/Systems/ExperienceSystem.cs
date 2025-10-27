@@ -2,10 +2,8 @@ using System.Collections.Generic;
 using Unity.Services.RemoteConfig;
 using UnityEngine;
 
-public class ExperienceSystem : MonoBehaviour, IObservable
+public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
 {
-    public static ExperienceSystem Instance;
-
     [Header("Experience")]
     [SerializeField] private float _maxExperienceLimit = 9999f;
     [SerializeField] private float _startExperienceThreshold = 10f;
@@ -25,17 +23,9 @@ public class ExperienceSystem : MonoBehaviour, IObservable
 
     private List<IObserver> _observers = new List<IObserver>();
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (!Instance)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        base.Awake();
 
         _currentExperienceThreshold = _startExperienceThreshold;
         _currentLevel = _startLevel;
