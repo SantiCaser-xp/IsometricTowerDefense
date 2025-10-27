@@ -1,11 +1,25 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonChangeLanguage : MonoBehaviour
 {
-    public Language language;
+    [SerializeField] Language language;
+    Button _button;
+
+    private void Awake()
+    {
+        _button = GetComponent<Button>();
+    }
+
+    private void Start()
+    {
+        _button.onClick.AddListener(BTNChangeLanguage);
+    }
+
 
     public void BTNChangeLanguage()
     {
-        LocalizationManager.instance.ChangeLanguage(language);
+        LocalizationManager.Instance.ChangeLanguage(language);
+        Debug.Log("Language changed!");
     }
 }

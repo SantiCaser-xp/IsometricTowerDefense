@@ -17,16 +17,16 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button settingsCloseX;
     [SerializeField] private Button settingsBack;
 
-    void Awake()
+    void Start()
     {
-        if (settingsButton) settingsButton.onClick.AddListener(OpenSettings);
+       // if (settingsButton) settingsButton.onClick.AddListener(OpenSettings);
 
-        if (settingsCloseX) settingsCloseX.onClick.AddListener(CloseSettings);
-        if (settingsBack) settingsBack.onClick.AddListener(CloseSettings);
+        //if (settingsCloseX) settingsCloseX.onClick.AddListener(CloseSettings);
+        //if (settingsBack) settingsBack.onClick.AddListener(CloseSettings);
 
-        if (settingsPanel) settingsPanel.SetActive(false);
-        //if (playButton) playButton.onClick.AddListener(LevelManager.Instance.LoadLevel);
-        if (exitButton) exitButton.onClick.AddListener(LevelManager.Instance.ExitFromGame);
+        //if (settingsPanel) settingsPanel.SetActive(false);
+        if (playButton) playButton.onClick.AddListener(() => SceneTransition.Instance.LoadLevel("WorldMap"));
+        //if (exitButton) exitButton.onClick.AddListener(SceneTransition.Instance.ExitFromGame);
 
         Time.timeScale = 1f;
     }
