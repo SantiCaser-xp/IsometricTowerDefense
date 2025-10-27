@@ -1,25 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : SingltonBase<EnemyManager>
 {
-    private static EnemyManager instance;
-    public static EnemyManager Instance => instance;
     private List<BaseEnemy> activeEnemies = new List<BaseEnemy>();
 
     [Header("Debug")]
     [SerializeField] private bool showDebugInfo = false;
 
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-    }
     public void RegisterEnemy(BaseEnemy enemy)
     {
         if (!activeEnemies.Contains(enemy))

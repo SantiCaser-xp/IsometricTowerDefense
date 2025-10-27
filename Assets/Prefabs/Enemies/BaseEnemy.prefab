@@ -213,7 +213,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -282,19 +282,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  damage: 10
-  attackRange: 2
-  attackCooldown: 1
-  searchInterval: 0.5
-  walkSpeed: 0
-  idleTime: 0
-  targetingStrategy: 0
-  waypoints: []
-  currentWaypoint: 0
-  lastAttackTime: 0
-  lastSearchTime: 0
+  _experienceModidier: 3
+  _targetingStrategy: 0
+  _cState: 
+  _waypoints: []
   _goldFactory: {fileID: 0}
-  agent: {fileID: 0}
+  _data: {fileID: 0}
 --- !u!1 &7303477762665445853
 GameObject:
   m_ObjectHideFlags: 0

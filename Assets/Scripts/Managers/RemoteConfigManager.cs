@@ -5,26 +5,10 @@ using Unity.Services.Core;
 using UnityEngine;
 using System.Collections;
 
-public class RemoteConfigManager : MonoBehaviour
-{
+public class RemoteConfigManager : SingltonBase<RemoteConfigManager>
+{ 
     public struct userAttributes { }
     public struct appAttributes { }
-
-    public static RemoteConfigManager Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
-
 
     async Task InitializeRemoteConfigAsync()
     {
