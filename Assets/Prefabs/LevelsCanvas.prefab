@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 2492663234205060939}
   - component: {fileID: 3844077634461071987}
   - component: {fileID: 2356891673603008463}
+  - component: {fileID: 5090964403335861464}
   m_Layer: 5
   m_Name: LevelButton
   m_TagString: Untagged
@@ -198,18 +199,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: LoadLevel
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: GilespieTest
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RealtimeValuesManager, Assembly-CSharp
         m_MethodName: SubstructHealth
         m_Mode: 4
@@ -221,6 +210,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5090964403335861464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2406330911363406370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510cc716e3331614e97f521fe1a6f74c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelName: Mobile Lv1 (2)
 --- !u!1 &3000200511394688313
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8897693872064526845
 RectTransform:
   m_ObjectHideFlags: 0
@@ -736,7 +738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3551459783626321051
 RectTransform:
   m_ObjectHideFlags: 0
@@ -960,7 +962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7915946756640743258
 RectTransform:
   m_ObjectHideFlags: 0
