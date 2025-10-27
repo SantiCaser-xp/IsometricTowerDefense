@@ -1,6 +1,6 @@
 
 
-public class EnemySmall : BaseEnemy
+public class EnemySmall : MVC_Enemy
 
 {
 

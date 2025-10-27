@@ -28,7 +28,7 @@ public class MVC_EnemyModel
     public event Action<bool> OnSetMoving;
 
     //Propirties
-    public ITargetable CurrrentTarget => _currentTarget;
+    public ITargetable CurrentTarget => _currentTarget;
     public Vector3 Position => _transform.position;
     public EnemyData Data => _data;
 

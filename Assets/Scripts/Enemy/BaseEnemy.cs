@@ -44,16 +44,16 @@ public abstract class BaseEnemy : Destructible
 
         _enemyFSM = new EnemyFSM<EnemyFSMStates, BaseEnemy>();
 
-        _enemyFSM._possibleStates.Add(EnemyFSMStates.Idle, new IdleState().SetUp(_enemyFSM).SetAvatar(this));
-        _enemyFSM._possibleStates.Add(EnemyFSMStates.Move, new MoveState().SetUp(_enemyFSM).SetAvatar(this));
-        _enemyFSM._possibleStates.Add(EnemyFSMStates.Attack, new AttackState().SetUp(_enemyFSM).SetAvatar(this));
-        _enemyFSM._possibleStates.Add(EnemyFSMStates.Die, new DieState().SetUp(_enemyFSM).SetAvatar(this));
+        //_enemyFSM._possibleStates.Add(EnemyFSMStates.Idle, new IdleState().SetUp(_enemyFSM).SetAvatar(this));
+        //_enemyFSM._possibleStates.Add(EnemyFSMStates.Move, new MoveState().SetUp(_enemyFSM).SetAvatar(this));
+        //_enemyFSM._possibleStates.Add(EnemyFSMStates.Attack, new AttackState().SetUp(_enemyFSM).SetAvatar(this));
+        //_enemyFSM._possibleStates.Add(EnemyFSMStates.Die, new DieState().SetUp(_enemyFSM).SetAvatar(this));
 
         _enemyFSM.ChangeState(EnemyFSMStates.Idle);
     }
     private void Start()
     {
-        EnemyManager.Instance?.RegisterEnemy(this);
+        //EnemyManager.Instance?.RegisterEnemy(this);
     }
 
     void Update()
@@ -71,7 +71,7 @@ public abstract class BaseEnemy : Destructible
     public virtual void Refresh()
     {
         _currentTarget = null;
-        EnemyManager.Instance?.RegisterEnemy(this);
+        //EnemyManager.Instance?.RegisterEnemy(this);
         _enemyFSM.ChangeState(EnemyFSMStates.Idle);
     }
 
@@ -122,13 +122,13 @@ public abstract class BaseEnemy : Destructible
 
         OnEnemyKilled?.Invoke();
 
-        EnemyManager.Instance?.UnregisterEnemy(this);
+        //EnemyManager.Instance?.UnregisterEnemy(this);
         _myPool.Release(this);
     }
 
     protected virtual void OnDestroy()
     {
-        EnemyManager.Instance?.UnregisterEnemy(this);
+        //EnemyManager.Instance?.UnregisterEnemy(this);
     }
     #endregion
 
