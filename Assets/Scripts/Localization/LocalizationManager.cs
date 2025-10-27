@@ -1,29 +1,21 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class LocalizationManager : MonoBehaviour
+public class LocalizationManager : SingltonBase<LocalizationManager>
 {
-    public static LocalizationManager instance;
     public Language language;
     public DataLocalization[] data;
 
     Dictionary<Language, Dictionary<string, string>> _translate = new();
     public event Action EventTranslate;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            _translate = LanguageU.LoadTranslate(data);
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(this);
-        }
+        base.Awake();
+
+        _translate = LanguageU.LoadTranslate(data);
     }
+
     public string GetTranslate(string id)
     {
         if (!_translate.ContainsKey(language))
@@ -36,14 +28,11 @@ public class LocalizationManager : MonoBehaviour
         }
         return _translate[language][id];
     }
+
     public void ChangeLanguage(Language newLanguage)
     {
         if (language == newLanguage) return;
         language = newLanguage;
         EventTranslate?.Invoke();
-    }
-    private void Update()
-    {
-
     }
 }

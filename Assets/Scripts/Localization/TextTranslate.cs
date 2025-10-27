@@ -13,18 +13,18 @@ public class TextTranslate : MonoBehaviour
     {
         _txt = GetComponent<TextMeshProUGUI>();
 
-        LocalizationManager.instance.EventTranslate += Translate;
+        LocalizationManager.Instance.EventTranslate += Translate;
 
         Translate();
     }
 
     private void Translate()
     {
-        _txt.text = LocalizationManager.instance.GetTranslate(_ID);
+        _txt.text = LocalizationManager.Instance.GetTranslate(_ID);
     }
 
     private void OnDestroy()
     {
-        LocalizationManager.instance.EventTranslate += Translate;
+        LocalizationManager.Instance.EventTranslate += Translate;
     }
 }
