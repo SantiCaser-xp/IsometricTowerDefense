@@ -2,11 +2,8 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTargetManager : MonoBehaviour
+public class EnemyTargetManager : SingltonBase<EnemyTargetManager>
 {
-    private static EnemyTargetManager instance;
-    public static EnemyTargetManager Instance => instance;
-
     [Header("Target lists")]
     private List<ITargetable> allTargets = new List<ITargetable>();
     private List<ITargetable> towers = new List<ITargetable>();
@@ -17,14 +14,10 @@ public class EnemyTargetManager : MonoBehaviour
     private Dictionary<Vector2Int, List<ITargetable>> spatialGrid;
     [SerializeField] private bool showDebugInfo = false;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
+        base.Awake();
+
         InitializeSpatialGrid();
     }
 

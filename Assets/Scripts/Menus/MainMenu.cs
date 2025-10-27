@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
         if (settingsBack) settingsBack.onClick.AddListener(CloseSettings);
 
         if (settingsPanel) settingsPanel.SetActive(false);
-        if (playButton) playButton.onClick.AddListener(LevelManager.Instance.LoadLevel);
+        //if (playButton) playButton.onClick.AddListener(LevelManager.Instance.LoadLevel);
         if (exitButton) exitButton.onClick.AddListener(LevelManager.Instance.ExitFromGame);
 
         Time.timeScale = 1f;
