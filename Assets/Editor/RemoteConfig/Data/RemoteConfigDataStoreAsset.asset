@@ -12,42 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d1249f81-8687-4a45-bef1-aff69bbdcd90\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b8c1b531-c37b-411c-972d-1a202c0a25d4\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SpawnEnemy\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": true\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"b1bfbdf6-fac0-4a1f-b73f-e5fcef83a033\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"EnemySpawnerTimer\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e5c4913d-4245-4236-b6f4-c653117e2d3a\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"b3f0a7b5-5853-4ebf-a7d7-6275563066de\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"EnemySpawnerPosition\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"5f7419fa-51e4-4fdf-9d57-211c96aacfa8\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n     
-    \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"d89569ab-f681-416a-806d-f51337a80a2d\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"TentHpAdd\",\r\n      \"type\": \"int\",\r\n      \"value\": 0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"aae44ef3-e425-43e8-932d-7f3f8a707ea4\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"XpToAdd\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 0\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d1249f81-8687-4a45-bef1-aff69bbdcd90\"\r\n   
+    \"b7425e7b-16f3-493a-a7ea-23769180b44f\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n      \"value\": 1.0\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"57fe3c57-9394-4ebd-a0fa-9fd7209a4afa\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"EnemySpawnerPosition\",\r\n      \"type\":
+    \"int\",\r\n      \"value\": 2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
+    \"entityId\": \"7de0dfcb-5497-40dc-8af6-26b200f8c639\"\r\n    },\r\n    \"rs\":
+    {\r\n      \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n      \"value\":
+    false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b6bd6f0f-160c-47a3-8a87-af89b4150006\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"TentHpAdd\",\r\n      \"type\": \"int\",\r\n     
+    \"value\": 0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"24c9817f-dd9a-493a-9357-3b2e35789d08\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"XpToAdd\",\r\n      \"type\": \"int\",\r\n      \"value\": 0\r\n   
+    }\r\n  }\r\n]"
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b8c1b531-c37b-411c-972d-1a202c0a25d4\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"SpawnEnemy\",\r\n      \"type\": \"bool\",\r\n     
     \"value\": true\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"b1bfbdf6-fac0-4a1f-b73f-e5fcef83a033\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"EnemySpawnerTimer\",\r\n      \"type\": \"float\",\r\n      \"value\":
-    5.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e5c4913d-4245-4236-b6f4-c653117e2d3a\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n     
-    \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"b3f0a7b5-5853-4ebf-a7d7-6275563066de\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"EnemySpawnerPosition\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"5f7419fa-51e4-4fdf-9d57-211c96aacfa8\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n     
-    \"value\": false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"d89569ab-f681-416a-806d-f51337a80a2d\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"TentHpAdd\",\r\n      \"type\": \"int\",\r\n      \"value\": 0\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"aae44ef3-e425-43e8-932d-7f3f8a707ea4\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"XpToAdd\",\r\n      \"type\": \"int\",\r\n     
-    \"value\": 0\r\n    }\r\n  }\r\n]"
+    \"b7425e7b-16f3-493a-a7ea-23769180b44f\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"StickScale\",\r\n      \"type\": \"float\",\r\n      \"value\": 1.0\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"57fe3c57-9394-4ebd-a0fa-9fd7209a4afa\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"EnemySpawnerPosition\",\r\n      \"type\":
+    \"int\",\r\n      \"value\": 2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
+    \"entityId\": \"7de0dfcb-5497-40dc-8af6-26b200f8c639\"\r\n    },\r\n    \"rs\":
+    {\r\n      \"key\": \"SetMoneyTo0\",\r\n      \"type\": \"bool\",\r\n      \"value\":
+    false\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"b6bd6f0f-160c-47a3-8a87-af89b4150006\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"TentHpAdd\",\r\n      \"type\": \"int\",\r\n     
+    \"value\": 0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"24c9817f-dd9a-493a-9357-3b2e35789d08\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"XpToAdd\",\r\n      \"type\": \"int\",\r\n      \"value\": 0\r\n   
+    }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"fa065e47-3520-464d-8198-426e6b6f91c3\",\r\n   
     \"name\": \"developers\",\r\n    \"id\": \"af07a3e9-6e87-4fe7-81d0-54d327a1ee04\",\r\n   
     \"isDefault\": false,\r\n    \"createdAt\": \"2025-10-02T17:24:06Z\",\r\n   
