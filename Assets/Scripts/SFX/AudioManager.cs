@@ -2,27 +2,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 [RequireComponent(typeof(AudioSource))]
-public class AudioManager : MonoBehaviour
+public class AudioManager : SingltonBase<AudioManager>
 {
-    #region Instance
-    public static AudioManager Instance;
-
-    private void Awake()
-    {
-        if(!Instance)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        _audioSource = GetComponent<AudioSource>();
-    }
-    #endregion
-
     [Header("Variables")]
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private float _initMasterVol = 0.75f;
@@ -40,6 +21,13 @@ public class AudioManager : MonoBehaviour
     public float InitUIVol => _initUIVol;
 
     private AudioSource _audioSource;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     private void Start()
     {

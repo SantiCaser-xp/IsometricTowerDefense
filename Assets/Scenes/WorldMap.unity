@@ -692,54 +692,9 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2356891673603008463, guid: a87eb17e443eb3a49aa416ad692979a4,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356891673603008463, guid: a87eb17e443eb3a49aa416ad692979a4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356891673603008463, guid: a87eb17e443eb3a49aa416ad692979a4,
-        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6335021462598354873}
-    - target: {fileID: 2356891673603008463, guid: a87eb17e443eb3a49aa416ad692979a4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 6335021462598354873}
-    - target: {fileID: 2356891673603008463, guid: a87eb17e443eb3a49aa416ad692979a4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SubstructHealth
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356891673603008463, guid: a87eb17e443eb3a49aa416ad692979a4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: RealtimeValuesManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356891673603008463, guid: a87eb17e443eb3a49aa416ad692979a4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2356891673603008463, guid: a87eb17e443eb3a49aa416ad692979a4,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5808576495345066295, guid: a87eb17e443eb3a49aa416ad692979a4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6244543889123898301, guid: a87eb17e443eb3a49aa416ad692979a4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6896395312429978073, guid: a87eb17e443eb3a49aa416ad692979a4,
         type: 3}
       propertyPath: m_Pivot.x
@@ -845,39 +800,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelsCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7952843676600651457, guid: a87eb17e443eb3a49aa416ad692979a4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2406330911363406370, guid: a87eb17e443eb3a49aa416ad692979a4,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2183413024409623300}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a87eb17e443eb3a49aa416ad692979a4, type: 3}
---- !u!1 &2183413024409623299 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2406330911363406370, guid: a87eb17e443eb3a49aa416ad692979a4,
-    type: 3}
-  m_PrefabInstance: {fileID: 2183413024409623298}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2183413024409623300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2183413024409623299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510cc716e3331614e97f521fe1a6f74c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _levelName: Mobile Lv1
 --- !u!114 &6335021462598354873 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8464924778369456699, guid: ac39d853f42161049807db6a77581ea8,
