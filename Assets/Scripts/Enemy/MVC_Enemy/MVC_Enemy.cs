@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
-[RequireComponent(typeof(Animator))]
+
 
 
 public class MVC_Enemy : Destructible
@@ -39,9 +39,9 @@ public class MVC_Enemy : Destructible
 
     private void Awake()
     {
-        //  _currentHealth = _maxHealth;
+        _currentHealth = _maxHealth;
         _agent = GetComponent<NavMeshAgent>();
-        _animator = GetComponent<Animator>();
+        _animator = GetComponentInChildren<Animator>();
 
         Model = new MVC_EnemyModel(_agent, transform, _data, _maxHealth);
         _view = new MVC_EnemyView(Model, _animator, _particleDmg, _soundDmg);

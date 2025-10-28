@@ -122,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 397299231706808115, guid: c223a96076b233849969187b887c421d,
         type: 3}
       propertyPath: _maxHealth
-      value: 200
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 397299231706808115, guid: c223a96076b233849969187b887c421d,
         type: 3}
@@ -164,6 +164,16 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5931922357492487072, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: d70593a275e250343a8df716924f325c, type: 3}
+    - target: {fileID: 5931922357492487072, guid: c223a96076b233849969187b887c421d,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1baee616178553d4889c66296ff715bc, type: 2}
     - target: {fileID: 6485476042077920468, guid: c223a96076b233849969187b887c421d,
         type: 3}
       propertyPath: m_Center.y
