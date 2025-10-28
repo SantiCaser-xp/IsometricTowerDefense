@@ -20,8 +20,8 @@ public class PauseSystem : MonoBehaviour
 
     private void Start()
     {
-        _restarButton.onClick.AddListener(SceneTransition.Instance.RestartLevel);
-        _exitButton.onClick.AddListener(() => SceneTransition.Instance.LoadLevel("WorldMap"));
+        _restarButton.onClick.AddListener(RestartLevel);
+        _exitButton.onClick.AddListener(ReturnToMenu);
         _resumeButton.onClick.AddListener(Resume);
         _settingsButton.onClick.AddListener(OpenSettings);
         _settingsCloseButton.onClick.AddListener(CloseSettings);
@@ -49,6 +49,18 @@ public class PauseSystem : MonoBehaviour
         if (_mainPausePanel) _mainPausePanel.SetActive(true);
 
         Time.timeScale = 0f;
+    }
+
+    public void RestartLevel()
+    {
+        Resume();
+        SceneTransition.Instance.RestartLevel();
+    }
+
+    public void ReturnToMenu()
+    {
+        Resume();
+        SceneTransition.Instance.LoadLevel("WorldMap");
     }
 
     public void Resume()
