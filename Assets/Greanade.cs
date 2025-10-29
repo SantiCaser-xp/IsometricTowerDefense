@@ -9,6 +9,8 @@ public class Greanade : MonoBehaviour
     float height;
     float duration;
     float t;
+    [SerializeField] float radius = 5f;
+    [SerializeField] LayerMask _enemyMask;
 
     public void Init(Vector3 start, Vector3 target, float height, float duration)
     {
@@ -35,9 +37,22 @@ public class Greanade : MonoBehaviour
             if (dir != Vector3.zero)
                 transform.forward = dir;
         }
-        else
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Placement"))
         {
-            // Llega al objetivo
+            Collider[] _hitedEnemies = Physics.OverlapSphere(transform.position, radius, _enemyMask);
+            foreach (var hit in _hitedEnemies)
+            {
+                Debug.Log("Hit enemy: " + hit.name);
+                var enemy = hit.GetComponent<IDamageable<float>>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(200f);
+                }
+            }
             Destroy(gameObject);
         }
     }
