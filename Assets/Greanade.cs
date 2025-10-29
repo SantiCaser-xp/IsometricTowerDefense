@@ -11,6 +11,7 @@ public class Greanade : MonoBehaviour
     float t;
     [SerializeField] float radius = 5f;
     [SerializeField] LayerMask _enemyMask;
+    [SerializeField] Animator _anim;
 
     public void Init(Vector3 start, Vector3 target, float height, float duration)
     {
@@ -53,7 +54,18 @@ public class Greanade : MonoBehaviour
                     enemy.TakeDamage(200f);
                 }
             }
-            Destroy(gameObject);
+            _anim.SetTrigger("Explode");
         }
+    }
+
+    public void DestroyGO()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
