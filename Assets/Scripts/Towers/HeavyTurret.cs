@@ -19,6 +19,8 @@ public class HeavyTurret : AbstractTower
     [Header("Rotation Settings")]
     [SerializeField] protected TowerMeshRotator _meshTopRotatior;
 
+    [SerializeField] protected Animator _animator;
+
     protected override void Awake()
     {
         base.Awake();
@@ -39,9 +41,12 @@ public class HeavyTurret : AbstractTower
         {
             // idle mode
             _meshTopRotatior.RotateTowerIdle();
+            _animator.SetBool("IsShooting", false);
         }
         else
         {
+            _animator.SetBool("IsShooting", true);
+
             // battle mode
             IDamageable<float> target = enemiesInRange[0];
 
