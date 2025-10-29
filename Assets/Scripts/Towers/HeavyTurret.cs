@@ -10,6 +10,8 @@ public class HeavyTurret : AbstractTower
     [SerializeField] protected GameObject normalVersion;
     [SerializeField] protected GameObject damagedVersion;
     [SerializeField] protected GameObject projectilePrefab;
+    private IDamageable<float> target;
+    private Transform targetTransform;
 
     //    public float projectileSpeed = 10f; // velocidad “horizontal” del proyectil
     //public float projectileHeight = 5f;
@@ -45,27 +47,33 @@ public class HeavyTurret : AbstractTower
         }
         else
         {
-            _animator.SetBool("IsShooting", true);
 
             // battle mode
-            IDamageable<float> target = enemiesInRange[0];
+            target = enemiesInRange[0];
 
             MonoBehaviour mb = target as MonoBehaviour;
 
             if (mb == null) { enemiesInRange.RemoveAt(0); return; }
 
-            Transform targetTransform = mb.transform;
+            targetTransform = mb.transform;
 
             _meshTopRotatior.RotateTowerToEnemy(targetTransform);
 
             // // do fire if tower done look at target
             if (fireCountdown <= 0f)
             {
-                Shoot(target, targetTransform);
+                _animator.SetBool("IsShooting", true);
+
+                //Shoot(target, targetTransform);
                 //ShootPredicted(targetTransform);
                 fireCountdown = 1f / fireRate;
             }
         }
+    }
+
+    public void CallShoot()
+    {
+        Shoot(target, targetTransform);
     }
 
     protected override void Shoot(IDamageable<float> target, Transform targetTransform)
