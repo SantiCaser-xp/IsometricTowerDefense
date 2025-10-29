@@ -73,6 +73,7 @@ public class HeavyTurret : AbstractTower
 
     public void CallShoot()
     {
+        Debug.Log("Shoot called");
         Shoot(target, targetTransform);
     }
 
