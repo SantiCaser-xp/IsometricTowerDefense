@@ -2,27 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Greanade : MonoBehaviour
+public abstract class AbstractGreanade : MonoBehaviour
 {
-    Vector3 startPos;
-    Vector3 targetPos;
-    float height;
-    float duration;
-    float t;
-    [SerializeField] float radius = 5f;
-    [SerializeField] LayerMask _enemyMask;
-    [SerializeField] Animator _anim;
+    protected Vector3 startPos;
+    protected Vector3 targetPos;
+    protected float height;
+    protected float duration;
+    protected float t;
+    [SerializeField] protected float radius = 5f;
+    [SerializeField] protected LayerMask _enemyMask;
+    [SerializeField] protected Animator _anim;
+    protected ObjectPool<AbstractGreanade> _myPool;
 
-    public void Init(Vector3 start, Vector3 target, float height, float duration)
+    public void Initialize(ObjectPool<AbstractGreanade> pool)
     {
-        startPos = start;
-        targetPos = target;
-        this.height = height;
-        this.duration = duration;
-        t = 0;
+        _myPool = pool;
     }
 
-    void Update()
+    private void Update()
     {
         if (t < 1)
         {
@@ -38,6 +35,14 @@ public class Greanade : MonoBehaviour
             if (dir != Vector3.zero)
                 transform.forward = dir;
         }
+    }
+    public void Init(Vector3 start, Vector3 target, float height, float duration)
+    {
+        startPos = start;
+        targetPos = target;
+        this.height = height;
+        this.duration = duration;
+        t = 0;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -58,14 +63,8 @@ public class Greanade : MonoBehaviour
         }
     }
 
-    public void DestroyGO()
+    public virtual void Refresh()
     {
-        Destroy(gameObject);
-    }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

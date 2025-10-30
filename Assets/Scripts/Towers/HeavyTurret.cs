@@ -3,13 +3,15 @@ using UnityEngine;
 public class HeavyTurret : AbstractTower
 {
     [SerializeField] protected Transform firePoint;
-    [SerializeField] protected AbstractFactory<AbstractBullet> _factory;
+    [SerializeField] protected AbstractFactory<AbstractGreanade> _factory;
     [SerializeField] protected TargetRing targetRing;
     [SerializeField] protected BoxCollider boxCollider;
     [SerializeField] protected TowerHealthBar _healthBar;
     [SerializeField] protected GameObject normalVersion;
     [SerializeField] protected GameObject damagedVersion;
     [SerializeField] protected GameObject projectilePrefab;
+    [SerializeField] protected float _maxHeight = 5f;
+    [SerializeField] protected float _flightDuration = 1.5f;
     private IDamageable<float> target;
     private Transform targetTransform;
 
@@ -31,7 +33,7 @@ public class HeavyTurret : AbstractTower
 
     protected virtual void Start()
     {
-        _factory = FactorySimpleBullet.Instance;
+        _factory = GreanadeFactory.Instance;
     }
 
     protected override void Update()
@@ -80,14 +82,10 @@ public class HeavyTurret : AbstractTower
 
     protected override void Shoot(IDamageable<float> target, Transform targetTransform)
     {
-        //var bullet = _factory.Create();
-        //bullet.transform.position = firePoint.position;
-        //bullet.transform.rotation = firePoint.rotation;
-        //bullet.SetTarget(target, targetTransform);
-        GameObject p = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        Greanade mp = p.GetComponent<Greanade>();
-        mp.Init(firePoint.position, targetTransform.position, 5f, 1.5f);
-        // 5f = altura máxima, 1.5f = duración del vuelo
+        var bullet = _factory.Create();
+        bullet.transform.position = firePoint.position;
+        bullet.transform.rotation = firePoint.rotation;
+        bullet.Init(firePoint.position, targetTransform.position, _maxHeight, _flightDuration);
     }
 
     public override void Die()
