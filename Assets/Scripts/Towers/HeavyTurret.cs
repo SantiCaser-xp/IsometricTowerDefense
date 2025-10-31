@@ -4,7 +4,6 @@ public class HeavyTurret : AbstractTower
 {
     [SerializeField] protected Transform firePoint;
     [SerializeField] protected AbstractFactory<AbstractGreanade> _factory;
-    [SerializeField] protected TargetRing targetRing;
     [SerializeField] protected BoxCollider boxCollider;
     [SerializeField] protected TowerHealthBar _healthBar;
     [SerializeField] protected GameObject normalVersion;
