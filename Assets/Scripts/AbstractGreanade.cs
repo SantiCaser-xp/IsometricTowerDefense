@@ -13,6 +13,7 @@ public abstract class AbstractGreanade : MonoBehaviour
     [SerializeField] protected LayerMask _enemyMask;
     [SerializeField] protected Animator _anim;
     protected ObjectPool<AbstractGreanade> _myPool;
+    [SerializeField] protected GameObject mesh;
 
     public void Initialize(ObjectPool<AbstractGreanade> pool)
     {
@@ -65,6 +66,6 @@ public abstract class AbstractGreanade : MonoBehaviour
 
     public virtual void Refresh()
     {
-
+        mesh.SetActive(true);
     }
 }
