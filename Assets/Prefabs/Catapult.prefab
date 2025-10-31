@@ -257,6 +257,8 @@ MonoBehaviour:
   damagedVersion: {fileID: 7061266585411822418}
   projectilePrefab: {fileID: 4510579888871767208, guid: 8bdaecdd542dc0d468fa21fac3681a36,
     type: 3}
+  _maxHeight: 5
+  _flightDuration: 1.5
   _meshTopRotatior: {fileID: 9081656682135586852}
   _animator: {fileID: 6351828871535344853}
 --- !u!65 &5225272746363494231
@@ -5419,6 +5421,18 @@ PrefabInstance:
       value: FattyCatapultG02
       objectReference: {fileID: 0}
     - target: {fileID: 4262571823209096, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262571823209096, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262571823209096, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262571823209096, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -5457,6 +5471,10 @@ PrefabInstance:
     - target: {fileID: 4262571823209096, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262571823209096, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
