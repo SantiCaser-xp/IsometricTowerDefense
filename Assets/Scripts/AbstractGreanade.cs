@@ -53,7 +53,6 @@ public abstract class AbstractGreanade : MonoBehaviour
             Collider[] _hitedEnemies = Physics.OverlapSphere(transform.position, radius, _enemyMask);
             foreach (var hit in _hitedEnemies)
             {
-                Debug.Log("Hit enemy: " + hit.name);
                 var enemy = hit.GetComponent<IDamageable<float>>();
                 if (enemy != null)
                 {
