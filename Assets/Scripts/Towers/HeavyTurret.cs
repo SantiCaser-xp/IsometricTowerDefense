@@ -3,13 +3,16 @@ using UnityEngine;
 public class HeavyTurret : AbstractTower
 {
     [SerializeField] protected Transform firePoint;
-    [SerializeField] protected AbstractFactory<AbstractBullet> _factory;
-    [SerializeField] protected TargetRing targetRing;
+    [SerializeField] protected AbstractFactory<AbstractGreanade> _factory;
     [SerializeField] protected BoxCollider boxCollider;
     [SerializeField] protected TowerHealthBar _healthBar;
     [SerializeField] protected GameObject normalVersion;
     [SerializeField] protected GameObject damagedVersion;
     [SerializeField] protected GameObject projectilePrefab;
+    [SerializeField] protected float _maxHeight = 5f;
+    [SerializeField] protected float _flightDuration = 1.5f;
+    private IDamageable<float> target;
+    private Transform targetTransform;
 
     //    public float projectileSpeed = 10f; // velocidad “horizontal” del proyectil
     //public float projectileHeight = 5f;
@@ -19,6 +22,8 @@ public class HeavyTurret : AbstractTower
     [Header("Rotation Settings")]
     [SerializeField] protected TowerMeshRotator _meshTopRotatior;
 
+    [SerializeField] protected Animator _animator;
+
     protected override void Awake()
     {
         base.Awake();
@@ -27,7 +32,7 @@ public class HeavyTurret : AbstractTower
 
     protected virtual void Start()
     {
-        _factory = FactorySimpleBullet.Instance;
+        _factory = GreanadeFactory.Instance;
     }
 
     protected override void Update()
@@ -39,40 +44,47 @@ public class HeavyTurret : AbstractTower
         {
             // idle mode
             _meshTopRotatior.RotateTowerIdle();
+            _animator.SetBool("IsShooting", false);
         }
         else
         {
+
             // battle mode
-            IDamageable<float> target = enemiesInRange[0];
+            target = enemiesInRange[0];
 
             MonoBehaviour mb = target as MonoBehaviour;
 
             if (mb == null) { enemiesInRange.RemoveAt(0); return; }
 
-            Transform targetTransform = mb.transform;
+            targetTransform = mb.transform;
 
             _meshTopRotatior.RotateTowerToEnemy(targetTransform);
 
             // // do fire if tower done look at target
             if (fireCountdown <= 0f)
             {
-                Shoot(target, targetTransform);
+                _animator.SetBool("IsShooting", true);
+
+                //Shoot(target, targetTransform);
                 //ShootPredicted(targetTransform);
                 fireCountdown = 1f / fireRate;
             }
         }
     }
 
+    //Called by animation event
+    public void CallShoot()
+    {
+        Debug.Log("Shoot called");
+        Shoot(target, targetTransform);
+    }
+
     protected override void Shoot(IDamageable<float> target, Transform targetTransform)
     {
-        //var bullet = _factory.Create();
-        //bullet.transform.position = firePoint.position;
-        //bullet.transform.rotation = firePoint.rotation;
-        //bullet.SetTarget(target, targetTransform);
-        GameObject p = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        Greanade mp = p.GetComponent<Greanade>();
-        mp.Init(firePoint.position, targetTransform.position, 5f, 1.5f);
-        // 5f = altura máxima, 1.5f = duración del vuelo
+        var bullet = _factory.Create();
+        bullet.transform.position = firePoint.position;
+        bullet.transform.rotation = firePoint.rotation;
+        bullet.Init(firePoint.position, targetTransform.position, _maxHeight, _flightDuration);
     }
 
     public override void Die()

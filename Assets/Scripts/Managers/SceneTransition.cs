@@ -105,11 +105,14 @@ public class SceneTransition : SingltonBase<SceneTransition>
             if (_progressBar.fillAmount >= 1)
             {
                 Application.backgroundLoadingPriority = ThreadPriority.High;
+                CanLoadLevel(true);
             }
+
+            yield return null;
         }
 
         _progressPanel.SetActive(false);
-        CanLoadLevel(true);
+        
         _isLoading = false;
     }
 

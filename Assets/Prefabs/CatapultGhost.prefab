@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3975240339186321264}
-  - component: {fileID: 4108880928705152511}
   - component: {fileID: 5225272746363494231}
+  - component: {fileID: 3404120983965009679}
+  - component: {fileID: 3591680866557330668}
   m_Layer: 0
-  m_Name: GhostHeavyTurret
+  m_Name: CatapultGhost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,36 +35,6 @@ Transform:
   - {fileID: 6412795891191499856}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4108880928705152511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3653821513944845359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2a63dd3763de4a409cb7d4018d8807b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 100
-  fireRate: 1
-  damage: 10
-  radius: 20
-  isDead: 0
-  _enemyMask:
-    serializedVersion: 2
-    m_Bits: 64
-  firePoint: {fileID: 0}
-  _factory: {fileID: 0}
-  targetRing: {fileID: 0}
-  boxCollider: {fileID: 5225272746363494231}
-  _healthBar: {fileID: 0}
-  normalVersion: {fileID: 0}
-  damagedVersion: {fileID: 0}
-  projectilePrefab: {fileID: 4510579888871767208, guid: 8bdaecdd542dc0d468fa21fac3681a36,
-    type: 3}
-  _meshTopRotatior: {fileID: 9081656682135586852}
 --- !u!65 &5225272746363494231
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -85,6 +56,50 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.9677105, y: 1, z: 2.1573067}
   m_Center: {x: 0.016144753, y: 0.5, z: -0.078653336}
+--- !u!114 &3404120983965009679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653821513944845359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd31274429234c47a9609c9473b3bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 6592
+  material: {fileID: 2100000, guid: 4a538c340b1945141abcd77e142829f5, type: 2}
+  isColliding: 0
+--- !u!54 &3591680866557330668
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653821513944845359}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &6409175511479080664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -137,6 +152,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23156611712489024, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a538c340b1945141abcd77e142829f5, type: 2}
+    - target: {fileID: 23669589091123604, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a538c340b1945141abcd77e142829f5, type: 2}
+    - target: {fileID: 23747123031848214, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a538c340b1945141abcd77e142829f5, type: 2}
     - target: {fileID: 199902075704571094, guid: 16356cdf71fc4b0499d0b7fd3d6c0cd9,
         type: 3}
       propertyPath: m_Materials.Array.size
