@@ -35,14 +35,12 @@ public class SimpleFlameThrower : AbstractTower
         }
         else
         {
+            meshToRotate.forward = Vector3.Lerp(meshToRotate.forward, (enemiesInRange[0] as MonoBehaviour).transform.position - meshToRotate.position, 0.5f * Time.deltaTime);
             if (damageCoroutine == null)
             {
-                meshToRotate.forward = Vector3.Lerp(meshToRotate.forward, (enemiesInRange[0] as MonoBehaviour).transform.position - meshToRotate.position, 0.5f * Time.deltaTime);
                 damageCoroutine = StartCoroutine(DamageOverTime());
             }
         }
-
-
     }
     public IEnumerator DamageOverTime()
     {
@@ -65,25 +63,6 @@ public class SimpleFlameThrower : AbstractTower
         }
         damageCoroutine = null; // Corrutina termina, limpiamos la referencia
     }
-
-    //public IEnumerator DamageOverTime()
-    //{
-
-    //    Debug.Log("<color=red>Dealing Damage</color>");
-
-    //    foreach (var item in enemiesInRange)
-    //    {
-    //        MonoBehaviour mb = item as MonoBehaviour;
-    //        Vector3 dir = mb.transform.position - transform.position;
-    //        if (dir.magnitude > viewRadius) continue;
-
-    //        if (Vector3.Angle(meshToRotate.forward, dir) <= viewAngle / 2)
-    //        {
-    //            item.TakeDamage(damage);
-    //        }
-    //    }
-    //    yield return new WaitForSeconds(1f);
-    //}
 
     protected override void OnDrawGizmos()
     {
