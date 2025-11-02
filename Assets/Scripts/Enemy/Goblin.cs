@@ -1,4 +1,4 @@
-public class Goblin : BaseEnemy
+public class Goblin : MVC_Enemy
 {
     
 }

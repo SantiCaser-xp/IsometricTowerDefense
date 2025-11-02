@@ -1,5 +1,5 @@
 
-public class EnemyMid : BaseEnemy
+public class EnemyMid : MVC_Enemy
 {
 
 }

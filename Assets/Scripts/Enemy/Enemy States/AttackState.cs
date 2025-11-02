@@ -1,45 +1,39 @@
 using UnityEngine;
 
-public class AttackState : EnemyState<EnemyFSMStates, BaseEnemy>
+public class AttackState : EnemyState<EnemyFSMStates, MVC_Enemy>
 {
     float _timer;
     public override void OnEnter()
     {
-        if (avatar.Agent == null || !avatar.Agent.enabled || !avatar.Agent.isOnNavMesh)
-            return;
-        avatar.NavMeshAgentState(true);
+        avatar.Model.StopMovement();
+        _timer = 0;
     }
-
     public override void OnExecute()
     {
-        if (avatar.CurrentTarget == null)
+        if (avatar.Model.CurrentTarget == null)
         {
             enemyFSM.ChangeState(EnemyFSMStates.Idle);
             return;
         }
 
-        float distanceToTarget = (avatar.transform.position - avatar.CurrentTarget.GetPos()).sqrMagnitude;
-        if (distanceToTarget > avatar.Data.attackRange * avatar.Data.attackRange)
+        float distanceToTarget = (avatar.Model.Position - avatar.Model.CurrentTarget.GetPos()).sqrMagnitude;
+
+        if (distanceToTarget > avatar.Model.Data.attackRange * avatar.Model.Data.attackRange)
         {
             enemyFSM.ChangeState(EnemyFSMStates.Move);
             return;
         }
 
         // Turning towards the target
-        Vector3 lookDirection = (avatar.CurrentTarget.GetPos() - avatar.transform.position).normalized;
-        lookDirection.y = 0;
-        avatar.transform.rotation = Quaternion.LookRotation(lookDirection);
+        avatar.Model.RotateTowardTarget();
 
         // Attack with cooldown
         _timer += Time.deltaTime;
-        if (_timer >= avatar.Data.attackCooldown)
+        if (_timer >= avatar.Model.Data.attackCooldown)
         {
-            avatar.PerformAttack();
+            avatar.Model.PerformAttack();
             _timer = 0;
         }
     }
-    public override void OnExit()
-    {
-
-    }
+    public override void OnExit() { }
 }

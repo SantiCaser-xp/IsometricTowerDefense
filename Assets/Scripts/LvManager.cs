@@ -19,7 +19,7 @@ public class LvManager : MonoBehaviour, IObservable
             playerBase.OnPlayerBaseDestroyed += OnPlayerBaseDiedHandler;
         }
 
-        BaseEnemy.OnEnemyKilled += EnemyKilled;
+        MVC_Enemy.OnEnemyKilled += EnemyKilled;
     }
 
     void Start()
@@ -32,7 +32,7 @@ public class LvManager : MonoBehaviour, IObservable
 
     private void OnDestroy()
     {
-        BaseEnemy.OnEnemyKilled -= EnemyKilled;
+        MVC_Enemy.OnEnemyKilled -= EnemyKilled;
     }
 
     public void EnemyKilled()

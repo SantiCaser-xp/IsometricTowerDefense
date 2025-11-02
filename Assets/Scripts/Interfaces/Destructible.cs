@@ -3,8 +3,8 @@ using UnityEngine;
 
 public abstract class Destructible : MonoBehaviour, IDamageable<float>, IKillable, ITargetable, IObservable
 {
-    [SerializeField] protected float _maxHealth = 100f;
-    protected float _currentHealth = 0f;
+    [SerializeField] protected float _maxHealth;
+    [SerializeField] protected float _currentHealth = 0f;
     protected List<IObserver> _observers = new List<IObserver>();
     public TargetType TargetType => TargetType.Tower;
 
