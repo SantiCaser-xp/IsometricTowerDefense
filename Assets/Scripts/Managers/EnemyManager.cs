@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class EnemyManager : SingltonBase<EnemyManager>
 {
-    private List<BaseEnemy> activeEnemies = new List<BaseEnemy>();
+    private List<MVC_Enemy> activeEnemies = new List<MVC_Enemy>();
 
     [Header("Debug")]
     [SerializeField] private bool showDebugInfo = false;
 
-    public void RegisterEnemy(BaseEnemy enemy)
+    public void RegisterEnemy(MVC_Enemy enemy)
     {
         if (!activeEnemies.Contains(enemy))
             activeEnemies.Add(enemy);
     }
-    public void UnregisterEnemy(BaseEnemy enemy)
+    public void UnregisterEnemy(MVC_Enemy enemy)
     {
         activeEnemies.Remove(enemy);
     }
@@ -25,9 +25,9 @@ public class EnemyManager : SingltonBase<EnemyManager>
         }
     }
 
-    public List<BaseEnemy> GetEnemiesInRange(Vector3 position, float range)
+    public List<MVC_Enemy> GetEnemiesInRange(Vector3 position, float range)
     {
-        List<BaseEnemy> enemiesInRange = new List<BaseEnemy>();
+        List<MVC_Enemy> enemiesInRange = new List<MVC_Enemy>();
         foreach (var enemy in activeEnemies)
         {
             if (enemy != null && Vector3.Distance(position, enemy.transform.position) <= range)

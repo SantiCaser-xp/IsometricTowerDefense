@@ -1,17 +1,10 @@
-public class DieState : EnemyState<EnemyFSMStates, BaseEnemy>
+public class DieState : EnemyState<EnemyFSMStates, MVC_Enemy>
 {
     public override void OnEnter()
     {
-        avatar.NavMeshAgentState(true);
-
+        avatar.Model.StopMovement();
     }
-    public override void OnExecute()
-    {
-
-    }
-    public override void OnExit()
-    {
-
-    }
+    public override void OnExecute() { }
+    public override void OnExit() { }
 }
 

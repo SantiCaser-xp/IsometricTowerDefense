@@ -1,5 +1,5 @@
 
-public class EnemyBig : BaseEnemy
+public class EnemyBig : MVC_Enemy
 
 {
     
