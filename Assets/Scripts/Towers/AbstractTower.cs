@@ -34,6 +34,7 @@ public abstract class AbstractTower : Destructible
         Collider[] hits = Physics.OverlapSphere(transform.position, radius, _enemyMask);
         HashSet<IDamageable<float>> detectedEnemies = new HashSet<IDamageable<float>>();
 
+
         foreach (var hit in hits)
         {
             var enemy = hit.GetComponent<IDamageable<float>>();

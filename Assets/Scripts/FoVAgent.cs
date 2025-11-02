@@ -18,32 +18,29 @@ public class FoVAgent : MonoBehaviour
 
     void FieldOfView()
     {
-        foreach (var item in viewableEntities)
-        {
 
+        //foreach (var item in viewableEntities)
+        //{
+        //    Vector3 dir = item.transform.position - transform.position;
+        //    if (dir.magnitude > viewRadius) continue;
 
-            Vector3 dir = item.transform.position - transform.position;
-            if (dir.magnitude > viewRadius) continue;
-
-            if (Vector3.Angle(transform.forward, dir) <= viewAngle / 2)
-            {
-                if (!Physics.Raycast(transform.position, dir, out RaycastHit hit, dir.magnitude, wallLayer))
-                {
-                    Debug.DrawLine(transform.position, item.transform.position, Color.red);
-                    item.gameObject.GetComponent<Renderer>().material.color = Color.red;
-                }
-                else
-                {
-                    Debug.DrawLine(transform.position, hit.point, Color.white);
-
-                }
-            }
-            else
-            {
-                item.gameObject.GetComponent<Renderer>().material.color = Color.white;
-            }
-        }
-
+        //    if (Vector3.Angle(transform.forward, dir) <= viewAngle / 2)
+        //    {
+        //        if (!Physics.Raycast(transform.position, dir, out RaycastHit hit, dir.magnitude, wallLayer))
+        //        {
+        //            Debug.DrawLine(transform.position, item.transform.position, Color.red);
+        //            item.gameObject.GetComponent<Renderer>().material.color = Color.red;
+        //        }
+        //        else
+        //        {
+        //            Debug.DrawLine(transform.position, hit.point, Color.white);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        item.gameObject.GetComponent<Renderer>().material.color = Color.white;
+        //    }
+        //}
     }
 
 
@@ -57,8 +54,6 @@ public class FoVAgent : MonoBehaviour
 
         Gizmos.DrawLine(transform.position, transform.position + lineA * viewRadius);
         Gizmos.DrawLine(transform.position, transform.position + lineB * viewRadius);
-
-
     }
 
     Vector3 GetVectorFromAngle(float angle)
