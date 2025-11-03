@@ -208,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _currentHealth: 0
   _targetType: 1
   _animator: {fileID: 3469287837884305035}
 --- !u!4 &10971271
@@ -5723,7 +5724,7 @@ PrefabInstance:
     - target: {fileID: 1471040729201113396, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3.500061
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1516510208615718623, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
         type: 3}
@@ -5794,6 +5795,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2330377440720410812, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2421637167202850008, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
         type: 3}
@@ -6120,6 +6126,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -315.80792
       objectReference: {fileID: 0}
+    - target: {fileID: 5310398058849777035, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3.0800781
+      objectReference: {fileID: 0}
+    - target: {fileID: 5310398058849777035, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -10.075073
+      objectReference: {fileID: 0}
     - target: {fileID: 5445886817013568824, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -6198,7 +6214,7 @@ PrefabInstance:
     - target: {fileID: 7997191855886045448, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.11035156
+      value: 0.111328125
       objectReference: {fileID: 0}
     - target: {fileID: 8059028024304647922, guid: 71dd55c12279ecf4eb33e8aa2983e63c,
         type: 3}
