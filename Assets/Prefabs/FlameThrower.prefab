@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6739743816524363836}
-  - component: {fileID: 5317655855399881327}
+  - component: {fileID: 7443150358902425231}
   m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 3196420224524797515}
   m_Father: {fileID: 315607934284097376}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5317655855399881327
+--- !u!114 &7443150358902425231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,10 +45,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 29631970303356558}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6146cca243f543743bc81ecf2f2bb3dd, type: 3}
+  m_Script: {fileID: 11500000, guid: be2194bb5b89bb148b607ea9326a679c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedRotation: 10
+  _speedRotation: 20
+  _angleThreshold: 10
 --- !u!1 &1002004554613847939
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +422,8 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 0
+  flameVFX: {fileID: 4798478064021277637}
+  _meshTopRotatior: {fileID: 7443150358902425231}
 --- !u!65 &3066452019219191194
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -570,7 +573,7 @@ GameObject:
   - component: {fileID: 4798478064021277637}
   - component: {fileID: 5146501599108469719}
   m_Layer: 0
-  m_Name: Flamethrower
+  m_Name: VFX_Flamethrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

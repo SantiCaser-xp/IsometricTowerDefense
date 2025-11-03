@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class SimpleFlameThrower : AbstractTower
 {
@@ -17,6 +18,16 @@ public class SimpleFlameThrower : AbstractTower
 
     public LayerMask wallLayer;
 
+    [SerializeField] VisualEffect flameVFX;
+
+    [Header("Rotation Settings")]
+    [SerializeField] protected TowerMeshRotator _meshTopRotatior;
+
+    private void Start()
+    {
+        flameVFX.Stop();
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -30,6 +41,7 @@ public class SimpleFlameThrower : AbstractTower
         {
             if (damageCoroutine != null)
             {
+                flameVFX.Stop();
                 StopCoroutine(damageCoroutine);
                 damageCoroutine = null;
                 _anim.SetBool("IsShooting", false);
@@ -39,10 +51,11 @@ public class SimpleFlameThrower : AbstractTower
         else
         {
             meshToRotate.forward = Vector3.Lerp(meshToRotate.forward, (enemiesInRange[0] as MonoBehaviour).transform.position - meshToRotate.position, 0.5f * Time.deltaTime);
-            if (damageCoroutine == null)
+            if (damageCoroutine == null && _meshTopRotatior.IsFacingTarget((enemiesInRange[0] as MonoBehaviour).transform))
             {
                 _anim.SetBool("IsShooting", true);
                 damageCoroutine = StartCoroutine(DamageOverTime());
+                flameVFX.Play();
             }
         }
     }
