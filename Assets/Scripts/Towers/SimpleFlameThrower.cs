@@ -9,6 +9,8 @@ public class SimpleFlameThrower : AbstractTower
 
     [SerializeField] private Transform meshToRotate;
 
+    [SerializeField] private Animator _anim;
+
     public List<GameObject> viewableEntities;
 
     private Coroutine damageCoroutine;
@@ -30,6 +32,7 @@ public class SimpleFlameThrower : AbstractTower
             {
                 StopCoroutine(damageCoroutine);
                 damageCoroutine = null;
+                _anim.SetBool("IsShooting", false);
             }
             return;
         }
@@ -38,6 +41,7 @@ public class SimpleFlameThrower : AbstractTower
             meshToRotate.forward = Vector3.Lerp(meshToRotate.forward, (enemiesInRange[0] as MonoBehaviour).transform.position - meshToRotate.position, 0.5f * Time.deltaTime);
             if (damageCoroutine == null)
             {
+                _anim.SetBool("IsShooting", true);
                 damageCoroutine = StartCoroutine(DamageOverTime());
             }
         }
