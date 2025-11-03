@@ -20,7 +20,7 @@ public class TowerMeshRotator : MonoBehaviour
         if(dir.sqrMagnitude > 0.01f)
         {
             Quaternion targetRot = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, _speedRotation * Time.deltaTime).normalized;
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, _speedRotation * Time.deltaTime);
         }
     }
 
