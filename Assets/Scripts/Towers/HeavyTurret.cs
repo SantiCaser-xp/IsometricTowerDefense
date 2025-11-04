@@ -43,6 +43,7 @@ public class HeavyTurret : AbstractTower
         if (enemiesInRange.Count == 0)
         {
             // idle mode
+            target = null;
             _meshTopRotatior.RotateTowerIdle();
             _animator.SetBool("IsShooting", false);
         }

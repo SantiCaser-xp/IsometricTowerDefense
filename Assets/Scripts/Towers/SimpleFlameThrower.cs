@@ -61,6 +61,7 @@ public class SimpleFlameThrower : AbstractTower
     }
     public IEnumerator DamageOverTime()
     {
+        //yield return new WaitForSeconds(1);      Delay before starting fire VFX
         while (enemiesInRange.Count > 0)
         {
             Debug.Log("<color=red>Dealing Damage</color>");
@@ -78,7 +79,7 @@ public class SimpleFlameThrower : AbstractTower
             }
             yield return new WaitForSeconds(1f);
         }
-        damageCoroutine = null; // Corrutina termina, limpiamos la referencia
+        damageCoroutine = null;
     }
 
     protected override void OnDrawGizmos()
