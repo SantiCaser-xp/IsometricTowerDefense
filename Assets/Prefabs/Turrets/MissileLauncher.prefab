@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 245103837850256721}
   - component: {fileID: 3052376032607350313}
-  m_Layer: 0
+  - component: {fileID: 3089125260257461274}
+  m_Layer: 11
   m_Name: MissileLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,6 +55,27 @@ MonoBehaviour:
   _enemyMask:
     serializedVersion: 2
     m_Bits: 0
+--- !u!65 &3089125260257461274
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4293189752334450328}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5, y: 2, z: 2.5}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &379746038456990753
 PrefabInstance:
   m_ObjectHideFlags: 0
