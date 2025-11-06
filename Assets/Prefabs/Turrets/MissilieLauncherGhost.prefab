@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 245103837850256721}
+  - component: {fileID: 8486039864121244958}
   - component: {fileID: 6349905387778573925}
+  - component: {fileID: 4536808635129054180}
   m_Layer: 0
   m_Name: MissilieLauncherGhost
   m_TagString: Untagged
@@ -33,6 +35,27 @@ Transform:
   - {fileID: 381575932879016635}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8486039864121244958
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4293189752334450328}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.5, y: 2, z: 2.5}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &6349905387778573925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,9 +70,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 6592
   material: {fileID: 2100000, guid: 4a538c340b1945141abcd77e142829f5, type: 2}
   isColliding: 0
+--- !u!54 &4536808635129054180
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4293189752334450328}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &379746038456990753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -102,6 +152,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23322526923859668, guid: def8b52e5e3714e43adcb23d43073949,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a538c340b1945141abcd77e142829f5, type: 2}
+    - target: {fileID: 23370428235742150, guid: def8b52e5e3714e43adcb23d43073949,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a538c340b1945141abcd77e142829f5, type: 2}
+    - target: {fileID: 23675282597185254, guid: def8b52e5e3714e43adcb23d43073949,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a538c340b1945141abcd77e142829f5, type: 2}
+    - target: {fileID: 23690510231910756, guid: def8b52e5e3714e43adcb23d43073949,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a538c340b1945141abcd77e142829f5, type: 2}
+    - target: {fileID: 23691712806358410, guid: def8b52e5e3714e43adcb23d43073949,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a538c340b1945141abcd77e142829f5, type: 2}
     - target: {fileID: 199250759311679798, guid: def8b52e5e3714e43adcb23d43073949,
         type: 3}
       propertyPath: m_Materials.Array.size
