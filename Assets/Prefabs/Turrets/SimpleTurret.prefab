@@ -568,6 +568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _currentHealth: 0
   fireRate: 5
   damage: 1
   radius: 10
@@ -653,8 +654,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2194bb5b89bb148b607ea9326a679c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speedRotation: 5
-  _angleThreshold: 5
+  _speedRotation: 30
+  _angleThreshold: 15
 --- !u!1 &4004847742085276241
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,7 +41,7 @@ public class TowerMeshRotator : MonoBehaviour
         Vector3 dir = (target.position - transform.position).normalized;
         dir.y = 0f;
         if (dir.sqrMagnitude < 0.3f * 0.3f) return false;
-        Debug.Log("Direction to target: " + target + " " + dir.sqrMagnitude);
+        //Debug.Log("Direction to target: " + target + " " + dir.sqrMagnitude);
 
         Quaternion targetRot = Quaternion.LookRotation(dir);
         float angle = Quaternion.Angle(transform.rotation, targetRot);
