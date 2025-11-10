@@ -45,5 +45,28 @@ public class EnemySpawnerLvSystem : MonoBehaviour
             Spawn(_lowEnemyFactory);
             yield return new WaitForSeconds(1f);
         }
+        yield return new WaitForSeconds(10f);
+
+
+        _sign.SetTrigger("RingDown");
+        _currentZone = _downZone;
+        _enemiesToSpawn = 7;
+        for (int i = 0; i < _enemiesToSpawn; i++)
+        {
+            Spawn(_midEnemyFactory);
+            yield return new WaitForSeconds(1f);
+        }
+        yield return new WaitForSeconds(10f);
+
+        _sign.SetTrigger("RingLeft");
+        _currentZone = _leftZone;
+        _enemiesToSpawn = 10;
+        for (int i = 0; i < _enemiesToSpawn; i++)
+        {
+            Spawn(_hardEnemyFactory);
+            yield return new WaitForSeconds(1f);
+        }
+
+
     }
 }
