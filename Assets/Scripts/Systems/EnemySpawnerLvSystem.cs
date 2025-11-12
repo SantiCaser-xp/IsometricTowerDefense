@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnerLvSystem : MonoBehaviour
+public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
 {
     [SerializeField] private Animator _sign;
 
@@ -19,7 +20,16 @@ public class EnemySpawnerLvSystem : MonoBehaviour
 
     [SerializeField] private int _enemiesToSpawn;
 
+    private List<IObserver> _observers = new List<IObserver>();
+    [SerializeField] private int _enemiesToKill;
+    private int _enemiesKilled;
 
+    public event Action AllWavesCleared;
+
+    private void Awake()
+    {
+        MVC_Enemy.OnEnemyKilled += EnemyKilled;
+    }
 
     private void Start()
     {
@@ -29,9 +39,39 @@ public class EnemySpawnerLvSystem : MonoBehaviour
     {
         var enemy = currFactory.Create();
         //enemy.transform.position = _currentZone.position;
-        enemy.transform.position = new Vector3 (_currentZone.position.x + Random.Range(3,6),
+        enemy.transform.position = new Vector3 (_currentZone.position.x + UnityEngine.Random.Range(3,6),
             _currentZone.position.y,
-            _currentZone.position.z + Random.Range(3, 6));
+            _currentZone.position.z + UnityEngine.Random.Range(3, 6));
+    }
+
+    private void OnDestroy()
+    {
+        MVC_Enemy.OnEnemyKilled -= EnemyKilled;
+    }
+
+    public void EnemyKilled()
+    {
+        _enemiesKilled++;
+
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_enemiesKilled, _enemiesToKill);
+        }
+
+        if (_enemiesKilled >= 5)
+        {
+            Debug.Log("All Enemies Killed! You Win!");
+            AllWavesCleared?.Invoke();
+            //NotifyGameStatus(GameStatus.Win);
+        }
+    }
+
+    private void NotifyGameStatus(GameStatus status)
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateGameStatus(status);
+        }
     }
 
     private IEnumerator SpawnEnemies()
@@ -68,5 +108,21 @@ public class EnemySpawnerLvSystem : MonoBehaviour
         }
 
 
+    }
+
+    public void Subscribe(IObserver observer)
+    {
+        if (!_observers.Contains(observer))
+        {
+            _observers.Add(observer);
+        }
+    }
+
+    public void Unsubscribe(IObserver observer)
+    {
+        if (_observers.Contains(observer))
+        {
+            _observers.Remove(observer);
+        }
     }
 }
