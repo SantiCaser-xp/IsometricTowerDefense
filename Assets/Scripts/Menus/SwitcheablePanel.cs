@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SwitcheablePanel : MonoBehaviour
 {
-    private void Awake()
+    private void Start()
     {
         TogglePanel();
     }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Services.RemoteConfig;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
 {
@@ -31,14 +32,25 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
         _currentLevel = _startLevel;
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneChanged;
+    }
+
     private void Start()
     {
         RemoteConfigService.Instance.FetchCompleted += UpdateData;
+
         foreach (var obs in _observers)
         {
             obs.UpdateData(_currentExperience, _currentExperienceThreshold);
             obs.UpdateData(_currentLevel);
         }
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneChanged;
     }
 
     public void AddExperience(float value)
@@ -75,16 +87,16 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
     public void AddPerk(int value = 1)
     {
         _currentPerksCount = Mathf.Clamp(_currentPerksCount + value, 0, _maxPerksCount);
+        EventManager.Trigger(EventType.OnPerkChanged);
     }
 
-    public bool TryUsePerk(int cost)
+    public void SubstractPerk(int cost)
     {
-        if (_currentPerksCount >= cost)
-        {
-            _currentPerksCount = Mathf.Clamp(_currentPerksCount - cost, 0, _maxPerksCount);
-            return true;
-        }
-        return false;
+        if (_currentPerksCount < cost) return;
+       
+        _currentPerksCount = Mathf.Clamp(_currentPerksCount - cost, 0, _maxPerksCount);
+        EventManager.Trigger(EventType.OnPerkChanged);
+        Debug.Log(_currentPerksCount);
     }
 
     private void RecalculateExperienceThreshold()
@@ -115,11 +127,22 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
 
     }
 
+    private void OnSceneChanged(Scene scene, LoadSceneMode mode)
+    {
+        EventManager.Trigger(EventType.OnPerkChanged);
+    }
+
     #region TEST
     [ContextMenu("Add Experience")]
     public void AddExperienceForce()
     {
         AddExperience(100);
+    }
+
+    [ContextMenu("Add perk")]
+    public void ForceAddPerk()
+    {
+        AddPerk(1);
     }
     #endregion
 }

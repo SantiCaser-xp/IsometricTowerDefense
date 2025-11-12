@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class CharacterDeposit : MonoBehaviour, IObservable
 {
-    [SerializeField] private int _maxGold = 9999;
+    private int _maxGold = 9999;
     private int _currentGold = 0;
     public int CurrentGold => _currentGold;
     private int _savedGold = 0;
-    private int _startedDeposit = 5;
+    //private int _startedDeposit = 5;
     List<IObserver> _observers = new List<IObserver>();
 
     private void Start()
     {
-        _currentGold = _startedDeposit;
+        _currentGold = PerkSkillManager.Instance.StartGold;
 
         foreach(var obs in _observers)
         {
@@ -51,10 +51,10 @@ public class CharacterDeposit : MonoBehaviour, IObservable
         }
     }
 
-    public void ChangeStartedDeposit(int amount)
+    /*public void ChangeStartedDeposit(int amount)
     {
         _startedDeposit += amount;
-    }
+    }*/
 
     public void Subscribe(IObserver observer)
     {

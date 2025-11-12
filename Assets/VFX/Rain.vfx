@@ -16,11 +16,11 @@ MonoBehaviour:
   stickyNoteInfos: []
   categories:
   - name: Rain
-    collapsed: 1
-  - name: Splash
-    collapsed: 1
-  - name: Ring
     collapsed: 0
+  - name: Splash
+    collapsed: 0
+  - name: Ring
+    collapsed: 1
   uiBounds:
     serializedVersion: 2
     x: 415
@@ -69,6 +69,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615104}
   - {fileID: 8926484042661615110}
   - {fileID: 8926484042661615133}
+  - {fileID: 8926484042661615167}
   m_UIPosition: {x: 0, y: 0}
   m_UICollapsed: 1
   m_UISuperCollapsed: 0
@@ -87,8 +88,8 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Tex2D
-    path: Tex2D
+  - name: RainTex2D
+    path: RainTex2D
     tooltip: 
     sheetType: m_NamedObject
     realType: Texture2D
@@ -101,8 +102,8 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: ParticleCount
-    path: ParticleCount
+  - name: RainParticleCount
+    path: RainParticleCount
     tooltip: 
     sheetType: m_Int
     realType: Int32
@@ -115,8 +116,8 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: SizeBound
-    path: SizeBound
+  - name: RainSizeBound
+    path: RainSizeBound
     tooltip: 
     sheetType: m_Vector3f
     realType: Vector3
@@ -124,13 +125,13 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":100.0,"y":0.0,"z":100.0}'
+      m_SerializableObject: '{"x":100.0,"y":100.0,"z":100.0}'
     min: -Infinity
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Gradient
-    path: Gradient
+  - name: RainGradient
+    path: RainGradient
     tooltip: 
     sheetType: m_Gradient
     realType: Gradient
@@ -143,8 +144,8 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Lifetime
-    path: Lifetime
+  - name: RainLifetime
+    path: RainLifetime
     tooltip: 
     sheetType: m_Vector2f
     realType: Vector2
@@ -157,8 +158,8 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Size
-    path: Size
+  - name: RainSize
+    path: RainSize
     tooltip: 
     sheetType: m_Vector3f
     realType: Vector3
@@ -250,6 +251,20 @@ MonoBehaviour:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
       m_SerializableObject: '{"x":1.0,"y":3.0,"z":1.0}'
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: SplashGradient
+    path: SplashGradient
+    tooltip: 
+    sheetType: m_Gradient
+    realType: Gradient
+    defaultValue:
+      m_Type:
+        m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.019382361322641374,"g":0.19120171666145326,"b":0.14995981752872468,"a":1.0},"time":0.0},{"color":{"r":0.019382361322641374,"g":0.19120171666145326,"b":0.14995981752872468,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":0.3450980484485626,"time":0.14999619126319886},{"alpha":0.5411764979362488,"time":0.7676509022712708},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -489,7 +504,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.AABox, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"center":{"x":0.0,"y":0.0,"z":0.0},"size":{"x":1.0,"y":0.0,"z":1.0}}'
+      m_SerializableObject: '{"center":{"x":0.0,"y":-42.36000061035156,"z":0.0},"size":{"x":1.0,"y":0.0,"z":1.0}}'
     m_Space: 0
   m_Property:
     name: bounds
@@ -1540,7 +1555,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661614634}
-  m_ExposedName: Tex2D
+  m_ExposedName: RainTex2D
   m_Exposed: 1
   m_Order: 0
   m_Category: Rain
@@ -1620,7 +1635,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661614636}
-  m_ExposedName: ParticleCount
+  m_ExposedName: RainParticleCount
   m_Exposed: 1
   m_Order: 5
   m_Category: Rain
@@ -1695,12 +1710,12 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661614638}
-  m_ExposedName: SizeBound
+  m_ExposedName: RainSizeBound
   m_Exposed: 1
   m_Order: 7
   m_Category: Rain
@@ -1754,7 +1769,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"x":100.0,"y":0.0,"z":100.0}'
+      m_SerializableObject: '{"x":100.0,"y":100.0,"z":100.0}'
     m_Space: 2147483647
   m_Property:
     name: o
@@ -2254,7 +2269,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661614710}
-  m_ExposedName: Gradient
+  m_ExposedName: RainGradient
   m_Exposed: 1
   m_Order: 9
   m_Category: Rain
@@ -2275,9 +2290,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614710}
       inputSlot: {fileID: 8926484042661614594}
-    - outputSlot: {fileID: 8926484042661614710}
-      inputSlot: {fileID: 8926484042661614929}
-    position: {x: 674, y: 2169}
+    position: {x: 656, y: 1948}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661614710
@@ -2315,7 +2328,6 @@ MonoBehaviour:
   m_Direction: 1
   m_LinkedSlots:
   - {fileID: 8926484042661614594}
-  - {fileID: 8926484042661614929}
 --- !u!114 &8926484042661614711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2337,7 +2349,7 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661614712}
-  m_ExposedName: Lifetime
+  m_ExposedName: RainLifetime
   m_Exposed: 1
   m_Order: 11
   m_Category: Rain
@@ -4294,12 +4306,12 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
   - {fileID: 8926484042661614814}
-  m_ExposedName: Size
+  m_ExposedName: RainSize
   m_Exposed: 1
   m_Order: 13
   m_Category: Rain
@@ -6908,7 +6920,7 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=null
   m_Direction: 0
   m_LinkedSlots:
-  - {fileID: 8926484042661614710}
+  - {fileID: 8926484042661615168}
 --- !u!114 &8926484042661614930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9059,7 +9071,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.UInt32, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
+      m_SerializableObject: 100
     m_Space: 2147483647
   m_Property:
     name: count
@@ -9712,7 +9724,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
+      m_SerializableObject: 0.39
     m_Space: 2147483647
   m_Property:
     name: _AlphaClip
@@ -9721,3 +9733,83 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
   m_LinkedSlots: []
+--- !u!114 &8926484042661615167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330e0fca1717dde4aaa144f48232aa64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 114350483966674976}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 0
+  m_UISuperCollapsed: 0
+  m_InputSlots: []
+  m_OutputSlots:
+  - {fileID: 8926484042661615168}
+  m_ExposedName: SplashGradient
+  m_Exposed: 1
+  m_Order: 14
+  m_Category: Splash
+  m_Min:
+    m_Type:
+      m_SerializableType: 
+    m_SerializableObject: 
+  m_Max:
+    m_Type:
+      m_SerializableType: 
+    m_SerializableObject: 
+  m_IsOutput: 0
+  m_EnumValues: []
+  m_ValueFilter: 0
+  m_Tooltip: 
+  m_Nodes:
+  - m_Id: 0
+    linkedSlots:
+    - outputSlot: {fileID: 8926484042661615168}
+      inputSlot: {fileID: 8926484042661614929}
+    position: {x: 1497, y: 3213}
+    expandedSlots: []
+    expanded: 0
+--- !u!114 &8926484042661615168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f778ff57c4e8145b9681fe3268d8e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661615168}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661615167}
+    m_Value:
+      m_Type:
+        m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.019382361322641374,"g":0.19120171666145326,"b":0.14995981752872468,"a":1.0},"time":0.0},{"color":{"r":0.019382361322641374,"g":0.19120171666145326,"b":0.14995981752872468,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":0.3450980484485626,"time":0.14999619126319886},{"alpha":0.5411764979362488,"time":0.7676509022712708},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
+    m_Space: 2147483647
+  m_Property:
+    name: o
+    m_serializedType:
+      m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  m_Direction: 1
+  m_LinkedSlots:
+  - {fileID: 8926484042661614929}

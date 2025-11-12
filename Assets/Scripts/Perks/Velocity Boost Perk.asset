@@ -12,11 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66fedeb5535c5ed4da10bc846fe1239f, type: 3}
   m_Name: Velocity Boost Perk
   m_EditorClassIdentifier: 
-  Name: Velocity Boost
-  Description: Your speed increment by 0.2 more permanently
   Icon: {fileID: 21300000, guid: 15eca607166f9f347a1886e34c59678c, type: 3}
-  MaxPrice: 3
-  MaxUpgradeLevel: 3
-  BaseLevel: 1
   BasePrice: 1
-  _speedBoostPerUpgrade: 0.2
+  _speedBoostPerUpgrade: 1.2

@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class PerkPanelUI : MonoBehaviour
 {
-    [SerializeField] private PerkManager _manager;
+    [SerializeField] private PerkSkillManager _manager;
     [SerializeField] private PerkUI _perkUIPrefab;
     [SerializeField] private Transform _container;
     [SerializeField] private PerkData[] _perks;
     [SerializeField] private TextMeshProUGUI _pertCount;
 
-    private void Start()
+    /*private void Start()
     {
         foreach (var perk in _perks)
         {
@@ -18,5 +18,5 @@ public class PerkPanelUI : MonoBehaviour
         }
 
         _pertCount.SetText($"Available perks: {ExperienceSystem.Instance.CurrentPerksCount}");
-    }
+    }*/
 }

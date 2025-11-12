@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Perk/VelocityBoostPerk")]
-public class VelocityBoostPerk : PerkData
+[CreateAssetMenu(menuName = "Perk/HealthBoostPerk")]
+public class HealthBoostPerk : PerkData
 {
-    [SerializeField] private float _speedBoostPerUpgrade = 1.2f;
+    [SerializeField] private float _healthBoostPerUpgrade = 10;
 
     public override void ApplyEffect()
     {
-        PerkSkillManager.Instance.ChangeCharacterSpeed(_speedBoostPerUpgrade);
+        PerkSkillManager.Instance.ChangeHealth(_healthBoostPerUpgrade);
     }
 
     public override bool BuyPerk()
