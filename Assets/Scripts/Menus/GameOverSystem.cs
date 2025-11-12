@@ -63,7 +63,8 @@ public class GameOverSystem : MonoBehaviour, IObserver
 
     private void HandleWavesCleared()
     {
-        UpdateGameStatus(GameStatus.Win);
+        UpdateGameStatus("Win");
+        Debug.Log("Waves Cleared - You Win!");
     }
 
     public void RestartLevel()
@@ -116,37 +117,76 @@ public class GameOverSystem : MonoBehaviour, IObserver
 
     public void UpdateData(int value) { }
 
+    //public void UpdateGameStatus(GameStatus status)
+    //{
+    //    switch (status)
+    //    {
+    //        case GameStatus.Win:
+    //            if (IsGameOver) return;
+    //            IsGameOver = true;
+
+    //            SetGroupActive(gameplayUI, false);
+    //            Time.timeScale = 0f;
+
+    //            if (winPanel)
+    //            {
+    //                winPanel.SetActive(true);
+    //                winPanel.transform.SetAsLastSibling();
+    //            }
+    //            break;
+
+    //        case GameStatus.Lose:
+    //            if (IsGameOver) return;
+    //            IsGameOver = true;
+
+    //            SetGroupActive(gameplayUI, false);
+    //            Time.timeScale = 0f;
+
+    //            if (losePanel)
+    //            {
+    //                losePanel.SetActive(true);
+    //                losePanel.transform.SetAsLastSibling();
+    //            }
+    //            break;
+    //    }
+    //}
+
+    public void UpdateGameStatus(string status)
+    {
+        Debug.Log("GameOverSystem: UpdateGameStatus called with status: " + status);
+        if (status == "Win")
+        {
+            Debug.Log("GameOverSystem: Win detected");
+            if (IsGameOver) return;
+            IsGameOver = true;
+
+            SetGroupActive(gameplayUI, false);
+            Time.timeScale = 0f;
+
+            if (winPanel)
+            {
+                winPanel.SetActive(true);
+                winPanel.transform.SetAsLastSibling();
+            }
+        }
+        else if (status == "Lose")
+        {
+            if (IsGameOver) return;
+            IsGameOver = true;
+
+            SetGroupActive(gameplayUI, false);
+            Time.timeScale = 0f;
+
+            if (losePanel)
+            {
+                losePanel.SetActive(true);
+                losePanel.transform.SetAsLastSibling();
+            }
+        }
+    }
+
     public void UpdateGameStatus(GameStatus status)
     {
-        switch (status)
-        {
-            case GameStatus.Win:
-                if (IsGameOver) return;
-                IsGameOver = true;
-
-                SetGroupActive(gameplayUI, false);
-                Time.timeScale = 0f;
-
-                if (winPanel)
-                {
-                    winPanel.SetActive(true);
-                    winPanel.transform.SetAsLastSibling();
-                }
-                break;
-
-            case GameStatus.Lose:
-                if (IsGameOver) return;
-                IsGameOver = true;
-
-                SetGroupActive(gameplayUI, false);
-                Time.timeScale = 0f;
-
-                if (losePanel)
-                {
-                    losePanel.SetActive(true);
-                    losePanel.transform.SetAsLastSibling();
-                }
-                break;
-        }
+        throw new System.NotImplementedException();
     }
 }

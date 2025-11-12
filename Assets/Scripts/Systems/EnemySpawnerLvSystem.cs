@@ -60,7 +60,8 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
 
         if (_enemiesKilled >= 5)
         {
-            Debug.Log("All Enemies Killed! You Win!");
+            //Debug.Log("All Enemies Killed! You Win!");
+            Debug.Log("Event invoked");
             AllWavesCleared?.Invoke();
             //NotifyGameStatus(GameStatus.Win);
         }
