@@ -19,6 +19,12 @@ public class TextTranslate : MonoBehaviour
         Translate();
     }
 
+    private void Start()
+    {
+        //LocalizationManager.Instance.EventTranslate += Translate;
+        Translate();
+    }
+
     private void OnDisable()
     {
         LocalizationManager.Instance.EventTranslate -= Translate;

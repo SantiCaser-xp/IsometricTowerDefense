@@ -8,12 +8,12 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
     public static Action<bool> OnDead;
     public static Action<float, float> OnHealthChanged;
     
-    [SerializeField] private float _maxHealth = 100f;
     private float _currentHealth = 0f;
     private bool _isAlive = true;
     
     public float CurrentHealth => _currentHealth;
-    public float MaxHealth => _maxHealth;
+    //[SerializeField] private float _maxHealth = 100f;
+    //public float MaxHealth => _maxHealth;
 
     public TargetType TargetType => TargetType.PlayerBase;
 
@@ -32,17 +32,17 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
         _controller = new CharacterInputController(_joystick);
         _movement = GetComponent<CharacterMovement>();
 
-        _currentHealth = _maxHealth;
+        _currentHealth = PerkSkillManager.Instance.StartHealth;
     }
 
     private void Start()
     {
         foreach (var obs in _observers)
         {
-            obs.UpdateData(_currentHealth, _maxHealth);
+            obs.UpdateData(_currentHealth, PerkSkillManager.Instance.StartHealth);
         }
         
-        OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
+        OnHealthChanged?.Invoke(_currentHealth, PerkSkillManager.Instance.StartHealth);
 
         //ITargetable targetable = this.GetComponent<ITargetable>();
         //if (targetable != null)
@@ -75,17 +75,17 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
 
         foreach (var obs in _observers)
         {
-            obs.UpdateData(_currentHealth, _maxHealth);
+            obs.UpdateData(_currentHealth, PerkSkillManager.Instance.StartHealth);
         }
 
         _animationController.ChangeHealth(_currentHealth);
 
-        if (_currentHealth >= _maxHealth)
+        if (_currentHealth >= PerkSkillManager.Instance.StartHealth)
         {
-            _currentHealth = _maxHealth;
+            _currentHealth = PerkSkillManager.Instance.StartHealth;
         }
         
-        OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
+        OnHealthChanged?.Invoke(_currentHealth, PerkSkillManager.Instance.StartHealth);
     }
 
     public void TakeDamage(float damage)
@@ -96,7 +96,7 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
 
         foreach (var obs in _observers)
         {
-            obs.UpdateData(_currentHealth, _maxHealth);
+            obs.UpdateData(_currentHealth, PerkSkillManager.Instance.StartHealth);
         }
 
         _animationController.ChangeHealth(_currentHealth);
@@ -107,7 +107,7 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
             Die();
         }
         
-        OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
+        OnHealthChanged?.Invoke(_currentHealth, PerkSkillManager.Instance.StartHealth);
     }
 
     public void Die()

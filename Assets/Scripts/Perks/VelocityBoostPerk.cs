@@ -3,23 +3,22 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Perk/VelocityBoostPerk")]
 public class VelocityBoostPerk : PerkData
 {
-    [SerializeField] private float _speedBoostPerUpgrade = 0.2f;
+    [SerializeField] private float _speedBoostPerUpgrade = 1.2f;
 
-    public override void ApplyEffect(PerkInstance instance, GameObject player)
+    public override void ApplyEffect()
     {
-        var movement = player.GetComponent<CharacterMovement>();
-        if (movement != null)
-        {
-            movement.ChangeSpeedMultiplier(_speedBoostPerUpgrade);
-        }
+        PerkSkillManager.Instance.ChangeCharacterSpeed(_speedBoostPerUpgrade);
     }
 
-    public override void RemoveEffect(PerkInstance instance, GameObject player)
+    public override bool BuyPerk()
     {
-        var movement = player.GetComponent<CharacterMovement>();
-        if (movement != null)
+        bool purchased = base.BuyPerk();
+
+        if (purchased)
         {
-            movement.ChangeSpeedMultiplier(_speedBoostPerUpgrade);
+            ApplyEffect();
         }
+
+        return purchased;
     }
 }

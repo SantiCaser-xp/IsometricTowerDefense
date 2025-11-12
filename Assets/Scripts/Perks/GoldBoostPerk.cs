@@ -5,21 +5,20 @@ public class GoldBoostPerk : PerkData
 {
     [SerializeField] private int _goldBoostPerUpgrade = 5;
 
-    public override void ApplyEffect(PerkInstance instance, GameObject player)
+    public override void ApplyEffect()
     {
-        var deposit = player.GetComponent<CharacterDeposit>();
-        if (deposit != null)
-        {
-            deposit.ChangeStartedDeposit(_goldBoostPerUpgrade);
-        }
+        PerkSkillManager.Instance.ChangeGold(_goldBoostPerUpgrade);
     }
 
-    public override void RemoveEffect(PerkInstance instance, GameObject player)
+    public override bool BuyPerk()
     {
-        var deposit = player.GetComponent<CharacterDeposit>();
-        if (deposit != null)
+        bool purchased = base.BuyPerk();
+
+        if (purchased)
         {
-            deposit.ChangeStartedDeposit(-_goldBoostPerUpgrade);
+            ApplyEffect();
         }
+
+        return purchased;
     }
 }
