@@ -6219,6 +6219,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 44064835362700457, guid: f31217f6a3b21474b8578b2bb0d2babc,
         type: 3}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 1112421785}
+    - target: {fileID: 44064835362700457, guid: f31217f6a3b21474b8578b2bb0d2babc,
+        type: 3}
       propertyPath: lvManager
       value: 
       objectReference: {fileID: 1203366666}
@@ -6757,6 +6762,11 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.47
       objectReference: {fileID: 0}
+    - target: {fileID: 7444504017510508479, guid: f31217f6a3b21474b8578b2bb0d2babc,
+        type: 3}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 1112421785}
     - target: {fileID: 7444504017510508479, guid: f31217f6a3b21474b8578b2bb0d2babc,
         type: 3}
       propertyPath: lvManager
