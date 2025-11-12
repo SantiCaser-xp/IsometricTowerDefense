@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -21,7 +22,9 @@ public class TowerMeshRotator : MonoBehaviour
         {
             Quaternion targetRot = Quaternion.LookRotation(dir);
             float maxDegreesDelta = _speedRotation * Time.deltaTime;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, maxDegreesDelta);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRot, maxDegreesDelta);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, maxDegreesDelta);
+
         }
     }
 

@@ -25,6 +25,8 @@ public class GameOverSystem : MonoBehaviour, IObserver
 
     [SerializeField] private LvManager lvManager;
 
+    public EnemySpawnerLvSystem spawner;
+
     public static bool IsGameOver { get; private set; }
 
     void Awake()
@@ -47,6 +49,21 @@ public class GameOverSystem : MonoBehaviour, IObserver
         }
 
         obs.Subscribe(this);
+    }
+
+    private void Start()
+    {
+        spawner.AllWavesCleared += HandleWavesCleared;
+    }
+    void OnDestroy()
+    {
+        // Es buena práctica desuscribirse
+        spawner.AllWavesCleared -= HandleWavesCleared;
+    }
+
+    private void HandleWavesCleared()
+    {
+        UpdateGameStatus(GameStatus.Win);
     }
 
     public void RestartLevel()
