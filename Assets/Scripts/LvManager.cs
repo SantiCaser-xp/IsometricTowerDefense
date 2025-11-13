@@ -46,7 +46,7 @@ public class LvManager : MonoBehaviour, IObservable
 
         if (_enemiesKilled >= _enemiesToKill)
         {
-            Debug.Log("All Enemies Killed! You Win!");
+            //Debug.Log("All Enemies Killed! You Win!");
             NotifyGameStatus(GameStatus.Win);
         }
     }
