@@ -24,7 +24,7 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
     [SerializeField] private int _enemiesToKill;
     private int _enemiesKilled;
 
-    public event Action AllWavesCleared;
+    public static event Action AllWavesCleared;
 
     private void Awake()
     {

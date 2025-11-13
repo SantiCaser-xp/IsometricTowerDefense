@@ -51,15 +51,15 @@ public class GameOverSystem : MonoBehaviour, IObserver
         obs.Subscribe(this);
     }
 
-    private void Start()
-    {
-        spawner.AllWavesCleared += HandleWavesCleared;
-    }
-    void OnDestroy()
-    {
-        // Es buena práctica desuscribirse
-        spawner.AllWavesCleared -= HandleWavesCleared;
-    }
+    //private void Start()
+    //{
+    //    spawner.AllWavesCleared += HandleWavesCleared;
+    //}
+    //void OnDestroy()
+    //{
+    //    // Es buena práctica desuscribirse
+    //    spawner.AllWavesCleared -= HandleWavesCleared;
+    //}
 
     private void HandleWavesCleared()
     {
