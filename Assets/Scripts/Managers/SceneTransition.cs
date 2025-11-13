@@ -12,6 +12,7 @@ public class SceneTransition : SingltonBase<SceneTransition>
     [SerializeField] Image _progressBar;
     AsyncOperation _operation;
     bool _isLoading = false;
+    private string _currentLevelToLoad;
 
     private void OnEnable()
     {
@@ -49,6 +50,11 @@ public class SceneTransition : SingltonBase<SceneTransition>
         if (_isLoading) return;
         _isLoading = true;
         StartCoroutine(FadeInAndLoad(name));
+    }
+
+    public void AskForAd(string sceneName)
+    {
+        _currentLevelToLoad = sceneName;
     }
 
     private IEnumerator FadeInRoutine()
