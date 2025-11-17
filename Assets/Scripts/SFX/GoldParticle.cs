@@ -1,13 +1,13 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class GoldParticle : MonoBehaviour, IObserver
 {
-    [SerializeField] ParticleSystem _particleSystem;
+    //[SerializeField] ParticleSystem _particleSystem;
+    [SerializeField] VisualEffect _goldFVX;
 
     private void Awake()
     {
-        _particleSystem = GetComponent<ParticleSystem>();
-
         IObservable obs = GetComponentInParent<IObservable>();
 
         if (obs == null)
@@ -17,13 +17,16 @@ public class GoldParticle : MonoBehaviour, IObserver
         }
 
         obs.Subscribe(this);
+
+        _goldFVX.Stop();
     }
 
     public void UpdateData(float currentValue, float maxValue) { }
 
     public void UpdateData(int value)
     {
-        _particleSystem.Play();
+        //_particleSystem.Play();
+        _goldFVX.Play();
     }
 
     public void UpdateGameStatus(GameStatus status) { }
