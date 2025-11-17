@@ -89,7 +89,8 @@ MonoBehaviour:
   - {fileID: -1878332245247344467}
   - {fileID: -3433022633011278069}
   - {fileID: -6712348413710173317}
-  m_RendererFeatureMap: adc0de57c6d2eee50b8f7cad1a745bd07bfb2568aef2d8a2
+  - {fileID: 1899208583787504171}
+  m_RendererFeatureMap: adc0de57c6d2eee50b8f7cad1a745bd07bfb2568aef2d8a22be206ff24585b1a
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -132,3 +133,20 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &1899208583787504171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
+  m_Name: DirtScreen
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  passMaterial: {fileID: 2100000, guid: 6c3331514482a0b45bb274fc12f22dc7, type: 2}
+  injectionPoint: 600
+  requirements: 4
+  passIndex: 0

@@ -88,12 +88,22 @@ Material:
     - _Combined_Smooth2: 1.45
     - _DirtTiling: 2
     - _GrassTiling: 2
+    - _IsRain: 0
+    - _PoundIntencity: 0.5
+    - _PoundRoughness: 3
+    - _PoundWaterNoise: 2000
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _RainEffect: 1
+    - _RainNormaStrenght: 0.8
+    - _RainPoundsScale: 268.56
     - _Smooth1: 0.24
     - _Smooth1_1: 0.24
     - _Smooth2: 0.73
     - _Smooth2_1: 0.73
     m_Colors:
+    - _FresnelColor: {r: 0, g: 0.7271677, b: 0.7924528, a: 0}
     - _GeneralTiling: {r: 30, g: 30, b: 0, a: 0}
+    - _RainPoundColor: {r: 0, g: 0.09468561, b: 0.5803922, a: 0}
+    - _WaterOffsetSpeed: {r: 0.001, g: 0.001, b: 0, a: 0}
   m_BuildTextureStacks: []
