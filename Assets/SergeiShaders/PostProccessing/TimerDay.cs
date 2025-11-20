@@ -5,7 +5,7 @@ public class TimerDay : MonoBehaviour
     [SerializeField] float _delayStart = 3f;  
     [SerializeField] float _interval = 5f;    
     [SerializeField] Rain _rain;
-
+    int _wheaterIndex;
     float _nextTime;
 
     void Start()
