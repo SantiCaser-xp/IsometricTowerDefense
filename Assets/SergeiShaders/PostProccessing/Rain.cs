@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class Rain : MonoBehaviour//доделать вызов дождя и настройки плавного появления луж и вызов шейдера скрина
+public class Rain : MonoBehaviour
 {
     [SerializeField] float _effectPower = 1f;
     [SerializeField] float _effectScreenPower = 0f;
