@@ -60,7 +60,7 @@ public abstract class AbstractBullet : MonoBehaviour
         transform.position += dir * speed * Time.deltaTime;
     }
 
-    protected void OnTriggerEnter(Collider other)
+    public virtual void HitTarget(Collider other)
     {
         if (other.transform == _targetTransform)
         {
@@ -71,5 +71,19 @@ public abstract class AbstractBullet : MonoBehaviour
         {
             _myPool.Release(this);
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        //if (other.transform == _targetTransform)
+        //{
+        //    _target.TakeDamage(_damage);
+        //    _myPool.Release(this);
+        //}
+        //else
+        //{
+        //    _myPool.Release(this);
+        //}
+        HitTarget(other);
     }
 }
