@@ -62,7 +62,7 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
             obs.UpdateData(_enemiesKilled, _enemiesToKill);
         }
 
-        if (_enemiesKilled >= 5)
+        if (_enemiesKilled >= 22)
         {
             //Debug.Log("All Enemies Killed! You Win!");
             Debug.Log("Event invoked");
