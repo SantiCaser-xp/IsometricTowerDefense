@@ -28,7 +28,7 @@ public class PlayerBase : Destructible
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        //_animator.SetTrigger("Hit");
+        _animator.SetTrigger("Hit");
     }
 
     public override void Die()

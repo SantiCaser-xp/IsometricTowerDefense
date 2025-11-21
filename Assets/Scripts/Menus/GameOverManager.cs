@@ -7,21 +7,32 @@ public class GameOverManager : MonoBehaviour
 {
     [SerializeField] GameObject _winPanel;
     [SerializeField] GameObject _losePanel;
+    [SerializeField] private PlayerBase playerBase;
 
     [SerializeField] private bool _isGameOver;
 
     private void Start()
     {
         EnemySpawnerLvSystem.AllWavesCleared += OnAllWavesCleared;
+        if (playerBase != null)
+        {
+            playerBase.OnPlayerBaseDestroyed += OnBaseDestroyed;
+        }
     }
 
     private void OnDestroy()
     {
         EnemySpawnerLvSystem.AllWavesCleared -= OnAllWavesCleared;
+        playerBase.OnPlayerBaseDestroyed -= OnBaseDestroyed;
     }
     private void OnAllWavesCleared()
     {
         UpdateGameStatus("Win");
+    }
+
+    private void OnBaseDestroyed()
+    {
+        UpdateGameStatus("Lose");
     }
     public void UpdateGameStatus(string status)
     {
