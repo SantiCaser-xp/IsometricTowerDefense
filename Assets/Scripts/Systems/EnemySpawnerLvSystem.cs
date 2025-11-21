@@ -33,6 +33,10 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
 
     private void Start()
     {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_enemiesKilled, 22);
+        }
         StartCoroutine(SpawnEnemies());
     }
     public void Spawn(EnemyFactory currFactory)
@@ -63,15 +67,6 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
             //Debug.Log("All Enemies Killed! You Win!");
             Debug.Log("Event invoked");
             AllWavesCleared?.Invoke();
-            //NotifyGameStatus(GameStatus.Win);
-        }
-    }
-
-    private void NotifyGameStatus(GameStatus status)
-    {
-        foreach (var obs in _observers)
-        {
-            obs.UpdateGameStatus(status);
         }
     }
 
