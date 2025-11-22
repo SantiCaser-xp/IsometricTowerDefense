@@ -23,4 +23,8 @@ public class CharacterMovement : MonoBehaviour
     {
         _movementSpeedMultiplier += speedMultiplier;
     }*/
+
+    private void OnCollisionEnter(Collision collision)
+    {
+    }
 }
