@@ -1,14 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
-
-
-
 public class MVC_Enemy : Destructible
 {
     [Header("MVC links")]
@@ -31,11 +26,10 @@ public class MVC_Enemy : Destructible
     private EnemyFSM<EnemyFSMStates, MVC_Enemy> _fsm;
 
     public static event System.Action OnEnemyKilled;
-    public TargetType TargetType => TargetType.Tower;
+    //public TargetType TargetType => TargetType.Tower;
     protected ITargetable _currentTarget;
     [SerializeField] protected TargetingStrategy _targetingStrategy = TargetingStrategy.Nearest;
     [SerializeField] protected string _cState;
-
 
     private void Awake()
     {
@@ -53,10 +47,9 @@ public class MVC_Enemy : Destructible
         _fsm._possibleStates.Add(EnemyFSMStates.Attack, new AttackState().SetUp(_fsm).SetAvatar(this));
         _fsm._possibleStates.Add(EnemyFSMStates.Die, new DieState().SetUp(_fsm).SetAvatar(this));
 
-
-
         Model.OnDie += HandleDeathLogic;
     }
+
     private void Start()
     {
         EnemyManager.Instance?.RegisterEnemy(this);
@@ -67,11 +60,10 @@ public class MVC_Enemy : Destructible
     {
         _fsm?.OnExecute();
         _cState = $"{_fsm._actualState}";// for debug
-
     }
+
     private void HandleDeathLogic()
     {
-
         _fsm.ChangeState(EnemyFSMStates.Die);
         var gold = _goldFactory.Create();
         Vector3 pos = transform.position;
@@ -84,6 +76,7 @@ public class MVC_Enemy : Destructible
         EnemyManager.Instance?.UnregisterEnemy(this);
         _myPool.Release(this);
     }
+
     protected virtual void OnDestroy()
     {
         _view.CleanUp();
@@ -91,14 +84,17 @@ public class MVC_Enemy : Destructible
 
         EnemyManager.Instance?.UnregisterEnemy(this);
     }
+
     public override void TakeDamage(float damage)
     {
         Model.TakeDamage(damage);
     }
+
     public Vector3 GetPos()
     {
         return Model.GetPos();
     }
+
     public void Subscribe(IObserver observer)
     {
         Model.Subscribe(observer);
@@ -108,15 +104,18 @@ public class MVC_Enemy : Destructible
     {
         Model.Unsubscribe(observer);
     }
+
     public override void Die()
     {
         Model.Die();
     }
+
     public virtual void SearchForTarget()
     {
         _currentTarget = EnemyTargetManager.Instance?.GetOptimalTarget(transform.position, _targetingStrategy);
         Model.SetTarget(_currentTarget);
     }
+
     public void NotifyTargetLost(ITargetable lostTarget)
     {
         if (Model.CurrentTarget == lostTarget)
@@ -139,9 +138,4 @@ public class MVC_Enemy : Destructible
         EnemyManager.Instance?.RegisterEnemy(this);
         _fsm.ChangeState(EnemyFSMStates.Idle);
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.DrawWireSphere(transform.position, _data.attackRange);
-    //}
 }

@@ -18,12 +18,9 @@ public class LevelUI : MonoBehaviour, IObserver
         obs.Subscribe(this);
     }
 
-    public void UpdateData(float currentExp, float maxEpx) { }
-
-    public void UpdateData(int value)
+    public void UpdateData(params object[] values)
     {
-        _levelText.SetText($"{value}");
+        int level = (int)values[0];
+        _levelText.SetText($"{level}");
     }
-
-    public void UpdateGameStatus(GameStatus status) { }
 }

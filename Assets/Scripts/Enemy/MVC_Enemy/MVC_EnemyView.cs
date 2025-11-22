@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MVC_EnemyView
@@ -31,6 +29,7 @@ public class MVC_EnemyView
        // _particleDmg?.Play();
        // _soundDmg?.Play();
     }
+
     private void HandleAttack()
     {
         _animator.SetTrigger("OnAttack");
@@ -39,6 +38,7 @@ public class MVC_EnemyView
     {
         _animator.SetTrigger("OnDeath");
     }
+
     private void HandleSetMoving(bool isMoving)
     {
         _animator.SetBool("isMoving", isMoving);

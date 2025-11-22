@@ -1,28 +1,13 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider))]
-public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObservable, ITargetable
+public class Character : MonoBehaviour
 {
-    public static Action<bool> OnDead;
-    public static Action<float, float> OnHealthChanged;
-    
-    private float _currentHealth = 0f;
-    private bool _isAlive = true;
-    
-    public float CurrentHealth => _currentHealth;
-    //[SerializeField] private float _maxHealth = 100f;
-    //public float MaxHealth => _maxHealth;
-
-    public TargetType TargetType => TargetType.PlayerBase;
-
     [SerializeField] private CharacterMeshRotator _meshRotator;
     [SerializeField] private ControlBase _joystick;
     private CharacterInputController _controller;
     private CharacterMovement _movement;
     private CharacterAnimationController _animationController;
-    private List<IObserver> _observers = new List<IObserver>();
     private Animator _animator;
 
     private void Awake()
@@ -31,24 +16,6 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
         _animationController = new CharacterAnimationController(_animator);
         _controller = new CharacterInputController(_joystick);
         _movement = GetComponent<CharacterMovement>();
-
-        _currentHealth = PerkSkillManager.Instance.StartHealth;
-    }
-
-    private void Start()
-    {
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_currentHealth, PerkSkillManager.Instance.StartHealth);
-        }
-        
-        OnHealthChanged?.Invoke(_currentHealth, PerkSkillManager.Instance.StartHealth);
-
-        //ITargetable targetable = this.GetComponent<ITargetable>();
-        //if (targetable != null)
-        //{
-        //    EnemyTargetManager.Instance?.RegisterTarget(targetable);
-        //}
     }
 
     private void Update()
@@ -66,83 +33,4 @@ public class Character : MonoBehaviour, IRestoreable, IDamageable<float>, IObser
             _meshRotator.RotateMesh(_controller.InputDirection);
         }
     }
-
-    public void RestoreHealth(float value)
-    {
-        if (value <= 0f) return;
-
-        _currentHealth += value;
-
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_currentHealth, PerkSkillManager.Instance.StartHealth);
-        }
-
-        _animationController.ChangeHealth(_currentHealth);
-
-        if (_currentHealth >= PerkSkillManager.Instance.StartHealth)
-        {
-            _currentHealth = PerkSkillManager.Instance.StartHealth;
-        }
-        
-        OnHealthChanged?.Invoke(_currentHealth, PerkSkillManager.Instance.StartHealth);
-    }
-
-    public void TakeDamage(float damage)
-    {
-        if (damage <= 0f) return;
-
-        _currentHealth -= damage;
-
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_currentHealth, PerkSkillManager.Instance.StartHealth);
-        }
-
-        _animationController.ChangeHealth(_currentHealth);
-
-        if (_currentHealth <= 0)
-        {
-            _currentHealth = 0;
-            Die();
-        }
-        
-        OnHealthChanged?.Invoke(_currentHealth, PerkSkillManager.Instance.StartHealth);
-    }
-
-    public void Die()
-    {
-        _isAlive = false;
-        OnDead?.Invoke(_isAlive);
-        FindObjectOfType<GameOverSystem>(true).UpdateGameStatus(GameStatus.Lose);
-    }
-
-    public void Subscribe(IObserver observer)
-    {
-        if (!_observers.Contains(observer))
-        {
-            _observers.Add(observer);
-        }
-    }
-
-    public void Unsubscribe(IObserver observer)
-    {
-        if (_observers.Contains(observer))
-        {
-            _observers.Remove(observer);
-        }
-    }
-
-    #region ForTest
-    [ContextMenu("TakeDamage")]
-    private void GetDamage()
-    {
-        TakeDamage(10);
-    }
-
-    public Vector3 GetPos()
-    {
-        return transform.position;
-    }
-    #endregion
 }

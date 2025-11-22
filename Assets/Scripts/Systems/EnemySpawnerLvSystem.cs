@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,8 +22,7 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
     private List<IObserver> _observers = new List<IObserver>();
     [SerializeField] private int _enemiesToKill;
     private int _enemiesKilled;
-
-    public static event Action AllWavesCleared;
+    private int _enemiesTotal = 22;
 
     private void Awake()
     {
@@ -35,17 +33,19 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
     {
         foreach (var obs in _observers)
         {
-            obs.UpdateData(_enemiesKilled, 22);
+            obs.UpdateData(_enemiesKilled, _enemiesTotal);
         }
+
         StartCoroutine(SpawnEnemies());
     }
+
     public void Spawn(EnemyFactory currFactory)
     {
         var enemy = currFactory.Create();
         //enemy.transform.position = _currentZone.position;
-        enemy.transform.position = new Vector3 (_currentZone.position.x + UnityEngine.Random.Range(3,6),
+        enemy.transform.position = new Vector3 (_currentZone.position.x + Random.Range(3,6),
             _currentZone.position.y,
-            _currentZone.position.z + UnityEngine.Random.Range(3, 6));
+            _currentZone.position.z + Random.Range(3, 6));
     }
 
     private void OnDestroy()
@@ -59,14 +59,12 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
 
         foreach (var obs in _observers)
         {
-            obs.UpdateData(_enemiesKilled, _enemiesToKill);
+            obs.UpdateData(_enemiesKilled, _enemiesTotal);
         }
 
-        if (_enemiesKilled >= 22)
+        if (_enemiesKilled >= _enemiesTotal)
         {
-            //Debug.Log("All Enemies Killed! You Win!");
-            Debug.Log("Event invoked");
-            AllWavesCleared?.Invoke();
+            EventManager.Trigger(EventType.OnGameWin);
         }
     }
 
@@ -102,8 +100,6 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
             Spawn(_hardEnemyFactory);
             yield return new WaitForSeconds(1f);
         }
-
-
     }
 
     public void Subscribe(IObserver observer)

@@ -21,13 +21,9 @@ public class GoldParticle : MonoBehaviour, IObserver
         _goldFVX.Stop();
     }
 
-    public void UpdateData(float currentValue, float maxValue) { }
-
-    public void UpdateData(int value)
+    public void UpdateData(params object[] values)
     {
         //_particleSystem.Play();
         _goldFVX.Play();
     }
-
-    public void UpdateGameStatus(GameStatus status) { }
 }

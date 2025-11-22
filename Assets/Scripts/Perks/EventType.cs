@@ -1,4 +1,7 @@
 public enum EventType
 { 
-    OnPerkChanged
+    OnPerkChanged,
+    OnGameOver,
+    OnGameWin,
+    OnEnemyKilled
 }

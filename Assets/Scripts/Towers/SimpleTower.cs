@@ -66,7 +66,7 @@ public class SimpleTower : AbstractTower
 
         foreach (var obs in _observers)
         {
-            obs.UpdateData(1);
+            obs.UpdateData(_currentHealth, _maxHealth);
         }
     }
 

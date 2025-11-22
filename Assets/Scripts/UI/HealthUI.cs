@@ -21,13 +21,12 @@ public class HealthUI : MonoBehaviour, IObserver
         obs.Subscribe(this);
     }
 
-    public void UpdateData(float currentHealth, float maxHealth)
+    public void UpdateData(params object[] values)
     {
-        _sliderLife.value = currentHealth / maxHealth;
-        _amountText.SetText($"{currentHealth:F1}/{maxHealth:F1}");
+        float current = (float)values[0];
+        float max = (float)values[1];
+
+        _sliderLife.value = current / max;
+        _amountText.SetText($"{current:F1}/{max:F1}");
     }
-
-    public void UpdateData(int value) { }
-
-    public void UpdateGameStatus(GameStatus status) { }
 }

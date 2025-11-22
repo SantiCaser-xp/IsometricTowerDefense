@@ -5,11 +5,11 @@ public class LevelButton : MonoBehaviour
 {
     [SerializeField] private string _internalLevelName = "";
     [SerializeField] private string _levelName = "";
-    private Button _button;
     [SerializeField] private bool _bttnAlreadyPushedThisSession = false;
-    [SerializeField] LevelsSign _levelSign;
-    [SerializeField] GameObject _levelSignGO;
-    [SerializeField] GameObject _adSign;
+    [SerializeField] LevelsSignScreen _levelSign;
+    [SerializeField] ShowRewardScreen showRewardScreen;
+
+    Button _button;
 
     private void Awake()
     {
@@ -26,10 +26,7 @@ public class LevelButton : MonoBehaviour
         if (!_bttnAlreadyPushedThisSession)
         {
             _bttnAlreadyPushedThisSession = true;
-            _adSign.SetActive(true);
-            _levelSign.UpdateLevelSign(_levelName, _internalLevelName);
-
-            // Aquí podrías poner lógica adicional, como mostrar un anuncio
+            ScreenManager.Instance.ActivateScreen(showRewardScreen);
         }
         else
         {
@@ -40,7 +37,6 @@ public class LevelButton : MonoBehaviour
     public void ShowLvPannel()
     {
         _levelSign.UpdateLevelSign(_levelName, _internalLevelName);
-
-        _levelSignGO.SetActive(true);
+        ScreenManager.Instance.ActivateScreen(_levelSign);
     }
 }

@@ -26,4 +26,13 @@ public class BloodScreenEffect : MonoBehaviour, IObserver
     public void UpdateData(int value) { }
 
     public void UpdateGameStatus(GameStatus status) { }
+
+    public void UpdateDataTime(float currentHealth, float maxHealth) { }
+
+    public void UpdateData(params object[] values)
+    {
+        float current = (float)values[0];
+
+        if (current <= 50) _material.SetFloat("_Alpha", 2f);
+    }
 }

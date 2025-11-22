@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,14 +37,14 @@ public class MVC_EnemyModel
         _transform = transform;
         _data = data;
         _maxHealth = maxHealth;
-        _currentHealth = maxHealth;
+        _currentHealth = _maxHealth;
     }
-
 
     public void SetTarget(ITargetable target)
     {
         _currentTarget = target;
     }
+
     public void MoveTo(Vector3 destination)
     {
         if (!_agent.enabled || !_agent.isOnNavMesh) return;
@@ -55,6 +53,7 @@ public class MVC_EnemyModel
         _agent.isStopped = false;
         OnSetMoving?.Invoke(true);
     }
+
     public void StopMovement()
     {
         if (!_agent.enabled || !_agent.isOnNavMesh) return;
@@ -62,17 +61,27 @@ public class MVC_EnemyModel
         _agent.isStopped = true;
         OnSetMoving?.Invoke(false);
     }
+
     public void PerformAttack()
     {
+        
         if (_currentTarget == null) return;
 
         IDamageable<float> damageable = _currentTarget as IDamageable<float>;
+        MonoBehaviour mb = damageable as MonoBehaviour;
+
+        if(mb.GetComponent<Destructible>().CurrentHealth <= 0) return;
+
         if (damageable != null)
         {
+
             damageable.TakeDamage(_data.damage);
+
+
             OnAttack?.Invoke();
         }
     }
+
     public void RotateTowardTarget()
     {
         if (_currentTarget == null) return;
@@ -81,6 +90,7 @@ public class MVC_EnemyModel
         lookDirection.y = 0;
         _transform.rotation = Quaternion.LookRotation(lookDirection);
     }
+
     public void TakeDamage(float damage)
     {
         _currentHealth -= damage;
@@ -92,25 +102,31 @@ public class MVC_EnemyModel
         {
             obs.UpdateData(_currentHealth, _maxHealth);
         }
+
         OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
+
         if (_currentHealth <= 0)
         {
             Die();
         }
     }
+
     public void Die()
     {
         OnDie?.Invoke();
     }
+
     public void ResetHealth()
     {
         _currentHealth = _maxHealth;
         OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
     }
+
     public Vector3 GetPos()
     {
         return _transform.position;
     }
+
     public void Subscribe(IObserver observer)
     {
         if (!_observers.Contains(observer))

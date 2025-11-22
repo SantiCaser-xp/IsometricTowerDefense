@@ -18,12 +18,11 @@ public class LevelManagerUI : MonoBehaviour, IObserver
         obs.Subscribe(this);
     }
 
-    public void UpdateData(float currentValue, float maxValue)
+    public void UpdateData(params object[] values)
     {
-        enemiesToKillText.text = $"Enemies Killed: {currentValue} / {maxValue}";
+        int currentEnemy = (int)values[0];
+        int maxEnemy = (int)values[1];  
+
+        enemiesToKillText.text = $"Enemies Killed: {currentEnemy} / {maxEnemy}";
     }
-
-    public void UpdateData(int value) { }
-
-    public void UpdateGameStatus(GameStatus status) { }
 }

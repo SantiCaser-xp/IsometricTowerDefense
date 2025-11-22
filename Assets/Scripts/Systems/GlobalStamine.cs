@@ -1,89 +1,174 @@
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalStamine : MonoBehaviour, IObservable
 {
-    #region Singlton
-    public static GlobalStamine Instance;
+    [SerializeField] private float _timeToRecharge = 180f; //3 minutes
+    [SerializeField] private float _amountPerInterval = 1f;
+    [SerializeField] private float _maxStamina = 100f;
+    private float _currentStamina = 0f;
+    bool _recharging = false;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+    DateTime _nextStaminaTime;
+    DateTime _lastStaminaTime;
 
-        _currentStamine = _maxStamine;
-    }
+    [SerializeField] LocalizationTime _myLoc;
 
-    #endregion
-
-    [SerializeField] private float _delayInSeconds = 900f; //15 minutes
-    [SerializeField] private float _amountPerInterval = 5f;
-    [SerializeField] private float _maxStamine = 100f;
-    private float _currentStamine = 0f;
-    private Coroutine _currentCoroutine;
     private List<IObserver> _observers = new List<IObserver>();
+
+    void Awake()
+    {
+        LoadFromSave();
+        if (_currentStamina < _maxStamina && !_recharging)
+        {
+            StartCoroutine(UpdateStaminaRoutine());
+        }
+    }
 
     private void Start()
     {
-        if (_currentCoroutine == null)
+        UpdateTimer();
+    }
+
+    void OnApplicationFocus(bool focus)
+    {
+        if(!focus) SaveToSaveData();
+    }
+
+    IEnumerator UpdateStaminaRoutine()
+    {
+        _recharging = true;
+
+        UpdateTimer();
+
+        DateTime currentTime;
+        DateTime nextTime;
+        bool addedStamina = false;
+
+        while (_currentStamina < _maxStamina)
         {
-            _currentCoroutine = StartCoroutine(nameof(RestoreHealthRoutine));
+            currentTime = MyLocation(_myLoc);
+            nextTime = _nextStaminaTime;
+            addedStamina = false;
+
+            while(currentTime > nextTime)
+            {
+                if (_currentStamina > _maxStamina) break;
+
+                _currentStamina++;
+                addedStamina = true;
+
+                SaveToSaveData();
+
+                UpdateTimer();
+                DateTime timeToAdd = nextTime;
+
+                if(_lastStaminaTime > nextTime) timeToAdd = _lastStaminaTime;
+
+                nextTime = NextTime(timeToAdd, _timeToRecharge);
+            }
+
+            if(addedStamina)
+            {
+                _nextStaminaTime = nextTime;
+                _lastStaminaTime = currentTime;
+            }
+
+            SaveToSaveData();
+            UpdateTimer();
+
+            yield return new WaitForEndOfFrame();
         }
+
+
+        _recharging = false;
+    }
+
+    void UpdateTimer()
+    {
+        if (_currentStamina > _maxStamina)
+        {
+            return;
+        }
+
+        TimeSpan time = _nextStaminaTime - MyLocation(_myLoc);
+
+        if (time.TotalSeconds <= 0)
+            time = TimeSpan.Zero;
 
         foreach (var obs in _observers)
         {
-            obs.UpdateData(_currentStamine, _maxStamine);
-            obs.UpdateData(0);
+            obs.UpdateData(_currentStamina, _maxStamina, time);
         }
     }
 
-    /// <summary>
-    /// This is the method for generate health as tries for play.(Limit)
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator RestoreHealthRoutine()
+    [ContextMenu("UseStaminaTest")]
+    public void TakeStamina()
     {
-        while (_currentStamine < _maxStamine)
+        UseStamina(25);
+    }
+
+    public bool UseStamina(int value)
+    {
+        if(_currentStamina - value >= 0)
         {
-            yield return new WaitForSeconds(_delayInSeconds);
+            _currentStamina -= value;
 
-            _currentStamine += _amountPerInterval;
-            _currentStamine = Mathf.Clamp(_currentStamine, 0f, _maxStamine);
+            SaveToSaveData();
 
-            yield return null;
+            if(!_recharging)
+            {
+                _nextStaminaTime = NextTime(MyLocation(_myLoc), _timeToRecharge);
+                StartCoroutine(UpdateStaminaRoutine());
+            }
+            return true;
         }
-
-        foreach (var obs in _observers)
+        else
         {
-            obs.UpdateData(_currentStamine, _maxStamine);
-            obs.UpdateData(0);
+            Debug.Log($"Fuck off vagabuncha");
+            return false;
         }
     }
 
-    public void SubstructHealth(float value)
+    void SaveToSaveData()
     {
-        if (value <= 0f) return;
+        SaveWithJSON.Instance._saveData.CurrentStamina = (int)_currentStamina;
+        SaveWithJSON.Instance._saveData.NextStaminaTime = _nextStaminaTime.ToString();
+        SaveWithJSON.Instance._saveData.LastStaminaTime = _lastStaminaTime.ToString();
 
-        _currentStamine -= value;
-        _currentStamine = Mathf.Clamp(_currentStamine, 0f, _maxStamine);
+        SaveWithJSON.Instance.SaveGame();
+    }
 
-        if(_currentStamine < _maxStamine && _currentCoroutine == null)
+    void LoadFromSave()
+    {
+        _currentStamina = SaveWithJSON.Instance._saveData.CurrentStamina;
+
+        _nextStaminaTime = StringToDateTime(SaveWithJSON.Instance._saveData.NextStaminaTime);
+        _lastStaminaTime = StringToDateTime(SaveWithJSON.Instance._saveData.LastStaminaTime);
+    }
+
+    DateTime MyLocation(LocalizationTime loc)
+    {
+        switch(loc)
         {
-            _currentCoroutine = StartCoroutine(nameof(RestoreHealthRoutine));
+            case LocalizationTime.Local:
+                return DateTime.Now;
+            default:
+                return DateTime.UtcNow;
         }
+    }
 
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_currentStamine, _maxStamine);
-            obs.UpdateData(0);
-        }
+    DateTime NextTime(DateTime time, float duration)
+    {
+        return time.AddSeconds(duration);
+    }
+
+    DateTime StringToDateTime(string data)
+    {
+        if(string.IsNullOrEmpty(data)) return MyLocation(_myLoc);
+        else  return DateTime.Parse(data);
     }
 
     public void Subscribe(IObserver observer)
