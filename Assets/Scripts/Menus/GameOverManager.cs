@@ -24,6 +24,7 @@ public class GameOverManager : MonoBehaviour
 
     private void OnBaseDestroyed(params object[] parameters)
     {
+        Debug.Log(gameObject.name + " - Game Over Screen Activated");
         ScreenManager.Instance.ActivateScreen(_gameoverScreen);
     }
 }
