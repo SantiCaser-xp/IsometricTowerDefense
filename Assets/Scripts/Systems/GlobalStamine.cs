@@ -20,7 +20,7 @@ public class GlobalStamine : MonoBehaviour, IObservable
 
     void Awake()
     {
-        LoadFromSave();
+        //LoadFromSave();
         if (_currentStamina < _maxStamina && !_recharging)
         {
             StartCoroutine(UpdateStaminaRoutine());
