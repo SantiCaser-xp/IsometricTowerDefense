@@ -40,11 +40,10 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
     private void Start()
     {
         RemoteConfigService.Instance.FetchCompleted += UpdateData;
-
+        LoadFromSave(SaveWithJSON.Instance._saveData);
         foreach (var obs in _observers)
         {
-            obs.UpdateData(_currentExperience, _currentExperienceThreshold);
-            obs.UpdateData(_currentLevel);
+            obs.UpdateData(_currentExperience, _currentExperienceThreshold, _currentLevel);
         }
     }
 
@@ -70,8 +69,7 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
 
         foreach (var obs in _observers)
         {
-            obs.UpdateData(_currentExperience, _currentExperienceThreshold);
-            obs.UpdateData(_currentLevel);
+            obs.UpdateData(_currentExperience, _currentExperienceThreshold, _currentLevel);
         }
     }
 
@@ -96,7 +94,6 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
        
         _currentPerksCount = Mathf.Clamp(_currentPerksCount - cost, 0, _maxPerksCount);
         EventManager.Trigger(EventType.OnPerkChanged);
-        Debug.Log(_currentPerksCount);
     }
 
     private void RecalculateExperienceThreshold()
@@ -124,12 +121,29 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
     {
         var experienceToAdd = RemoteConfigService.Instance.appConfig.GetFloat("XpToAdd");
         AddExperience(experienceToAdd);
-
     }
 
     private void OnSceneChanged(Scene scene, LoadSceneMode mode)
     {
         EventManager.Trigger(EventType.OnPerkChanged);
+    }
+
+    public void LoadFromSave(SaveData data)
+    {
+        _currentExperience = data.CurrentExperience;
+        _currentExperienceThreshold = data.CurrentExperienceThreshold;
+        _currentLevel = data.CurrentLevel;
+
+        _currentPerksCount = data.CurrentPerks;
+    }
+
+    public void SaveToData(SaveData data)
+    {
+        data.CurrentExperience = _currentExperience;
+        data.CurrentExperienceThreshold = _currentExperienceThreshold;
+        data.CurrentLevel = _currentLevel;
+        data.CurrentPerks = _currentPerksCount;
+        SaveWithJSON.Instance.SaveGame();
     }
 
     #region TEST

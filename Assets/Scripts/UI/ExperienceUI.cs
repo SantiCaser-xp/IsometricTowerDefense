@@ -22,16 +22,14 @@ public class ExperienceUI : MonoBehaviour, IObserver
         obs.Subscribe(this);
     }
 
-    public void UpdateData(float currentExp, float maxEpx)
+    public void UpdateData(params object[] values)
     {
-        _sliderExperience.value = currentExp / maxEpx;
-        _amountText.SetText($"{currentExp:F2}/{maxEpx:F2}");
-    }
+        float currentExp = (float)values[0];
+        float maxExp = (float)values[1];
+        int level = (int)values[2];
 
-    public void UpdateData(int value)
-    {
-        _levelText.SetText($"{value}");
+        _sliderExperience.value = currentExp / maxExp;
+        _amountText.SetText($"{currentExp:F2}/{maxExp:F2}");
+        _levelText.SetText($"{level}");
     }
-
-    public void UpdateGameStatus(GameStatus status) { }
 }

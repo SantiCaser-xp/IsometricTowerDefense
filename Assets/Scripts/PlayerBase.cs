@@ -6,22 +6,17 @@ public class PlayerBase : Destructible
     [SerializeField] TargetType _targetType;
     [SerializeField] Animator _animator;
 
-    public event System.Action OnPlayerBaseDestroyed;
-
     private void Start()
     {
-        RemoteConfigService.Instance.FetchCompleted += UpdateData;
-        ITargetable targetable = this.GetComponent<ITargetable>();
-        if (targetable != null)
-        {
-            EnemyTargetManager.Instance?.RegisterTarget(targetable);
-        }
+        RemoteConfigService.Instance.FetchCompleted += SetHealthFromRemote;
 
-        _currentHealth = _maxHealth;
+        EnemyTargetManager.Instance?.RegisterTarget(this);
+
+        _currentHealth = PerkSkillManager.Instance.StartHealth;
 
         foreach (var obs in _observers)
         {
-            obs.UpdateData(_currentHealth, _maxHealth);
+            obs.UpdateData(_currentHealth, PerkSkillManager.Instance.StartHealth);
         }
     }
 
@@ -33,17 +28,23 @@ public class PlayerBase : Destructible
 
     public override void Die()
     {
-        OnPlayerBaseDestroyed?.Invoke();
+        EnemyTargetManager.Instance.UnregisterTarget(this);
         _animator.SetTrigger("Die");
+        Debug.Log("Base Destroyed");
+        EventManager.Trigger(EventType.OnGameOver);//add delay before gameoverscreen
     }
 
-    public void UpdateData(ConfigResponse configResponse)
+    void SetHealthFromRemote(ConfigResponse configResponse)
     {
         _currentHealth += RemoteConfigService.Instance.appConfig.GetInt("TentHpAdd");
+        UpdateData();
+    }
 
+    public void UpdateData(params object[] values)
+    {
         foreach (var obs in _observers)
         {
-            obs.UpdateData(_currentHealth, _maxHealth);
+            obs.UpdateData(_currentHealth, PerkSkillManager.Instance.StartHealth);
         }
     }
 }

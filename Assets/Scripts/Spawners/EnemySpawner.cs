@@ -10,8 +10,9 @@ public class EnemySpawner : GenericSpawner<EnemyFactory>
         enemy.transform.position = _spawnPoints[0].position;
     }
 
-    private void Start()
-    {
+    protected override void Start()
+    { 
+        base.Start();
         RemoteConfigService.Instance.FetchCompleted += UpdateData;
     }
 

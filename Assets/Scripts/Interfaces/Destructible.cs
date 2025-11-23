@@ -5,6 +5,8 @@ public abstract class Destructible : MonoBehaviour, IDamageable<float>, IKillabl
 {
     [SerializeField] protected float _maxHealth;
     [SerializeField] protected float _currentHealth = 0f;
+    public float CurrentHealth => _currentHealth;
+
     protected List<IObserver> _observers = new List<IObserver>();
     public TargetType TargetType => TargetType.Tower;
 

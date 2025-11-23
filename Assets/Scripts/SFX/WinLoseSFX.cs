@@ -22,8 +22,10 @@ public class WinLoseSFX : MonoBehaviour, IObserver
         //_audiosource.ignoreListenerPause = true;
     }
 
-    public void UpdateGameStatus(GameStatus status)
+    public void UpdateData(params object[] values)
     {
+        GameStatus status = (GameStatus)values[0];
+
         switch (status)
         {
             case GameStatus.Win:
@@ -34,7 +36,4 @@ public class WinLoseSFX : MonoBehaviour, IObserver
                 break;
         }
     }
-
-    public void UpdateData(float currentValue, float maxValue) { }
-    public void UpdateData(int value) { }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1539233061354395551}
   - component: {fileID: 9221262117712861484}
   - component: {fileID: 1400397893081205861}
+  - component: {fileID: 5777229904353367219}
   m_Layer: 0
   m_Name: Weather
   m_TagString: Untagged
@@ -67,3 +68,19 @@ MonoBehaviour:
   _delayStart: 3
   _interval: 10
   _rain: {fileID: 9221262117712861484}
+--- !u!114 &5777229904353367219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015914394449806661}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad6399bbfd8e6541b4486078940d660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dustStormFVX: {fileID: 0}
+  _speedTransition: 0.2
+  _intensity: 0
+  _heatScreenMaterial: {fileID: 2100000, guid: fd4ccebbb5230d940b61764e9076fff4, type: 2}

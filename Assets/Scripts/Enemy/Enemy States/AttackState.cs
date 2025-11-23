@@ -29,11 +29,13 @@ public class AttackState : EnemyState<EnemyFSMStates, MVC_Enemy>
 
         // Attack with cooldown
         _timer += Time.deltaTime;
+
         if (_timer >= avatar.Model.Data.attackCooldown)
         {
             avatar.Model.PerformAttack();
             _timer = 0;
         }
     }
+
     public override void OnExit() { }
 }

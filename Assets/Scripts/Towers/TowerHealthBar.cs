@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class TowerHealthBar : MonoBehaviour, IObserver
 {
     [SerializeField] private Image _fillImage;
-
     private Camera _mainCamera;
 
     private void Awake()
@@ -30,17 +29,11 @@ public class TowerHealthBar : MonoBehaviour, IObserver
         }
     }
 
-    public void UpdateData(float currentValue, float maxValue)
+    public void UpdateData(params object[] values)
     {
+        float currentValue = (float)values[0];
+        float maxValue = (float)values[1];
+
         _fillImage.fillAmount = currentValue / maxValue;
-
-        /*if (currentValue <= 0f)
-        {
-            gameObject.SetActive(false); //preguntar sobre esta mierda, que no quiere trabajar ^_^
-        }*/
     }
-
-    public void UpdateData(int value) { }
-
-    public void UpdateGameStatus(GameStatus status) { }
 }

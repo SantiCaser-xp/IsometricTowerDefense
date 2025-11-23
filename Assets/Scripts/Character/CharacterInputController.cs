@@ -10,6 +10,7 @@ public class CharacterInputController
     public CharacterInputController(ControlBase joystick)
     {
         _joystick = joystick;
+        
     }
 
     public void InputArtificialUpdate()
@@ -27,6 +28,11 @@ public class CharacterInputController
     {
         _inputDirection.x = Input.GetAxisRaw("Horizontal");
         _inputDirection.z = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //_pauseSystem.OpenPausePC();
+        }
     }
 
     public void InputAndroid()
