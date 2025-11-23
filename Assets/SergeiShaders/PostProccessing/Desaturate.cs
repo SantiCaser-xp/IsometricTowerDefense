@@ -19,16 +19,6 @@ public class Desaturate : MonoBehaviour,IObserver
         obs.Subscribe(this);
     }
 
-    public void UpdateData(float currentHealth, float maxHealth)
-    {
-        _material.SetFloat("_Rang", currentHealth / maxHealth);
-    }
-    public void UpdateDataTime(float currentHealth, float maxHealth) { }
-
-    public void UpdateData(int value) { }
-
-    public void UpdateGameStatus(GameStatus status) { }
-
     public void UpdateData(params object[] values)
     {
         _material.SetFloat("_Rang", (float)values[0] / (float)values[1]);

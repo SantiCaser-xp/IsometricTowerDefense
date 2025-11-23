@@ -4,7 +4,7 @@ using UnityEngine.Windows;
 
 public class SaveWithCustomJSon : SaveWithJSON
 {
-    protected virtual void Awake()
+    /*protected virtual void Awake()
     {
         _pathBase = Environment.GetFolderPath(Environment.SpecialFolder.Personal) +
         Application.companyName + "/" + Application.productName;
@@ -14,5 +14,5 @@ public class SaveWithCustomJSon : SaveWithJSON
         _path = _pathBase + "/SaveData";
 
         LoadGame();
-    }
+    }*/
 }

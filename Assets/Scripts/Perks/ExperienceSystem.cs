@@ -40,7 +40,7 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
     private void Start()
     {
         RemoteConfigService.Instance.FetchCompleted += UpdateData;
-        LoadFromSave(SaveWithJSON.Instance._saveData);
+        //LoadFromSave(SaveWithJSON.Instance._saveData);
         foreach (var obs in _observers)
         {
             obs.UpdateData(_currentExperience, _currentExperienceThreshold, _currentLevel);
@@ -143,7 +143,7 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
         data.CurrentExperienceThreshold = _currentExperienceThreshold;
         data.CurrentLevel = _currentLevel;
         data.CurrentPerks = _currentPerksCount;
-        SaveWithJSON.Instance.SaveGame();
+        //SaveWithJSON.Instance.SaveGame();
     }
 
     #region TEST
