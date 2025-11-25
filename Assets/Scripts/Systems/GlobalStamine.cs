@@ -32,10 +32,10 @@ public class GlobalStamine : MonoBehaviour, IObservable
         UpdateTimer();
     }
 
-    void OnApplicationFocus(bool focus)
-    {
-        if(!focus) SaveToSaveData();
-    }
+    //void OnApplicationFocus(bool focus)
+    //{
+    //    if(!focus) SaveToSaveData();
+    //}
 
     IEnumerator UpdateStaminaRoutine()
     {
@@ -60,7 +60,7 @@ public class GlobalStamine : MonoBehaviour, IObservable
                 _currentStamina++;
                 addedStamina = true;
 
-                SaveToSaveData();
+                //SaveToSaveData();
 
                 UpdateTimer();
                 DateTime timeToAdd = nextTime;
@@ -76,7 +76,7 @@ public class GlobalStamine : MonoBehaviour, IObservable
                 _lastStaminaTime = currentTime;
             }
 
-            SaveToSaveData();
+            //SaveToSaveData();
             UpdateTimer();
 
             yield return new WaitForEndOfFrame();
@@ -116,7 +116,7 @@ public class GlobalStamine : MonoBehaviour, IObservable
         {
             _currentStamina -= value;
 
-            SaveToSaveData();
+            //SaveToSaveData();
 
             if(!_recharging)
             {
@@ -132,22 +132,22 @@ public class GlobalStamine : MonoBehaviour, IObservable
         }
     }
 
-    void SaveToSaveData()
-    {
-        SaveWithJSON.Instance._saveData.CurrentStamina = (int)_currentStamina;
-        SaveWithJSON.Instance._saveData.NextStaminaTime = _nextStaminaTime.ToString();
-        SaveWithJSON.Instance._saveData.LastStaminaTime = _lastStaminaTime.ToString();
+    //void SaveToSaveData()
+    //{
+    //    SaveWithJSON.Instance._saveData.CurrentStamina = (int)_currentStamina;
+    //    SaveWithJSON.Instance._saveData.NextStaminaTime = _nextStaminaTime.ToString();
+    //    SaveWithJSON.Instance._saveData.LastStaminaTime = _lastStaminaTime.ToString();
 
-        SaveWithJSON.Instance.SaveGame();
-    }
+    //    SaveWithJSON.Instance.SaveGame();
+    //}
 
-    void LoadFromSave()
-    {
-        _currentStamina = SaveWithJSON.Instance._saveData.CurrentStamina;
+    //void LoadFromSave()
+    //{
+    //    _currentStamina = SaveWithJSON.Instance._saveData.CurrentStamina;
 
-        _nextStaminaTime = StringToDateTime(SaveWithJSON.Instance._saveData.NextStaminaTime);
-        _lastStaminaTime = StringToDateTime(SaveWithJSON.Instance._saveData.LastStaminaTime);
-    }
+    //    _nextStaminaTime = StringToDateTime(SaveWithJSON.Instance._saveData.NextStaminaTime);
+    //    _lastStaminaTime = StringToDateTime(SaveWithJSON.Instance._saveData.LastStaminaTime);
+    //}
 
     DateTime MyLocation(LocalizationTime loc)
     {
