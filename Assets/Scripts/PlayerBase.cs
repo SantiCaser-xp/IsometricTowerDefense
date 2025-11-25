@@ -8,15 +8,22 @@ public class PlayerBase : Destructible
 
     private void Start()
     {
+        InitializeBase();
+    }
+
+    public void InitializeBase()
+    {
+        _currentHealth = PerkSkillManager.Instance.StartHealth;
+        Debug.Log("Player Base Health at Start: " + _currentHealth);
+
         RemoteConfigService.Instance.FetchCompleted += SetHealthFromRemote;
 
         EnemyTargetManager.Instance?.RegisterTarget(this);
 
-        _currentHealth = PerkSkillManager.Instance.StartHealth;
-
         foreach (var obs in _observers)
         {
             obs.UpdateData(_currentHealth, PerkSkillManager.Instance.StartHealth);
+            Debug.Log("Player Base Health Initialized");
         }
     }
 

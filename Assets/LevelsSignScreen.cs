@@ -10,6 +10,7 @@ public class LevelsSignScreen : MonoBehaviour, IScreen
     [SerializeField] TextMeshProUGUI _levelTxt;
     [SerializeField] Button _closeButton;
     [SerializeField] Button _playButton;
+    [SerializeField] string _sceneName = "Mobile Lv1 PauseManager";
     string _actualLevelName;
 
     private void Awake()
@@ -29,7 +30,7 @@ public class LevelsSignScreen : MonoBehaviour, IScreen
         if (_globalStamine.UseStamina(_stamineCost))
         {
             ScreenManager.Instance.DeactivateScreen();
-            SceneTransition.Instance.LoadLevel("Mobile Lv1 PauseManager");
+            SceneTransition.Instance.LoadLevel(_sceneName);
         }
     }
 

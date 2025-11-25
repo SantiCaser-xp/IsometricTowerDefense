@@ -4,6 +4,7 @@ public class GameOverManager : MonoBehaviour
 {
     [SerializeField] GameObject _winScreen;
     [SerializeField] GameObject _gameoverScreen;
+    [SerializeField] PlayerBase _playerBase;
 
     private void OnEnable()
     {
@@ -26,5 +27,6 @@ public class GameOverManager : MonoBehaviour
     {
         Debug.Log(gameObject.name + " - Game Over Screen Activated");
         ScreenManager.Instance.ActivateScreen(_gameoverScreen);
+        _playerBase.InitializeBase();
     }
 }

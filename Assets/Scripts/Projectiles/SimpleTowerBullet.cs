@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SimpleTowerBullet : AbstractBullet
+public class SimpleTowerBullet : BulletDecorator
 {
     
 }

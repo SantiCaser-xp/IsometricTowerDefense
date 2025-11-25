@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 3066452019219191194}
   - component: {fileID: 797805754896969444}
   - component: {fileID: 3629454007985622448}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FlameThrowerGhost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,8 +411,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.22, y: 1.4194294, z: 2.22}
-  m_Center: {x: 0, y: 0.6365027, z: 0}
+  m_Size: {x: 2.22, y: 1, z: 2.22}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &797805754896969444
 MonoBehaviour:
   m_ObjectHideFlags: 0
