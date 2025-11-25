@@ -49,6 +49,9 @@ public class SceneTransition : SingltonBase<SceneTransition>
     {
         if (_isLoading) return;
         _isLoading = true;
+
+        StopAllCoroutines();
+
         StartCoroutine(FadeInAndLoad(name));
     }
 
