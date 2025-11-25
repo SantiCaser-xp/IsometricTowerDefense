@@ -13,17 +13,15 @@ public class PlayerBase : Destructible
 
     public void InitializeBase()
     {
-        _currentHealth = PerkSkillManager.Instance.StartHealth;
-        Debug.Log("Player Base Health at Start: " + _currentHealth);
-
         RemoteConfigService.Instance.FetchCompleted += SetHealthFromRemote;
 
         EnemyTargetManager.Instance?.RegisterTarget(this);
 
+        _currentHealth = PerkSkillManager.Instance.StartHealth;
+
         foreach (var obs in _observers)
         {
             obs.UpdateData(_currentHealth, PerkSkillManager.Instance.StartHealth);
-            Debug.Log("Player Base Health Initialized");
         }
     }
 
@@ -37,14 +35,12 @@ public class PlayerBase : Destructible
     {
         EnemyTargetManager.Instance.UnregisterTarget(this);
         _animator.SetTrigger("Die");
-        Debug.Log("Base Destroyed");
         EventManager.Trigger(EventType.OnGameOver);//add delay before gameoverscreen
     }
 
     void SetHealthFromRemote(ConfigResponse configResponse)
     {
         _currentHealth += RemoteConfigService.Instance.appConfig.GetInt("TentHpAdd");
-        UpdateData();
     }
 
     public void UpdateData(params object[] values)
