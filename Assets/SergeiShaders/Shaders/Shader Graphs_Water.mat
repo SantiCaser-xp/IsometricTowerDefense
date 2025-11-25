@@ -46,19 +46,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.487
+    - _Alpha: 0.604
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 1
     - _CellSize: 10
-    - _CellWaveSize: 2.52
-    - _CellWaveSpeed: 1.66
+    - _CellWaveSize: 1.54
+    - _CellWaveSpeed: 0.1
     - _Cull: 2
     - _Distance: 0.001
     - _DistortionIntensity: 0.5
-    - _Distortion_Strenght: 0.13
+    - _Distortion_Strenght: 0.032
     - _DstBlend: 10
     - _Falloff: 0.001
     - _QueueControl: 0
@@ -66,7 +66,7 @@ Material:
     - _ReceiveShadows: 1
     - _SrcBlend: 1
     - _Surface: 1
-    - _WaveAmplitude: 4.5
+    - _WaveAmplitude: 7.88
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
@@ -77,11 +77,11 @@ Material:
     - _DistortionTiling: {r: 1, g: 1, b: 0, a: 0}
     - _DistortionTiling2: {r: 3, g: 3, b: 0, a: 0}
     - _OFFSET: {r: 0, g: 0, b: 0, a: 0}
-    - _SpeedOffset: {r: 0.1, g: 0, b: 0, a: 0}
+    - _SpeedOffset: {r: 0.03, g: 0, b: 0, a: 0}
     - _TILING: {r: 14.95, g: 12.71, b: 0, a: 0}
     - _VoronoiTiling: {r: 8.46, g: 0.9, b: 0, a: 0}
     - _WAVE: {r: 0.36320752, g: 1, b: 0.94514585, a: 0}
-    - _WaveSpeed: {r: 0.7, g: 0, b: 0, a: 0}
+    - _WaveSpeed: {r: 0.4, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5149155509780205186
 MonoBehaviour:

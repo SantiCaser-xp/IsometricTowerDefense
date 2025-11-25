@@ -176,7 +176,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7679479510096779179}
   - component: {fileID: 790742994856015157}
-  - component: {fileID: 614059572065387929}
+  - component: {fileID: 8453527633837544690}
+  - component: {fileID: 8262829293281970676}
   m_Layer: 0
   m_Name: Standard Rock 3
   m_TagString: Untagged
@@ -234,8 +235,8 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1933590862281043612}
   m_Enabled: 1
---- !u!64 &614059572065387929
-MeshCollider:
+--- !u!65 &8453527633837544690
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -252,10 +253,28 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 8660027153776480934, guid: cdfa04c51cadc7246b34041135934d73, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 5.0334516, y: 1.6897485, z: 3.2214637}
+  m_Center: {x: -0.03235578, y: 0.3448745, z: -0.070489645}
+--- !u!114 &8262829293281970676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977529444600223557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &7756469226934752076
 GameObject:
   m_ObjectHideFlags: 0
