@@ -26,10 +26,7 @@ public abstract class Destructible : MonoBehaviour, IDamageable<float>, IKillabl
 
         _currentHealth = Mathf.Clamp(_currentHealth, 0f, _maxHealth);
 
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_currentHealth, _maxHealth);
-        }
+        Notify();
 
         if (_currentHealth <= 0f)
         {
@@ -38,6 +35,7 @@ public abstract class Destructible : MonoBehaviour, IDamageable<float>, IKillabl
 
     }
 
+    #region Observable
     public virtual void Subscribe(IObserver observer)
     {
         if (!_observers.Contains(observer))
@@ -53,4 +51,13 @@ public abstract class Destructible : MonoBehaviour, IDamageable<float>, IKillabl
             _observers.Remove(observer);
         }
     }
+
+    public virtual void Notify()
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentHealth, _maxHealth);
+        }
+    }
+    #endregion
 }

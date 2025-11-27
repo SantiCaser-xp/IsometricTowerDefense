@@ -20,6 +20,5 @@ public class ButtonChangeLanguage : MonoBehaviour
     public void BTNChangeLanguage()
     {
         LocalizationManager.Instance.ChangeLanguage(language);
-        Debug.Log("Language changed!");
     }
 }

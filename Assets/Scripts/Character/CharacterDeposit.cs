@@ -15,10 +15,7 @@ public class CharacterDeposit : MonoBehaviour, IObservable
     {
         _currentGold = PerkSkillManager.Instance.StartGold;
 
-        foreach(var obs in _observers)
-        {
-            obs.UpdateData(_currentGold);
-        }
+        Notify();
 
         RemoteConfigService.Instance.FetchCompleted += UpdateData;
     }
@@ -31,10 +28,7 @@ public class CharacterDeposit : MonoBehaviour, IObservable
 
         _currentGold = Mathf.Clamp(_currentGold, 0, _maxGold);
 
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_currentGold);
-        }
+        Notify();
     }
 
     public void SubstructDeposit(int amount)
@@ -45,32 +39,13 @@ public class CharacterDeposit : MonoBehaviour, IObservable
 
         _currentGold = Mathf.Clamp(_currentGold, 0, _maxGold);
 
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_currentGold);
-        }
+        Notify();
     }
 
     /*public void ChangeStartedDeposit(int amount)
     {
         _startedDeposit += amount;
     }*/
-
-    public void Subscribe(IObserver observer)
-    {
-        if (!_observers.Contains(observer))
-        {
-            _observers.Add(observer);
-        }
-    }
-
-    public void Unsubscribe(IObserver observer)
-    {
-        if (_observers.Contains(observer))
-        {
-            _observers.Remove(observer);
-        }
-    }
 
     public void UpdateData(ConfigResponse configResponse)
     {
@@ -87,11 +62,34 @@ public class CharacterDeposit : MonoBehaviour, IObservable
             _savedGold = 0;
         }
 
+        Notify();
+    }
+
+    #region Observable
+    public void Subscribe(IObserver observer)
+    {
+        if (!_observers.Contains(observer))
+        {
+            _observers.Add(observer);
+        }
+    }
+
+    public void Unsubscribe(IObserver observer)
+    {
+        if (_observers.Contains(observer))
+        {
+            _observers.Remove(observer);
+        }
+    }
+
+    public void Notify()
+    {
         foreach (var obs in _observers)
         {
             obs.UpdateData(_currentGold);
         }
     }
+    #endregion
 
     #region Test
     [ContextMenu("Add Gold 50")]

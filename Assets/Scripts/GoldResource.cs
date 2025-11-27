@@ -37,32 +37,13 @@ public class GoldResource : MonoBehaviour, IObservable
         _rb.isKinematic = false;
     }
 
-    public void Subscribe(IObserver observer)
-    {
-        if (!_observers.Contains(observer))
-        {
-            _observers.Add(observer);
-        }
-    }
-
-    public void Unsubscribe(IObserver observer)
-    {
-        if (_observers.Contains(observer))
-        {
-            _observers.Remove(observer);
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<Character>() != null)
         {
             StartCoroutine(DeactivateRoutine());
 
-            foreach (var obs in _observers)
-            {
-                obs.UpdateData(1);
-            }
+            Notify();
         }
     }
 
@@ -81,4 +62,30 @@ public class GoldResource : MonoBehaviour, IObservable
         _pool.Release(this);
         yield return null;
     }
+
+    #region Observable
+    public void Subscribe(IObserver observer)
+    {
+        if (!_observers.Contains(observer))
+        {
+            _observers.Add(observer);
+        }
+    }
+
+    public void Unsubscribe(IObserver observer)
+    {
+        if (_observers.Contains(observer))
+        {
+            _observers.Remove(observer);
+        }
+    }
+
+    public void Notify()
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(1);
+        }
+    }
+    #endregion
 }

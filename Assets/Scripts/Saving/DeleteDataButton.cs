@@ -13,6 +13,6 @@ public class DeleteDataButton : MonoBehaviour
 
     void OnDeleteDataButtonClicked()
     {
-        //SaveWithJSON.Instance.DeleteAll();
+        SaveWithJSON.Instance.DeleteAll();
     }
 }

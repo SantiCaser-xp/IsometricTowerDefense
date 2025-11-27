@@ -26,6 +26,6 @@ public class BloodScreenEffect : MonoBehaviour, IObserver
     {
         float current = (float)values[0];
 
-        if (current <= 50) _material.SetFloat("_Alpha", 2f);
+        if (current <= 50) _material.SetFloat("_Alpha", 1f);
     }
 }
