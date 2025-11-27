@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Desaturate : MonoBehaviour,IObserver
+public class Desaturate : MonoBehaviour, IObserver
 {
     [SerializeField] Material _material;
 
@@ -16,7 +16,12 @@ public class Desaturate : MonoBehaviour,IObserver
             return;
         }
 
-        obs.Subscribe(this);
+        obs.Subscribe(this);   
+    }
+
+    void Start()
+    {
+        _material.SetFloat("_Rang", 1f);
     }
 
     public void UpdateData(params object[] values)

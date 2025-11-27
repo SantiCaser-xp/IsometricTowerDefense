@@ -18,7 +18,7 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
     private int _currentLevel = 0;
 
     [Header("Perks")]
-    [SerializeField] private int _maxPerksCount = 9999; 
+    [SerializeField] private int _maxPerksCount = 9999;
     [SerializeField] private int _currentPerksCount;
     public int CurrentPerksCount => _currentPerksCount;
 
@@ -32,24 +32,26 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
         _currentLevel = _startLevel;
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneChanged;
+        EventManager.Subscribe(EventType.OnGameWin, Save);
+        EventManager.Subscribe(EventType.OnGameOver, OnGameLose);
     }
 
-    private void Start()
+    void Start()
     {
         RemoteConfigService.Instance.FetchCompleted += UpdateData;
-        //LoadFromSave(SaveWithJSON.Instance._saveData);
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_currentExperience, _currentExperienceThreshold, _currentLevel);
-        }
+
+        Load();
+        Notify();
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneChanged;
+        EventManager.Unsubscribe(EventType.OnGameWin, Save);
+        EventManager.Unsubscribe(EventType.OnGameOver, OnGameLose);
     }
 
     public void AddExperience(float value)
@@ -67,13 +69,10 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
             RecalculateExperienceThreshold();
         }
 
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_currentExperience, _currentExperienceThreshold, _currentLevel);
-        }
+        Notify();
     }
 
-    private void AddLevel()
+    void AddLevel()
     {
         if (_currentLevel < _maxLevel)
         {
@@ -91,16 +90,79 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
     public void SubstractPerk(int cost)
     {
         if (_currentPerksCount < cost) return;
-       
+
         _currentPerksCount = Mathf.Clamp(_currentPerksCount - cost, 0, _maxPerksCount);
         EventManager.Trigger(EventType.OnPerkChanged);
+        Save();
     }
 
-    private void RecalculateExperienceThreshold()
+    void RecalculateExperienceThreshold()
     {
         _currentExperienceThreshold *= _experienceGainMultiplier;
     }
 
+    public void UpdateData(ConfigResponse configResponse)
+    {
+        var experienceToAdd = RemoteConfigService.Instance.appConfig.GetFloat("XpToAdd");
+        AddExperience(experienceToAdd);
+    }
+
+    void OnSceneChanged(Scene scene, LoadSceneMode mode)
+    {
+        EventManager.Trigger(EventType.OnPerkChanged);
+        OnGameLose(scene, mode);
+    }
+
+    void Save(params object[] parameters)
+    {
+        if (SaveWithJSON.Instance == null) return;
+
+        var sd = SaveWithJSON.Instance._experienceData;
+
+        sd.CurrentExperience = _currentExperience;
+        sd.CurrentExperienceThreshold = _currentExperienceThreshold;
+        sd.CurrentLevel = _currentLevel;
+        sd.CurrentPerks = _currentPerksCount;
+
+        SaveWithJSON.Instance._experienceData = sd;
+        SaveWithJSON.Instance.SaveGame();
+    }
+
+    void Load()
+    {
+        var sd = SaveWithJSON.Instance._experienceData;
+
+        _currentExperience = Mathf.Clamp(sd.CurrentExperience, 0f, _maxExperienceLimit);
+        _currentExperienceThreshold = (sd.CurrentExperienceThreshold > 0f) ? sd.CurrentExperienceThreshold : _startExperienceThreshold;
+        _currentLevel = Mathf.Clamp(sd.CurrentLevel, _startLevel, _maxLevel);
+        _currentPerksCount = Mathf.Clamp(sd.CurrentPerks, 0, _maxPerksCount);
+    }
+
+    void OnGameLose(params object[] parameters)
+    {
+        if (SaveWithJSON.Instance == null) return;
+
+        SaveWithJSON.Instance.LoadGame();
+
+        Load();
+        Notify();
+    }
+
+    #region TEST
+    [ContextMenu("Add Experience")]
+    public void AddExperienceForce()
+    {
+        AddExperience(100);
+    }
+
+    [ContextMenu("Add perk")]
+    public void ForceAddPerk()
+    {
+        AddPerk(1);
+    }
+    #endregion
+
+    #region Observable
     public void Subscribe(IObserver observer)
     {
         if (!_observers.Contains(observer))
@@ -117,46 +179,12 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
         }
     }
 
-    public void UpdateData(ConfigResponse configResponse)
+    public void Notify()
     {
-        var experienceToAdd = RemoteConfigService.Instance.appConfig.GetFloat("XpToAdd");
-        AddExperience(experienceToAdd);
-    }
-
-    private void OnSceneChanged(Scene scene, LoadSceneMode mode)
-    {
-        EventManager.Trigger(EventType.OnPerkChanged);
-    }
-
-    public void LoadFromSave(SaveData data)
-    {
-        _currentExperience = data.CurrentExperience;
-        _currentExperienceThreshold = data.CurrentExperienceThreshold;
-        _currentLevel = data.CurrentLevel;
-
-        _currentPerksCount = data.CurrentPerks;
-    }
-
-    public void SaveToData(SaveData data)
-    {
-        data.CurrentExperience = _currentExperience;
-        data.CurrentExperienceThreshold = _currentExperienceThreshold;
-        data.CurrentLevel = _currentLevel;
-        data.CurrentPerks = _currentPerksCount;
-        //SaveWithJSON.Instance.SaveGame();
-    }
-
-    #region TEST
-    [ContextMenu("Add Experience")]
-    public void AddExperienceForce()
-    {
-        AddExperience(100);
-    }
-
-    [ContextMenu("Add perk")]
-    public void ForceAddPerk()
-    {
-        AddPerk(1);
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentExperience, _currentExperienceThreshold, _currentLevel);
+        }
     }
     #endregion
 }

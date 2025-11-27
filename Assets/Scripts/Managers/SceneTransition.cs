@@ -23,8 +23,6 @@ public class SceneTransition : SingltonBase<SceneTransition>
     {
         _progressPanel.SetActive(false);
         _progressBar.fillAmount = 0;
-
-        //StartCoroutine(FadeOutRoutine());
     }
 
     private void OnDisable()
@@ -50,7 +48,8 @@ public class SceneTransition : SingltonBase<SceneTransition>
         if (_isLoading) return;
         _isLoading = true;
 
-        StopAllCoroutines();
+        //StopAllCoroutines();
+        StopCoroutine(FadeOutRoutine());
 
         StartCoroutine(FadeInAndLoad(name));
     }

@@ -31,10 +31,7 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
 
     private void Start()
     {
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_enemiesKilled, _enemiesTotal);
-        }
+        Notify();
 
         StartCoroutine(SpawnEnemies());
     }
@@ -57,10 +54,7 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
     {
         _enemiesKilled++;
 
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_enemiesKilled, _enemiesTotal);
-        }
+        Notify();
 
         if (_enemiesKilled >= _enemiesTotal)
         {
@@ -102,6 +96,7 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
         }
     }
 
+    #region Observable
     public void Subscribe(IObserver observer)
     {
         if (!_observers.Contains(observer))
@@ -117,4 +112,13 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
             _observers.Remove(observer);
         }
     }
+
+    public void Notify()
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_enemiesKilled, _enemiesTotal);
+        }
+    }
+    #endregion
 }
