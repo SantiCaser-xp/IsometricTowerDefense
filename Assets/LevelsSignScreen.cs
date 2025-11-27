@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class LevelsSignScreen : MonoBehaviour, IScreen
 {
     [SerializeField] GameObject _root;
-    [SerializeField] GlobalStamine _globalStamine;
+    [SerializeField] GlobalStamina _globalStamina;
     [SerializeField] int _stamineCost = 100;
     [SerializeField] TextMeshProUGUI _levelTxt;
     [SerializeField] Button _closeButton;
@@ -13,7 +13,7 @@ public class LevelsSignScreen : MonoBehaviour, IScreen
     [SerializeField] string _sceneName = "Mobile Lv1 PauseManager";
     string _actualLevelName;
 
-    private void Awake()
+    void Awake()
     {
         _closeButton.onClick.AddListener(() => ScreenManager.Instance.DeactivateScreen());
         _playButton.onClick.AddListener(GoToLevel);
@@ -27,7 +27,7 @@ public class LevelsSignScreen : MonoBehaviour, IScreen
 
     public void GoToLevel()
     {
-        if (_globalStamine.UseStamina(_stamineCost))
+        if (_globalStamina.UseStamina(_stamineCost))
         {
             ScreenManager.Instance.DeactivateScreen();
             SceneTransition.Instance.LoadLevel(_sceneName);

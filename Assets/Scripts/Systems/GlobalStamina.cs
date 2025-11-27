@@ -3,39 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalStamine : MonoBehaviour, IObservable
+public class GlobalStamina : MonoBehaviour, IObservable
 {
-    [SerializeField] private float _timeToRecharge = 180f; //3 minutes
-    [SerializeField] private float _amountPerInterval = 1f;
-    [SerializeField] private float _maxStamina = 100f;
-    private float _currentStamina = 0f;
+    [SerializeField] float _timeToRecharge = 180f; //3 minutes
+    [SerializeField] float _amountPerInterval = 1f;
+    [SerializeField] float _maxStamina = 100f;
+    [SerializeField] LocalizationTime _myLoc;
+    float _currentStamina = 0f;
     bool _recharging = false;
 
     DateTime _nextStaminaTime;
     DateTime _lastStaminaTime;
+    TimeSpan _time;
 
-    [SerializeField] LocalizationTime _myLoc;
+    List<IObserver> _observers = new List<IObserver>();
 
-    private List<IObserver> _observers = new List<IObserver>();
-
-    void Awake()
+    void Start()
     {
-        //LoadFromSave();
+        Load();
+
         if (_currentStamina < _maxStamina && !_recharging)
         {
             StartCoroutine(UpdateStaminaRoutine());
         }
-    }
 
-    private void Start()
-    {
         UpdateTimer();
     }
-
-    //void OnApplicationFocus(bool focus)
-    //{
-    //    if(!focus) SaveToSaveData();
-    //}
 
     IEnumerator UpdateStaminaRoutine()
     {
@@ -55,12 +48,10 @@ public class GlobalStamine : MonoBehaviour, IObservable
 
             while(currentTime > nextTime)
             {
-                if (_currentStamina > _maxStamina) break;
+                if (_currentStamina == _maxStamina) break;
 
                 _currentStamina++;
                 addedStamina = true;
-
-                //SaveToSaveData();
 
                 UpdateTimer();
                 DateTime timeToAdd = nextTime;
@@ -74,14 +65,13 @@ public class GlobalStamine : MonoBehaviour, IObservable
             {
                 _nextStaminaTime = nextTime;
                 _lastStaminaTime = currentTime;
+                Save();
             }
 
-            //SaveToSaveData();
             UpdateTimer();
 
             yield return new WaitForEndOfFrame();
         }
-
 
         _recharging = false;
     }
@@ -93,15 +83,12 @@ public class GlobalStamine : MonoBehaviour, IObservable
             return;
         }
 
-        TimeSpan time = _nextStaminaTime - MyLocation(_myLoc);
+        _time = _nextStaminaTime - MyLocation(_myLoc);
 
-        if (time.TotalSeconds <= 0)
-            time = TimeSpan.Zero;
+        if (_time.TotalSeconds <= 0)
+            _time = TimeSpan.Zero;
 
-        foreach (var obs in _observers)
-        {
-            obs.UpdateData(_currentStamina, _maxStamina, time);
-        }
+        Notify();
     }
 
     [ContextMenu("UseStaminaTest")]
@@ -116,7 +103,7 @@ public class GlobalStamine : MonoBehaviour, IObservable
         {
             _currentStamina -= value;
 
-            //SaveToSaveData();
+            Save();
 
             if(!_recharging)
             {
@@ -131,23 +118,6 @@ public class GlobalStamine : MonoBehaviour, IObservable
             return false;
         }
     }
-
-    //void SaveToSaveData()
-    //{
-    //    SaveWithJSON.Instance._saveData.CurrentStamina = (int)_currentStamina;
-    //    SaveWithJSON.Instance._saveData.NextStaminaTime = _nextStaminaTime.ToString();
-    //    SaveWithJSON.Instance._saveData.LastStaminaTime = _lastStaminaTime.ToString();
-
-    //    SaveWithJSON.Instance.SaveGame();
-    //}
-
-    //void LoadFromSave()
-    //{
-    //    _currentStamina = SaveWithJSON.Instance._saveData.CurrentStamina;
-
-    //    _nextStaminaTime = StringToDateTime(SaveWithJSON.Instance._saveData.NextStaminaTime);
-    //    _lastStaminaTime = StringToDateTime(SaveWithJSON.Instance._saveData.LastStaminaTime);
-    //}
 
     DateTime MyLocation(LocalizationTime loc)
     {
@@ -171,6 +141,29 @@ public class GlobalStamine : MonoBehaviour, IObservable
         else  return DateTime.Parse(data);
     }
 
+
+    void Save()
+    {
+        var sd = SaveWithJSON.Instance._staminaData;
+
+        sd.CurrentStamina = Mathf.Clamp(Mathf.RoundToInt(_currentStamina), 0, Mathf.RoundToInt(_maxStamina));
+        sd.NextStaminaTime = _nextStaminaTime.ToString();
+        sd.LastStaminaTime = _lastStaminaTime.ToString();
+
+        SaveWithJSON.Instance._staminaData = sd;
+        SaveWithJSON.Instance.SaveGame();
+    }
+
+    void Load()
+    {
+        var sd = SaveWithJSON.Instance._staminaData;
+
+        _currentStamina = Mathf.Clamp(sd.CurrentStamina, 0, Mathf.RoundToInt(_maxStamina));
+        _nextStaminaTime = StringToDateTime(sd.NextStaminaTime);
+        _lastStaminaTime = StringToDateTime(sd.LastStaminaTime);
+    }
+
+    #region Observable
     public void Subscribe(IObserver observer)
     {
         if (!_observers.Contains(observer))
@@ -186,4 +179,13 @@ public class GlobalStamine : MonoBehaviour, IObservable
             _observers.Remove(observer);
         }
     }
+
+    public void Notify()
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentStamina, _maxStamina, _time);
+        }
+    }
+    #endregion
 }

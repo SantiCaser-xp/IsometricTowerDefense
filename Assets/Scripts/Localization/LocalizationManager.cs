@@ -16,6 +16,12 @@ public class LocalizationManager : SingltonBase<LocalizationManager>
         _translate = LanguageU.LoadTranslate(data);
     }
 
+    private void Start()
+    {
+        Load();
+        EventTranslate?.Invoke();
+    }
+
     public string GetTranslate(string id)
     {
         if (!_translate.ContainsKey(language))
@@ -33,6 +39,23 @@ public class LocalizationManager : SingltonBase<LocalizationManager>
     {
         if (language == newLanguage) return;
         language = newLanguage;
+        Save();
         EventTranslate?.Invoke();
+        print("Language changed!");
+    }
+
+    void Save()
+    {
+        var sd = SaveWithJSON.Instance._settingsData;
+
+        sd.Language = language;
+        SaveWithJSON.Instance._settingsData = sd;
+        SaveWithJSON.Instance.SaveGame();
+    }
+
+    void Load()
+    {
+        var savedLang = SaveWithJSON.Instance._settingsData.Language;
+        ChangeLanguage(savedLang);
     }
 }

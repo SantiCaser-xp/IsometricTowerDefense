@@ -23,6 +23,7 @@ public class PerkUI : MonoBehaviour
 
     private void Start()
     {
+        Load();
         UpdateUI();
     }
 
@@ -49,6 +50,26 @@ public class PerkUI : MonoBehaviour
     private void OnBuyClicked()
     {
         _data.BuyPerk();
+        Save();
         _buyButton.gameObject.SetActive(false);
+    }
+
+    void Save()
+    {
+        var sd = SaveWithJSON.Instance._perksData;
+        sd.BoughtPerks.Add(_data);
+    }
+
+    void Load()
+    {
+        var sd = SaveWithJSON.Instance._perksData;
+
+        bool isBought = sd.BoughtPerks.Contains(_data);
+
+        if (isBought)
+        {
+            _buyButton.gameObject.SetActive(false); 
+            UpdateUI();                             
+        }
     }
 }
