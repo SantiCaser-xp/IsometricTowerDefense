@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,8 @@ using UnityEngine.Advertisements;
 public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     string _id;
-    [SerializeField] private IWantReward _giveRewardTo;
+    private RewardType _rewardType;
+
     public void Initialized(string id)
     {
         _id = id;
@@ -18,10 +20,11 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         Advertisement.Load(_id, this);
     }
 
-    public void ShowRewardedAd(IWantReward giveRewardTo)
+    public void ShowRewardedAd(RewardType rewardType)
     {
+        _rewardType = rewardType;
+        Debug.Log("Reward Type set to: " + _rewardType.ToString());
         Advertisement.Show(_id, this);
-        _giveRewardTo = giveRewardTo;
     }
 
 
@@ -53,7 +56,9 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
             if(showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
             {
                 Debug.Log("Unity Ads Rewarded Ad Completed");
-                _giveRewardTo.GiveReward();
+                Debug.Log("Rewarding player with: " + _rewardType.ToString());
+                EventManager.Trigger(EventType.OnAdFinished, _rewardType);
+
                 // Reward the user for watching the ad to completion.
             }
             else if (showCompletionState.Equals(UnityAdsShowCompletionState.SKIPPED))

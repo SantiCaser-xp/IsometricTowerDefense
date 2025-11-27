@@ -72,8 +72,6 @@ public abstract class AbstractTower : Destructible
             {
                 if (Vector3.Distance(transform.position, hit.transform.position) < radius)
                 {
-                    hit.gameObject.GetComponent<Renderer>().material.color = Color.red;
-                    Debug.Log(Vector3.Distance(transform.position, hit.transform.position));
                     enemiesInRange.Add(enemy);
                 }
             }
