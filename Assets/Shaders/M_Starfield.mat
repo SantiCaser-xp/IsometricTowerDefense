@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Hologram
-  m_Shader: {fileID: -6465566751694194690, guid: 986d836a32668f84a939a418918806fa,
+  m_Name: M_Starfield
+  m_Shader: {fileID: -6465566751694194690, guid: 7487ad1cca654984988ebb97bd7332a6,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,10 +24,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Albedo:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -42,26 +38,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DisplacementAmount: 0.13
-    - _DistortionFrequency: 3.4
-    - _Frequency: 31
-    - _Power: 1
+    - _BlinkSpeed: 0.002
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SecondLinesWidth: 0.04
-    - _Speed: 0.094
-    - _UsesTextureBase: 0
-    - _UsesTextureColor: 0
-    - _Width: 1
+    - _StarsAmount: 300.7
+    - _StarsPower: 1158.3
     m_Colors:
-    - _AlbedoOffset: {r: 0, g: 0, b: 0, a: 0}
-    - _AlbedoTiling: {r: 0, g: 0, b: 0, a: 0}
-    - _AlphaRange: {r: 0.375, g: 3.58, b: 0, a: 0}
-    - _Color: {r: 1, g: 0, b: 0, a: 0}
-    - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
-    - _SecondLinesColor: {r: 0.82547176, g: 1, b: 0.9748134, a: 0}
+    - _Color: {r: 66.89993, g: 6.85585, b: 3.152351, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &7746646821643708613
+--- !u!114 &8297456658169084749
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
