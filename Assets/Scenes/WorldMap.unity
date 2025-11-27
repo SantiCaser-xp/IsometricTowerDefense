@@ -1479,11 +1479,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510cc716e3331614e97f521fe1a6f74c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _internalLevelName: Mobile Lv1 (2)
-  _levelName: Level 1
+  _internalLevelName: LevelPC
+  _levelName: Level mobile
   _levelSign: {fileID: 1389811657}
-  _showStaminaAdScreen: {fileID: 0}
-  _globalStamina: {fileID: 0}
+  _showStaminaAdScreen: {fileID: 314577875}
+  _globalStamina: {fileID: 6335021462598354873}
 --- !u!114 &1684327143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1523,7 +1523,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1684327144}
   m_OnClick:
     m_PersistentCalls:
