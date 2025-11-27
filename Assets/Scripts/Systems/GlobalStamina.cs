@@ -97,6 +97,15 @@ public class GlobalStamina : MonoBehaviour, IObservable
         UseStamina(25);
     }
 
+    public void AddStamina(int value)
+    {
+        if (value <= 0) return;
+        _currentStamina += value;
+        _currentStamina = Mathf.Clamp(_currentStamina, 0, _maxStamina);
+        Save();
+        Notify();
+    }
+
     public bool UseStamina(int value)
     {
         if(_currentStamina - value >= 0)

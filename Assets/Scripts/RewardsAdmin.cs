@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RewardsAdmin : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] GlobalStamina _globalStamina;
     void Start()
     {
         EventManager.Subscribe(EventType.OnAdFinished, OnAdFinishedd);
@@ -27,12 +27,17 @@ public class RewardsAdmin : MonoBehaviour
             RewardType rewardType = (RewardType)rewardTypeObj;
             switch (rewardType)
             {
-                case RewardType.InitialCoins:
-                    Debug.Log("Player rewarded with Initial Coins");
-                    ApplyCoinsReward();
+                case RewardType.AddExperience:
+                    Debug.Log("Player rewarded with Experience");
+                    AddExperience();
                     break;
                 case RewardType.StaminaBoost:
+                    AddStamina();
                     Debug.Log("Player rewarded with Stamina");
+                    break;
+                case RewardType.AddPerksPoint:
+                    AddPerk();
+                    Debug.Log("Player rewarded with perkPoints");
                     break;
                 default:
                     Debug.Log("Unknown reward type");
@@ -42,14 +47,19 @@ public class RewardsAdmin : MonoBehaviour
         
     }
 
-    public void ApplyCoinsReward()
+    public void AddExperience()
     {
-        PerkSkillManager.Instance.ChangeGold(1);
+        ExperienceSystem.Instance.AddExperience(5f);
+        ExperienceSystem.Instance.Save();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddStamina()
     {
-        
+        _globalStamina.AddStamina(25);
+    }
+    public void AddPerk()
+    {
+        ExperienceSystem.Instance.AddPerk();
+        ExperienceSystem.Instance.Save();
     }
 }

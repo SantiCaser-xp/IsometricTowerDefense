@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowRewardScreen : MonoBehaviour, IWantReward, IScreen
+public class ShowRewardScreen : MonoBehaviour, IScreen
 {
     [SerializeField] GameObject _root;
     [SerializeField] GameObject _levelScreen;
@@ -24,15 +24,10 @@ public class ShowRewardScreen : MonoBehaviour, IWantReward, IScreen
         _root.SetActive(false);
     }
 
-    public void GiveReward()
-    {
-        Debug.Log("Rewarded Ad Finished - Give Reward to Player");
-    }
-
     public void ShowAd()
     {
         //AdsManager.Instance.ShowMyRewardedAd(this);
-        AdsManager.Instance.ShowMyRewardedAd(RewardType.InitialCoins);
+        AdsManager.Instance.ShowMyRewardedAd(RewardType.AddExperience);
         ScreenManager.Instance.DeactivateScreen();
     }
 
