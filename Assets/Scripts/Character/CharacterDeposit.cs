@@ -7,7 +7,7 @@ public class CharacterDeposit : MonoBehaviour, IObservable
     private int _maxGold = 9999;
     private int _currentGold = 0;
     public int CurrentGold => _currentGold;
-    private int _savedGold = 0;
+    //private int _savedGold = 0;
     //private int _startedDeposit = 5;
     List<IObserver> _observers = new List<IObserver>();
 
@@ -17,7 +17,7 @@ public class CharacterDeposit : MonoBehaviour, IObservable
 
         Notify();
 
-        RemoteConfigService.Instance.FetchCompleted += UpdateData;
+        //RemoteConfigService.Instance.FetchCompleted += UpdateData;
     }
 
     public void AddDeposit(int amount)
@@ -42,28 +42,28 @@ public class CharacterDeposit : MonoBehaviour, IObservable
         Notify();
     }
 
-    /*public void ChangeStartedDeposit(int amount)
-    {
-        _startedDeposit += amount;
-    }*/
+    //public void ChangeStartedDeposit(int amount)
+    //{
+    //    _startedDeposit += amount;
+    //}
 
-    public void UpdateData(ConfigResponse configResponse)
-    {
-        var hasCero = RemoteConfigService.Instance.appConfig.GetBool("SetMoneyTo0");
+    //public void UpdateData(ConfigResponse configResponse)
+    //{
+    //    var hasCero = RemoteConfigService.Instance.appConfig.GetBool("SetMoneyTo0");
 
-        if (hasCero)
-        {
-            _savedGold = _currentGold;
-            _currentGold = 0;
-        }
-        else
-        {
-            _currentGold += _savedGold;
-            _savedGold = 0;
-        }
+    //    if (hasCero)
+    //    {
+    //        _savedGold = _currentGold;
+    //        _currentGold = 0;
+    //    }
+    //    else
+    //    {
+    //        _currentGold += _savedGold;
+    //        _savedGold = 0;
+    //    }
 
-        Notify();
-    }
+    //    Notify();
+    //}
 
     #region Observable
     public void Subscribe(IObserver observer)

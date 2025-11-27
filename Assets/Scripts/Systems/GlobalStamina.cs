@@ -10,6 +10,7 @@ public class GlobalStamina : MonoBehaviour, IObservable
     [SerializeField] float _maxStamina = 100f;
     [SerializeField] LocalizationTime _myLoc;
     float _currentStamina = 0f;
+    public float CurrentStamina => _currentStamina;
     bool _recharging = false;
 
     DateTime _nextStaminaTime;
@@ -95,6 +96,15 @@ public class GlobalStamina : MonoBehaviour, IObservable
     public void TakeStamina()
     {
         UseStamina(25);
+    }
+
+    public void AddStamina(int value)
+    {
+        if (value <= 0) return;
+        _currentStamina += value;
+        _currentStamina = Mathf.Clamp(_currentStamina, 0, _maxStamina);
+        Save();
+        Notify();
     }
 
     public bool UseStamina(int value)

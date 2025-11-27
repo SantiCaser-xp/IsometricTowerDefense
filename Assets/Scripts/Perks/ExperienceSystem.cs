@@ -113,7 +113,8 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
         OnGameLose(scene, mode);
     }
 
-    void Save(params object[] parameters)
+
+    public void Save(params object[] parameters)
     {
         if (SaveWithJSON.Instance == null) return;
 

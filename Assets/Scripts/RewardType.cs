@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum RewardType
 {
-    InitialCoins,
+    AddExperience,
+    AddPerksPoint,
     StaminaBoost,
 }
