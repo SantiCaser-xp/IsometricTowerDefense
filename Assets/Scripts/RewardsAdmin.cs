@@ -5,9 +5,26 @@ using UnityEngine;
 public class RewardsAdmin : MonoBehaviour
 {
     [SerializeField] GlobalStamina _globalStamina;
+    [SerializeField] GameObject floatingAdGO;
+    [SerializeField] float _timerToShowAd = 10f;
+
     void Start()
     {
+        floatingAdGO.SetActive(false);
         EventManager.Subscribe(EventType.OnAdFinished, OnAdFinishedd);
+    }
+
+    private void Update()
+    {
+        if (floatingAdGO.activeSelf) return;
+
+        _timerToShowAd -= Time.deltaTime;
+
+        if (_timerToShowAd <= 0f)
+        {
+            _timerToShowAd = 10f;
+            floatingAdGO.SetActive(true);
+        }
     }
 
     private void OnDisable()

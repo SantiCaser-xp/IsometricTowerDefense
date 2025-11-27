@@ -7,7 +7,6 @@ public class ShowRewardScreen : MonoBehaviour, IScreen
     [SerializeField] GameObject _levelScreen;
     [SerializeField] Button _yesButton;
     [SerializeField] Button _noButton;
-
     void Awake()
     {
         _yesButton.onClick.AddListener(ShowAd);
@@ -27,7 +26,7 @@ public class ShowRewardScreen : MonoBehaviour, IScreen
     public void ShowAd()
     {
         //AdsManager.Instance.ShowMyRewardedAd(this);
-        AdsManager.Instance.ShowMyRewardedAd(RewardType.AddExperience);
+        AdsManager.Instance.ShowMyRewardedAd(RewardType.StaminaBoost);
         ScreenManager.Instance.DeactivateScreen();
     }
 

@@ -5,9 +5,9 @@ public class LevelButton : MonoBehaviour
 {
     [SerializeField] private string _internalLevelName = "";
     [SerializeField] private string _levelName = "";
-    [SerializeField] private bool _bttnAlreadyPushedThisSession = false;
     [SerializeField] LevelsSignScreen _levelSign;
-    [SerializeField] ShowRewardScreen showRewardScreen;
+    [SerializeField] ShowRewardScreen _showStaminaAdScreen;
+    [SerializeField] GlobalStamina _globalStamina;
 
     Button _button;
 
@@ -23,10 +23,10 @@ public class LevelButton : MonoBehaviour
 
     private void OnButtonClick()
     {
-        if (!_bttnAlreadyPushedThisSession)
+        if (_globalStamina.CurrentStamina < 25f)
         {
-            _bttnAlreadyPushedThisSession = true;
-            ScreenManager.Instance.ActivateScreen(showRewardScreen);
+            ScreenManager.Instance.ActivateScreen(_showStaminaAdScreen);
+            return;
         }
         else
         {
