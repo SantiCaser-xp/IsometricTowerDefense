@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &71150148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 71150150}
+  - component: {fileID: 71150149}
+  m_Layer: 0
+  m_Name: RewardsAdmin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &71150149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71150148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1df9b393928464bb6ceafcce2ee3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &71150150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71150148}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 912.1126, y: 570.56903, z: 4.472168}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &122924039
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1235,6 +1279,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 733971066522552236, guid: b1058385900a4dd4fa82eec43a3a969f,
+        type: 3}
+      propertyPath: m_text
+      value: Yes
+      objectReference: {fileID: 0}
+    - target: {fileID: 733971066522552236, guid: b1058385900a4dd4fa82eec43a3a969f,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 26.85
+      objectReference: {fileID: 0}
     - target: {fileID: 817589401296356249, guid: b1058385900a4dd4fa82eec43a3a969f,
         type: 3}
       propertyPath: _sceneName
@@ -1250,6 +1304,16 @@ PrefabInstance:
       propertyPath: _globalStamine
       value: 
       objectReference: {fileID: 6335021462598354873}
+    - target: {fileID: 1178586362544755606, guid: b1058385900a4dd4fa82eec43a3a969f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858551867414258600, guid: b1058385900a4dd4fa82eec43a3a969f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1983738389488728403, guid: b1058385900a4dd4fa82eec43a3a969f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1350,10 +1414,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4777691774996227972, guid: b1058385900a4dd4fa82eec43a3a969f,
+        type: 3}
+      propertyPath: m_text
+      value: Watch Ad for more initial gold?
+      objectReference: {fileID: 0}
     - target: {fileID: 7193262779082816671, guid: b1058385900a4dd4fa82eec43a3a969f,
         type: 3}
       propertyPath: m_Name
       value: AdvertismentCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185416906949316326, guid: b1058385900a4dd4fa82eec43a3a969f,
+        type: 3}
+      propertyPath: m_text
+      value: No
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1684,6 +1758,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 921363061}
   - {fileID: 1700109232}
+  - {fileID: 71150150}
   - {fileID: 1403487451233769366}
   - {fileID: 8186423652645560189}
   - {fileID: 8950039186057593863}

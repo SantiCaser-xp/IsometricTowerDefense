@@ -45,8 +45,8 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener
         Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
     }
 
-    public void ShowMyRewardedAd(IWantReward giveRewardTo)
+    public void ShowMyRewardedAd(RewardType rewardType)
     {
-        _playstoreRewardedScript.ShowRewardedAd(giveRewardTo);
+        _playstoreRewardedScript.ShowRewardedAd(rewardType);
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public static class EventManager
 {
@@ -26,7 +27,9 @@ public static class EventManager
 
     public static void Trigger(EventType type, params object[] parameters)
     {
+        //Debug.WriteLineIf(EventType.OnAdFinished == type, "Event Triggered: " + type.ToString());
         if (_events.ContainsKey(type))
             _events[type](parameters);
+
     }
 }

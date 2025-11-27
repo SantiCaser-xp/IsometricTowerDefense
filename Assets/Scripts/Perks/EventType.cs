@@ -3,5 +3,6 @@ public enum EventType
     OnPerkChanged,
     OnGameOver,
     OnGameWin,
-    OnEnemyKilled
+    OnEnemyKilled,
+    OnAdFinished
 }

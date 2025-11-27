@@ -31,7 +31,8 @@ public class ShowRewardScreen : MonoBehaviour, IWantReward, IScreen
 
     public void ShowAd()
     {
-        AdsManager.Instance.ShowMyRewardedAd(this);
+        //AdsManager.Instance.ShowMyRewardedAd(this);
+        AdsManager.Instance.ShowMyRewardedAd(RewardType.InitialCoins);
         ScreenManager.Instance.DeactivateScreen();
     }
 
