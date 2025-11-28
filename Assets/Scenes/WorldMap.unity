@@ -2486,6 +2486,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1445137663013020065, guid: a87eb17e443eb3a49aa416ad692979a4,
         type: 3}
+      propertyPath: _levelName
+      value: Level Mobile
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445137663013020065, guid: a87eb17e443eb3a49aa416ad692979a4,
+        type: 3}
       propertyPath: _levelSign
       value: 
       objectReference: {fileID: 1389811657}
@@ -2496,9 +2501,24 @@ PrefabInstance:
       objectReference: {fileID: 6335021462598354873}
     - target: {fileID: 1445137663013020065, guid: a87eb17e443eb3a49aa416ad692979a4,
         type: 3}
+      propertyPath: _internalLevelName
+      value: Level Mobile
+      objectReference: {fileID: 0}
+    - target: {fileID: 1445137663013020065, guid: a87eb17e443eb3a49aa416ad692979a4,
+        type: 3}
       propertyPath: _showStaminaAdScreen
       value: 
       objectReference: {fileID: 314577875}
+    - target: {fileID: 1599445907281588126, guid: a87eb17e443eb3a49aa416ad692979a4,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1662370508412688612, guid: a87eb17e443eb3a49aa416ad692979a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2271721926418326093, guid: a87eb17e443eb3a49aa416ad692979a4,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2512,7 +2532,7 @@ PrefabInstance:
     - target: {fileID: 2356891673603008463, guid: a87eb17e443eb3a49aa416ad692979a4,
         type: 3}
       propertyPath: m_Interactable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4298640935793855378, guid: a87eb17e443eb3a49aa416ad692979a4,
         type: 3}
@@ -2524,6 +2544,16 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 2085980119}
+    - target: {fileID: 4804628343001511836, guid: a87eb17e443eb3a49aa416ad692979a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5090964403335861464, guid: a87eb17e443eb3a49aa416ad692979a4,
+        type: 3}
+      propertyPath: _levelName
+      value: Level Mobile
+      objectReference: {fileID: 0}
     - target: {fileID: 5090964403335861464, guid: a87eb17e443eb3a49aa416ad692979a4,
         type: 3}
       propertyPath: _levelSign
@@ -2534,6 +2564,11 @@ PrefabInstance:
       propertyPath: _globalStamina
       value: 
       objectReference: {fileID: 6335021462598354873}
+    - target: {fileID: 5090964403335861464, guid: a87eb17e443eb3a49aa416ad692979a4,
+        type: 3}
+      propertyPath: _internalLevelName
+      value: Level Mobile
+      objectReference: {fileID: 0}
     - target: {fileID: 5090964403335861464, guid: a87eb17e443eb3a49aa416ad692979a4,
         type: 3}
       propertyPath: _showStaminaAdScreen
@@ -2663,6 +2698,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LevelsCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8029791585101418843, guid: a87eb17e443eb3a49aa416ad692979a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2813,6 +2853,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 817589401296356249, guid: b1058385900a4dd4fa82eec43a3a969f,
+        type: 3}
+      propertyPath: _sceneName
+      value: Level Mobile
+      objectReference: {fileID: 0}
     - target: {fileID: 817589401296356249, guid: b1058385900a4dd4fa82eec43a3a969f,
         type: 3}
       propertyPath: _globalStamina
@@ -3054,6 +3099,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5155484566351177735, guid: 7016a22b2b9d2a94f802c30c01228646,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155484566351177735, guid: 7016a22b2b9d2a94f802c30c01228646,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155484566351177735, guid: 7016a22b2b9d2a94f802c30c01228646,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5349689475601419430, guid: 7016a22b2b9d2a94f802c30c01228646,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3098,6 +3158,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PerksUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448851506916956937, guid: 7016a22b2b9d2a94f802c30c01228646,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6519826938346865873, guid: 7016a22b2b9d2a94f802c30c01228646,
         type: 3}
