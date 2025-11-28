@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0376710a13c0446817ced9c14f9087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clip: {fileID: 8300000, guid: 9f34b51621c9b524abe399318c9d228b, type: 3}
+  _clip: {fileID: 8300000, guid: 69bce5c59a334c343a893fa3a79f36ee, type: 3}
 --- !u!82 &2894191389130768351
 AudioSource:
   m_ObjectHideFlags: 0
@@ -57,8 +57,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.597
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 4118140657250400014}
   - component: {fileID: 8735884578148876764}
   - component: {fileID: 4178035083812216121}
+  - component: {fileID: 5226355629328898156}
   m_Layer: 0
   m_Name: Shield
   m_TagString: Untagged
@@ -170,7 +171,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5572388406747558614}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.58535653, z: -0, w: 0.81077605}
+  m_LocalRotation: {x: 0, y: 0.585354, z: 0, w: 0.8107779}
   m_LocalPosition: {x: -10.09, y: -0.03, z: 15.27}
   m_LocalScale: {x: 8.212282, y: 8.212282, z: 8.212282}
   m_ConstrainProportionsScale: 0
@@ -264,3 +265,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5226355629328898156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5572388406747558614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
