@@ -86,6 +86,11 @@ public class HeavyTurret : AbstractTower
         bullet.transform.position = firePoint.position;
         bullet.transform.rotation = firePoint.rotation;
         bullet.Init(firePoint.position, targetTransform.position, _maxHeight, _flightDuration);
+
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentHealth, _maxHealth);
+        }
     }
 
     public override void Die()
