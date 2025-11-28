@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TowerShootSFX : MonoBehaviour, IObserver
 {
-    [SerializeField] private AudioSource _audiosource;
+    private AudioSource _audiosource;
     [SerializeField] private AudioClip _clip;
 
     private void Awake()
