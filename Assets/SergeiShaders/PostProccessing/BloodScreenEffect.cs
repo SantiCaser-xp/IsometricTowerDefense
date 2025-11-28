@@ -15,11 +15,17 @@ public class BloodScreenEffect : MonoBehaviour, IObserver
         }
 
         obs.Subscribe(this);
+        ResetBloodScreen();
     }
 
-    private void Start()
+    void OnEnable()
     {
-        _material.SetFloat("_Alpha", 0f);
+        EventManager.Subscribe(EventType.OnGameWin, ResetBloodScreen);
+    }
+
+    void OnDisable()
+    {
+        EventManager.Unsubscribe(EventType.OnGameWin, ResetBloodScreen);
     }
 
     public void UpdateData(params object[] values)
@@ -27,5 +33,10 @@ public class BloodScreenEffect : MonoBehaviour, IObserver
         float current = (float)values[0];
 
         if (current <= 50) _material.SetFloat("_Alpha", 1f);
+    }
+
+    void ResetBloodScreen(params object[] arg)
+    {
+        _material.SetFloat("_Alpha", 0f);
     }
 }
