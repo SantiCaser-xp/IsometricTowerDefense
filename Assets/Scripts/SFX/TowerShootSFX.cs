@@ -24,4 +24,9 @@ public class TowerShootSFX : MonoBehaviour, IObserver
     {
         _audiosource.PlayOneShot(_clip);
     }
+
+    public void StopSFX()
+    {
+        _audiosource.Stop();
+    }
 }
