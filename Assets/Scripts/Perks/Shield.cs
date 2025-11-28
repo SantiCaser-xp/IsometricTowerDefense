@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Shield : MonoBehaviour
+public class Shield : MonoBehaviour, IObservable
 {
     [SerializeField,Range(0.35f,1f)] float _effectPower;
     [SerializeField] float _workInterval;
@@ -10,6 +12,9 @@ public class Shield : MonoBehaviour
     Collider _collider;
     Coroutine _coroutine;
     bool _isActivated;
+    List<IObserver> _observers = new List<IObserver>();
+    float _currentHealth;
+    float _maxHealth;
 
     private void Awake()
     {
@@ -20,6 +25,7 @@ public class Shield : MonoBehaviour
 
     public void ToggleIsActivated()
     {
+        Notify();
         _isActivated = !_isActivated;
 
         if (_coroutine != null) StopCoroutine(_coroutine);
@@ -32,7 +38,8 @@ public class Shield : MonoBehaviour
         if(_isActivated)
         {
             _collider.enabled = true;
-            
+
+
             while (_effectPower < 1f)
             {
                 _effectPower = Mathf.MoveTowards(_effectPower, 1f, Time.deltaTime * _speed);
@@ -56,4 +63,30 @@ public class Shield : MonoBehaviour
 
         _coroutine = null;
     }
+
+    #region Observable
+    public void Subscribe(IObserver observer)
+    {
+        if (!_observers.Contains(observer))
+        {
+            _observers.Add(observer);
+        }
+    }
+
+    public void Unsubscribe(IObserver observer)
+    {
+        if (_observers.Contains(observer))
+        {
+            _observers.Remove(observer);
+        }
+    }
+
+    public void Notify()
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData();
+        }
+    }
+    #endregion
 }

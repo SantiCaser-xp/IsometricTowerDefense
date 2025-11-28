@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbstractGreanade : MonoBehaviour
+public abstract class AbstractGreanade : MonoBehaviour, IObservable
 {
     protected Vector3 startPos;
     protected Vector3 targetPos;
@@ -14,6 +15,8 @@ public abstract class AbstractGreanade : MonoBehaviour
     [SerializeField] protected Animator _anim;
     protected ObjectPool<AbstractGreanade> _myPool;
     [SerializeField] protected GameObject mesh;
+    private List<IObserver> _observers = new List<IObserver>();
+
 
     public void Initialize(ObjectPool<AbstractGreanade> pool)
     {
@@ -50,6 +53,7 @@ public abstract class AbstractGreanade : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Placement"))
         {
+            Notify();
             Collider[] _hitedEnemies = Physics.OverlapSphere(transform.position, radius, _enemyMask);
             foreach (var hit in _hitedEnemies)
             {
@@ -67,4 +71,30 @@ public abstract class AbstractGreanade : MonoBehaviour
     {
         mesh.SetActive(true);
     }
+
+    #region Observable
+    public void Subscribe(IObserver observer)
+    {
+        if (!_observers.Contains(observer))
+        {
+            _observers.Add(observer);
+        }
+    }
+
+    public void Unsubscribe(IObserver observer)
+    {
+        if (_observers.Contains(observer))
+        {
+            _observers.Remove(observer);
+        }
+    }
+
+    public void Notify()
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData();
+        }
+    }
+    #endregion
 }

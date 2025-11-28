@@ -29,6 +29,10 @@ public class PlayerBase : Destructible
     {
         base.TakeDamage(damage);
         _animator.SetTrigger("Hit");
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_currentHealth, _maxHealth);
+        }
     }
 
     public override void Die()

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using System;
 
-public class NewPlacementSystem : MonoBehaviour
+public class NewPlacementSystem : MonoBehaviour,IObservable
 {
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float placementDistance = 2f;
@@ -20,6 +21,7 @@ public class NewPlacementSystem : MonoBehaviour
     [SerializeField] private int currentPrice;
     private GameObject currentGhost;
     private int currentID;
+    private List<IObserver> _observers = new List<IObserver>();
 
 
 
@@ -92,6 +94,7 @@ public class NewPlacementSystem : MonoBehaviour
         if (data != null && data.Prefab != null)
         {
             Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
+            Notify();
             Instantiate(data.Prefab, placementPosition, Quaternion.identity);
         }
     }
@@ -128,4 +131,30 @@ public class NewPlacementSystem : MonoBehaviour
         yield return new WaitForSeconds(2);
         Advise.SetActive(false);
     }
+
+    #region Observable
+    public void Subscribe(IObserver observer)
+    {
+        if (!_observers.Contains(observer))
+        {
+            _observers.Add(observer);
+        }
+    }
+
+    public void Unsubscribe(IObserver observer)
+    {
+        if (_observers.Contains(observer))
+        {
+            _observers.Remove(observer);
+        }
+    }
+
+    public void Notify()
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData();
+        }
+    }
+    #endregion
 }

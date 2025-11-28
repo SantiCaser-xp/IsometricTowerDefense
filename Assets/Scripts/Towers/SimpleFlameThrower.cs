@@ -20,6 +20,8 @@ public class SimpleFlameThrower : AbstractTower
 
     [SerializeField] VisualEffect flameVFX;
 
+    [SerializeField] TowerShootSFX shootSFX;
+
     [Header("Rotation Settings")]
     [SerializeField] protected TowerMeshRotator _meshTopRotatior;
 
@@ -42,6 +44,7 @@ public class SimpleFlameThrower : AbstractTower
             if (damageCoroutine != null)
             {
                 flameVFX.Stop();
+                shootSFX.StopSFX();
                 StopCoroutine(damageCoroutine);
                 damageCoroutine = null;
                 _anim.SetBool("IsShooting", false);
@@ -77,6 +80,7 @@ public class SimpleFlameThrower : AbstractTower
                     item.TakeDamage(damage);
                 }
             }
+            Notify();
             yield return new WaitForSeconds(1f);
         }
         damageCoroutine = null;
