@@ -32,45 +32,33 @@ public class NewPlacementSystem : MonoBehaviour,IObservable
         {
             UpdateGhostPosition();
             isGhostColliding = currentGhost.GetComponent<GhostCollDetector>().isColliding;
-
-#if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetMouseButtonDown(0))
             {
                 if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                {
                     return;
-                TryPlaceObject();
-            }
-#elif UNITY_ANDROID || UNITY_IOS
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-                return;
-            TryPlaceObject();
-        }
-#endif
-        }
-    }
+                }
 
-    private void TryPlaceObject()
-    {
-        if (_deposit.CurrentGold >= currentPrice && !isGhostColliding)
-        {
-            PlaceObject();
-            _deposit.SubstructDeposit(currentPrice);
-        }
-        else
-        {
-            if (isGhostColliding)
-            {
-                cantPlaceText.SetActive(true);
-                StartCoroutine(FadeOutText(cantPlaceText));
-            }
+                if (_deposit.CurrentGold >= currentPrice && !isGhostColliding)
+                {
+                    PlaceObject();
+                    _deposit.SubstructDeposit(currentPrice);
+                }
+                else
+                {
+                    if (isGhostColliding)
+                    {
+                        cantPlaceText.SetActive(true);
+                        StartCoroutine(FadeOutText(cantPlaceText));
+                    }
 
-            if (_deposit.CurrentGold < currentPrice)
-            {
-                outOfCashText.SetActive(true);
-                StartCoroutine(FadeOutText(outOfCashText));
-                StopPlacement();
+                    if (_deposit.CurrentGold < currentPrice)
+                    {
+                        outOfCashText.SetActive(true);
+                        StartCoroutine(FadeOutText(outOfCashText));
+                        StopPlacement();
+                    }
+                }
             }
         }
     }
