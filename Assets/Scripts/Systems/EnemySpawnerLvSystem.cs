@@ -39,10 +39,14 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
     public void Spawn(EnemyFactory currFactory)
     {
         var enemy = currFactory.Create();
-        //enemy.transform.position = _currentZone.position;
-        enemy.transform.position = new Vector3 (_currentZone.position.x + Random.Range(3,6),
+
+        /*enemy.transform.position = new Vector3 (_currentZone.position.x + Random.Range(3,6),
             _currentZone.position.y,
-            _currentZone.position.z + Random.Range(3, 6));
+            _currentZone.position.z + Random.Range(3, 6));*/
+
+        enemy.transform.position = new Vector3(_currentZone.position.x,
+            _currentZone.position.y,
+            _currentZone.position.z);
     }
 
     private void OnDestroy()
