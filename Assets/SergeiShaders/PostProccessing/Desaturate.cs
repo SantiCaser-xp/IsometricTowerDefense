@@ -19,13 +19,25 @@ public class Desaturate : MonoBehaviour, IObserver
         obs.Subscribe(this);   
     }
 
-    void Start()
+    void OnEnable()
     {
-        _material.SetFloat("_Rang", 1f);
+        EventManager.Subscribe(EventType.OnGameWin, ResetDesaturation);
+        EventManager.Subscribe(EventType.OnGameOver, ResetDesaturation);
+    }
+
+    void OnDisable()
+    {
+        EventManager.Unsubscribe(EventType.OnGameWin, ResetDesaturation);
+        EventManager.Unsubscribe(EventType.OnGameOver, ResetDesaturation);
     }
 
     public void UpdateData(params object[] values)
     {
         _material.SetFloat("_Rang", (float)values[0] / (float)values[1]);
+    }
+
+    private void ResetDesaturation(params object[] args)
+    {
+        _material.SetFloat("_Rang", 1f);
     }
 }

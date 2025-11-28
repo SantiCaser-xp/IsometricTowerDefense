@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using System;
 
-public class NewPlacementSystem : MonoBehaviour,IObservable
+public class NewPlacementSystem : MonoBehaviour, IObservable
 {
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float placementDistance = 2f;

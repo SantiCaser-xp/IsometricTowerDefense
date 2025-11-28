@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -14,11 +15,22 @@ public class Rain : MonoBehaviour
     Coroutine _coroutine;
     bool _isActivated;
 
+    void OnEnable()
+    {
+        EventManager.Subscribe(EventType.OnGameWin, ResetRainScreen);
+        EventManager.Subscribe(EventType.OnGameOver, ResetRainScreen);
+    }
+
     private void Start()
     {
-        _rainVFX.Stop();
-        _meshRenderer.material.SetFloat("_PoundIntencity", _effectPower);
-        _material.SetFloat("_Intensity", _effectScreenPower);
+        ResetRainScreen();
+    }
+
+    
+    void OnDisable()
+    {
+        EventManager.Unsubscribe(EventType.OnGameWin, ResetRainScreen);
+        EventManager.Unsubscribe(EventType.OnGameOver, ResetRainScreen);
     }
 
     [ContextMenu("Activate Rain")]
@@ -63,5 +75,12 @@ public class Rain : MonoBehaviour
         }
 
         _coroutine = null;
+    }
+
+    void ResetRainScreen(params object[] arg)
+    {
+        _rainVFX.Stop();
+        _meshRenderer.material.SetFloat("_PoundIntencity", _effectPower);
+        _material.SetFloat("_Intensity", _effectScreenPower);
     }
 }
