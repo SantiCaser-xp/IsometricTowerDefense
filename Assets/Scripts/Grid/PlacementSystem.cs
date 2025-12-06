@@ -49,14 +49,14 @@ public class PlacementSystem : MonoBehaviour
 
         if (_deposit.CurrentGold >= price)
         {
-            Debug.Log("Comprado!");
+            //Debug.Log("Comprado!");
             _deposit.SubstructDeposit(price);
             buildingState.OnAction(placementPosition);
         }
         else
         {
             StopPlacement();
-            Debug.Log("Yo don´t have money!");
+            //Debug.Log("Yo don´t have money!");
         }
     }
 

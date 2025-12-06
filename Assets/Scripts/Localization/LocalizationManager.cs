@@ -41,7 +41,7 @@ public class LocalizationManager : SingltonBase<LocalizationManager>
         language = newLanguage;
         Save();
         EventTranslate?.Invoke();
-        print("Language changed!");
+        //print("Language changed!");
     }
 
     void Save()

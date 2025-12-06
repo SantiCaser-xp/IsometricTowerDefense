@@ -19,13 +19,13 @@ public class EnemyState<T, J> where J : MonoBehaviour       /*IEnemyState<T>*/
     }
     public virtual void OnEnter()
     {
-        Debug.Log($"Entered {this.GetType().ToString()} state");
+        //Debug.Log($"Entered {this.GetType().ToString()} state");
     }
     public virtual void OnExecute() { }
     public virtual void OnFixedExecute() { }
     public virtual void OnExit()
     {
-        Debug.Log($"Exit {this.GetType().ToString()} state");
+        //Debug.Log($"Exit {this.GetType().ToString()} state");
     }
 
 

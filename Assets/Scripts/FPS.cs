@@ -4,6 +4,12 @@ public class FPS : MonoBehaviour
 {
     float smoothedFPS;
 
+    private void Start()
+    {  
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+    }
+
     void Update()
     {
         float currentFPS = 1f / Time.unscaledDeltaTime;

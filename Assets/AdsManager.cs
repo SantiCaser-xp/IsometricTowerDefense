@@ -36,13 +36,13 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener
 
     public void OnInitializationComplete()
     {
-        Debug.Log("Unity Ads Initialization Complete.");
+        //Debug.Log("Unity Ads Initialization Complete.");
         _playstoreRewardedScript.Initialized(_playstoreRewardedID);
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
     {
-        Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
+        //Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
     }
 
     public void ShowMyRewardedAd(RewardType rewardType)

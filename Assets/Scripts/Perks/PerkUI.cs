@@ -5,6 +5,7 @@ using UnityEngine;
 public class PerkUI : MonoBehaviour
 {
     [SerializeField] private Image _icon;
+    [SerializeField] private Image _iconDone;
     [SerializeField] private TMP_Text _nameText;
     [SerializeField] private TMP_Text _descriptionText;
     [SerializeField] private TMP_Text _priceText;
@@ -36,6 +37,7 @@ public class PerkUI : MonoBehaviour
     {
         _icon.sprite = data.Icon;
         _buyButton.onClick.AddListener(OnBuyClicked);
+        _iconDone.gameObject.SetActive(false);
     }
 
     private void UpdateUI(params object[] parameters)
@@ -50,8 +52,10 @@ public class PerkUI : MonoBehaviour
     private void OnBuyClicked()
     {
         _data.BuyPerk();
-        Save();
         _buyButton.gameObject.SetActive(false);
+        _priceText.gameObject.SetActive(false);
+        _iconDone.gameObject.SetActive(true);
+        Save();
     }
 
     void Save()
@@ -69,6 +73,8 @@ public class PerkUI : MonoBehaviour
         if (isBought)
         {
             _buyButton.gameObject.SetActive(false); 
+            _priceText.gameObject.SetActive(false);
+            _iconDone.gameObject.SetActive(true);
             UpdateUI();                             
         }
     }

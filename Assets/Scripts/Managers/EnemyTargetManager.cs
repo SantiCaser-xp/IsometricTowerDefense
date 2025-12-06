@@ -151,13 +151,13 @@ public class EnemyTargetManager : SingltonBase<EnemyTargetManager>
         return nearby;
     }
     #endregion
-    private void OnGUI()
+    /*private void OnGUI()
     {
         if (showDebugInfo)
         {
             GUI.Label(new Rect(10, 30, 200, 20), $"Registred targets: {allTargets.Count}");
         }
-    }
+    }*/
 
 
 

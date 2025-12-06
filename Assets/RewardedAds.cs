@@ -23,7 +23,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     public void ShowRewardedAd(RewardType rewardType)
     {
         _rewardType = rewardType;
-        Debug.Log("Reward Type set to: " + _rewardType.ToString());
+        //Debug.Log("Reward Type set to: " + _rewardType.ToString());
         Advertisement.Show(_id, this);
     }
 
@@ -32,12 +32,12 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     public void OnUnityAdsAdLoaded(string placementId)
     {
-        Debug.Log("Ad Loaded Successfully.");
+        //Debug.Log("Ad Loaded Successfully.");
     }
 
     public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
     {
-        Debug.Log($"Error loading Ad Unit {placementId}: {error.ToString()} - {message}");
+        //Debug.Log($"Error loading Ad Unit {placementId}: {error.ToString()} - {message}");
         //LoadRewardedAd();
     }
 
@@ -46,7 +46,7 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     public void OnUnityAdsShowClick(string placementId)
     {
-        Debug.Log("Ad Clicked.");
+        //Debug.Log("Ad Clicked.");
     }
 
     public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
@@ -55,20 +55,20 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         {
             if(showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
             {
-                Debug.Log("Unity Ads Rewarded Ad Completed");
-                Debug.Log("Rewarding player with: " + _rewardType.ToString());
+                //Debug.Log("Unity Ads Rewarded Ad Completed");
+                //Debug.Log("Rewarding player with: " + _rewardType.ToString());
                 EventManager.Trigger(EventType.OnAdFinished, _rewardType);
 
                 // Reward the user for watching the ad to completion.
             }
             else if (showCompletionState.Equals(UnityAdsShowCompletionState.SKIPPED))
             {
-                Debug.Log("Unity Ads Rewarded Ad Skipped");
+                //Debug.Log("Unity Ads Rewarded Ad Skipped");
                 // Do not reward the user for skipping the ad.
             }
             else if (showCompletionState.Equals(UnityAdsShowCompletionState.UNKNOWN))
             {
-                Debug.Log("Unity Ads Rewarded Ad Unknown");
+                //Debug.Log("Unity Ads Rewarded Ad Unknown");
             }
         }
         LoadRewardedAd();
@@ -76,12 +76,12 @@ public class RewardedAds : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 
     public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
     {
-        Debug.Log($"Error showing Ad Unit {placementId}: {error.ToString()} - {message}");
+        //Debug.Log($"Error showing Ad Unit {placementId}: {error.ToString()} - {message}");
         LoadRewardedAd();
     }
 
     public void OnUnityAdsShowStart(string placementId)
     {
-        Debug.Log("Ad Started.");
+        //Debug.Log("Ad Started.");
     }
 }

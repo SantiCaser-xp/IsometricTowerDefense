@@ -46,7 +46,7 @@ public class Shield : MonoBehaviour, IObservable
                 _meshRenderer.material.SetFloat("_CutEdge", _effectPower);
                 yield return null;
             }
-            Debug.Log("Shield fully active. Waiting...");
+            
             yield return new WaitForSeconds(_workInterval);
         }
 

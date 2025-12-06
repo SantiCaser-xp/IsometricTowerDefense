@@ -124,7 +124,7 @@ public class GlobalStamina : MonoBehaviour, IObservable
         }
         else
         {
-            Debug.Log($"Fuck off vagabuncha");
+            //Debug.Log($"Fuck off vagabuncha");
             return false;
         }
     }

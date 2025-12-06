@@ -76,7 +76,7 @@ public class HeavyTurret : AbstractTower
     //Called by animation event
     public void CallShoot()
     {
-        Debug.Log("Shoot called");
+        //Debug.Log("Shoot called");
         Shoot(target, targetTransform);
     }
 

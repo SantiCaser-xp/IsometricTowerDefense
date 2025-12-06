@@ -18,7 +18,7 @@ public class GhostCollDetector : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger Entered with " + other.gameObject.name);
+        //Debug.Log("Trigger Entered with " + other.gameObject.name);
         if (((1 << other.gameObject.layer) & layerMask.value) != 0)
         {
             isColliding = true;
