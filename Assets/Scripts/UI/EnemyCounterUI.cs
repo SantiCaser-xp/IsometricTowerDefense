@@ -23,6 +23,6 @@ public class EnemyCounterUI : MonoBehaviour, IObserver
         int currentEnemy = (int)values[0];
         int maxEnemy = (int)values[1];
 
-        _enemyCounterText.SetText($"Enemy killed: {currentEnemy}/{maxEnemy}");
+        _enemyCounterText.SetText($"{currentEnemy}/{maxEnemy}");
     }
 }
