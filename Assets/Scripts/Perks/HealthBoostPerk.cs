@@ -8,6 +8,7 @@ public class HealthBoostPerk : PerkData
     public override void ApplyEffect()
     {
         PerkSkillManager.Instance.ChangeHealth(_healthBoostPerUpgrade);
+        PerkSkillManager.Instance.Save();
     }
 
     public override bool BuyPerk()

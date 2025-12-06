@@ -8,6 +8,7 @@ public class VelocityBoostPerk : PerkData
     public override void ApplyEffect()
     {
         PerkSkillManager.Instance.ChangeCharacterSpeed(_speedBoostPerUpgrade);
+        PerkSkillManager.Instance.Save();
     }
 
     public override bool BuyPerk()

@@ -19,9 +19,37 @@ public class PerkSkillManager : SingltonBase<PerkSkillManager>
     [SerializeField] float _startRocketDamage = 10f;
     public float StartRocketDamage => _startRocketDamage;
 
+    private void Start()
+    {
+        Load();
+    }
+
+    public void Save()
+    {
+        if (SaveWithJSON.Instance == null) return;
+
+        var sd = SaveWithJSON.Instance._perksData;
+
+        sd.CharacterSpeed = _startCharacterSpeed;
+        sd.Gold = _startGold;
+        sd.Health = _startHealth;
+
+        SaveWithJSON.Instance._perksData = sd;
+        SaveWithJSON.Instance.SaveGame();
+    }
+
+    public void Load()
+    {
+        var sd = SaveWithJSON.Instance._perksData;
+
+        sd.CharacterSpeed = _startCharacterSpeed;
+        sd.Gold = _startGold;
+        sd.Health = _startHealth;
+    }
+
     public void ChangeCharacterSpeed(float speed)
     {
-        _startCharacterSpeed *= speed;
+        _startCharacterSpeed += speed;
     }
 
     public void ChangeGold(int gold)
@@ -36,7 +64,7 @@ public class PerkSkillManager : SingltonBase<PerkSkillManager>
 
     public void ChangeRocketRadius(float radius)
     {
-        _startRocketDamage += radius;
+        _startRadius += radius;
     }
 
     public void ChangeRocketDamage(float damage)
