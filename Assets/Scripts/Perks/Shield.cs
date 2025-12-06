@@ -8,6 +8,7 @@ public class Shield : MonoBehaviour, IObservable
     [SerializeField,Range(0.35f,1f)] float _effectPower;
     [SerializeField] float _workInterval;
     [SerializeField] float _speed;
+    [SerializeField] bool _tutorialMode = false;
     MeshRenderer _meshRenderer;
     Collider _collider;
     Coroutine _coroutine;
@@ -15,6 +16,7 @@ public class Shield : MonoBehaviour, IObservable
     List<IObserver> _observers = new List<IObserver>();
     float _currentHealth;
     float _maxHealth;
+    
 
     private void Awake()
     {
@@ -27,6 +29,8 @@ public class Shield : MonoBehaviour, IObservable
     {
         Notify();
         _isActivated = !_isActivated;
+
+        if (_tutorialMode) EventManager.Trigger(EventType.ActivateShield, EventType.ActivateShield);
 
         if (_coroutine != null) StopCoroutine(_coroutine);
 

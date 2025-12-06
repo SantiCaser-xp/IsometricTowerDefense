@@ -5,6 +5,7 @@ public class TimerDay : MonoBehaviour
     [SerializeField] float _delayStart = 3f;  
     [SerializeField] float _interval = 5f;    
     [SerializeField] Rain _rain;
+    [SerializeField] DustStorm _storm;
     int _wheaterIndex;
     float _nextTime;
 
@@ -17,7 +18,8 @@ public class TimerDay : MonoBehaviour
     {
         if (Time.time >= _nextTime)
         {
-            _rain.ToggleIsActivated();
+            if(_rain != null) _rain.ToggleIsActivated();
+            else if(_storm != null) _storm.ToggleIsActivated();
 
             _nextTime = Time.time + _interval;
         }

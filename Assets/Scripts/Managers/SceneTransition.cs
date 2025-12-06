@@ -12,32 +12,40 @@ public class SceneTransition : SingltonBase<SceneTransition>
     [SerializeField] Image _progressBar;
     AsyncOperation _operation;
     bool _isLoading = false;
-    private string _currentLevelToLoad;
+    string _currentLevelToLoad;
+    Coroutine _fadeInCoroutine;
+    Coroutine _fadeOutCoroutine;
+    Coroutine _loadCoroutine;
 
-    private void OnEnable()
+    void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void Start()
+    void Start()
     {
         _progressPanel.SetActive(false);
         _progressBar.fillAmount = 0;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        StartCoroutine(FadeOutRoutine());
+        if (_fadeOutCoroutine != null)
+            StopCoroutine(_fadeOutCoroutine);
+
+        _fadeOutCoroutine = StartCoroutine(FadeOutRoutine());
     }
 
-    private IEnumerator FadeInAndLoad(string sceneName)
+    IEnumerator FadeInAndLoad(string sceneName)
     {
-        yield return StartCoroutine(FadeInRoutine());
+        _fadeInCoroutine = StartCoroutine(FadeInRoutine());
+        yield return _fadeInCoroutine;
+
         yield return StartCoroutine(LoadSceneAsync(sceneName));
     }
 
@@ -48,10 +56,16 @@ public class SceneTransition : SingltonBase<SceneTransition>
         if (_isLoading) return;
         _isLoading = true;
 
-        //StopAllCoroutines();
-        //StopCoroutine(FadeOutRoutine());
+        if (_fadeOutCoroutine != null)
+            StopCoroutine(_fadeOutCoroutine);
 
-        StartCoroutine(FadeInAndLoad(name));
+        if (_fadeInCoroutine != null)
+            StopCoroutine(_fadeInCoroutine);
+
+        if (_loadCoroutine != null)
+            StopCoroutine(_loadCoroutine);
+
+        _loadCoroutine = StartCoroutine(FadeInAndLoad(name));
     }
 
     public void AskForAd(string sceneName)
@@ -59,17 +73,17 @@ public class SceneTransition : SingltonBase<SceneTransition>
         _currentLevelToLoad = sceneName;
     }
 
-    private IEnumerator FadeInRoutine()
+    IEnumerator FadeInRoutine()
     {
-        _blackPanel.raycastTarget = true;
+        //_blackPanel.raycastTarget = true;
         float elapsed = 0f;
         Color color = _blackPanel.color;
+        float startAlpha = color.a;
 
         while (elapsed < _fadeInTime)
         {
             elapsed += Time.deltaTime;
-            float alpha = Mathf.Clamp01(0f + elapsed / _fadeInTime);
-            color.a = alpha;
+            color.a = Mathf.Lerp(startAlpha, 1f, elapsed / _fadeInTime);
             _blackPanel.color = color;
             yield return null;
         }
@@ -78,26 +92,26 @@ public class SceneTransition : SingltonBase<SceneTransition>
         _blackPanel.color = color;
     }
 
-    private IEnumerator FadeOutRoutine()
+    IEnumerator FadeOutRoutine()
     {
         float elapsed = 0f;
         Color color = _blackPanel.color;
+        float startAlpha = color.a;
 
         while (elapsed < _fadeOutTime)
         {
             elapsed += Time.deltaTime;
-            float alpha = Mathf.Clamp01(1f - elapsed / _fadeOutTime);
-            color.a = alpha;
+            color.a = Mathf.Lerp(startAlpha, 0f, elapsed / _fadeOutTime);
             _blackPanel.color = color;
             yield return null;
         }
 
-        _blackPanel.raycastTarget = false;
+       // _blackPanel.raycastTarget = false;
         color.a = 0f;
         _blackPanel.color = color;
     }
 
-    private IEnumerator LoadSceneAsync(string sceneName)
+    IEnumerator LoadSceneAsync(string sceneName)
     {
         _progressPanel.SetActive(true);
 

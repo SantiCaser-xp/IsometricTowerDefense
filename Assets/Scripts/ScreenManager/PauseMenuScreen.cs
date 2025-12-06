@@ -7,12 +7,14 @@ public class PauseMenuScreen : MonoBehaviour, IScreen
     [SerializeField] GameObject _root;
     [SerializeField] GameObject _settingsScreen;
     [SerializeField] Button _resumeButton;
+    [SerializeField] Button _tutorialButton;
     [SerializeField] Button _settingsButton;
     [SerializeField] Button _exitGameButton;
 
-    private void Awake()
+    void Awake()
     {
         _resumeButton.onClick.AddListener(() => ScreenManager.Instance.DeactivateScreen());
+        _tutorialButton.onClick.AddListener(OpenTutorial);
         _settingsButton.onClick.AddListener(() => ScreenManager.Instance.ActivateScreen(_settingsScreen));
         _exitGameButton.onClick.AddListener(ExitGame);
     }
@@ -33,6 +35,12 @@ public class PauseMenuScreen : MonoBehaviour, IScreen
     {
         ScreenManager.Instance.ActivateScreen(this);
     }*/
+
+    public void OpenTutorial()
+    {
+        ScreenManager.Instance.DeactivateScreen();
+        SceneTransition.Instance.LoadLevel("Tutorial");
+    }
 
     public void ExitGame()
     {

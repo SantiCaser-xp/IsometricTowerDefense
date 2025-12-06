@@ -19,6 +19,7 @@ public class NewPlacementSystem : MonoBehaviour, IObservable
     [SerializeField] private CharacterDeposit _deposit;
     [SerializeField] private bool isGhostColliding;
     [SerializeField] private int currentPrice;
+    [SerializeField] private bool _tutorialMode = false;
     private GameObject currentGhost;
     private int currentID;
     private List<IObserver> _observers = new List<IObserver>();
@@ -27,7 +28,7 @@ public class NewPlacementSystem : MonoBehaviour, IObservable
 
     void Update()
     {
-        Debug.DrawRay(playerTransform.position + playerTransform.forward * placementDistance + Vector3.up * raycastHeight, Vector3.down * raycastHeight * 2f, Color.red);
+        //Debug.DrawRay(playerTransform.position + playerTransform.forward * placementDistance + Vector3.up * raycastHeight, Vector3.down * raycastHeight * 2f, Color.red);
         if (isPlacing)
         {
             UpdateGhostPosition();
@@ -76,6 +77,9 @@ public class NewPlacementSystem : MonoBehaviour, IObservable
             Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
             currentGhost = Instantiate(data.GhostPrefab, placementPosition, Quaternion.identity);
         }
+
+        if(_tutorialMode)
+            EventManager.Trigger(EventType.OpenBuildMenu, EventType.OpenBuildMenu);
     }
 
     public void StopPlacement()
@@ -97,6 +101,9 @@ public class NewPlacementSystem : MonoBehaviour, IObservable
             Notify();
             Instantiate(data.Prefab, placementPosition, Quaternion.identity);
         }
+
+        if (_tutorialMode)
+            EventManager.Trigger(EventType.PlaceBuilding, EventType.PlaceBuilding);
     }
 
     public void UpdateGhostPosition()

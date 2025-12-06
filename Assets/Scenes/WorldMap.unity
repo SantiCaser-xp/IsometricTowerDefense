@@ -2511,6 +2511,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenuCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8513769681127188315, guid: 9c0ba0e32dcc8174aa50bbb97ee8ac11,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2085980119}
+    - target: {fileID: 8513769681127188315, guid: 9c0ba0e32dcc8174aa50bbb97ee8ac11,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 2085980119}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2991,6 +3001,21 @@ PrefabInstance:
     - target: {fileID: 569142992633587641, guid: 7016a22b2b9d2a94f802c30c01228646,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3227364164104279000, guid: 7016a22b2b9d2a94f802c30c01228646,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3227364164104279000, guid: 7016a22b2b9d2a94f802c30c01228646,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3227364164104279000, guid: 7016a22b2b9d2a94f802c30c01228646,
+        type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3425227841880579494, guid: 7016a22b2b9d2a94f802c30c01228646,

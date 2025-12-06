@@ -4,5 +4,13 @@ public enum EventType
     OnGameOver,
     OnGameWin,
     OnEnemyKilled,
-    OnAdFinished
+    OnAdFinished,
+    MoveJoystick,
+    OpenBuildMenu,
+    PlaceBuilding,
+    ZoomCamera,
+    KillFirstEnemy,
+    ActivateShield,
+    FirstGoldCatched,
+    Survive,
 }
