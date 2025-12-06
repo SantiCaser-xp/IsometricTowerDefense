@@ -42,9 +42,9 @@ public class PerkSkillManager : SingltonBase<PerkSkillManager>
     {
         var sd = SaveWithJSON.Instance._perksData;
 
-        sd.CharacterSpeed = _startCharacterSpeed;
-        sd.Gold = _startGold;
-        sd.Health = _startHealth;
+        _startCharacterSpeed = sd.CharacterSpeed;
+        _startGold = sd.Gold;
+        _startHealth = sd.Health;
     }
 
     public void ChangeCharacterSpeed(float speed)
