@@ -59,7 +59,7 @@ public abstract class BaseEnemy : Destructible
     void Update()
     {
         _enemyFSM.OnExecute();
-        _cState = $"{_enemyFSM._actualState}";// for debug
+        //_cState = $"{_enemyFSM._actualState}";// for debug
 
     }
 

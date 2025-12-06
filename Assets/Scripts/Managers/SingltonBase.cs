@@ -17,7 +17,7 @@ public class SingltonBase<T> : MonoBehaviour where T : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("MonoSingleton: object of type already exists, instance will be destroy = " + typeof(T).Name);
+            //Debug.LogWarning("MonoSingleton: object of type already exists, instance will be destroy = " + typeof(T).Name);
             Destroy(gameObject);
             return;
         }

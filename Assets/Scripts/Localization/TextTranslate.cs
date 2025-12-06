@@ -8,29 +8,28 @@ public class TextTranslate : MonoBehaviour
     [SerializeField] string _ID;
     TextMeshProUGUI _txt;
 
-    private void Awake()
+    void Awake()
     {
         _txt = GetComponent<TextMeshProUGUI>();
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         LocalizationManager.Instance.EventTranslate += Translate;
         Translate();
     }
 
-    private void Start()
+    void Start()
     {
-        //LocalizationManager.Instance.EventTranslate += Translate;
         Translate();
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         LocalizationManager.Instance.EventTranslate -= Translate;
     }
 
-    private void Translate()
+    void Translate()
     {
         _txt.text = LocalizationManager.Instance.GetTranslate(_ID);
     }

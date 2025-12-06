@@ -10,7 +10,6 @@ public class CharacterInputController
     public CharacterInputController(ControlBase joystick)
     {
         _joystick = joystick;
-        
     }
 
     public void InputArtificialUpdate()

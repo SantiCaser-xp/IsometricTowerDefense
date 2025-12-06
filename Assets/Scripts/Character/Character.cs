@@ -33,9 +33,4 @@ public class Character : MonoBehaviour
             _meshRotator.RotateMesh(_controller.InputDirection);
         }
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Collision detected with " + collision.gameObject.name);
-    }
 }

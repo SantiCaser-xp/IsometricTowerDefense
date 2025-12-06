@@ -60,7 +60,7 @@ public class MVC_Enemy : Destructible
     void Update()
     {
         _fsm?.OnExecute();
-        _cState = $"{_fsm._actualState}";// for debug
+        //_cState = $"{_fsm._actualState}";// for debug
     }
 
     private void HandleDeathLogic()

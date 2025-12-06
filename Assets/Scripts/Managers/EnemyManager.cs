@@ -37,11 +37,11 @@ public class EnemyManager : SingltonBase<EnemyManager>
         }
         return enemiesInRange;
     }
-    private void OnGUI()
+    /*private void OnGUI()
     {
         if (showDebugInfo)
         {
             GUI.Label(new Rect(10, 10, 200, 20), $"Active Enemies: {activeEnemies.Count}");
         }
-    }
+    }*/
 }

@@ -67,7 +67,7 @@ public class SimpleFlameThrower : AbstractTower
         //yield return new WaitForSeconds(1);      Delay before starting fire VFX
         while (enemiesInRange.Count > 0)
         {
-            Debug.Log("<color=magenta>Dealing Damage</color>");
+            //Debug.Log("<color=magenta>Dealing Damage</color>");
 
             foreach (var item in enemiesInRange)
             {

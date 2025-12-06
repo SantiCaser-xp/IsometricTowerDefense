@@ -20,7 +20,7 @@ public abstract class AbstractBullet : MonoBehaviour
         if (timer > 3)
         {
 
-            Debug.Log("Release");
+            //Debug.Log("Release");
             _myPool.Release(this);
             return;
         }

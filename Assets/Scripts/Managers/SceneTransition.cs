@@ -49,7 +49,7 @@ public class SceneTransition : SingltonBase<SceneTransition>
         _isLoading = true;
 
         //StopAllCoroutines();
-        StopCoroutine(FadeOutRoutine());
+        //StopCoroutine(FadeOutRoutine());
 
         StartCoroutine(FadeInAndLoad(name));
     }
@@ -61,6 +61,7 @@ public class SceneTransition : SingltonBase<SceneTransition>
 
     private IEnumerator FadeInRoutine()
     {
+        _blackPanel.raycastTarget = true;
         float elapsed = 0f;
         Color color = _blackPanel.color;
 
@@ -91,6 +92,7 @@ public class SceneTransition : SingltonBase<SceneTransition>
             yield return null;
         }
 
+        _blackPanel.raycastTarget = false;
         color.a = 0f;
         _blackPanel.color = color;
     }

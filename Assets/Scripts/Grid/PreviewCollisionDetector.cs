@@ -9,7 +9,7 @@ public class PreviewCollisionDetector : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Enemy")|| other.gameObject.layer == LayerMask.NameToLayer("Object"))
         {
             IsColliding = true;
-            Debug.Log("Collision Detected with " + other.gameObject.layer);
+            //Debug.Log("Collision Detected with " + other.gameObject.layer);
         }
     }
 
