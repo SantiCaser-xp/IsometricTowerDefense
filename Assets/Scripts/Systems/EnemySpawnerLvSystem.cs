@@ -6,11 +6,11 @@ public class EnemySpawnerLvSystem : MonoBehaviour, IObservable
 {
     [SerializeField] private Animator _sign;
 
-    [SerializeField] private EnemyFactory _lowEnemyFactory;
+    [SerializeField] private EnemyFactory _lowEnemyFactory; 
     [SerializeField] private EnemyFactory _midEnemyFactory;
     [SerializeField] private EnemyFactory _hardEnemyFactory;
 
-    [SerializeField] private Transform _upZone;
+    [SerializeField] private Transform _upZone; 
     [SerializeField] private Transform _downZone;
     [SerializeField] private Transform _rightZone;
     [SerializeField] private Transform _leftZone;

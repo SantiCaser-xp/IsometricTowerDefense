@@ -2678,6 +2678,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 377625282}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &386608027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3762187882674114120, guid: 4bd4db490f722304d95db6d8d5e13a37,
+    type: 3}
+  m_PrefabInstance: {fileID: 1265762815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &391988790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4282,22 +4294,22 @@ MonoBehaviour:
   _tutorialText: {fileID: 286548599}
   _steps:
   - text: Move joystick for walk
-    completeEvent: 5
-  - text: Move two finger for Zoom In/Out
-    completeEvent: 8
-  - text: Open buil menu for build the tower
     completeEvent: 6
-  - text: Tap anywhere for build
-    completeEvent: 7
-  - text: Kill your first enemy
+  - text: Move two finger for Zoom In/Out
     completeEvent: 9
-  - text: For build towers you need gold. Take it!
-    completeEvent: 11
-  - text: Hurry up! You must activate Shield.
+  - text: Open buil menu for build the tower
+    completeEvent: 7
+  - text: Tap anywhere for build
+    completeEvent: 8
+  - text: Kill your first enemy
     completeEvent: 10
+  - text: For build towers you need gold. Take it!
+    completeEvent: 12
+  - text: Hurry up! You must activate Shield.
+    completeEvent: 11
   - text: Try to survive. Kill enemies you get experience and level. Each level get
       to you perk. You can buy skills in the shop.
-    completeEvent: 12
+    completeEvent: 13
 --- !u!4 &663837897
 Transform:
   m_ObjectHideFlags: 0
@@ -6922,6 +6934,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: NewPlacementSystem, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 1588713115064736224, guid: 4bd4db490f722304d95db6d8d5e13a37,
+        type: 3}
+      propertyPath: _perkCounterAtLevel
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2511676827169123626, guid: 4bd4db490f722304d95db6d8d5e13a37,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7360,7 +7377,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3471200879359635953, guid: 4bd4db490f722304d95db6d8d5e13a37,
+        type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1579208236}
   m_SourcePrefab: {fileID: 100100000, guid: 4bd4db490f722304d95db6d8d5e13a37, type: 3}
 --- !u!114 &1265762816 stripped
 MonoBehaviour:
@@ -7372,6 +7393,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 096919ca38284ce4a93719e0ca21af23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1265762825 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5662518956230912997, guid: 4bd4db490f722304d95db6d8d5e13a37,
+    type: 3}
+  m_PrefabInstance: {fileID: 1265762815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1272034303
@@ -9272,6 +9305,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1761481713}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1579208231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3471200879359635953, guid: 4bd4db490f722304d95db6d8d5e13a37,
+    type: 3}
+  m_PrefabInstance: {fileID: 1265762815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1579208236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579208231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b72e041d646104899d2a4de236b434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buildButton: {fileID: 386608027}
+  _shieldButton: {fileID: 1265762825}
+  _tutorialMode: 1
 --- !u!1001 &1582416163
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -22,6 +22,7 @@ public class ZoomTouch : MonoBehaviour
 
     void Update()
     {
+
 #if UNITY_EDITOR
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -51,7 +52,7 @@ public class ZoomTouch : MonoBehaviour
             );
         }
 
-#else
+#elif UNITY_ANDROID
 
 
         if (Input.touchCount != 2) return;
@@ -91,7 +92,8 @@ public class ZoomTouch : MonoBehaviour
             return zoom * _zoomStep * Time.deltaTime;
         }
         
-    }
+    
 #endif
+
     }
 }

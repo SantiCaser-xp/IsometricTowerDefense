@@ -22,6 +22,9 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
     [SerializeField] private int _currentPerksCount;
     public int CurrentPerksCount => _currentPerksCount;
 
+    int _perkCounterAtLevel;
+    public int PerkCounterAtLevel => _perkCounterAtLevel;
+
     private List<IObserver> _observers = new List<IObserver>();
 
     protected override void Awake()
@@ -77,12 +80,14 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
         if (_currentLevel < _maxLevel)
         {
             _currentLevel++;
+            EventManager.Trigger(EventType.OnAddLevel);
             AddPerk();
         }
     }
 
     public void AddPerk(int value = 1)
     {
+        _perkCounterAtLevel++;
         _currentPerksCount = Mathf.Clamp(_currentPerksCount + value, 0, _maxPerksCount);
         EventManager.Trigger(EventType.OnPerkChanged);
     }
@@ -109,6 +114,7 @@ public class ExperienceSystem : SingltonBase<ExperienceSystem>, IObservable
 
     void OnSceneChanged(Scene scene, LoadSceneMode mode)
     {
+        _perkCounterAtLevel = 0;
         EventManager.Trigger(EventType.OnPerkChanged);
         OnGameLose(scene, mode);
     }

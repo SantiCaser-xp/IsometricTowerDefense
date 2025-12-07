@@ -10,6 +10,8 @@ public class EnemyTutorial : MonoBehaviour
     int _randomIndex;
     int _killedCount;
     int _totalEnemyCount;
+    bool _isSpawned = false;
+    bool _isCatched = false;
 
     void Awake()
     {
@@ -42,17 +44,23 @@ public class EnemyTutorial : MonoBehaviour
         if (_killedCount >= _totalEnemyCount)
         {
             EventManager.Trigger(EventType.OnGameWin);
+            Debug.Log("Win");
         }
     }
 
     void SpawnOneEnemyRoutine(params object[] args)
     {
-        StartCoroutine(SpawnEnemies(_enemiesToSpawn[0]));
+        if (_isSpawned) return;
+
+        StartCoroutine(SpawnOneEnemy());
+
     }
 
     void SpawnEnemiesRoutine(params object[] args)
     {
-        StartCoroutine(SpawnEnemies(_enemiesToSpawn[1]));
+        if(_isCatched) return;
+
+        StartCoroutine(SpawnEnemies());
     }
 
     public void Spawn(EnemyFactory currFactory)
@@ -62,9 +70,25 @@ public class EnemyTutorial : MonoBehaviour
         enemy.transform.position = _spawnPoints[_randomIndex].position;
     }
 
-    IEnumerator SpawnEnemies(int count)
+    IEnumerator SpawnOneEnemy()
     {
-        for (int i = 0; i < count; i++)
+        _isSpawned = true;
+
+        for (int i = 0; i < _enemiesToSpawn[0]; i++)
+        {
+            _randomIndex = Random.Range(1, _spawnPoints.Length);
+            Spawn(_lowEnemyFactory);
+            yield return new WaitForSeconds(_delayBetweenSpawn);
+        }
+
+        yield return null;
+    }
+
+    IEnumerator SpawnEnemies()
+    {
+        _isCatched = true;
+
+        for (int i = 0; i < _enemiesToSpawn[1]; i++)
         {
             _randomIndex = Random.Range(1, _spawnPoints.Length);
             Spawn(_lowEnemyFactory);
