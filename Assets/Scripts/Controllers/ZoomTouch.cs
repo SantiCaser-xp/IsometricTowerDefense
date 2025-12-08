@@ -88,7 +88,6 @@ public class ZoomTouch : MonoBehaviour
 
         float CalculateZoom(float zoom)
         {
-
             return zoom * _zoomStep * Time.deltaTime;
         }
         

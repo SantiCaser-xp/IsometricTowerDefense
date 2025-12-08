@@ -7,29 +7,27 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Water
-  m_Shader: {fileID: -6465566751694194690, guid: 3b7a078df6154aa469a13aff3b6c3278,
+  m_Name: Shader Graphs_glass
+  m_Shader: {fileID: -6465566751694194690, guid: c14de49aee2807b4bbbc323c5ca9a325,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _ALPHAPREMULTIPLY_ON
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Transparent
-  disabledShaderPasses:
-  - DepthOnly
+  stringTagMap: {}
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: 85c8e7f7f866a0e4d80eb38f401fb13b, type: 3}
+    - _SampleTexture2D_557c1e476d4b462eb88e60eb95fbee25_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 0bc98ebe74f505743b4bd955dc254c2b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -46,44 +44,28 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.604
+    - _Alpha: 0.406
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 1
-    - _CellSize: 10
-    - _CellWaveSize: 1.54
-    - _CellWaveSpeed: 0.1
     - _Cull: 2
-    - _Distance: 0.001
-    - _DistortionIntensity: 0.5
-    - _Distortion_Strenght: 0.032
+    - _Distortion: 75.3
     - _DstBlend: 10
-    - _Falloff: 0.001
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SrcBlend: 1
     - _Surface: 1
-    - _WaveAmplitude: 3.42
     - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _ColorEspuma: {r: 0.2216981, g: 1, b: 0.861129, a: 1}
-    - _DEPTH: {r: 0, g: 0.18664181, b: 0.5, a: 0}
-    - _DistortionTiling: {r: 1, g: 1, b: 0, a: 0}
-    - _DistortionTiling2: {r: 3, g: 3, b: 0, a: 0}
-    - _OFFSET: {r: 8.23, g: 0, b: 0, a: 0}
-    - _SpeedOffset: {r: 0.03, g: 0, b: 0, a: 0}
-    - _TILING: {r: 14.95, g: 12.71, b: 0, a: 0}
-    - _VoronoiTiling: {r: 8.46, g: 0.9, b: 0, a: 0}
-    - _WAVE: {r: 0.36320752, g: 1, b: 0.94514585, a: 0}
-    - _WaveSpeed: {r: 0.4, g: 0, b: 0, a: 0}
+    - _Color: {r: 0, g: 4, b: 3.960413, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &5149155509780205186
+--- !u!114 &8967841289823631174
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
