@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Rigidbody))]
@@ -21,6 +20,9 @@ public class MVC_Enemy : Destructible
     [SerializeField] protected ObjectPool<MVC_Enemy> _myPool;
     private NavMeshAgent _agent;
     private Animator _animator;
+
+    [Header("Tutorial")]
+    [SerializeField] bool _tutorialMode = false;
 
     public MVC_EnemyModel Model { get; private set; }
     private MVC_EnemyView _view;
@@ -72,6 +74,8 @@ public class MVC_Enemy : Destructible
         gold.transform.position = pos;
         ExperienceSystem.Instance.AddExperience(_experienceModidier);
 
+        if(_tutorialMode) EventManager.Trigger(EventType.KillFirstEnemy, EventType.KillFirstEnemy);
+        EventManager.Trigger(EventType.OnEnemyKilled);
         OnEnemyKilled?.Invoke();
 
         EnemyManager.Instance?.UnregisterEnemy(this);

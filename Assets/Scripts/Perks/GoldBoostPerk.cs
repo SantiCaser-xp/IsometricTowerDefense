@@ -8,6 +8,7 @@ public class GoldBoostPerk : PerkData
     public override void ApplyEffect()
     {
         PerkSkillManager.Instance.ChangeGold(_goldBoostPerUpgrade);
+        PerkSkillManager.Instance.Save();
     }
 
     public override bool BuyPerk()

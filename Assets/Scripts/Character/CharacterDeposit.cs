@@ -7,6 +7,7 @@ public class CharacterDeposit : MonoBehaviour, IObservable
     private int _maxGold = 9999;
     private int _currentGold = 0;
     public int CurrentGold => _currentGold;
+    [SerializeField] bool _tutorialMode = false;
     //private int _savedGold = 0;
     //private int _startedDeposit = 5;
     List<IObserver> _observers = new List<IObserver>();
@@ -14,7 +15,7 @@ public class CharacterDeposit : MonoBehaviour, IObservable
     private void Start()
     {
         _currentGold = PerkSkillManager.Instance.StartGold;
-
+        if (_tutorialMode) _currentGold = 2;
         Notify();
 
         //RemoteConfigService.Instance.FetchCompleted += UpdateData;

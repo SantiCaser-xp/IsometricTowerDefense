@@ -3,10 +3,11 @@ using UnityEngine.EventSystems;
 
 public class ControllerJoystick : ControlBase, IDragHandler, IEndDragHandler
 {
-    [SerializeField] private float _maxMagnitude = 10f;
-    private Vector3 _initialPos;
+    [SerializeField] float _maxMagnitude = 10f;
+    [SerializeField] bool _tutorialMode = false;
+    Vector3 _initialPos;
 
-    private void Start()
+    void Start()
     {
         _initialPos = transform.position;
     }
@@ -24,6 +25,11 @@ public class ControllerJoystick : ControlBase, IDragHandler, IEndDragHandler
         _direction = Vector3.ClampMagnitude((Vector3)eventData.position - _initialPos, _maxMagnitude);
 
         transform.position = _initialPos + _direction;
+
+        if (_tutorialMode)
+        {
+            EventManager.Trigger(EventType.MoveJoystick, EventType.MoveJoystick);
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)

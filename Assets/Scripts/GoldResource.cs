@@ -6,6 +6,7 @@ public class GoldResource : MonoBehaviour, IObservable
 {
     [SerializeField] private int _gold = 1;
     [SerializeField] private float _delayToDeactivate = 1;
+    [SerializeField] bool _TutorialMode = false;
     private ObjectPool<GoldResource> _pool;
     private CharacterDeposit _characterDeposit;
     private List<IObserver> _observers = new List<IObserver>();
@@ -41,6 +42,8 @@ public class GoldResource : MonoBehaviour, IObservable
     {
         if(other.GetComponent<Character>() != null)
         {
+            if(_TutorialMode) EventManager.Trigger(EventType.FirstGoldCatched, EventType.FirstGoldCatched);
+
             StartCoroutine(DeactivateRoutine());
 
             Notify();

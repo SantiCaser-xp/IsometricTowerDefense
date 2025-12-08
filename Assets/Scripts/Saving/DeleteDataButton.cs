@@ -3,16 +3,16 @@ using UnityEngine.UI;
 
 public class DeleteDataButton : MonoBehaviour
 {
+    [SerializeField] GameObject _confirmPanel;
     Button _deleteDataButton;
 
     void Awake()
     {
         _deleteDataButton = GetComponent<Button>();
-        _deleteDataButton.onClick.AddListener(OnDeleteDataButtonClicked);
     }
 
-    void OnDeleteDataButtonClicked()
+    void Start()
     {
-        SaveWithJSON.Instance.DeleteAll();
+        _deleteDataButton.onClick.AddListener(() => ScreenManager.Instance.ActivateScreen(_confirmPanel));
     }
 }

@@ -56,4 +56,16 @@ public class ScreenManager : SingltonBase<ScreenManager>
             _screens[_screens.Count - 1].Activate();
         }
     }
+
+    public void DeactivateAll()
+    {
+        if (_screens.Count == 0) return;
+
+        foreach(var screen in _screens)
+        {
+            screen.Deactivate();
+        }
+
+        _screens.Clear();
+    }
 }
