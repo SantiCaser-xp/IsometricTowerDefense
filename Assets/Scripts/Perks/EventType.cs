@@ -14,4 +14,9 @@ public enum EventType
     ActivateShield,
     FirstGoldCatched,
     Survive,
+    OnBannerAdShown,
+    OnBannerAdDisable,
+    ShowInterstitialAd,
+    ButtonForInterstitialClicked,
+    SceneChanged
 }
