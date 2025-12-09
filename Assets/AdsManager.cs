@@ -10,8 +10,12 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener
     [SerializeField] string _playstoreID = "";
     [SerializeField] string _playstoreRewardedID = "Rewarded_Android";
     [SerializeField] RewardedAds _playstoreRewardedScript;
-    //[SerializeField] string _playstoreInterstitialID = "";
-    //[SerializeField] string _playStoreBannerID = "";
+
+    [SerializeField] string _playStoreBannerID = "Banner_Android";
+    [SerializeField] BannerAds _playstoreBannerScript;
+
+    [SerializeField] string _playStoreInterstitialID = "Interstitial_Android";
+    [SerializeField] InterstitialAds _playstoreInterstitialScript;
 
     public static AdsManager Instance { get; private set; }
 
@@ -38,6 +42,8 @@ public class AdsManager : MonoBehaviour, IUnityAdsInitializationListener
     {
         //Debug.Log("Unity Ads Initialization Complete.");
         _playstoreRewardedScript.Initialized(_playstoreRewardedID);
+        _playstoreBannerScript.Initialize(_playStoreBannerID);
+        _playstoreInterstitialScript.Initialized(_playStoreInterstitialID);
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)

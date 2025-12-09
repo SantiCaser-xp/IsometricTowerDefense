@@ -65,6 +65,8 @@ public class SceneTransition : SingltonBase<SceneTransition>
         if (_loadCoroutine != null)
             StopCoroutine(_loadCoroutine);
 
+        EventManager.Trigger(EventType.SceneChanged);
+
         _loadCoroutine = StartCoroutine(FadeInAndLoad(name));
     }
 
