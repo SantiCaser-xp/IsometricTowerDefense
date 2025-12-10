@@ -26,10 +26,11 @@ public class MVC_Enemy : Destructible
 
     public MVC_EnemyModel Model { get; private set; }
     private MVC_EnemyView _view;
-    private EnemyFSM<EnemyFSMStates, MVC_Enemy> _fsm;
+    public EnemyFSM<EnemyFSMStates, MVC_Enemy> fsm;
 
     public static event System.Action OnEnemyKilled;
     //public TargetType TargetType => TargetType.Tower;
+   // public EnemyFSM<EnemyFSMStates, MVC_Enemy> Fsm => _fsm;
     protected ITargetable _currentTarget;
     [SerializeField] protected TargetingStrategy _targetingStrategy = TargetingStrategy.Nearest;
     [SerializeField] protected string _cState;
@@ -43,12 +44,7 @@ public class MVC_Enemy : Destructible
         Model = new MVC_EnemyModel(_agent, transform, _data, _maxHealth);
         _view = new MVC_EnemyView(Model, _animator, _particleDmg, _soundDmg);
 
-        _fsm = new EnemyFSM<EnemyFSMStates, MVC_Enemy>();
-
-        _fsm._possibleStates.Add(EnemyFSMStates.Idle, new IdleState().SetUp(_fsm).SetAvatar(this));
-        _fsm._possibleStates.Add(EnemyFSMStates.Move, new MoveState().SetUp(_fsm).SetAvatar(this));
-        _fsm._possibleStates.Add(EnemyFSMStates.Attack, new AttackState().SetUp(_fsm).SetAvatar(this));
-        _fsm._possibleStates.Add(EnemyFSMStates.Die, new DieState().SetUp(_fsm).SetAvatar(this));
+        InitializeFSM();
 
         Model.OnDie += HandleDeathLogic;
     }
@@ -56,25 +52,35 @@ public class MVC_Enemy : Destructible
     private void Start()
     {
         EnemyManager.Instance?.RegisterEnemy(this);
-        _fsm.ChangeState(EnemyFSMStates.Idle);
+        fsm.ChangeState(EnemyFSMStates.Idle);
     }
 
     void Update()
     {
-        _fsm?.OnExecute();
+        fsm?.OnExecute();
         //_cState = $"{_fsm._actualState}";// for debug
     }
+    protected virtual void InitializeFSM()
+    {
+        fsm = new EnemyFSM<EnemyFSMStates, MVC_Enemy>();
+
+        fsm._possibleStates.Add(EnemyFSMStates.Idle, new IdleState().SetUp(fsm).SetAvatar(this));
+        fsm._possibleStates.Add(EnemyFSMStates.Move, new MoveState().SetUp(fsm).SetAvatar(this));
+        fsm._possibleStates.Add(EnemyFSMStates.Attack, new AttackState().SetUp(fsm).SetAvatar(this));
+        fsm._possibleStates.Add(EnemyFSMStates.Die, new DieState().SetUp(fsm).SetAvatar(this));
+    }
+
 
     private void HandleDeathLogic()
     {
-        _fsm.ChangeState(EnemyFSMStates.Die);
+        fsm.ChangeState(EnemyFSMStates.Die);
         var gold = _goldFactory.Create();
         Vector3 pos = transform.position;
         pos.y = 1f;
         gold.transform.position = pos;
         ExperienceSystem.Instance.AddExperience(_experienceModidier);
 
-        if(_tutorialMode) EventManager.Trigger(EventType.KillFirstEnemy, EventType.KillFirstEnemy);
+        if (_tutorialMode) EventManager.Trigger(EventType.KillFirstEnemy, EventType.KillFirstEnemy);
         EventManager.Trigger(EventType.OnEnemyKilled);
         OnEnemyKilled?.Invoke();
 
@@ -127,7 +133,7 @@ public class MVC_Enemy : Destructible
         {
             Model.SetTarget(null);
 
-            _fsm.ChangeState(EnemyFSMStates.Idle);
+            fsm.ChangeState(EnemyFSMStates.Idle);
         }
     }
 
@@ -141,6 +147,6 @@ public class MVC_Enemy : Destructible
         Model.SetTarget(null);
         Model.ResetHealth();
         EnemyManager.Instance?.RegisterEnemy(this);
-        _fsm.ChangeState(EnemyFSMStates.Idle);
+        fsm.ChangeState(EnemyFSMStates.Idle);
     }
 }
