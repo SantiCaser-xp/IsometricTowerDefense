@@ -33,11 +33,11 @@ public class Desaturate : MonoBehaviour, IObserver
 
     public void UpdateData(params object[] values)
     {
-        _material.SetFloat("_Rang", (float)values[0] / (float)values[1]);
+        _material.SetFloat("_Intensity", (float)values[0] / (float)values[1]);
     }
 
     private void ResetDesaturation(params object[] args)
     {
-        _material.SetFloat("_Rang", 1f);
+        _material.SetFloat("_Intensity", 1f);
     }
 }

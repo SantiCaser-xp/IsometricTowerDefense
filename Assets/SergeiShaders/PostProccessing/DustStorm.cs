@@ -20,7 +20,7 @@ public class DustStorm : MonoBehaviour
     void Start()
     {
         _dustStormFVX.Stop();
-        _heatScreenMaterial.SetFloat("_HeatStrenght", _intensity);
+        _heatScreenMaterial.SetFloat("_Intensity", _intensity);
     }
 
     void OnDisable()
@@ -31,7 +31,7 @@ public class DustStorm : MonoBehaviour
 
     private void ResetHeatEffect(params object[] args)
     {
-        _heatScreenMaterial.SetFloat("_HeatStrenght", 0f);
+        _heatScreenMaterial.SetFloat("_Intensity", 0f);
     }
 
     [ContextMenu("Activate Storm")]
@@ -55,7 +55,7 @@ public class DustStorm : MonoBehaviour
             while (_intensity < 1f)
             {
                 _intensity = Mathf.MoveTowards(_intensity, 1f, Time.deltaTime * _speedTransition);
-                _heatScreenMaterial.SetFloat("_HeatStrenght", _intensity);
+                _heatScreenMaterial.SetFloat("_Intensity", _intensity);
                 yield return null;
             }
         }
@@ -66,7 +66,7 @@ public class DustStorm : MonoBehaviour
             while (_intensity > 0f)
             {
                 _intensity = Mathf.MoveTowards(_intensity, 0f, Time.deltaTime * _speedTransition);
-                _heatScreenMaterial.SetFloat("_HeatStrenght", _intensity);
+                _heatScreenMaterial.SetFloat("_Intensity", _intensity);
                 yield return null;
             }
         }

@@ -410,7 +410,7 @@ PrefabInstance:
     - target: {fileID: 329135671147210343, guid: e65c7991c0e19df43bbc48d563995636,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 506562328365736715, guid: e65c7991c0e19df43bbc48d563995636,
         type: 3}
@@ -470,7 +470,7 @@ PrefabInstance:
     - target: {fileID: 7120172283070359920, guid: e65c7991c0e19df43bbc48d563995636,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3006,28 +3006,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 398867351}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &407943699 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2015914394449806661, guid: d479ddb09a0a3b9419ef18862752e83d,
-    type: 3}
-  m_PrefabInstance: {fileID: 430223516368611220}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &407943703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407943699}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ad6399bbfd8e6541b4486078940d660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dustStormFVX: {fileID: 0}
-  _speedTransition: 0.2
-  _intensity: 0
-  _heatScreenMaterial: {fileID: 2100000, guid: fd4ccebbb5230d940b61764e9076fff4, type: 2}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -13643,7 +13621,7 @@ PrefabInstance:
     - target: {fileID: 2015914394449806661, guid: d479ddb09a0a3b9419ef18862752e83d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9221262117712861484, guid: d479ddb09a0a3b9419ef18862752e83d,
         type: 3}
@@ -13663,11 +13641,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2015914394449806661, guid: d479ddb09a0a3b9419ef18862752e83d,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 407943703}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d479ddb09a0a3b9419ef18862752e83d, type: 3}
 --- !u!4 &442902589883806596
 Transform:

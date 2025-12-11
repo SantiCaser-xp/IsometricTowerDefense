@@ -8,11 +8,11 @@ public class DirtScreen : MonoBehaviour
     void Start()
     {
         _intensity = 0f;
-        _dirtScreenMaterial.SetFloat("_AlphaStrenght", _intensity);
+        _dirtScreenMaterial.SetFloat("_Intensity", _intensity);
     }
 
     void Update()
     {
-        _dirtScreenMaterial.SetFloat("_AlphaStrenght", _intensity);
+        _dirtScreenMaterial.SetFloat("_Intensity", _intensity);
     }
 }
