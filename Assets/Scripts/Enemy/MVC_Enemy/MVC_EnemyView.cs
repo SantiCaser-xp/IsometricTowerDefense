@@ -6,6 +6,7 @@ public class MVC_EnemyView
     private MVC_EnemyModel _model;
     private Animator _animator;
     private ParticleSystem _particleDmg;
+    private ParticleSystem _particleDie;
     private AudioSource _soundDmg;
 
     //constructor
@@ -26,8 +27,10 @@ public class MVC_EnemyView
     {
         _animator.SetTrigger("OnHit");  // TODO string -> variable
 
-       // _particleDmg?.Play();
-       // _soundDmg?.Play();
+
+        //_particleDmg?.Play();
+        //_particleDie?.Play();
+        // _soundDmg?.Play();
     }
 
     private void HandleAttack()
@@ -37,6 +40,7 @@ public class MVC_EnemyView
     private void HandleDie()
     {
         _animator.SetTrigger("OnDeath");
+        _particleDie?.Play();
     }
 
     private void HandleSetMoving(bool isMoving)
