@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Starfield
-  m_Shader: {fileID: -6465566751694194690, guid: 7487ad1cca654984988ebb97bd7332a6,
+  m_Name: M_BloodScreen
+  m_Shader: {fileID: -6465566751694194690, guid: 23df69256645e344cb73dde20cf253aa,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,6 +24,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _NoiseTexture:
+        m_Texture: {fileID: 2800000, guid: cb0eab1177b89364a8bb33e97596ca64, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -38,24 +42,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlinkSpeed: 0.0001
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _StarsAmount: 1696.4
-    - _StarsPower: 1000
+    - _Alpha: 0
+    - _Fullscreen_AlphaBlendOperation: 0
+    - _Fullscreen_BlendMode: 1
+    - _Fullscreen_ColorBlendOperation: 0
+    - _Fullscreen_DepthWrite: 0
+    - _Fullscreen_DstAlphaBlend: 10
+    - _Fullscreen_DstColorBlend: 10
+    - _Fullscreen_SrcAlphaBlend: 1
+    - _Fullscreen_SrcColorBlend: 5
+    - _VignetteIntensity: 4.18
+    - _VignettePower: 2.88
     m_Colors:
-    - _Color: {r: 766.9959, g: 766.9959, b: 766.9959, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 0.6039216}
+    - _NoiseSpeed: {r: 0, g: 0.1, b: 0, a: 0}
+    - _NoiseTiling: {r: 2, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &8297456658169084749
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7

@@ -3028,7 +3028,6 @@ MonoBehaviour:
   _speedTransition: 0.2
   _intensity: 0
   _heatScreenMaterial: {fileID: 2100000, guid: fd4ccebbb5230d940b61764e9076fff4, type: 2}
-  _dirtScreenMaterial: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -11596,6 +11595,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FOVAxisMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318307996302939921, guid: 117ba98f39f894741a1b972b2baf5b70,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 32255
       objectReference: {fileID: 0}
     - target: {fileID: 6318307996302939921, guid: 117ba98f39f894741a1b972b2baf5b70,
         type: 3}

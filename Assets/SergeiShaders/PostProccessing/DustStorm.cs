@@ -8,21 +8,30 @@ public class DustStorm : MonoBehaviour
     [SerializeField] float _speedTransition;
     [SerializeField] float _intensity = 0f;
     [SerializeField] Material _heatScreenMaterial;
-    [SerializeField] Material _dirtScreenMaterial;
-    AudioSource _audioSource;
     Coroutine _coroutine;
     bool _isActivated;
 
-    void Awake()
+    void OnEnable()
     {
-        _audioSource = GetComponent<AudioSource>();
+        EventManager.Subscribe(EventType.OnGameWin, ResetHeatEffect);
+        EventManager.Subscribe(EventType.OnGameOver, ResetHeatEffect);
     }
 
     void Start()
     {
         _dustStormFVX.Stop();
         _heatScreenMaterial.SetFloat("_HeatStrenght", _intensity);
-        _dirtScreenMaterial.SetFloat("_AlphaStrenght", _intensity);
+    }
+
+    void OnDisable()
+    {
+        EventManager.Unsubscribe(EventType.OnGameWin, ResetHeatEffect);
+        EventManager.Unsubscribe(EventType.OnGameOver, ResetHeatEffect);
+    }
+
+    private void ResetHeatEffect(params object[] args)
+    {
+        _heatScreenMaterial.SetFloat("_HeatStrenght", 0f);
     }
 
     [ContextMenu("Activate Storm")]
@@ -32,13 +41,11 @@ public class DustStorm : MonoBehaviour
 
         if (_coroutine != null) StopCoroutine(_coroutine);
 
-        _coroutine = StartCoroutine(ShieldRoutine());
+        _coroutine = StartCoroutine(DustStormRoutine());
     }
 
-    IEnumerator ShieldRoutine()
+    IEnumerator DustStormRoutine()
     {
-        _audioSource.Play();
-
         if (_isActivated)
         {
 
@@ -49,19 +56,17 @@ public class DustStorm : MonoBehaviour
             {
                 _intensity = Mathf.MoveTowards(_intensity, 1f, Time.deltaTime * _speedTransition);
                 _heatScreenMaterial.SetFloat("_HeatStrenght", _intensity);
-                _dirtScreenMaterial.SetFloat("_AlphaStrenght", _intensity);
                 yield return null;
             }
         }
         else
         {
             _dustStormFVX.Stop();
-            _audioSource.Stop();
+
             while (_intensity > 0f)
             {
                 _intensity = Mathf.MoveTowards(_intensity, 0f, Time.deltaTime * _speedTransition);
                 _heatScreenMaterial.SetFloat("_HeatStrenght", _intensity);
-                _dirtScreenMaterial.SetFloat("_AlphaStrenght", _intensity);
                 yield return null;
             }
         }

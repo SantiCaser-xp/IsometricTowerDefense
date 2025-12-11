@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +14,6 @@ public abstract class AbstractGreanade : MonoBehaviour, IObservable
     protected ObjectPool<AbstractGreanade> _myPool;
     [SerializeField] protected GameObject mesh;
     private List<IObserver> _observers = new List<IObserver>();
-
 
     public void Initialize(ObjectPool<AbstractGreanade> pool)
     {
@@ -58,6 +55,7 @@ public abstract class AbstractGreanade : MonoBehaviour, IObservable
             foreach (var hit in _hitedEnemies)
             {
                 var enemy = hit.GetComponent<IDamageable<float>>();
+
                 if (enemy != null)
                 {
                     enemy.TakeDamage(200f);

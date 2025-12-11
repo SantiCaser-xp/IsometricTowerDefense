@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SimpleGreanade : AbstractGreanade
@@ -12,11 +9,9 @@ public class SimpleGreanade : AbstractGreanade
         _myPool.Release(this);
     }
 
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
-
-    
 }
