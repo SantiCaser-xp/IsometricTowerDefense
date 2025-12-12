@@ -25,45 +25,53 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _DirtLeft:
-        m_Texture: {fileID: 2800000, guid: 8c8e2daf62c51d74fa7728887a878540, type: 3}
+        m_Texture: {fileID: 2800000, guid: c8748b2da9e969c4ba1bc7c5fb221595, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DirtLeftNORM:
+        m_Texture: {fileID: 2800000, guid: 632e98a44435e604ca96d1108493a46f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DirtRight:
-        m_Texture: {fileID: 2800000, guid: 8c8e2daf62c51d74fa7728887a878540, type: 3}
+        m_Texture: {fileID: 2800000, guid: 495a8937383d3784588fc6a9bb626098, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DirtRightNORM:
+        m_Texture: {fileID: 2800000, guid: 15a13d5d92482a143ae9538120678665, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GrassLeft:
-        m_Texture: {fileID: 2800000, guid: 8c8e2daf62c51d74fa7728887a878540, type: 3}
+        m_Texture: {fileID: 2800000, guid: a2631e95d102e9f4886ecf675ade77b1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GrassLeftNORM:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e0fd5b5d8d8efb843a909b79847d516a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GrassRight:
-        m_Texture: {fileID: 2800000, guid: b204ab11cc4e32a41b51ade506d3dacd, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5197e5687d16e554ea60221ab38ec35c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GrassRightNORM:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: c1f57de72c477d54581d592ef599661d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CombinedTiling: 1.83
-    - _Combined_Smooth1: 0.28
-    - _Combined_Smooth2: 0.77
-    - _DirtTiling: 1.97
-    - _GrassTiling: 7.8
+    - _CombinedTiling: 1.31
+    - _Combined_Smooth1: -0.04
+    - _Combined_Smooth2: 1.09
+    - _DirtTiling: 1
+    - _GrassTiling: 1
     - _PoundIntencity: 1
     - _PoundRoughness: 0.1
     - _RainPoundsScale: 0
-    - _Smooth1: 0.52
-    - _Smooth1_1: 0.73
-    - _Smooth2: 0.79
-    - _Smooth2_1: 0.74
+    - _Smooth1: 0.35
+    - _Smooth1_1: 0.76
+    - _Smooth2: 0.94
+    - _Smooth2_1: 0.82
     m_Colors:
-    - _GeneralTiling: {r: 40, g: 40, b: 0, a: 0}
+    - _GeneralTiling: {r: 30, g: 30, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7312860276962276385
 MonoBehaviour:
