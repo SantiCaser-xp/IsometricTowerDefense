@@ -49,6 +49,9 @@ public class GlobalStamina : MonoBehaviour, IObservable
         if (_currentStamina >= _maxStamina)
             return; // No programar notificación si ya está llena
 
+        // Cancela la notificación anterior antes de crear una nueva
+        ControladorNotificaciones.Instance.CancelNotification(_id);
+
         // Calcula el tiempo restante para llenar la stamina
         float secondsToFull = (_maxStamina - _currentStamina) * _timeToRecharge;
         DateTime fireTime = NextTime(MyLocation(_myLoc), secondsToFull);
@@ -61,6 +64,7 @@ public class GlobalStamina : MonoBehaviour, IObservable
             fireTime
         );
     }
+
 
     IEnumerator UpdateStaminaRoutine()
     {

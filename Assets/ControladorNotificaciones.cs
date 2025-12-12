@@ -95,6 +95,21 @@ public class ControladorNotificaciones : MonoBehaviour
     {
         // El jugador cerró la app
         ProgramarNotificacionInactividad();
+        ProgramarNotificacionCierre();
+    }
+
+    private void ProgramarNotificacionCierre()
+    {
+        // Por ejemplo, 5 minutos después de cerrar la app
+        DateTime fireTime = DateTime.Now.AddSeconds(3);
+        int notifId = DisplayNotification(
+            "¡No te vayas!",
+            "Vuelve pronto, tenemos sorpresas para ti.",
+            IconSelecter.icon_0,
+            IconSelecter.icon_1,
+            fireTime
+        );
+        PlayerPrefs.SetInt("CloseAppNotifId", notifId);
     }
 
     private void ProgramarNotificacionInactividad()
