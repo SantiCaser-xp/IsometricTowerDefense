@@ -46,8 +46,13 @@ public class GlobalStamina : MonoBehaviour, IObservable
 
     void DisplayNotification()
     {
-        float calc = _maxStamina - (_currentStamina + 1) * _timeToRecharge + 1 + (float)_time.TotalSeconds;
-        DateTime fireTime = NextTime(MyLocation(_myLoc), calc);
+        if (_currentStamina >= _maxStamina)
+            return; // No programar notificación si ya está llena
+
+        // Calcula el tiempo restante para llenar la stamina
+        float secondsToFull = (_maxStamina - _currentStamina) * _timeToRecharge;
+        DateTime fireTime = NextTime(MyLocation(_myLoc), secondsToFull);
+
         _id = ControladorNotificaciones.Instance.DisplayNotification(
             _titleNotif,
             _messageNotif,
@@ -143,7 +148,11 @@ public class GlobalStamina : MonoBehaviour, IObservable
             Save();
 
             ControladorNotificaciones.Instance.CancelNotification(_id);
-            DisplayNotification();
+
+            if (_currentStamina < _maxStamina)
+            {
+                DisplayNotification();
+            }
 
             if (!_recharging)
             {
@@ -154,7 +163,6 @@ public class GlobalStamina : MonoBehaviour, IObservable
         }
         else
         {
-            //Debug.Log($"Fuck off vagabuncha");
             return false;
         }
     }
@@ -177,9 +185,16 @@ public class GlobalStamina : MonoBehaviour, IObservable
 
     DateTime StringToDateTime(string data)
     {
-        if (string.IsNullOrEmpty(data)) return MyLocation(_myLoc);
-        else return DateTime.Parse(data);
+        if (string.IsNullOrEmpty(data))
+            return MyLocation(_myLoc);
+
+        DateTime result;
+        if (DateTime.TryParse(data, out result))
+            return result;
+        else
+            return MyLocation(_myLoc); // O puedes devolver DateTime.MinValue si prefieres
     }
+
 
 
     void Save()
@@ -203,8 +218,15 @@ public class GlobalStamina : MonoBehaviour, IObservable
         _currentStamina = Mathf.Clamp(sd.CurrentStamina, 0, Mathf.RoundToInt(_maxStamina));
         _nextStaminaTime = StringToDateTime(sd.NextStaminaTime);
         _lastStaminaTime = StringToDateTime(sd.LastStaminaTime);
-        _id = StringToDateTime(sd.id).GetHashCode();
+
+        // id es un número, no una fecha
+        int parsedId;
+        if (int.TryParse(sd.id, out parsedId))
+            _id = parsedId;
+        else
+            _id = 0;
     }
+
 
     #region Observable
     public void Subscribe(IObserver observer)
