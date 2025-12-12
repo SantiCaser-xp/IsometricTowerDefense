@@ -76,6 +76,50 @@ public class ControladorNotificaciones : MonoBehaviour
     {
         AndroidNotificationCenter.CancelNotification(id);
     }
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            // El jugador minimizó o salió de la app
+            ProgramarNotificacionInactividad();
+        }
+        else
+        {
+            // El jugador regresó, cancela la notificación
+            CancelarNotificacionInactividad();
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        // El jugador cerró la app
+        ProgramarNotificacionInactividad();
+    }
+
+    private void ProgramarNotificacionInactividad()
+    {
+        // Por ejemplo, 24 horas después
+        DateTime fireTime = DateTime.Now.AddSeconds(30);
+        int notifId = DisplayNotification(
+            "¡Vuelve al juego!",
+            "Te extrañamos, regresa y sigue jugando.",
+            IconSelecter.icon_0,
+            IconSelecter.icon_1,
+            fireTime
+        );
+        PlayerPrefs.SetInt("InactivityNotifId", notifId);
+    }
+
+    private void CancelarNotificacionInactividad()
+    {
+        if (PlayerPrefs.HasKey("InactivityNotifId"))
+        {
+            CancelNotification(PlayerPrefs.GetInt("InactivityNotifId"));
+            PlayerPrefs.DeleteKey("InactivityNotifId");
+        }
+    }
+
 }
 
 public enum IconSelecter

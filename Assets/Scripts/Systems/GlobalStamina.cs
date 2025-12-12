@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GlobalStamina : MonoBehaviour, IObservable
 {
     [SerializeField] float _timeToRecharge = 180f; //3 minutes
@@ -17,6 +18,12 @@ public class GlobalStamina : MonoBehaviour, IObservable
     DateTime _lastStaminaTime;
     TimeSpan _time;
 
+    [SerializeField] string _titleNotif = "Stamina Recharged!";
+    [SerializeField] string _messageNotif = "Your stamina has been fully recharged.";
+    [SerializeField] IconSelecter _smallIcon = IconSelecter.icon_0;
+    [SerializeField] IconSelecter _largeIcon = IconSelecter.icon_1;
+    public int _id;
+
     List<IObserver> _observers = new List<IObserver>();
 
     void Start()
@@ -29,6 +36,25 @@ public class GlobalStamina : MonoBehaviour, IObservable
         }
 
         UpdateTimer();
+
+        if (_currentStamina < _maxStamina)
+        {
+            _time = _nextStaminaTime - MyLocation(_myLoc);
+            DisplayNotification();
+        }
+    }
+
+    void DisplayNotification()
+    {
+        float calc = _maxStamina - (_currentStamina + 1) * _timeToRecharge + 1 + (float)_time.TotalSeconds;
+        DateTime fireTime = NextTime(MyLocation(_myLoc), calc);
+        _id = ControladorNotificaciones.Instance.DisplayNotification(
+            _titleNotif,
+            _messageNotif,
+            _smallIcon,
+            _largeIcon,
+            fireTime
+        );
     }
 
     IEnumerator UpdateStaminaRoutine()
@@ -47,7 +73,7 @@ public class GlobalStamina : MonoBehaviour, IObservable
             nextTime = _nextStaminaTime;
             addedStamina = false;
 
-            while(currentTime > nextTime)
+            while (currentTime > nextTime)
             {
                 if (_currentStamina == _maxStamina) break;
 
@@ -57,12 +83,12 @@ public class GlobalStamina : MonoBehaviour, IObservable
                 UpdateTimer();
                 DateTime timeToAdd = nextTime;
 
-                if(_lastStaminaTime > nextTime) timeToAdd = _lastStaminaTime;
+                if (_lastStaminaTime > nextTime) timeToAdd = _lastStaminaTime;
 
                 nextTime = NextTime(timeToAdd, _timeToRecharge);
             }
 
-            if(addedStamina)
+            if (addedStamina)
             {
                 _nextStaminaTime = nextTime;
                 _lastStaminaTime = currentTime;
@@ -74,6 +100,7 @@ public class GlobalStamina : MonoBehaviour, IObservable
             yield return new WaitForEndOfFrame();
         }
 
+        ControladorNotificaciones.Instance.CancelNotification(_id);
         _recharging = false;
     }
 
@@ -109,13 +136,16 @@ public class GlobalStamina : MonoBehaviour, IObservable
 
     public bool UseStamina(int value)
     {
-        if(_currentStamina - value >= 0)
+        if (_currentStamina - value >= 0)
         {
             _currentStamina -= value;
 
             Save();
 
-            if(!_recharging)
+            ControladorNotificaciones.Instance.CancelNotification(_id);
+            DisplayNotification();
+
+            if (!_recharging)
             {
                 _nextStaminaTime = NextTime(MyLocation(_myLoc), _timeToRecharge);
                 StartCoroutine(UpdateStaminaRoutine());
@@ -131,7 +161,7 @@ public class GlobalStamina : MonoBehaviour, IObservable
 
     DateTime MyLocation(LocalizationTime loc)
     {
-        switch(loc)
+        switch (loc)
         {
             case LocalizationTime.Local:
                 return DateTime.Now;
@@ -147,8 +177,8 @@ public class GlobalStamina : MonoBehaviour, IObservable
 
     DateTime StringToDateTime(string data)
     {
-        if(string.IsNullOrEmpty(data)) return MyLocation(_myLoc);
-        else  return DateTime.Parse(data);
+        if (string.IsNullOrEmpty(data)) return MyLocation(_myLoc);
+        else return DateTime.Parse(data);
     }
 
 
@@ -159,6 +189,8 @@ public class GlobalStamina : MonoBehaviour, IObservable
         sd.CurrentStamina = Mathf.Clamp(Mathf.RoundToInt(_currentStamina), 0, Mathf.RoundToInt(_maxStamina));
         sd.NextStaminaTime = _nextStaminaTime.ToString();
         sd.LastStaminaTime = _lastStaminaTime.ToString();
+        sd.id = _id.ToString();
+
 
         SaveWithJSON.Instance._staminaData = sd;
         SaveWithJSON.Instance.SaveGame();
@@ -171,6 +203,7 @@ public class GlobalStamina : MonoBehaviour, IObservable
         _currentStamina = Mathf.Clamp(sd.CurrentStamina, 0, Mathf.RoundToInt(_maxStamina));
         _nextStaminaTime = StringToDateTime(sd.NextStaminaTime);
         _lastStaminaTime = StringToDateTime(sd.LastStaminaTime);
+        _id = StringToDateTime(sd.id).GetHashCode();
     }
 
     #region Observable
