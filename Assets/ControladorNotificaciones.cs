@@ -101,7 +101,7 @@ public class ControladorNotificaciones : MonoBehaviour
     private void ProgramarNotificacionCierre()
     {
         // Por ejemplo, 5 minutos después de cerrar la app
-        DateTime fireTime = DateTime.Now.AddSeconds(3);
+        DateTime fireTime = DateTime.Now.AddSeconds(2);
         int notifId = DisplayNotification(
             "¡No te vayas!",
             "Vuelve pronto, tenemos sorpresas para ti.",
@@ -114,8 +114,7 @@ public class ControladorNotificaciones : MonoBehaviour
 
     private void ProgramarNotificacionInactividad()
     {
-        // Por ejemplo, 24 horas después
-        DateTime fireTime = DateTime.Now.AddSeconds(30);
+        DateTime fireTime = DateTime.Now.AddSeconds(4);
         int notifId = DisplayNotification(
             "¡Vuelve al juego!",
             "Te extrañamos, regresa y sigue jugando.",
