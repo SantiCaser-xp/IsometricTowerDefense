@@ -37,11 +37,11 @@ public class GlobalStamina : MonoBehaviour, IObservable
 
         UpdateTimer();
 
-        if (_currentStamina < _maxStamina)
-        {
-            _time = _nextStaminaTime - MyLocation(_myLoc);
-            DisplayNotification();
-        }
+        //if (_currentStamina < _maxStamina)
+        //{
+        //    _time = _nextStaminaTime - MyLocation(_myLoc);
+        //    DisplayNotification();
+        //}
     }
 
     void DisplayNotification()
