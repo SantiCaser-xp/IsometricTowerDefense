@@ -36,7 +36,7 @@ public class KamikazeAttackState : EnemyState<EnemyFSMStates, MVC_Enemy>
     private void Explode()
     {
         avatar.Model.PerformAttack();
-      avatar.Model.TakeDamage(1000);  // to change state to die
+      avatar.Model.Die();  // to change state to die
         
     }
 

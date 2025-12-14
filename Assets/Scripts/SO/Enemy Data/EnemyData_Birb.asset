@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf40581b1d6e6d45a7a84d0a5005f80, type: 3}
   m_Name: EnemyData_Birb
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 30
   attackRange: 5
   attackCooldown: 0
   searchInterval: 1
+  _deathVFXPrefab: {fileID: 0}
+  _attackVFXPrefab: {fileID: 8476438972236430039, guid: 02fc49a3af1c45041b1b4ed4250ccefa,
+    type: 3}

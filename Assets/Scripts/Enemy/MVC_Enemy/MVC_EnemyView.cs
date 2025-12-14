@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class MVC_EnemyView
 {
@@ -36,10 +37,12 @@ public class MVC_EnemyView
 
     private void HandleAttack()
     {
+        Debug.Log("HandleAttack");
         _animator.SetTrigger("OnAttack");
 
         if (_particleAttack != null)
         {
+            Debug.Log("Attack SFX");
             _particleAttack?.Play();
         }
     }
@@ -47,7 +50,7 @@ public class MVC_EnemyView
     {
         _animator.SetTrigger("OnDeath");
 
-        
+
     }
 
     private void HandleSetMoving(bool isMoving)
