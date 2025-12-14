@@ -13,6 +13,7 @@ public class MVC_Enemy : Destructible
 
     [Header("Dependencies (View)")]
     [SerializeField] private ParticleSystem _particleDmg;
+    [SerializeField] private ParticleSystem _particleDie;
     [SerializeField] private AudioSource _soundDmg;
 
     [Header("Components")]
@@ -42,7 +43,7 @@ public class MVC_Enemy : Destructible
         _animator = GetComponentInChildren<Animator>();
 
         Model = new MVC_EnemyModel(_agent, transform, _data, _maxHealth);
-        _view = new MVC_EnemyView(Model, _animator, _particleDmg, _soundDmg);
+        _view = new MVC_EnemyView(Model, _animator, _particleDmg, _particleDie, _soundDmg);
 
         InitializeFSM();
 

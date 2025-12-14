@@ -10,11 +10,12 @@ public class MVC_EnemyView
     private AudioSource _soundDmg;
 
     //constructor
-    public MVC_EnemyView(MVC_EnemyModel model, Animator animator, ParticleSystem particleDmg, AudioSource soundDmg)
+    public MVC_EnemyView(MVC_EnemyModel model, Animator animator, ParticleSystem particleDmg, ParticleSystem particleDie, AudioSource soundDmg)
     {
         _model = model;
         _animator = animator;
         _particleDmg = particleDmg;
+        _particleDie = particleDie;
         _soundDmg = soundDmg;
 
         // subscribe on events
@@ -40,7 +41,11 @@ public class MVC_EnemyView
     private void HandleDie()
     {
         _animator.SetTrigger("OnDeath");
-        _particleDie?.Play();
+
+        if (_particleDie != null)
+        {
+            _particleDie?.Play();
+        }
     }
 
     private void HandleSetMoving(bool isMoving)
