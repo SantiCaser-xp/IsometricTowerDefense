@@ -66,7 +66,7 @@ public class MVC_EnemyModel
     {
         
         if (_currentTarget == null) return;
-
+         
         IDamageable<float> damageable = _currentTarget as IDamageable<float>;
         MonoBehaviour mb = damageable as MonoBehaviour;
 

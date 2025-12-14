@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,11 +9,11 @@ public class MVC_Enemy : Destructible
 {
     [Header("MVC links")]
     [SerializeField] private EnemyData _data;
-    //[SerializeField] private float _maxHealth;
     [SerializeField] protected float _experienceModidier = 3f;
 
     [Header("Dependencies (View)")]
     [SerializeField] private ParticleSystem _particleDmg;
+    [SerializeField] private ParticleSystem _particleAttack;
     [SerializeField] private AudioSource _soundDmg;
 
     [Header("Components")]
@@ -20,16 +21,23 @@ public class MVC_Enemy : Destructible
     [SerializeField] protected ObjectPool<MVC_Enemy> _myPool;
     private NavMeshAgent _agent;
     private Animator _animator;
+    private Rigidbody _rb;
+    private Collider _collider;
+
+    [Header("Death Settings")]
+    [SerializeField] protected float _deathDelay = 3.0f;
+
 
     [Header("Tutorial")]
     [SerializeField] bool _tutorialMode = false;
 
     public MVC_EnemyModel Model { get; private set; }
     private MVC_EnemyView _view;
-    private EnemyFSM<EnemyFSMStates, MVC_Enemy> _fsm;
+    public EnemyFSM<EnemyFSMStates, MVC_Enemy> fsm;
 
     public static event System.Action OnEnemyKilled;
     //public TargetType TargetType => TargetType.Tower;
+    // public EnemyFSM<EnemyFSMStates, MVC_Enemy> Fsm => _fsm;
     protected ITargetable _currentTarget;
     [SerializeField] protected TargetingStrategy _targetingStrategy = TargetingStrategy.Nearest;
     [SerializeField] protected string _cState;
@@ -39,16 +47,13 @@ public class MVC_Enemy : Destructible
         _currentHealth = _maxHealth;
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponentInChildren<Animator>();
+        _collider = GetComponent<Collider>();
+        _rb = GetComponent<Rigidbody>();
 
         Model = new MVC_EnemyModel(_agent, transform, _data, _maxHealth);
-        _view = new MVC_EnemyView(Model, _animator, _particleDmg, _soundDmg);
+        _view = new MVC_EnemyView(Model, _animator, _particleDmg, _particleAttack, _soundDmg);
 
-        _fsm = new EnemyFSM<EnemyFSMStates, MVC_Enemy>();
-
-        _fsm._possibleStates.Add(EnemyFSMStates.Idle, new IdleState().SetUp(_fsm).SetAvatar(this));
-        _fsm._possibleStates.Add(EnemyFSMStates.Move, new MoveState().SetUp(_fsm).SetAvatar(this));
-        _fsm._possibleStates.Add(EnemyFSMStates.Attack, new AttackState().SetUp(_fsm).SetAvatar(this));
-        _fsm._possibleStates.Add(EnemyFSMStates.Die, new DieState().SetUp(_fsm).SetAvatar(this));
+        InitializeFSM();
 
         Model.OnDie += HandleDeathLogic;
     }
@@ -56,30 +61,42 @@ public class MVC_Enemy : Destructible
     private void Start()
     {
         EnemyManager.Instance?.RegisterEnemy(this);
-        _fsm.ChangeState(EnemyFSMStates.Idle);
+        fsm.ChangeState(EnemyFSMStates.Idle);
     }
 
     void Update()
     {
-        _fsm?.OnExecute();
+        fsm?.OnExecute();
         //_cState = $"{_fsm._actualState}";// for debug
     }
+    protected virtual void InitializeFSM()
+    {
+        fsm = new EnemyFSM<EnemyFSMStates, MVC_Enemy>();
+
+        fsm._possibleStates.Add(EnemyFSMStates.Idle, new IdleState().SetUp(fsm).SetAvatar(this));
+        fsm._possibleStates.Add(EnemyFSMStates.Move, new MoveState().SetUp(fsm).SetAvatar(this));
+        fsm._possibleStates.Add(EnemyFSMStates.Attack, new AttackState().SetUp(fsm).SetAvatar(this));
+        fsm._possibleStates.Add(EnemyFSMStates.Die, new DieState().SetUp(fsm).SetAvatar(this));
+    }
+
 
     private void HandleDeathLogic()
     {
-        _fsm.ChangeState(EnemyFSMStates.Die);
+        fsm.ChangeState(EnemyFSMStates.Die);
+
         var gold = _goldFactory.Create();
         Vector3 pos = transform.position;
         pos.y = 1f;
         gold.transform.position = pos;
         ExperienceSystem.Instance.AddExperience(_experienceModidier);
 
-        if(_tutorialMode) EventManager.Trigger(EventType.KillFirstEnemy, EventType.KillFirstEnemy);
+        if (_tutorialMode) EventManager.Trigger(EventType.KillFirstEnemy, EventType.KillFirstEnemy);
         EventManager.Trigger(EventType.OnEnemyKilled);
         OnEnemyKilled?.Invoke();
-
         EnemyManager.Instance?.UnregisterEnemy(this);
-        _myPool.Release(this);
+
+        StartCoroutine(DieSequence());
+
     }
 
     protected virtual void OnDestroy()
@@ -115,6 +132,17 @@ public class MVC_Enemy : Destructible
         Model.Die();
     }
 
+    private IEnumerator DieSequence()
+    {
+        _collider.enabled = false;
+        _agent.enabled = false;
+        _rb.isKinematic = true;        
+        _rb.velocity = Vector3.zero;
+
+        yield return new WaitForSeconds(_deathDelay);
+        _myPool.Release(this);
+    }
+
     public virtual void SearchForTarget()
     {
         _currentTarget = EnemyTargetManager.Instance?.GetOptimalTarget(transform.position, _targetingStrategy);
@@ -127,7 +155,7 @@ public class MVC_Enemy : Destructible
         {
             Model.SetTarget(null);
 
-            _fsm.ChangeState(EnemyFSMStates.Idle);
+            fsm.ChangeState(EnemyFSMStates.Idle);
         }
     }
 
@@ -141,6 +169,10 @@ public class MVC_Enemy : Destructible
         Model.SetTarget(null);
         Model.ResetHealth();
         EnemyManager.Instance?.RegisterEnemy(this);
-        _fsm.ChangeState(EnemyFSMStates.Idle);
+        fsm.ChangeState(EnemyFSMStates.Idle);
+        _collider.enabled = true;
+        _agent.enabled = true;
+        _rb.isKinematic = false;
+        StopAllCoroutines();
     }
 }
