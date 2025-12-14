@@ -7727,6 +7727,16 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1979909335}
+    - target: {fileID: 6869196556653183677, guid: 4bd4db490f722304d95db6d8d5e13a37,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00024414062
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869196556653183677, guid: 4bd4db490f722304d95db6d8d5e13a37,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7369731882445707351, guid: 4bd4db490f722304d95db6d8d5e13a37,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -8547,6 +8557,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bush (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7254055375138740451, guid: f25617eca2ca30640b94bed55a8cd275,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7743733797251171505, guid: f25617eca2ca30640b94bed55a8cd275,
         type: 3}
@@ -18984,6 +18999,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bush
       objectReference: {fileID: 0}
+    - target: {fileID: 7254055375138740451, guid: f25617eca2ca30640b94bed55a8cd275,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7743733797251171505, guid: f25617eca2ca30640b94bed55a8cd275,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19705,7 +19725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 18
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2643516856798993086 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2136323326439534478, guid: 29317299a837da740a46353c2069ff47,
@@ -20841,7 +20861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 18
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1001 &3673158595534742461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43087,7 +43107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 18
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &8181486814364744796
 MeshRenderer:
   m_ObjectHideFlags: 0
