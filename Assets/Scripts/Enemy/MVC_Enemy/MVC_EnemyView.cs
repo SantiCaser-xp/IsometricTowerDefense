@@ -6,16 +6,16 @@ public class MVC_EnemyView
     private MVC_EnemyModel _model;
     private Animator _animator;
     private ParticleSystem _particleDmg;
-    private ParticleSystem _particleDie;
+    private ParticleSystem _particleAttack;
     private AudioSource _soundDmg;
 
     //constructor
-    public MVC_EnemyView(MVC_EnemyModel model, Animator animator, ParticleSystem particleDmg, ParticleSystem particleDie, AudioSource soundDmg)
+    public MVC_EnemyView(MVC_EnemyModel model, Animator animator, ParticleSystem particleDmg, ParticleSystem particleAttack, AudioSource soundDmg)
     {
         _model = model;
         _animator = animator;
         _particleDmg = particleDmg;
-        _particleDie = particleDie;
+        _particleAttack = particleAttack;
         _soundDmg = soundDmg;
 
         // subscribe on events
@@ -37,15 +37,17 @@ public class MVC_EnemyView
     private void HandleAttack()
     {
         _animator.SetTrigger("OnAttack");
+
+        if (_particleAttack != null)
+        {
+            _particleAttack?.Play();
+        }
     }
     private void HandleDie()
     {
         _animator.SetTrigger("OnDeath");
 
-        if (_particleDie != null)
-        {
-            _particleDie?.Play();
-        }
+        
     }
 
     private void HandleSetMoving(bool isMoving)
