@@ -37,20 +37,21 @@ public class MVC_EnemyView
 
     private void HandleAttack()
     {
-        Debug.Log("HandleAttack");
+        
         _animator.SetTrigger("OnAttack");
 
         if (_particleAttack != null)
         {
-            Debug.Log("Attack SFX");
+            
             _particleAttack?.Play();
         }
     }
     private void HandleDie()
     {
+        _animator.ResetTrigger("OnHit");
+        _animator.ResetTrigger("OnAttack");
+
         _animator.SetTrigger("OnDeath");
-
-
     }
 
     private void HandleSetMoving(bool isMoving)

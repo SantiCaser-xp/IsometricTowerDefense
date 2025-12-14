@@ -21,10 +21,12 @@ public class MVC_Enemy : Destructible
     [SerializeField] protected ObjectPool<MVC_Enemy> _myPool;
     private NavMeshAgent _agent;
     private Animator _animator;
+    private Rigidbody _rb;
+    private Collider _collider;
 
     [Header("Death Settings")]
-    [SerializeField] protected float _deathDelay = 2.0f;
-    private Collider _collider;
+    [SerializeField] protected float _deathDelay = 3.0f;
+
 
     [Header("Tutorial")]
     [SerializeField] bool _tutorialMode = false;
@@ -46,6 +48,7 @@ public class MVC_Enemy : Destructible
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponentInChildren<Animator>();
         _collider = GetComponent<Collider>();
+        _rb = GetComponent<Rigidbody>();
 
         Model = new MVC_EnemyModel(_agent, transform, _data, _maxHealth);
         _view = new MVC_EnemyView(Model, _animator, _particleDmg, _particleAttack, _soundDmg);
@@ -133,6 +136,8 @@ public class MVC_Enemy : Destructible
     {
         _collider.enabled = false;
         _agent.enabled = false;
+        _rb.isKinematic = true;        
+        _rb.velocity = Vector3.zero;
 
         yield return new WaitForSeconds(_deathDelay);
         _myPool.Release(this);
@@ -167,6 +172,7 @@ public class MVC_Enemy : Destructible
         fsm.ChangeState(EnemyFSMStates.Idle);
         _collider.enabled = true;
         _agent.enabled = true;
+        _rb.isKinematic = false;
         StopAllCoroutines();
     }
 }
