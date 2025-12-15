@@ -30,7 +30,7 @@ public class LevelsSignScreen : MonoBehaviour, IScreen
         if (_globalStamina.UseStamina(_stamineCost))
         {
             ScreenManager.Instance.DeactivateScreen();
-            SceneTransition.Instance.LoadLevel(_sceneName);
+            SceneTransition.Instance.LoadLevel(_actualLevelName);
         }
     }
 

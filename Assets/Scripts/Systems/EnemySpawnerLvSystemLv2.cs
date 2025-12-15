@@ -1,0 +1,128 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class EnemySpawnerLvSystemLv2 : MonoBehaviour, IObservable
+{
+    [SerializeField] private Animator _sign;
+
+    [SerializeField] private EnemyFactory _kamikazeFactory; 
+    [SerializeField] private EnemyFactory _midEnemyFactory;
+    [SerializeField] private EnemyFactory _hardEnemyFactory;
+
+    [SerializeField] private Transform _upZone; 
+    [SerializeField] private Transform _downZone;
+    [SerializeField] private Transform _rightZone;
+    [SerializeField] private Transform _leftZone;
+
+    [SerializeField] private Transform _currentZone;
+
+    [SerializeField] private int _enemiesToSpawn;
+
+    private List<IObserver> _observers = new List<IObserver>();
+    [SerializeField] private int _enemiesToKill;
+    private int _enemiesKilled;
+    private int _enemiesTotal = 20;
+
+    private void Awake()
+    {
+        MVC_Enemy.OnEnemyKilled += EnemyKilled;
+    }
+
+    private void Start()
+    {
+        Notify();
+
+        StartCoroutine(SpawnEnemies());
+    }
+
+    public void Spawn(EnemyFactory currFactory)
+    {
+        var enemy = currFactory.Create();
+
+        /*enemy.transform.position = new Vector3 (_currentZone.position.x + Random.Range(3,6),
+            _currentZone.position.y,
+            _currentZone.position.z + Random.Range(3, 6));*/
+
+        enemy.transform.position = new Vector3(_currentZone.position.x,
+            _currentZone.position.y,
+            _currentZone.position.z);
+    }
+
+    private void OnDestroy()
+    {
+        MVC_Enemy.OnEnemyKilled -= EnemyKilled;
+    }
+
+    public void EnemyKilled()
+    {
+        _enemiesKilled++;
+
+        Notify();
+
+        if (_enemiesKilled >= _enemiesTotal)
+        {
+            EventManager.Trigger(EventType.OnGameWin);
+        }
+    }
+
+    private IEnumerator SpawnEnemies()
+    {
+        yield return new WaitForSeconds(4f);
+        _sign.SetTrigger("RingLeft");
+        _currentZone = _leftZone;
+        _enemiesToSpawn = 5;
+        for (int i = 0; i < _enemiesToSpawn; i++)
+        {
+            Spawn(_kamikazeFactory);
+            yield return new WaitForSeconds(2f);
+        }
+        yield return new WaitForSeconds(10f);
+
+
+        _sign.SetTrigger("RingDown");
+        _currentZone = _downZone;
+        _enemiesToSpawn = 5;
+        for (int i = 0; i < _enemiesToSpawn; i++)
+        {
+            Spawn(_hardEnemyFactory);
+            yield return new WaitForSeconds(1f);
+        }
+        yield return new WaitForSeconds(10f);
+
+        _sign.SetTrigger("RingLeft");
+        _currentZone = _leftZone;
+        _enemiesToSpawn = 10;
+        for (int i = 0; i < _enemiesToSpawn; i++)
+        {
+            Spawn(_midEnemyFactory);
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    #region Observable
+    public void Subscribe(IObserver observer)
+    {
+        if (!_observers.Contains(observer))
+        {
+            _observers.Add(observer);
+        }
+    }
+
+    public void Unsubscribe(IObserver observer)
+    {
+        if (_observers.Contains(observer))
+        {
+            _observers.Remove(observer);
+        }
+    }
+
+    public void Notify()
+    {
+        foreach (var obs in _observers)
+        {
+            obs.UpdateData(_enemiesKilled, _enemiesTotal);
+        }
+    }
+    #endregion
+}
