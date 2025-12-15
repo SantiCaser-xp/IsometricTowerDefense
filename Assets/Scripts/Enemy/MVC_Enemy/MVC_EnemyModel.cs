@@ -11,6 +11,11 @@ public class MVC_EnemyModel
     private EnemyData _data;
     private ITargetable _currentTarget;
 
+    //flocking settings
+    private Vector3 _currentSeparationForce;
+    private float _nextFlockUpdateTime;
+    private Vector3 _smoothVelocity;
+
     //components
     private Transform _transform;
     private NavMeshAgent _agent;
@@ -38,6 +43,8 @@ public class MVC_EnemyModel
         _data = data;
         _maxHealth = maxHealth;
         _currentHealth = _maxHealth;
+
+        _nextFlockUpdateTime = Time.time + UnityEngine.Random.Range(0f, 0.2f);
     }
 
     public void SetTarget(ITargetable target)
@@ -64,13 +71,13 @@ public class MVC_EnemyModel
 
     public void PerformAttack()
     {
-        
+
         if (_currentTarget == null) return;
-         
+
         IDamageable<float> damageable = _currentTarget as IDamageable<float>;
         MonoBehaviour mb = damageable as MonoBehaviour;
 
-        if(mb.GetComponent<Destructible>().CurrentHealth <= 0) return;
+        if (mb.GetComponent<Destructible>().CurrentHealth <= 0) return;
 
         if (damageable != null)
         {
@@ -139,5 +146,53 @@ public class MVC_EnemyModel
     {
         _observers.Remove(observer);
 
+    }
+
+    public void UpdateFlocking()
+    {
+        if (!_agent.enabled || !_agent.isOnNavMesh) return;
+
+        if (Time.time > _nextFlockUpdateTime)
+        {
+            CalculateSeparationForce();
+            _nextFlockUpdateTime = Time.time + _data.flockUpdateInterval;
+        }
+
+        Vector3 targetVelocity = _agent.desiredVelocity;
+        targetVelocity += _currentSeparationForce * _data.separationWeight;
+        _agent.velocity = Vector3.Lerp(_agent.velocity, targetVelocity, Time.deltaTime * 5f);
+    }
+    private void CalculateSeparationForce()
+    {
+        Vector3 separationTotal = Vector3.zero;
+        int count = 0;
+
+        var enemies = EnemyManager.Instance.ActiveEnemies;
+        float sqrRadius = _data.separationRadius * _data.separationRadius;
+        Vector3 myPos = _transform.position;
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            var other = enemies[i];
+            if(other == null||other.Model==this) continue;
+
+            Vector3 otherPos = other.GetPos();
+            Vector3 diff = myPos - otherPos ;
+            float sqrDist = diff.sqrMagnitude;
+
+            if (sqrDist < sqrRadius && sqrDist > 0.01f)
+            {
+                separationTotal += diff.normalized / Mathf.Sqrt(sqrDist);
+                count++;
+            }
+        }
+        if (count > 0) {
+            separationTotal /= count;
+            _currentSeparationForce = separationTotal;
+        }
+        else
+        {
+            _currentSeparationForce = Vector3.zero;
+        }
     }
 }
