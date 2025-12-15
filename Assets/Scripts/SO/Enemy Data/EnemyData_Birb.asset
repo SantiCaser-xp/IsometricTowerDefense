@@ -16,6 +16,6 @@ MonoBehaviour:
   attackRange: 5
   attackCooldown: 0
   searchInterval: 1
-  _deathVFXPrefab: {fileID: 0}
-  _attackVFXPrefab: {fileID: 8476438972236430039, guid: 02fc49a3af1c45041b1b4ed4250ccefa,
-    type: 3}
+  separationRadius: 1.5
+  separationWeight: 2
+  flockUpdateInterval: 0.5

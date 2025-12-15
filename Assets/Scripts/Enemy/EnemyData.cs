@@ -8,4 +8,9 @@ public class EnemyData : ScriptableObject
     public float attackRange;
     public float attackCooldown;
     public float searchInterval;
+
+    [Header("Flocking Settings")]
+    public float separationRadius;
+    public float separationWeight;
+    public float flockUpdateInterval;
 }

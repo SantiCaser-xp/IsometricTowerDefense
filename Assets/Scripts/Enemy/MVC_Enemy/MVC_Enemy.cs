@@ -53,6 +53,10 @@ public class MVC_Enemy : Destructible
         Model = new MVC_EnemyModel(_agent, transform, _data, _maxHealth);
         _view = new MVC_EnemyView(Model, _animator, _particleDmg, _particleAttack, _soundDmg);
 
+        _agent.updatePosition = true;
+        _agent.updateRotation = true;
+        _agent.updateUpAxis=true;
+
         InitializeFSM();
 
         Model.OnDie += HandleDeathLogic;
@@ -68,6 +72,11 @@ public class MVC_Enemy : Destructible
     {
         fsm?.OnExecute();
         //_cState = $"{_fsm._actualState}";// for debug
+
+        if(fsm._actualState is MoveState)
+        {
+            Model.UpdateFlocking();
+        }
     }
     protected virtual void InitializeFSM()
     {
