@@ -24,8 +24,6 @@ public class NewPlacementSystem : MonoBehaviour, IObservable
     private int currentID;
     private List<IObserver> _observers = new List<IObserver>();
 
-
-
     void Update()
     {
         //Debug.DrawRay(playerTransform.position + playerTransform.forward * placementDistance + Vector3.up * raycastHeight, Vector3.down * raycastHeight * 2f, Color.red);
@@ -74,12 +72,14 @@ public class NewPlacementSystem : MonoBehaviour, IObservable
         currentPrice = data.Price;
         if (data != null && data.GhostPrefab != null)
         {
-            Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
+            Vector3 placementPosition = GetPlacementPositionFromMouse();
             currentGhost = Instantiate(data.GhostPrefab, placementPosition, Quaternion.identity);
         }
 
-        if(_tutorialMode)
+        if (_tutorialMode)
+        {
             EventManager.Trigger(EventType.OpenBuildMenu, EventType.OpenBuildMenu);
+        }
     }
 
     public void StopPlacement()
@@ -97,20 +97,22 @@ public class NewPlacementSystem : MonoBehaviour, IObservable
         ObjectData data = database.objectsData.Find(obj => obj.ID == currentID);
         if (data != null && data.Prefab != null)
         {
-            Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
+            Vector3 placementPosition = GetPlacementPositionFromMouse();
             Notify();
             Instantiate(data.Prefab, placementPosition, Quaternion.identity);
         }
 
         if (_tutorialMode)
+        {
             EventManager.Trigger(EventType.PlaceBuilding, EventType.PlaceBuilding);
+        }
     }
 
     public void UpdateGhostPosition()
     {
         if (currentGhost != null)
         {
-            Vector3 placementPosition = GetPlacementPositionInFrontOfPlayer();
+            Vector3 placementPosition = GetPlacementPositionFromMouse();
             currentGhost.transform.position = placementPosition;
         }
         else
@@ -118,18 +120,41 @@ public class NewPlacementSystem : MonoBehaviour, IObservable
             Debug.Log("Theres not currentGhost");
         }
     }
-    private Vector3 GetPlacementPositionInFrontOfPlayer()
+
+    /// <summary>
+    /// Calcula la posición de colocación usando un raycast desde la cámara a la posición del ratón.
+    /// Respeta el layerMask definido para el terreno/suelo de construcción.
+    /// </summary>
+    private Vector3 GetPlacementPositionFromMouse()
     {
-        Vector3 origin = playerTransform.position + playerTransform.forward * placementDistance + Vector3.up * raycastHeight;
-        Vector3 direction = Vector3.down;
+        Camera mainCamera = Camera.main;
+        if (mainCamera == null)
+        {
+            // Fallback si no hay cámara principal
+            Vector3 fallbackNoCamera = playerTransform.position + playerTransform.forward * placementDistance;
+            fallbackNoCamera.y = 0f;
+            return fallbackNoCamera;
+        }
+
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(origin, direction, out hit, raycastHeight * 2f, layerMask))
+        // Raycast contra el suelo/escenario usando el layerMask
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
             return hit.point;
         }
+
+        // Fallback si no hay nada bajo el ratón: proyectamos hacia delante del jugador
+        Vector3 origin = playerTransform.position + Vector3.up * raycastHeight;
+        Vector3 direction = playerTransform.forward;
+        if (Physics.Raycast(origin, direction, out hit, placementDistance + raycastHeight, layerMask))
+        {
+            return hit.point;
+        }
+
         Vector3 fallback = playerTransform.position + playerTransform.forward * placementDistance;
-        fallback.y = 0;
+        fallback.y = 0f;
         return fallback;
     }
 
