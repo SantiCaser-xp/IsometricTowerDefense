@@ -5,6 +5,7 @@ public class PauseLevelScreen : MonoBehaviour, IScreen
 {
     [SerializeField] GameObject _root;
     [SerializeField] GameObject _settingsScreen;
+    [SerializeField] GameObject _exitLevelScreen;
     [SerializeField] Button _restarButton;
     [SerializeField] Button _resumeButton;
     [SerializeField] Button _settingsButton;
@@ -15,7 +16,7 @@ public class PauseLevelScreen : MonoBehaviour, IScreen
         _restarButton.onClick.AddListener(RestartLevel);
         _resumeButton.onClick.AddListener(() => ScreenManager.Instance.DeactivateScreen());
         _settingsButton.onClick.AddListener(() => ScreenManager.Instance.ActivateScreen(_settingsScreen));
-        _returnToMapButton.onClick.AddListener(ReturnToMenu);
+        _returnToMapButton.onClick.AddListener(() => ScreenManager.Instance.ActivateScreen(_exitLevelScreen));
     }
 
     public void Activate()
@@ -39,11 +40,5 @@ public class PauseLevelScreen : MonoBehaviour, IScreen
     {
         ScreenManager.Instance.DeactivateScreen();
         SceneTransition.Instance.RestartLevel();
-    }
-
-    public void ReturnToMenu()
-    {
-        ScreenManager.Instance.DeactivateScreen();
-        SceneTransition.Instance.LoadLevel("WorldMap");
     }
 }
